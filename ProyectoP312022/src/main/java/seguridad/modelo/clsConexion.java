@@ -1,9 +1,9 @@
-    package seguridad.modelo;
+package seguridad.modelo;
 
 import java.sql.*;
 
-public class Conexion {
-    private static final String JDBC_URL = "jdbc:mysql://localhost/datap312022?useSSL=false&serverTimezone=UTC";
+public class clsConexion {
+    private static final String JDBC_URL = "jdbc:mysql://localhost/didactica?useSSL=false&serverTimezone=UTC";
     private static final String JDBC_USER = "UsuPrueba";
     private static final String JDBC_PASS = "123456";
    
