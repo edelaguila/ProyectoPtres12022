@@ -30,8 +30,8 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Aplicacion");
-        modelo.addColumn("nombre");
-        modelo.addColumn("estado");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
         daoAplicacion aplicacionDAO = new daoAplicacion();
         List<clsAplicacion> aplicaciones = aplicacionDAO.select();
         tablaAplicaciones.setModel(modelo);
