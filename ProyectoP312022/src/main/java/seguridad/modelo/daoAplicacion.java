@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class daoAplicacion {
 
-    private static final String SQL_SELECT = "SELECT id_aplicacion, nombreAplicacion, estadoAplicacion FROM aplicacion";
-    private static final String SQL_INSERT = "INSERT INTO aplicacion(nombreAplicacion, estadoAplicacion) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE aplicacion SET nombreAplicacion=?, estadoAplicacion=? WHERE id_aplicacion = ?";
-    private static final String SQL_DELETE = "DELETE FROM aplicacion WHERE id_aplicacion=?";
-    private static final String SQL_QUERY = "SELECT id_aplicacion, nombreAplicacion, estadoAplicacion FROM aplicacion WHERE id_aplicacion = ?";
+    private static final String SQL_SELECT = "SELECT aplid, aplnombre, aplestatus FROM tbl_aplicacion";
+    private static final String SQL_INSERT = "INSERT INTO tbl_aplicacion(aplnombre, aplestatus) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_aplicacion SET aplnombre=?, aplestatus=? WHERE aplid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_aplicacion WHERE aplid=?";
+    private static final String SQL_QUERY = "SELECT aplid, aplnombre, aplestatus FROM tbl_aplicacion WHERE aplid = ?";
 
     public List<clsAplicacion> select() {
         Connection conn = null;
@@ -37,9 +37,9 @@ public class daoAplicacion {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id_aplicacion = rs.getInt("id_aplicacion");
-                String nombre = rs.getString("nombreAplicacion");
-                String estado = rs.getString("estadoAplicacion");
+                int id_aplicacion = rs.getInt("aplid");
+                String nombre = rs.getString("aplnombre");
+                String estado = rs.getString("aplestatus");
                 
                 aplicacion = new clsAplicacion();
                 aplicacion.setId_aplicacion(id_aplicacion);
@@ -147,9 +147,9 @@ public class daoAplicacion {
             stmt.setInt(1, aplicacion.getId_aplicacion());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id_aplicacion = rs.getInt("id_aplicacion");
-                String nombre = rs.getString("nombreAplicacion");
-                String estado = rs.getString("estadoAplicacion");
+                int id_aplicacion = rs.getInt("aplid");
+                String nombre = rs.getString("aplnombre");
+                String estado = rs.getString("aplestatus");
                 
                 aplicacion = new clsAplicacion();
                 aplicacion.setId_aplicacion(id_aplicacion);

@@ -10,49 +10,49 @@ package seguridad.controlador;
  * @author visitante
  */
 public class clsAplicacion {
-    int id_aplicacion;
-    String nombreAplicacion;
-    String estadoAplicacion;
+    int aplid;
+    String aplnombre;
+    String aplestatus;
 
     public clsAplicacion() {
     }
 
     public clsAplicacion(int id_aplicacion) {
-        this.id_aplicacion = id_aplicacion;
+        this.aplid= id_aplicacion;
     }
 
     public clsAplicacion(String nombreAplicacion, String estadoAplicacion) {
-        this.nombreAplicacion = nombreAplicacion;
-        this.estadoAplicacion = estadoAplicacion;
+        this.aplnombre = nombreAplicacion;
+        this.aplestatus = estadoAplicacion;
     }
 
     public int getId_aplicacion() {
-        return id_aplicacion;
+        return aplid;
     }
 
     public void setId_aplicacion(int id_aplicacion) {
-        this.id_aplicacion = id_aplicacion;
+        this.aplid = id_aplicacion;
     }
 
     public String getNombreAplicacion() {
-        return nombreAplicacion;
+        return aplnombre;
     }
 
     public void setNombreAplicacion(String nombreAplicacion) {
-        this.nombreAplicacion = nombreAplicacion;
+        this.aplnombre = nombreAplicacion;
     }
 
     public String getestadoAplicacion() {
-        return estadoAplicacion;
+        return aplestatus;
     }
 
     public void setestadoAplicacion(String estadoAplicacion) {
-        this.estadoAplicacion = estadoAplicacion;
+        this.aplestatus = estadoAplicacion;
     }
 
     @Override
     public String toString() {
-        return "aplicacion{" + "id_aplicacion=" + id_aplicacion + ", nombreAplicacion=" + nombreAplicacion + ", estadoAplicacion=" + estadoAplicacion + '}';
+        return "tbl_aplicacion{" + "aplid=" + aplid + ", aplnombre=" + aplnombre + ", aplestatus=" + aplestatus + '}';
     }
     
 }
