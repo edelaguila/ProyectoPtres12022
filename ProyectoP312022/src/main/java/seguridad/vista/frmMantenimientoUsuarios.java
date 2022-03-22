@@ -29,7 +29,7 @@ public class frmMantenimientoUsuarios extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Usuario");
+        modelo.addColumn("ID usuario");
         modelo.addColumn("nombre");
         
         daoUsuario vendedorDAO = new daoUsuario();
@@ -150,11 +150,11 @@ public class frmMantenimientoUsuarios extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID Vendedor", "ID Empleado", "Correo", "Telefono", "Direccion", "Porcentaje", "Comision"
+                "ID usuario", "nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

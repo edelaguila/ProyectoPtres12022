@@ -5,52 +5,54 @@
  */
 package seguridad.controlador;
 
+/**
+ *
+ * @author visitante
+ */
 public class clsAplicacion {
-    int id_aplicacion;
-    String nombre_aplicacion;
-    String estatus_aplicacion;
+    int aplid;
+    String aplnombre;
+    String aplestatus;
 
     public clsAplicacion() {
     }
 
     public clsAplicacion(int id_aplicacion) {
-        this.id_aplicacion= id_aplicacion;
+        this.aplid= id_aplicacion;
     }
 
-    public clsAplicacion(String nombre_aplicacion, String estatus_aplicacion) {
-        this.nombre_aplicacion = nombre_aplicacion;
-        this.estatus_aplicacion= estatus_aplicacion;
+    public clsAplicacion(String nombreAplicacion, String estadoAplicacion) {
+        this.aplnombre = nombreAplicacion;
+        this.aplestatus = estadoAplicacion;
     }
 
     public int getId_aplicacion() {
-        return id_aplicacion;
+        return aplid;
     }
 
     public void setId_aplicacion(int id_aplicacion) {
-        this.id_aplicacion = id_aplicacion;
+        this.aplid = id_aplicacion;
     }
 
-    public String getNombre_aplicaion() {
-        return nombre_aplicacion;
+    public String getNombreAplicacion() {
+        return aplnombre;
     }
 
-    public void setNombre_aplicacion(String nombre_aplicacion) {
-        this.nombre_aplicacion = nombre_aplicacion;
+    public void setNombreAplicacion(String nombreAplicacion) {
+        this.aplnombre = nombreAplicacion;
     }
 
-    public String getEstatus_aplicacion() {
-        return estatus_aplicacion;
+    public String getestadoAplicacion() {
+        return aplestatus;
     }
 
-    public void setEstatus_aplicacion(String estatus_aplicacion) {
-        this.estatus_aplicacion = estatus_aplicacion;
+    public void setestadoAplicacion(String estadoAplicacion) {
+        this.aplestatus = estadoAplicacion;
     }
 
     @Override
     public String toString() {
-        return "Aplicaciones{" + "id_aplicacion=" + id_aplicacion + ", nombre_aplicacion=" + nombre_aplicacion+ ", estatus_aplicacion=" + estatus_aplicacion+ '}';
+        return "tbl_aplicacion{" + "aplid=" + aplid + ", aplnombre=" + aplnombre + ", aplestatus=" + aplestatus + '}';
     }
     
-     }
-    
-    
+}

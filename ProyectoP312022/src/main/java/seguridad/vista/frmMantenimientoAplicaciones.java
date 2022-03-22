@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 
-
 /**
  *
  * @author visitante
@@ -20,29 +19,27 @@ import java.io.File;
 public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-        /*EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        List<Empleado> empleados = empleadoDAO.select();
-        cbox_empleado.addItem("Seleccione una opción");
-        for (int i = 0; i < empleados.size(); i++) {
-            cbox_empleado.addItem(empleados.get(i).getNombreEmpleado());
-        }*/
+        daoAplicacion AplicacionDAO = new daoAplicacion();
+        List<clsAplicacion> aplicaciones = AplicacionDAO.select();
+        cbox_aplicacion.addItem("Seleccione una opción");
+        for (int i = 0; i < aplicaciones.size(); i++) {
+            cbox_aplicacion.addItem(aplicaciones.get(i).getNombreAplicacion());
+        }
     }
-
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID_Aplicacion");
-        modelo.addColumn("nombre_aplicacion");
-        modelo.addColumn("estatus_aplicacion");
-        
+        modelo.addColumn("ID Aplicacion");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
         daoAplicacion aplicacionDAO = new daoAplicacion();
-        List<clsAplicacion> Aplicaciones = aplicacionDAO.select();
+        List<clsAplicacion> aplicaciones = aplicacionDAO.select();
         tablaAplicaciones.setModel(modelo);
         String[] dato = new String[3];
-        for (int i = 0; i < Aplicaciones.size(); i++) {
-            dato[0] = Integer.toString(Aplicaciones.get(i).getId_aplicacion());
-            dato[1] = Aplicaciones.get(i).getNombre_aplicaion();
-            
+        for (int i = 0; i < aplicaciones.size(); i++) {
+            dato[0] = Integer.toString(aplicaciones.get(i).getId_aplicacion());
+            dato[1] = aplicaciones.get(i).getNombreAplicacion();
+            dato[2] = aplicaciones.get(i).getestadoAplicacion();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -53,15 +50,14 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         daoAplicacion aplicacionDAO = new daoAplicacion();
         aplicacionAConsultar.setId_aplicacion(Integer.parseInt(txtbuscado.getText()));
         aplicacionAConsultar = aplicacionDAO.query(aplicacionAConsultar);
-        txtNombre.setText(aplicacionAConsultar.getNombre_aplicaion());
-        txtEstado.setText(aplicacionAConsultar.getEstatus_aplicacion());
+        txtNombre.setText(aplicacionAConsultar.getNombreAplicacion());
+        txtEstado.setText(aplicacionAConsultar.getestadoAplicacion());
     }
 
     public frmMantenimientoAplicaciones() {
-        
+        initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
-        initComponents();
     }
 
     /**
@@ -80,6 +76,7 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
+        label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
@@ -89,17 +86,8 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         label4 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
+        lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        label10 = new javax.swing.JLabel();
-        label13 = new javax.swing.JLabel();
-        label12 = new javax.swing.JLabel();
-        label6 = new javax.swing.JLabel();
-        label8 = new javax.swing.JLabel();
-        label9 = new javax.swing.JLabel();
-        label7 = new javax.swing.JLabel();
-        label11 = new javax.swing.JLabel();
-        label3 = new javax.swing.JLabel();
-        label14 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -110,59 +98,51 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Mantenimiento Aplicacion");
         setVisible(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 40, 40));
 
-        btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 50, 40));
 
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 40, 40));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Aplicaciones");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(678, 0, -1, -1));
 
-        btnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 40, 40));
 
-        txtbuscado.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 102, -1));
+        label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label3.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtNombre.setOpaque(false);
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 65, 263, -1));
 
-        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 50, 40));
 
         tablaAplicaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaAplicaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -183,28 +163,25 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaAplicaciones);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 564, 303));
-
         cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbox_aplicacionActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 341, 263, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Aplicacion");
-        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 345, -1, -1));
 
         txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstado.setOpaque(false);
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 100, 263, -1));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Estado");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        lb.setForeground(new java.awt.Color(204, 204, 204));
+        lb.setText(".");
 
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -212,47 +189,93 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 343, -1, -1));
 
-        label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label10.setText("buscar");
-        getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, -1, 10));
-
-        label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label13.setText("eliminar");
-        getContentPane().add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
-
-        label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label12.setText(" modificar");
-        getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 60, -1));
-
-        label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("registrar");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-
-        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label8.setText("limpiar");
-        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
-
-        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label9.setText("registrar");
-        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-
-        label7.setBackground(new java.awt.Color(255, 255, 255));
-        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, 140));
-
-        label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label11.setText("limpiar");
-        getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
-
-        label3.setBackground(new java.awt.Color(255, 255, 255));
-        label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 230, 120));
-
-        label14.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label14.setText("Nombre");
-        getContentPane().add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label3)
+                            .addComponent(label5))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(txtNombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(label1)
+                        .addGap(294, 294, 294))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(135, 135, 135)
+                .addComponent(label4)
+                .addGap(46, 46, 46)
+                .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(label1)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label5)))
+                            .addComponent(lb))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRegistrar)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnModificar))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar)
+                            .addComponent(btnLimpiar))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label4)
+                    .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -269,8 +292,8 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         daoAplicacion aplicacionDAO = new daoAplicacion();
         clsAplicacion aplicacionAInsertar = new clsAplicacion();
-        aplicacionAInsertar.setNombre_aplicacion(txtNombre.getText());
-        aplicacionAInsertar.setEstatus_aplicacion(txtEstado.getText());
+        aplicacionAInsertar.setNombreAplicacion(txtNombre.getText());
+        aplicacionAInsertar.setestadoAplicacion(txtEstado.getText());
         aplicacionDAO.insert(aplicacionAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -285,8 +308,8 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         daoAplicacion aplicacionDAO = new daoAplicacion();
         clsAplicacion aplicacionAActualizar = new clsAplicacion();
         aplicacionAActualizar.setId_aplicacion(Integer.parseInt(txtbuscado.getText()));
-        aplicacionAActualizar.setNombre_aplicacion(txtNombre.getText());
-        aplicacionAActualizar.setEstatus_aplicacion(txtEstado.getText());
+        aplicacionAActualizar.setNombreAplicacion(txtNombre.getText());
+        aplicacionAActualizar.setestadoAplicacion(txtEstado.getText());
         aplicacionDAO.update(aplicacionAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -336,18 +359,10 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
-    private javax.swing.JLabel label10;
-    private javax.swing.JLabel label11;
-    private javax.swing.JLabel label12;
-    private javax.swing.JLabel label13;
-    private javax.swing.JLabel label14;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
-    private javax.swing.JLabel label6;
-    private javax.swing.JLabel label7;
-    private javax.swing.JLabel label8;
-    private javax.swing.JLabel label9;
+    private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaAplicaciones;
