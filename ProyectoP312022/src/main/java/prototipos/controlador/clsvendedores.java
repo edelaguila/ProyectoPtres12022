@@ -11,10 +11,10 @@ import seguridad.controlador.*;
  *
  * @author visitante
  */
-public class clsvendedores {
+public class clsVendedores {
     //declaracion de variable para Vendedores 
 
-    public clsvendedores() {
+    public clsVendedores() {
     }
 
     
