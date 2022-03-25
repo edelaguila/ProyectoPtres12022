@@ -16,11 +16,20 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
         
-        }
     }
 
-    
-   
+    public void llenadoDeTablas() {
+        
+    }
+
+    public void buscaraplicacion() {
+      
+    }
+
+    public frmMantenimientoPuestosG4() {
+       
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +51,7 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaPuestos = new javax.swing.JTable();
+        tablaEmpleado = new javax.swing.JTable();
         cbox_aplicacion = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
@@ -105,13 +114,13 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
             }
         });
 
-        tablaPuestos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaPuestos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID Puesto", "Nombre", "Estatus"
+                "ID Empleado", "Nombre", "puestos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -122,7 +131,7 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaPuestos);
+        jScrollPane1.setViewportView(tablaEmpleado);
 
         cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +148,7 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
         txtEstado.setOpaque(false);
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estado");
+        label5.setText("Puesto");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -206,7 +215,8 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(label1)
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -219,7 +229,7 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
                                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(label5)))
                             .addComponent(lb))
-                        .addGap(138, 138, 138)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
                             .addComponent(btnEliminar)
@@ -228,14 +238,13 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar)
-                            .addComponent(btnLimpiar)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                            .addComponent(btnLimpiar))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label4)
                     .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,16 +252,16 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
+       
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+      
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        
+        buscaraplicacion();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -261,7 +270,13 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        
+        cbox_aplicacion.setSelectedIndex(0);
+        txtNombre.setText("");
+        txtEstado.setText("");
+        txtbuscado.setText("");
+        btnRegistrar.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarActionPerformed
@@ -273,7 +288,7 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -293,9 +308,9 @@ public class frmMantenimientoPuestosG4 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaPuestos;
+    private javax.swing.JTable tablaEmpleado;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
-
+}

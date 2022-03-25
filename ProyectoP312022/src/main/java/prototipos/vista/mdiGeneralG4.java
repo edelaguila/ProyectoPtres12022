@@ -169,7 +169,7 @@ public class mdiGeneralG4 extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        frmMantenimientoTipodeconceptosG4 ventana = new frmMantenimientoTipodeconceptosG4();
+        frmMantenimientoTiposdeConceptoG4 ventana = new frmMantenimientoTiposdeConceptoG4();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
