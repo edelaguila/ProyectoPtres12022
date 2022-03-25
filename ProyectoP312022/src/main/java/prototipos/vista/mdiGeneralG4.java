@@ -141,7 +141,7 @@ public class mdiGeneralG4 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        frmMantenimientoUsuarios ventana = new frmMantenimientoUsuarios();
+        frmMantenimientoEmpleadosG4 ventana = new frmMantenimientoEmpleadosG4();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
@@ -149,16 +149,16 @@ public class mdiGeneralG4 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        frmMantenimientoPapps ventana2 = new frmMantenimientoPapps();
-        jDesktopPane1.add(ventana2);
+       frmMantenimientoDepartamentosG4 ventana = new frmMantenimientoDepartamentosG4();
+        jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana2.getSize();
-        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2); 
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2); 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        frmMantenimientoAplicaciones ventana = new frmMantenimientoAplicaciones();
+        frmMantenimientoPuestosG4 ventana = new frmMantenimientoPuestosG4();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
@@ -169,7 +169,7 @@ public class mdiGeneralG4 extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        frmMantenimientoPerfiles ventana = new frmMantenimientoPerfiles();
+        frmMantenimientoTipodeconceptosG4 ventana = new frmMantenimientoTipodeconceptosG4();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
