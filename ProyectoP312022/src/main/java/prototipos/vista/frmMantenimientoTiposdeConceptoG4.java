@@ -12,10 +12,9 @@ package prototipos.vista;
  *
  * @author visitante
  */
-public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame {
+public class frmMantenimientoTiposdeConceptoG4 extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-       
         
     }
 
@@ -27,8 +26,8 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
       
     }
 
-    public frmMantenimientoDepartamentosG4() {
-      
+    public frmMantenimientoTiposdeConceptoG4() {
+       
     }
 
     /**
@@ -52,7 +51,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAplicaciones = new javax.swing.JTable();
+        tablaEmpleado = new javax.swing.JTable();
         cbox_aplicacion = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
@@ -67,7 +66,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Aplicacion");
+        setTitle("Mantenimiento TIpos de conceptos");
         setVisible(true);
 
         btnEliminar.setText("Eliminar");
@@ -92,7 +91,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
         });
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("Aplicaciones");
+        label1.setText("Tipos de conceptos");
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,24 +114,24 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
             }
         });
 
-        tablaAplicaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaAplicaciones.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID Aplicacion", "Nombre", "Estado"
+                "ID", "Nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaAplicaciones);
+        jScrollPane1.setViewportView(tablaEmpleado);
 
         cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
@@ -142,14 +141,14 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
         });
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label4.setText("Aplicacion");
+        label4.setText("conceptos");
 
         txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstado.setOpaque(false);
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estado");
+        label5.setText("Puesto");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -257,7 +256,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+      
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -267,7 +266,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-      
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -289,7 +288,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -309,7 +308,7 @@ public class frmMantenimientoDepartamentosG4 extends javax.swing.JInternalFrame 
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaAplicaciones;
+    private javax.swing.JTable tablaEmpleado;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
