@@ -182,7 +182,7 @@ public class mdiGeneral extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-         frmMantenimientoPperfilUsuario ventana = new frmMantenimientoPperfilUsuario();
+         frmMantenimientoPperfilusuarios ventana = new frmMantenimientoPperfilusuarios();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
