@@ -37,8 +37,9 @@ public class daoPerfilUsuario {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 
-                String perfil = rs.getString("perid");
-                String usuario = rs.getString("usuid");
+                int perfil = rs.getInt("perid");
+                int usuario = rs.getInt("usuid");
+                
 
                 perfilusuario= new clsPerfilUsuario();
                 perfilusuario.setperfil(perfil);
@@ -65,8 +66,8 @@ public class daoPerfilUsuario {
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, perfilusuario.getperfil());
-            stmt.setString(2, perfilusuario.getusuario());
+            stmt.setInt(1, perfilusuario.getperfil());
+            stmt.setInt(2, perfilusuario.getusuario());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -89,8 +90,8 @@ public class daoPerfilUsuario {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, perfilusuario.getperfil());
-            stmt.setString(2, perfilusuario.getusuario());
+            stmt.setInt(1, perfilusuario.getperfil());
+            stmt.setInt(2, perfilusuario.getusuario());
             
 
             rows = stmt.executeUpdate();
@@ -135,11 +136,11 @@ public class daoPerfilUsuario {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, perfilusuario.getperfil());
+            stmt.setInt(1, perfilusuario.getperfil());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String perfil = rs.getString("perid");
-                String usuario = rs.getString("usuid");
+                int perfil = rs.getInt("perid");
+                int usuario = rs.getInt("usuid");
 
                 perfilusuario = new clsPerfilUsuario();
                 perfilusuario.setperfil(perfil);

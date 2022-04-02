@@ -1,43 +1,36 @@
 package seguridad.controlador;
 
 public class clsPerfilUsuario {
-
-    private String perid;
-    private String usuid;
+    int perid;
+    int usuid;
 
     public clsPerfilUsuario() {
     }
 
-
-    
-    public clsPerfilUsuario(String perid, String usuid) {
-        this.perid = perid;
-        this.usuid = usuid;
+    public clsPerfilUsuario(int perid, int usuid) {
+        this.perid= perid;
+        this.usuid= usuid;
     }
-    
- 
-  
 
-    public String getperfil() {
+    public int getperfil() {
         return perid;
     }
 
-    public void setperfil(String perid) {
-        this.perid= perid;
+    public void setperfil(int perid) {
+        this.perid = perid;
     }
 
-    public String getusuario() {
+ public int getusuario() {
         return usuid;
     }
-
-    public void setusuario(String usuid) {
+ 
+public void setusuario(int usuid) {
         this.usuid = usuid;
     }
 
     @Override
     public String toString() {
-        return "tbl_perfilusuario{"  + " Perid=" + perid + ", usuid=" + usuid + '}';
+        return "tbl_perfilusuario{" + "perid=" + perid + ", usuid=" + usuid + '}';
     }
-    
     
 }
