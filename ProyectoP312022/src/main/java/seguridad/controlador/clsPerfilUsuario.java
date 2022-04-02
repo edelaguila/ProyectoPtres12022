@@ -1,36 +1,49 @@
 package seguridad.controlador;
 
 public class clsPerfilUsuario {
-    int perid;
-    int usuid;
+    int perusuid;
+    String pernombre;
+    String usunombre;
 
     public clsPerfilUsuario() {
     }
 
-    public clsPerfilUsuario(int perid, int usuid) {
-        this.perid= perid;
-        this.usuid= usuid;
+    public clsPerfilUsuario(int id_perfilusuario) {
+        this.perusuid= id_perfilusuario;
     }
 
-    public int getperfil() {
-        return perid;
+    public clsPerfilUsuario(String nombreperfil, String nombreusuario) {
+        this.pernombre = nombreperfil;
+        this.usunombre = nombreusuario;
     }
 
-    public void setperfil(int perid) {
-        this.perid = perid;
+    public int getId_PerfilUsuario() {
+        return perusuid;
     }
 
- public int getusuario() {
-        return usuid;
+    public void setId_PerfilUsuario(int id_perfilusuario) {
+        this.perusuid = id_perfilusuario;
     }
- 
-public void setusuario(int usuid) {
-        this.usuid = usuid;
+
+    public String getNombrePerfil() {
+        return pernombre;
+    }
+
+    public void setNombrePerfil(String nombreperfil) {
+        this.pernombre = nombreperfil;
+    }
+
+    public String getNombreUsuario() {
+        return usunombre;
+    }
+
+    public void setNombreUsuario(String nombreusuario) {
+        this.usunombre = nombreusuario;
     }
 
     @Override
     public String toString() {
-        return "tbl_perfilusuario{" + "perid=" + perid + ", usuid=" + usuid + '}';
+        return "tbl_perfilusuario{" + "perusuid=" + perusuid + ", pernombre=" + pernombre + ", usunombre=" + usunombre + '}';
     }
     
 }

@@ -9,7 +9,8 @@ import seguridad.modelo.daoUsuario;
 import seguridad.controlador.clsUsuario;
 import seguridad.modelo.daoPerfil;
 import seguridad.controlador.clsPerfil;
-
+import seguridad.modelo.daoPerfilUsuario;
+import seguridad.controlador.clsPerfilUsuario;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -35,10 +36,26 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         
         daoUsuario usuarioDAO = new daoUsuario();
         List<clsUsuario> usuarios = usuarioDAO.select();
-        tablaVendedores.setModel(modelo);
+        tablausuarios.setModel(modelo);
         String[] dato = new String[8];
         for (int i = 0; i < usuarios.size(); i++) {
             dato[0] = usuarios.get(i).getUsunombre();      
+           //System.out.println("vendedor:" + vendedores);
+            modelo.addRow(dato);
+        }
+    }
+    
+    
+    public void llenadoDeTablas2() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("nombre");
+        
+        daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
+        List<clsPerfilUsuario> perfilusuarios = perfilusuarioDAO.select();
+        tablaasignacion.setModel(modelo);
+        String[] dato = new String[8];
+        for (int i = 0; i < perfilusuarios.size(); i++) {
+            dato[0] = perfilusuarios.get(i).getNombrePerfil();      
            //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -79,8 +96,10 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaVendedores = new javax.swing.JTable();
+        tablausuarios = new javax.swing.JTable();
         lb = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaasignacion = new javax.swing.JTable();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -91,6 +110,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         setResizable(true);
         setTitle("Mantenimiento Perfil Usuarios");
         setVisible(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +118,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 btnEliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +126,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 btnRegistrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,9 +134,11 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 btnBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 18, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Usuarios disponibles");
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,13 +146,17 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 btnModificarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText("Nombre");
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 20, -1, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 19, 102, -1));
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtNombre.setOpaque(false);
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 20, 185, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,9 +164,10 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 btnLimpiarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 95, -1));
 
-        tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
+        tablausuarios.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablausuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -154,70 +183,34 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaVendedores);
+        jScrollPane1.setViewportView(tablausuarios);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 300, 303));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
+        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 22, 13, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(label3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(421, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(label1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3)
-                    .addComponent(btnBuscar)
-                    .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRegistrar)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnEliminar)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnLimpiar)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnModificar)
-                        .addGap(86, 86, 86))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
-        );
+        tablaasignacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaasignacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaasignacion);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 300, 303));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -232,12 +225,16 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        daoUsuario usuarioDAO = new daoUsuario();
-        clsUsuario usuarioAInsertar = new clsUsuario();
-        usuarioAInsertar.setUsunombre(txtNombre.getText());
-    
-        usuarioDAO.insert(usuarioAInsertar);
-        llenadoDeTablas();
+        DefaultTableModel modelo = new DefaultTableModel();
+       
+        
+        daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
+        clsPerfilUsuario perfilusuarioAInsertar = new clsPerfilUsuario();
+        perfilusuarioAInsertar.setNombrePerfil(txtNombre.getText());
+     
+        
+        perfilusuarioDAO.insert(perfilusuarioAInsertar);
+        llenadoDeTablas2();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -276,12 +273,14 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaVendedores;
+    private javax.swing.JTable tablaasignacion;
+    private javax.swing.JTable tablausuarios;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
