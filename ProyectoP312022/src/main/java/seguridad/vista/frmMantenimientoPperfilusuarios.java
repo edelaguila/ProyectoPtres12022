@@ -7,6 +7,8 @@ package seguridad.vista;
 
 import seguridad.modelo.daoUsuario;
 import seguridad.controlador.clsUsuario;
+import seguridad.modelo.daoPerfil;
+import seguridad.controlador.clsPerfil;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +31,6 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
         modelo.addColumn("nombre");
         
         daoUsuario usuarioDAO = new daoUsuario();
@@ -37,20 +38,18 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         tablaVendedores.setModel(modelo);
         String[] dato = new String[8];
         for (int i = 0; i < usuarios.size(); i++) {
-            dato[0] = Integer.toString(usuarios.get(i).getUsuid());
-            dato[1] = usuarios.get(i).getUsunombre();
-            
-            //System.out.println("vendedor:" + vendedores);
+            dato[0] = usuarios.get(i).getUsunombre();      
+           //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
 
-    public void buscarVendedor() {
-        clsUsuario usuarioAConsultar = new clsUsuario();
-        daoUsuario usuarioDAO = new daoUsuario();
-        usuarioAConsultar.setUsuid(Integer.parseInt(txtbuscado.getText()));
-        usuarioAConsultar = usuarioDAO.query(usuarioAConsultar);
-        txtNombre.setText(usuarioAConsultar.getUsunombre());        
+    public void buscarperfil() {
+        clsPerfil perfilAConsultar = new clsPerfil();
+        daoPerfil perfilDAO = new daoPerfil();
+        perfilAConsultar.setId_Perfil(Integer.parseInt(txtbuscado.getText()));
+        perfilAConsultar = perfilDAO.query(perfilAConsultar);
+        txtNombre.setText(perfilAConsultar.getNombrePerfil());        
     }
 
     public frmMantenimientoPperfilusuarios() {
@@ -144,11 +143,11 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
 
             },
             new String [] {
-                "ID usuario", "nombre"
+                "nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -243,7 +242,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscarVendedor();
+        buscarperfil();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
