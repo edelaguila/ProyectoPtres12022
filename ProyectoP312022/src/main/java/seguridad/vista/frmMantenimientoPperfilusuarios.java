@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultListModel;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,6 +67,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
+         
     }
 
     /**
@@ -83,7 +85,6 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         btnRegistrar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
-        btnModificar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
@@ -93,6 +94,8 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         tablaasignacion = new javax.swing.JTable();
         label4 = new javax.swing.JLabel();
         cbox_aplicacion = new javax.swing.JComboBox<>();
+        label2 = new javax.swing.JLabel();
+        label5 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -127,24 +130,16 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 18, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("Usuarios disponibles");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
-
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 95, -1));
+        label1.setText("Buscar perfil");
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 400, 20, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 19, 102, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 102, -1));
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -194,16 +189,30 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
                 cbox_aplicacionActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 220, -1));
+        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 220, -1));
+
+        label2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label2.setText("Usuarios asignados");
+        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, -1, -1));
+
+        label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label5.setText("Usuarios disponibles");
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        int c = 0;
+        String consultar="";
+        consultar = JOptionPane.showInputDialog("Eliminar Asignacion" + " Ingresar numero de ID que aparece en la tabla derecha." + c+".");
+        
+        
+        
         daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
         clsPerfilUsuario perfilusuarioAEliminar = new clsPerfilUsuario();;
-        perfilusuarioAEliminar.setId_PerfilUsuario(Integer.parseInt(txtbuscado.getText()));
+        perfilusuarioAEliminar.setId_PerfilUsuario(Integer.parseInt(consultar));
         perfilusuarioDAO.delete(perfilusuarioAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -224,17 +233,6 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         buscarperfil();
  
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-//        // TODO add your handling code here:
-        daoUsuario usuarioDAO = new daoUsuario();
-        clsUsuario usuarioAActualizar = new clsUsuario();
-        usuarioAActualizar.setUsuid(Integer.parseInt(txtbuscado.getText()));
-        usuarioAActualizar.setUsunombre(txtNombre.getText());
-       
-        usuarioDAO.update(usuarioAActualizar);
-        llenadoDeCombos();
-    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         
@@ -258,13 +256,14 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbox_aplicacion;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label1;
+    private javax.swing.JLabel label2;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
+    private javax.swing.JLabel label5;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
