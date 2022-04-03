@@ -240,7 +240,6 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
-        btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
 
         // TODO add your handling code here:
