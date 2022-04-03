@@ -201,11 +201,11 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        daoUsuario usuarioDAO = new daoUsuario();
-        clsUsuario usuarioAEliminar = new clsUsuario();
-        usuarioAEliminar.setUsuid(Integer.parseInt(txtbuscado.getText()));
-        usuarioDAO.delete(usuarioAEliminar);
-        llenadoDeCombos();
+        daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
+        clsPerfilUsuario perfilusuarioAEliminar = new clsPerfilUsuario();;
+        perfilusuarioAEliminar.setId_PerfilUsuario(Integer.parseInt(txtbuscado.getText()));
+        perfilusuarioDAO.delete(perfilusuarioAEliminar);
+        llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
