@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS tbl_aplicacionusuario (
 ) ENGINE = InnoDB CHARACTER SET = latin1;
 
 CREATE TABLE IF NOT EXISTS tbl_perfilusuario (
-	perusuid int NOT NULL,
+	perusuid int NOT NULL AUTO_INCREMENT,
 	pernombre VARCHAR(50),
 	usunombre VARCHAR(50),
 	PRIMARY KEY (perusuid)

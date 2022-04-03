@@ -12,7 +12,9 @@ import seguridad.controlador.clsPerfil;
 import seguridad.modelo.daoPerfilUsuario;
 import seguridad.controlador.clsPerfilUsuario;
 import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultListModel;
 import java.io.File;
 
 /**
@@ -22,44 +24,35 @@ import java.io.File;
 public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-        /*EmpleadoDAO empleadoDAO = new EmpleadoDAO();
-        List<Empleado> empleados = empleadoDAO.select();
-        cbox_empleado.addItem("Seleccione una opción");
-        for (int i = 0; i < empleados.size(); i++) {
-            cbox_empleado.addItem(empleados.get(i).getNombreEmpleado());
-        }*/
-    }
-
-    public void llenadoDeTablas() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("nombre");
-        
         daoUsuario usuarioDAO = new daoUsuario();
         List<clsUsuario> usuarios = usuarioDAO.select();
-        tablausuarios.setModel(modelo);
-        String[] dato = new String[8];
+        cbox_aplicacion.addItem("Seleccione una opción");
         for (int i = 0; i < usuarios.size(); i++) {
-            dato[0] = usuarios.get(i).getUsunombre();      
-           //System.out.println("vendedor:" + vendedores);
-            modelo.addRow(dato);
+            cbox_aplicacion.addItem(usuarios.get(i).getUsunombre());
         }
     }
     
-    
-    public void llenadoDeTablas2() {
+    public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("nombre");
-        
+        modelo.addColumn("id");
+        modelo.addColumn("Perfil");
+        modelo.addColumn("Nombre");
         daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
         List<clsPerfilUsuario> perfilusuarios = perfilusuarioDAO.select();
         tablaasignacion.setModel(modelo);
         String[] dato = new String[8];
         for (int i = 0; i < perfilusuarios.size(); i++) {
-            dato[0] = perfilusuarios.get(i).getNombrePerfil();      
-           //System.out.println("vendedor:" + vendedores);
+            dato[0] = Integer.toString(perfilusuarios.get(i).getId_PerfilUsuario());
+            dato[1] = perfilusuarios.get(i).getNombrePerfil();
+            dato[2] = perfilusuarios.get(i).getNombreUsuario();
+            //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
+
+    
+    
+  
 
     public void buscarperfil() {
         clsPerfil perfilAConsultar = new clsPerfil();
@@ -95,11 +88,11 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         txtbuscado = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablausuarios = new javax.swing.JTable();
         lb = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaasignacion = new javax.swing.JTable();
+        label4 = new javax.swing.JLabel();
+        cbox_aplicacion = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -149,14 +142,14 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Nombre");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 20, -1, -1));
+        label3.setText(".");
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 400, 20, -1));
         getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 19, 102, -1));
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtNombre.setOpaque(false);
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 20, 185, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 185, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -165,27 +158,6 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
             }
         });
         getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 95, -1));
-
-        tablausuarios.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablausuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "nombre"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tablausuarios);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 300, 303));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -197,11 +169,11 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
 
             },
             new String [] {
-                "nombre"
+                "id", "Perfil", "Nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -212,6 +184,18 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 300, 303));
 
+        label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label4.setText("Nombre");
+        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 20, -1, -1));
+
+        cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_aplicacionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 220, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -221,25 +205,24 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         clsUsuario usuarioAEliminar = new clsUsuario();
         usuarioAEliminar.setUsuid(Integer.parseInt(txtbuscado.getText()));
         usuarioDAO.delete(usuarioAEliminar);
-        llenadoDeTablas();
+        llenadoDeCombos();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        DefaultTableModel modelo = new DefaultTableModel();
-       
-        
         daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
         clsPerfilUsuario perfilusuarioAInsertar = new clsPerfilUsuario();
         perfilusuarioAInsertar.setNombrePerfil(txtNombre.getText());
-     
-        
+        perfilusuarioAInsertar.setNombreUsuario(cbox_aplicacion.getSelectedItem().toString());
         perfilusuarioDAO.insert(perfilusuarioAInsertar);
-        llenadoDeTablas2();
+        llenadoDeTablas();
+        
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         buscarperfil();
+ 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -250,7 +233,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         usuarioAActualizar.setUsunombre(txtNombre.getText());
        
         usuarioDAO.update(usuarioAActualizar);
-        llenadoDeTablas();
+        llenadoDeCombos();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -265,6 +248,11 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    private void cbox_aplicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_aplicacionActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_aplicacionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -272,15 +260,15 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> cbox_aplicacion;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
+    private javax.swing.JLabel label4;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaasignacion;
-    private javax.swing.JTable tablausuarios;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
