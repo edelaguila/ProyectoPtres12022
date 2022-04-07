@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS `bdproyectop312022` DEFAULT CHARACTER SET utf8 ;
-USE `bdproyectop312022` ;
+USE `bdproyectop3120222` ;
 
 CREATE TABLE IF NOT EXISTS tbl_usuario (
 	usuid INT NOT NULL AUTO_INCREMENT,
@@ -52,11 +52,10 @@ CREATE TABLE IF NOT EXISTS tbl_aplicacionusuario (
 ) ENGINE = InnoDB CHARACTER SET = latin1;
 
 CREATE TABLE IF NOT EXISTS tbl_perfilusuario (
-	perid int NOT NULL,
-	usuid int NOT NULL,
-	PRIMARY KEY (perid, usuid),
-	FOREIGN KEY (perid) REFERENCES tbl_perfil (perid),
-	FOREIGN KEY (usuid) REFERENCES tbl_usuario (usuid)
+	perusuid int NOT NULL AUTO_INCREMENT,
+	pernombre VARCHAR(50),
+	usunombre VARCHAR(50),
+	PRIMARY KEY (perusuid)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS tbl_bitacora (
