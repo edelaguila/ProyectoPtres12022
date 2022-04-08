@@ -7,6 +7,7 @@ package seguridad.vista;
 
 
 
+import compras.vista.mdiComprasG2;
 import seguridad.controlador.clsUsuario;
 import java.awt.HeadlessException;
 
@@ -189,7 +190,15 @@ public class frmLogin extends javax.swing.JFrame {
                         } catch (Exception e) {
                             System.out.println(e);
                         }
-                        break;                        
+                        break;
+                            case "Area Compras":
+                        try {
+                            mdiComprasG2 menuCompras = new mdiComprasG2();
+                            menuCompras.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }                    
                         default:
                             break;
                     }
