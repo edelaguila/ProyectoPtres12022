@@ -1,61 +1,49 @@
 package seguridad.controlador;
 
 public class clsPerfil {
-    private int iper_id;
-    private String sper_nombre;
-    private String sper_estado;
+    int perid;
+    String pernombre;
+    String perestatus;
 
     public clsPerfil() {
     }
 
-    public clsPerfil(int iid) {
-        this.iper_id = iid;
-    }
-    
-    public clsPerfil(String snombre, String sestado) {
-        this.sper_nombre = snombre;
-        this.sper_estado = sestado;
-    }
-    
-    public clsPerfil(int iid, String snombre, String sestado) {
-        this.iper_id = iid;
-        this.sper_nombre = snombre;
-        this.sper_estado = sestado;
-    }
-    
-
-    public int getId_perfil() {
-        return iper_id;
+    public clsPerfil(int id_perfil) {
+        this.perid= id_perfil;
     }
 
-    public void setId_perfil(int iid) {
-        this.iper_id = iid;
+    public clsPerfil(String nombreperfil, String estadoperfil) {
+        this.pernombre = nombreperfil;
+        this.perestatus = estadoperfil;
     }
 
-    public String getperfil() {
-        return sper_nombre;
+    public int getId_Perfil() {
+        return perid;
     }
 
-    public void setnombreperfil(String snombre) {
-        this.sper_nombre = snombre;
+    public void setId_Perfil(int id_perfil) {
+        this.perid = id_perfil;
     }
 
-    public String getnombreperfil() {
-        return sper_estado;
+    public String getNombrePerfil() {
+        return pernombre;
     }
 
-    public void setEstado(String sestado) {
-        this.sper_estado = sestado;
+    public void setNombrePerfil(String nombrePerfil) {
+        this.pernombre = nombrePerfil;
     }
-    
-    public String getEstado() {
-        return sper_estado;
+
+    public String getEstadoPerfil() {
+        return perestatus;
+    }
+
+    public void setEstadoPerfil(String estadoPerfil) {
+        this.perestatus = estadoPerfil;
     }
 
     @Override
     public String toString() {
-        return "tbl_perfil{" + "per_idPerfil=" + iper_id + ", per_NombrePerfil=" + sper_nombre + ", per_EstatusPerfil=" + sper_estado + '}';
+        return "tbl_perfil{" + "perid=" + perid + ", pernombre=" + pernombre + ", perestatus=" + perestatus + '}';
     }
-    
     
 }

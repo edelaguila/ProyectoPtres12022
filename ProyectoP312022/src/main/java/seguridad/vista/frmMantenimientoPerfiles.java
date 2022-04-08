@@ -29,18 +29,18 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Perfil");
-        modelo.addColumn("Nombre Perfil");
-        modelo.addColumn("Estado Perfil");
+        modelo.addColumn("ID perfil");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
         
-        daoPerfil vendedorDAO = new daoPerfil();
-        List<clsPerfil> vendedores = vendedorDAO.select();
+        daoPerfil perfilDAO = new daoPerfil();
+        List<clsPerfil> perfiles = perfilDAO.select();
         tablaVendedores.setModel(modelo);
         String[] dato = new String[3];
-        for (int i = 0; i < vendedores.size(); i++) {
-            dato[0] = Integer.toString(vendedores.get(i).getId_perfil());
-            dato[1] = vendedores.get(i).getnombreperfil();
-            dato[2] = vendedores.get(i).getEstado();
+        for (int i = 0; i < perfiles.size(); i++) {
+            dato[0] = Integer.toString(perfiles.get(i).getId_Perfil());
+            dato[1] = perfiles.get(i).getNombrePerfil();
+            dato[2] = perfiles.get(i).getEstadoPerfil();
             
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -48,11 +48,12 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
     }
 
     public void buscarVendedor() {
-        clsPerfil vendedorAConsultar = new clsPerfil();
-        daoPerfil vendedorDAO = new daoPerfil();
-        vendedorAConsultar.setId_perfil(Integer.parseInt(txtbuscado.getText()));
-        vendedorAConsultar = vendedorDAO.query(vendedorAConsultar);
-        txtNombre.setText(vendedorAConsultar.getnombreperfil());        
+        clsPerfil perfilAConsultar = new clsPerfil();
+        daoPerfil perfilDAO = new daoPerfil();
+        perfilAConsultar.setId_Perfil(Integer.parseInt(txtbuscado.getText()));
+        perfilAConsultar = perfilDAO.query(perfilAConsultar);
+        txtNombre.setText(perfilAConsultar.getNombrePerfil());    
+        txtEstado.setText(perfilAConsultar.getEstadoPerfil());
     }
 
     public frmMantenimientoPerfiles() {
@@ -85,10 +86,9 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
         tablaVendedores = new javax.swing.JTable();
         cbox_empleado = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -152,11 +152,11 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID Vendedor", "ID Empleado", "Correo", "Telefono", "Direccion", "Porcentaje", "Comision"
+                "ID perfil", "Nombre", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,17 +175,15 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Empleado:");
 
-        txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtDireccion.setOpaque(false);
+        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtEstado.setOpaque(false);
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Estado Perfil");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
-
-        jButton1.setText("jButton1");
 
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -217,16 +215,13 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
                                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label3)
-                                    .addComponent(label5))
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                                    .addComponent(txtNombre))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label3)
+                            .addComponent(label5))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(txtNombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
@@ -263,7 +258,7 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
                                     .addComponent(label3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(label5)))
                             .addComponent(lb))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -280,9 +275,8 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label4)
                     .addComponent(cbox_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jButton2))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -290,19 +284,19 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        daoPerfil vendedorDAO = new daoPerfil();
-        clsPerfil vendedorAEliminar = new clsPerfil();
-        vendedorAEliminar.setId_perfil(Integer.parseInt(txtbuscado.getText()));
-        vendedorDAO.delete(vendedorAEliminar);
+        daoPerfil perfilDAO = new daoPerfil();
+        clsPerfil perfilAEliminar = new clsPerfil();
+        perfilAEliminar.setId_Perfil(Integer.parseInt(txtbuscado.getText()));
+        perfilDAO.delete(perfilAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        daoPerfil vendedorDAO = new daoPerfil();
-        clsPerfil vendedorAInsertar = new clsPerfil();
-        vendedorAInsertar.setnombreperfil(txtNombre.getText());
-         vendedorAInsertar.setnombreperfil(txtDireccion.getText());
-        vendedorDAO.insert(vendedorAInsertar);
+        daoPerfil perfilDAO = new daoPerfil();
+        clsPerfil perfilAInsertar = new clsPerfil();
+        perfilAInsertar.setNombrePerfil(txtNombre.getText());
+         perfilAInsertar.setEstadoPerfil(txtEstado.getText());
+        perfilDAO.insert(perfilAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -313,18 +307,19 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        daoPerfil vendedorDAO = new daoPerfil();
-        clsPerfil vendedorAActualizar = new clsPerfil();
-        vendedorAActualizar.setId_perfil(Integer.parseInt(txtbuscado.getText()));
-        vendedorAActualizar.setnombreperfil(txtNombre.getText());
-        vendedorDAO.update(vendedorAActualizar);
+        daoPerfil perfilDAO = new daoPerfil();
+        clsPerfil perfilAActualizar = new clsPerfil();
+        perfilAActualizar.setId_Perfil(Integer.parseInt(txtbuscado.getText()));
+        perfilAActualizar.setNombrePerfil(txtNombre.getText());
+        perfilAActualizar.setEstadoPerfil(txtEstado.getText());
+        perfilDAO.update(perfilAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        
         txtNombre.setText("");
-        txtDireccion.setText("");
+        txtEstado.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
@@ -363,7 +358,6 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbox_empleado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
@@ -374,7 +368,7 @@ public class frmMantenimientoPerfiles extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaVendedores;
-    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
