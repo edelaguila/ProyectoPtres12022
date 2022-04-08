@@ -6,11 +6,16 @@
 package seguridad.vista;
 
 
+
 import seguridad.controlador.clsUsuario;
 import java.awt.HeadlessException;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import prototipos.vista.mdiPrototipo;
+import seguridad.controlador.clsUsuarioConectado;
 import seguridad.modelo.daoUsuario;
+
 
 /**
  *
@@ -24,7 +29,7 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
         setLocationRelativeTo(null);
-        setSize(300, 200);
+        setSize(356, 220);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -44,6 +49,8 @@ public class frmLogin extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtContraseña = new javax.swing.JPasswordField();
+        cbxAreas = new javax.swing.JComboBox<>();
+        lblArea = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +82,10 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
+        cbxAreas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:", "Area Seguridad", "Area Logistica", "Area Compras", "Area Ventas", "Area RRHH", "Prototipo" }));
+
+        lblArea.setText("Area");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,19 +96,23 @@ public class frmLogin extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAceptar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(txtUsuario)
-                            .addComponent(txtContraseña))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxAreas, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUsuario)
+                                .addComponent(txtContraseña)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnAceptar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton2))))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,6 +120,10 @@ public class frmLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbxAreas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblArea))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -116,7 +135,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(jButton2))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -141,10 +160,40 @@ public class frmLogin extends javax.swing.JFrame {
 
                 if (txtContraseña.getText().equals(usuarioAConsultar.getUsucontrasena()) && txtUsuario.getText().equals(usuarioAConsultar.getUsunombre())) {
                     JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    //mdiGeneral menuGeneral = new mdiGeneral();
+                    //menuGeneral.setVisible(true);
+                    //this.dispose();
+                    clsUsuarioConectado usuarioRegistrado = new clsUsuarioConectado();                                   usuarioRegistrado.setUsunombre(txtUsuario.getText().trim());
+                    
+                    //---Agregado para considerar todos los módulos
+                    String areaSeleccionada;
+                    areaSeleccionada = cbxAreas.getSelectedItem().toString();
 
-                    mdiGeneral menuGeneral = new mdiGeneral();
-                    menuGeneral.setVisible(true);
-                    this.dispose();
+                    switch (areaSeleccionada) {
+
+                        case "Area Seguridad":
+                        try {
+                            mdiGeneral menuSeguridad = new mdiGeneral();
+                            menuSeguridad.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;
+                        case "Prototipo":
+                        try {
+                            mdiPrototipo menuPrototipo = new mdiPrototipo();
+                            menuPrototipo.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;                        
+                        default:
+                            break;
+                    }
+                    //---fin agregado
 
                 } else {
                     JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO o CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -205,10 +254,12 @@ public class frmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JComboBox<String> cbxAreas;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblArea;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
