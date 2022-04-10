@@ -1,5 +1,4 @@
 package compras.controlador;
-
 import compras.vista.*;
 
 public class clsConcepto {

@@ -34,9 +34,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         String[] dato = new String[5];
         for (int i = 0; i < concepto.size(); i++) {
             dato[0] = Integer.toString(concepto.get(i).getConid());
-            dato[2] = concepto.get(i).getConnombre();
-            dato[3] = concepto.get(i).getConefecto();
-            dato[4] = concepto.get(i).getConestatus();
+            dato[1] = concepto.get(i).getConnombre();
+            dato[2] = concepto.get(i).getConefecto();
+            dato[3] = concepto.get(i).getConestatus();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -47,7 +47,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         daoConcepto conceptoDAO = new daoConcepto();
         conceptoAConsultar.setConid(Integer.parseInt(txtbuscado.getText()));
         conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
-        txtConId.setText(String.valueOf(conceptoAConsultar.getConid()));
         txtConNombre.setText(conceptoAConsultar.getConnombre());
         txtConEfecto.setText(conceptoAConsultar.getConefecto());
         txtConEstado.setText(conceptoAConsultar.getConestatus());
@@ -78,7 +77,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
-        txtConId = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
@@ -90,7 +88,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label7 = new javax.swing.JLabel();
         txtConNombre = new javax.swing.JTextField();
         txtConEfecto = new javax.swing.JTextField();
-        label4 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -143,10 +140,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label3.setText("Codigo Producto");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
         getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 102, -1));
-
-        txtConId.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtConId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtConId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 220, 20));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -213,10 +206,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtConEfecto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         getContentPane().add(txtConEfecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 220, -1));
 
-        label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label4.setText("Id Concepto");
-        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,7 +221,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         daoConcepto conceptoDAO = new daoConcepto();
         clsConcepto conceptoAInsertar = new clsConcepto();
-        conceptoAInsertar.setConid(Integer.parseInt(txtConId.getText()));
         conceptoAInsertar.setConnombre(txtConNombre.getText());
         conceptoAInsertar.setConefecto(txtConEfecto.getText());
         conceptoAInsertar.setConestatus(txtConEstado.getText());
@@ -259,7 +247,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        
-        txtConId.setText("");
         txtConEstado.setText("");
         txtbuscado.setText("");
         txtConNombre.setText("");
@@ -299,7 +286,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
-    private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
@@ -309,7 +295,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JTable tablaVendedores;
     private javax.swing.JTextField txtConEfecto;
     private javax.swing.JTextField txtConEstado;
-    private javax.swing.JTextField txtConId;
     private javax.swing.JTextField txtConNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
