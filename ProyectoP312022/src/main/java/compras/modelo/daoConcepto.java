@@ -19,7 +19,7 @@ import java.util.List;
 public class daoConcepto {
 
     private static final String SQL_SELECT = "SELECT conid, connombre, conefecto, conestatus FROM tbl_concepto";
-    private static final String SQL_INSERT = "INSERT INTO tbl_concepto ( conid, connombre, conefecto, conestado) VALUES (?,?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_concepto ( conid, connombre, conefecto, conestatus) VALUES (?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_concepto SET connombre = ?, conefecto = ?, conestatus = ? WHERE tbl_concepto.conid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_concepto WHERE tbl_concepto.conid = ?";
     private static final String SQL_QUERY = "SELECT conid, connombre, conefecto, conestatus FROM tbl_concepto WHERE conid=?";
