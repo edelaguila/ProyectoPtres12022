@@ -77,9 +77,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
-        label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDatos = new javax.swing.JTable();
@@ -87,7 +85,6 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         label4 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
-        lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         txtEstado1 = new javax.swing.JTextField();
         label7 = new javax.swing.JLabel();
@@ -150,16 +147,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 378, 95, -1));
-
-        label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("No. nomina");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
         getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 420, 102, -1));
-
-        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtNombre.setOpaque(false);
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 260, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -210,10 +198,6 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Fecha nomina");
         getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        lb.setForeground(new java.awt.Color(204, 204, 204));
-        lb.setText(".");
-        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 22, 13, -1));
 
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -380,14 +364,12 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
     private javax.swing.JLabel label13;
-    private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
-    private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaDatos;
@@ -395,7 +377,6 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEstado1;
     private javax.swing.JTextField txtEstado2;
     private javax.swing.JTextField txtEstado3;
-    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNombre2;
     private javax.swing.JTextField txtNombre3;
