@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS tbl_tiempo (
 	tiemid INT NOT NULL AUTO_INCREMENT,
     tiemfechaingreso DATE,
     tiemfechafinal DATE,
-	PRIMARY KEY (empid) )
+	PRIMARY KEY (tiemid) )
 ENGINE = InnoDB CHARACTER SET = latin1;
 
 CREATE TABLE IF NOT EXISTS tbl_percepciones (
