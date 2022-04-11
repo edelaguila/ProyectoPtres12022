@@ -13,6 +13,7 @@ import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import prototipos.vista.mdiPrototipo;
+import rrhh.vista.mdiNomina;
 import seguridad.controlador.clsUsuarioConectado;
 import seguridad.modelo.daoUsuario;
 
@@ -83,6 +84,11 @@ public class frmLogin extends javax.swing.JFrame {
         });
 
         cbxAreas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione:", "Area Seguridad", "Area Logistica", "Area Compras", "Area Ventas", "Area RRHH", "Prototipo" }));
+        cbxAreas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxAreasActionPerformed(evt);
+            }
+        });
 
         lblArea.setText("Area");
 
@@ -189,7 +195,16 @@ public class frmLogin extends javax.swing.JFrame {
                         } catch (Exception e) {
                             System.out.println(e);
                         }
-                        break;                        
+                        break; 
+                        case "Nominas":
+                        try {
+                            mdiNomina menunomina = new mdiNomina();
+                            menunomina.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;   
                         default:
                             break;
                     }
@@ -213,6 +228,10 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbxAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxAreasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxAreasActionPerformed
 
     /**
      * @param args the command line arguments
