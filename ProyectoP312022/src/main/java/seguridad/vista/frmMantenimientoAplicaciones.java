@@ -88,6 +88,7 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        label6 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -190,6 +191,9 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
             }
         });
 
+        label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label6.setText("Aplicacion");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,14 +235,19 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(label1)
                         .addGap(294, 294, 294))))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(135, 135, 135)
-                .addComponent(label4)
-                .addGap(46, 46, 46)
-                .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(135, 135, 135)
+                        .addComponent(label4)
+                        .addGap(46, 46, 46)
+                        .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(label6)
+                        .addGap(238, 238, 238))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +283,8 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
                     .addComponent(label4)
                     .addComponent(cbox_aplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addComponent(label6))
         );
 
         pack();
@@ -362,6 +372,7 @@ public class frmMantenimientoAplicaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
+    private javax.swing.JLabel label6;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;

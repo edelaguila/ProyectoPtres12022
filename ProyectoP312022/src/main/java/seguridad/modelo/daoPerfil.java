@@ -10,39 +10,41 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  *
  * @author visitante
  */
 public class daoPerfil {
 
-    private static final String SQL_SELECT = "SELECT per_idPerfil, per_NombrePerfil, per_EstatusPerfil FROM tbl_perfil";
-    private static final String SQL_INSERT = "INSERT INTO tbl_perfil(per_idPerfil,per_EstatusPerfil) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_perfil SET per_idPerfil=?, per_EstatusPerfil=? WHERE per_idPerfil = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_perfil WHERE per_idPerfil=?";
-    private static final String SQL_QUERY = "SELECT per_idPerfil, per_NombrePerfil, per_EstatusPerfil FROM tbl_perfil WHERE per_NombrePerfil = ?";
+    private static final String SQL_SELECT = "SELECT perid, pernombre, perestatus FROM tbl_perfil";
+    private static final String SQL_INSERT = "INSERT INTO tbl_perfil(pernombre, perestatus) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_perfil SET pernombre=?, perestatus=? WHERE perid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_perfil WHERE perid=?";
+    private static final String SQL_QUERY = "SELECT perid, pernombre, perestatus FROM tbl_perfil WHERE perid = ?";
 
-    public List<clsPerfil> select() {
+ public List<clsPerfil> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsPerfil usuario = null;
-        List<clsPerfil> usuarios = new ArrayList<clsPerfil>();
+        clsPerfil perfil = null;
+        List<clsPerfil> perfiles = new ArrayList<clsPerfil>();
+
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int iPerfil_id = rs.getInt("per_idPerfil");
-                String sPerfil_nombre = rs.getString("per_NombrePerfil");
-                String sPerfil_estado = rs.getString("per_EstatusPerfil");
-
-                usuario = new clsPerfil();
-                usuario.setId_perfil(iPerfil_id);
-                usuario.setnombreperfil(sPerfil_nombre);
-                usuario.setEstado(sPerfil_estado);
-
-                usuarios.add(usuario);
+                int id_perfil = rs.getInt("perid");
+                String nombre = rs.getString("pernombre");
+                String estado = rs.getString("perestatus");
+                
+                perfil = new clsPerfil();
+                perfil.setId_Perfil(id_perfil);
+                perfil.setNombrePerfil(nombre);
+                perfil.setEstadoPerfil(estado);
+                
+                perfiles.add(perfil);
             }
 
         } catch (SQLException ex) {
@@ -53,7 +55,7 @@ public class daoPerfil {
             clsConexion.close(conn);
         }
 
-        return usuarios;
+        return perfiles;
     }
 
     public int insert(clsPerfil perfil) {
@@ -63,8 +65,9 @@ public class daoPerfil {
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, perfil.getnombreperfil());
-            stmt.setString(2, perfil.getEstado());
+            stmt.setString(1, perfil.getNombrePerfil());
+            stmt.setString(2, perfil.getEstadoPerfil());
+
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -83,13 +86,14 @@ public class daoPerfil {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
+
         try {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, perfil.getnombreperfil());
-            stmt.setString(2, perfil.getEstado());
-            stmt.setInt(3, perfil.getId_perfil());
+            stmt.setString(1, perfil.getNombrePerfil());
+            stmt.setString(2, perfil.getEstadoPerfil());
+            stmt.setInt(3, perfil.getId_Perfil());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -113,7 +117,7 @@ public class daoPerfil {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, perfil.getId_perfil());
+            stmt.setInt(1, perfil.getId_Perfil());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -126,27 +130,33 @@ public class daoPerfil {
         return rows;
     }
 
-    public clsPerfil query(clsPerfil perfil) {
+//    public List<Persona> query(Persona vendedor) { // Si se utiliza un ArrayList
+    public clsPerfil query(clsPerfil perfil) {    
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        List<clsPerfil> perfiles = new ArrayList<clsPerfil>();
+        int rows = 0;
+
         try {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, perfil.getnombreperfil());
+            stmt.setInt(1, perfil.getId_Perfil());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int iPerfil_id = rs.getInt("per_idPerfil");
-                String sPerfil_nombre = rs.getString("per_NombrePerfil");
-                String sPerfil_estado = rs.getString("per_EstatusPerfil");
-
+                int id_perfil = rs.getInt("perid");
+                String nombre = rs.getString("pernombre");
+                String estado = rs.getString("perestatus");
+                
                 perfil = new clsPerfil();
-                perfil.setId_perfil(iPerfil_id);
-                perfil.setnombreperfil(sPerfil_nombre);
-                perfil.setEstado(sPerfil_estado);
+                perfil.setId_Perfil(id_perfil);
+                perfil.setNombrePerfil(nombre);
+                perfil.setEstadoPerfil(estado);
+                
+                //vendedores.add(vendedor); // Si se utiliza un ArrayList
             }
-            //System.out.println("Registros buscado:" + persona);
+            //System.out.println("Registros buscado:" + vendedor);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -155,7 +165,8 @@ public class daoPerfil {
             clsConexion.close(conn);
         }
 
-        //return personas;  // Si se utiliza un ArrayList
+        //return vendedores;  // Si se utiliza un ArrayList
         return perfil;
     }
+        
 }
