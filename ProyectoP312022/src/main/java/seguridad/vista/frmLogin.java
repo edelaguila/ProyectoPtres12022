@@ -196,7 +196,7 @@ public class frmLogin extends javax.swing.JFrame {
                             System.out.println(e);
                         }
                         break; 
-                        case "Nominas":
+                        case "Area RRHH":
                         try {
                             mdiNomina menunomina = new mdiNomina();
                             menunomina.setVisible(true);
@@ -208,7 +208,12 @@ public class frmLogin extends javax.swing.JFrame {
                         default:
                             break;
                     }
-                    //---fin agregado
+                    //Area Seguridad
+//Area Logistica
+//Area Compras
+//Area Ventas
+//Area RRHH
+//Prototipo
 
                 } else {
                     JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO o CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);

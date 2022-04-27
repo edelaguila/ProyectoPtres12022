@@ -6,9 +6,8 @@
 package rrhh.vista;
 
 
-import seguridad.vista.*;
-import seguridad.modelo.daoAplicacion;
-import seguridad.controlador.clsAplicacion;
+import rrhh.modelo.daoEmpleados;
+import rrhh.controlador.clsEmpleados;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -17,45 +16,51 @@ import java.io.File;
  *
  * @author visitante
  */
-public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
+public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-        daoAplicacion AplicacionDAO = new daoAplicacion();
-        List<clsAplicacion> aplicaciones = AplicacionDAO.select();
-        cbox_aplicacion.addItem("Seleccione una opción");
-        for (int i = 0; i < aplicaciones.size(); i++) {
-            cbox_aplicacion.addItem(aplicaciones.get(i).getNombreAplicacion());
+        daoEmpleados EmpleadoDAO = new daoEmpleados();
+        List<clsEmpleados> empleados = EmpleadoDAO.select();
+        cbox_trabajadores.addItem("Seleccione una opción");
+        for (int i = 0; i < empleados.size(); i++) {
+            cbox_trabajadores.addItem(empleados.get(i).getempnombre());
         }
     }
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Aplicacion");
+        modelo.addColumn("Id empleado");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Salario");
         modelo.addColumn("Estado");
-        daoAplicacion aplicacionDAO = new daoAplicacion();
-        List<clsAplicacion> aplicaciones = aplicacionDAO.select();
+        modelo.addColumn("Dias laborados");
+        daoEmpleados empleadoDAO = new daoEmpleados();
+        List<clsEmpleados> empleados = empleadoDAO.select();
         tablaEmpleados.setModel(modelo);
         String[] dato = new String[3];
-        for (int i = 0; i < aplicaciones.size(); i++) {
-            dato[0] = Integer.toString(aplicaciones.get(i).getId_aplicacion());
-            dato[1] = aplicaciones.get(i).getNombreAplicacion();
-            dato[2] = aplicaciones.get(i).getestadoAplicacion();
+        for (int i = 0; i < empleados.size(); i++) {
+            dato[0] = Integer.toString(empleados.get(i).getempid());
+            dato[1] = empleados.get(i).getempnombre();
+            dato[2] = Integer.toString(empleados.get(i).getempsueldo());
+            dato[3] = empleados.get(i).getempestado();
+            dato[5] = Integer.toString(empleados.get(i).getempdias());
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
 
     public void buscaraplicacion() {
-        clsAplicacion aplicacionAConsultar = new clsAplicacion();
-        daoAplicacion aplicacionDAO = new daoAplicacion();
-        aplicacionAConsultar.setId_aplicacion(Integer.parseInt(txtbuscado.getText()));
-        aplicacionAConsultar = aplicacionDAO.query(aplicacionAConsultar);
-        txtNombre.setText(aplicacionAConsultar.getNombreAplicacion());
-        txtEstado.setText(aplicacionAConsultar.getestadoAplicacion());
+        clsEmpleados empleadoAConsultar = new clsEmpleados();
+        daoEmpleados empleadoDAO = new daoEmpleados();
+        empleadoAConsultar.setempid(Integer.parseInt(txtbuscado.getText()));
+        empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
+        txtNombre.setText(empleadoAConsultar.getempnombre());
+        txtSalario.setText(Integer.toString(empleadoAConsultar.getempsueldo()));
+        txtEstado.setText(empleadoAConsultar.getempestado());
+        txtDias.setText(Integer.toString(empleadoAConsultar.getempdias()));
     }
 
-    public frmMantenimientoDatos() {
+    public frmMantenimientoEmpleados() {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
@@ -81,7 +86,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
-        cbox_aplicacion = new javax.swing.JComboBox<>();
+        cbox_trabajadores = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         txtSalario = new javax.swing.JTextField();
@@ -102,7 +107,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Ingreso de datos");
+        setTitle("Mantenimiento empleados");
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -172,13 +177,13 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 680, 303));
 
-        cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
+        cbox_trabajadores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_trabajadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_aplicacionActionPerformed(evt);
+                cbox_trabajadoresActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 263, -1));
+        getContentPane().add(cbox_trabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 263, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("-----------------Ingreso de datos del empleado-----------------");
@@ -246,19 +251,21 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        daoAplicacion aplicacionDAO = new daoAplicacion();
-        clsAplicacion aplicacionAEliminar = new clsAplicacion();
-        aplicacionAEliminar.setId_aplicacion(Integer.parseInt(txtbuscado.getText()));
-        aplicacionDAO.delete(aplicacionAEliminar);
+        daoEmpleados empleadoDAO = new daoEmpleados();
+        clsEmpleados empleadoAEliminar = new clsEmpleados();
+        empleadoAEliminar.setempid(Integer.parseInt(txtbuscado.getText()));
+        empleadoDAO.delete(empleadoAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        daoAplicacion aplicacionDAO = new daoAplicacion();
-        clsAplicacion aplicacionAInsertar = new clsAplicacion();
-        aplicacionAInsertar.setNombreAplicacion(txtNombre.getText());
-        aplicacionAInsertar.setestadoAplicacion(txtEstado.getText());
-        aplicacionDAO.insert(aplicacionAInsertar);
+        daoEmpleados empleadoDAO = new daoEmpleados();
+        clsEmpleados empleadoAInsertar = new clsEmpleados();
+        empleadoAInsertar.setempnombre(txtNombre.getText());
+        empleadoAInsertar.setempsueldo(Integer.parseInt(txtSalario.getText()));
+        empleadoAInsertar.setempestado(txtEstado.getText());
+        empleadoAInsertar.setempdias(Integer.parseInt(txtDias.getText()));
+        empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -269,17 +276,19 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        daoAplicacion aplicacionDAO = new daoAplicacion();
-        clsAplicacion aplicacionAActualizar = new clsAplicacion();
-        aplicacionAActualizar.setId_aplicacion(Integer.parseInt(txtbuscado.getText()));
-        aplicacionAActualizar.setNombreAplicacion(txtNombre.getText());
-        aplicacionAActualizar.setestadoAplicacion(txtEstado.getText());
-        aplicacionDAO.update(aplicacionAActualizar);
+        daoEmpleados empleadoDAO = new daoEmpleados();
+        clsEmpleados empleadoAActualizar = new clsEmpleados();
+        empleadoAActualizar.setempid(Integer.parseInt(txtbuscado.getText()));
+        empleadoAActualizar.setempnombre(txtNombre.getText());
+        empleadoAActualizar.setempsueldo(Integer.parseInt(txtSalario.getText()));
+        empleadoAActualizar.setempestado(txtEstado.getText());
+        empleadoAActualizar.setempdias(Integer.parseInt(txtDias.getText()));  
+        empleadoDAO.update(empleadoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        cbox_aplicacion.setSelectedIndex(0);
+        cbox_trabajadores.setSelectedIndex(0);
         txtNombre.setText("");
         txtEstado.setText("");
         txtbuscado.setText("");
@@ -290,10 +299,10 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void cbox_aplicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_aplicacionActionPerformed
+    private void cbox_trabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_trabajadoresActionPerformed
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbox_aplicacionActionPerformed
+    }//GEN-LAST:event_cbox_trabajadoresActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -323,7 +332,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> cbox_aplicacion;
+    private javax.swing.JComboBox<String> cbox_trabajadores;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
