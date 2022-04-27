@@ -13,6 +13,7 @@ import compras.controlador.clsProducto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,21 +25,25 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Proveedor");
         modelo.addColumn("ID Producto");
+        modelo.addColumn("ID Proveedor");
         modelo.addColumn("Nombre Producto");
         modelo.addColumn("Marca Producto");
         modelo.addColumn("Precio Producto");
+        modelo.addColumn("Linea");
+        modelo.addColumn("existencia");
         daoProducto productoDAO = new daoProducto();
         List<clsProducto> producto = productoDAO.select();
         tablaVendedores.setModel(modelo);
-        String[] dato = new String[5];
+        String[] dato = new String[7];
         for (int i = 0; i < producto.size(); i++) {
             dato[0] = Integer.toString(producto.get(i).getProdid());
             dato[1] = Integer.toString(producto.get(i).getProvid());
             dato[2] = producto.get(i).getProdnombre();
             dato[3] = producto.get(i).getProdmarca();
             dato[4] = Integer.toString(producto.get(i).getProdprecio());
+            dato[5] = producto.get(i).getProdlinea();
+            dato[6] = producto.get(i).getProdexistencia();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -53,6 +58,8 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         txtNombre.setText(productoAConsultar.getProdnombre());
         txtMarca.setText(productoAConsultar.getProdmarca());
         txtPrecio.setText(String.valueOf(productoAConsultar.getProdprecio()));
+        txtlinea.setText(productoAConsultar.getProdlinea());
+        txtExistencia.setText(productoAConsultar.getProdexistencia());
         
     }
 
@@ -93,6 +100,11 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
         label4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        txtlinea = new javax.swing.JTextField();
+        label8 = new javax.swing.JLabel();
+        txtExistencia = new javax.swing.JTextField();
+        label9 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -102,6 +114,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Mantenimiento Productos");
+        setPreferredSize(new java.awt.Dimension(1100, 550));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -111,7 +124,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 257, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 95, 30));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +132,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 257, 95, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 95, 30));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +140,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 299, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 100, 30));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("PRODUCTOS");
@@ -139,16 +152,16 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 257, 95, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 95, 30));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Codigo Producto");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 102, -1));
+        label3.setText("Codigo Del Producto");
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 102, -1));
 
         txtProveedor.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtProveedor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 220, 20));
+        getContentPane().add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 220, 20));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,8 +169,10 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 299, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 95, 30));
 
+        tablaVendedores.setBackground(new java.awt.Color(204, 255, 255));
+        tablaVendedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
         tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,15 +192,15 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaVendedores);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 20, 612, 303));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 20, 612, 440));
 
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtPrecio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 220, -1));
+        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 220, 20));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Precio Producto");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -197,7 +212,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 100, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 100, 30));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Nombre Producto");
@@ -209,15 +224,39 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 220, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 220, 20));
 
         txtMarca.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtMarca.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 220, -1));
+        getContentPane().add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 20));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Codigo Proveedor");
         getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, -1, -1));
+
+        jButton1.setText("?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 40, -1));
+
+        txtlinea.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtlinea.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        getContentPane().add(txtlinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 220, 20));
+
+        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label8.setText("linea producto");
+        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        txtExistencia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtExistencia.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        getContentPane().add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 220, 20));
+
+        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label9.setText("existencia del producto");
+        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,7 +266,6 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         daoProducto productoDAO = new daoProducto();
         clsProducto productoAEliminar = new clsProducto();
         productoAEliminar.setProdid(Integer.parseInt(txtbuscado.getText()));
-        productoAEliminar.setProvid(Integer.parseInt(txtProveedor.getText()));
         productoDAO.delete(productoAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -239,6 +277,8 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         productoAInsertar.setProdnombre(txtNombre.getText());
         productoAInsertar.setProdmarca(txtMarca.getText());
         productoAInsertar.setProdprecio(Integer.parseInt(txtPrecio.getText()));
+        productoAInsertar.setProdlinea(txtlinea.getText());
+        productoAInsertar.setProdexistencia(txtExistencia.getText());
         productoDAO.insert(productoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -257,6 +297,8 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         productoAActualizar.setProdnombre(txtNombre.getText());
         productoAActualizar.setProdmarca(txtMarca.getText());
         productoAActualizar.setProdprecio(Integer.parseInt(txtPrecio.getText()));
+        productoAActualizar.setProdlinea(txtlinea.getText());
+        productoAActualizar.setProdexistencia(txtExistencia.getText());
         productoDAO.update(productoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -268,6 +310,8 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         txtbuscado.setText("");
         txtNombre.setText("");
         txtMarca.setText("");
+        txtlinea.setText("");
+        txtExistencia.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -292,6 +336,11 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(rootPane, "INGRESE EL CODIGO DEL PRODUCTO QUE DESEA BUSCAR,ELIMINAR O REGISTRAR");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -299,6 +348,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
@@ -307,14 +357,18 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaVendedores;
+    private javax.swing.JTextField txtExistencia;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtProveedor;
     private javax.swing.JTextField txtbuscado;
+    private javax.swing.JTextField txtlinea;
     // End of variables declaration//GEN-END:variables
 }

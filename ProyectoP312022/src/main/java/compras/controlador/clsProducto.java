@@ -7,18 +7,26 @@ public class clsProducto {
  private int provid;
  private String prodnombre;
  private String prodmarca;
+ private String prodlinea;
  private int prodprecio;
+ private String prodexistencia;
+ 
+ 
 
     public clsProducto() {
     }
 
-    public clsProducto(int prodid,int provid, String prodnombre, String prodmarca, int prodprecio) {
-        this.prodid = prodid; 
+    public clsProducto(int prodid, int provid, String prodnombre, String prodmarca, String prodlinea, int prodprecio, String prodexistencia) {
+        this.prodid = prodid;
         this.provid = provid;
         this.prodnombre = prodnombre;
         this.prodmarca = prodmarca;
+        this.prodlinea = prodlinea;
         this.prodprecio = prodprecio;
+        this.prodexistencia = prodexistencia;
     }
+
+
 
     public int getProdid() {
         return prodid;
@@ -61,10 +69,30 @@ public class clsProducto {
         this.prodprecio = prodprecio;
     }
 
+    public String getProdlinea() {
+        return prodlinea;
+    }
+
+    public void setProdlinea(String prodlinea) {
+        this.prodlinea = prodlinea;
+    }
+
+    public String getProdexistencia() {
+        return prodexistencia;
+    }
+
+    public void setProdexistencia(String prodexistencia) {
+        this.prodexistencia = prodexistencia;
+    }
+
     @Override
     public String toString() {
-        return "clsProducto{" + "prodid=" + prodid + ", provid=" + provid + ", prodnombre=" + prodnombre + ", prodmarca=" + prodmarca + ", prodprecio=" + prodprecio + '}';
+        return "clsProducto{" + "prodid=" + prodid + ", provid=" + provid + ", prodnombre=" + prodnombre + ", prodmarca=" + prodmarca + ", prodlinea=" + prodlinea + ", prodprecio=" + prodprecio + ", prodexistencia=" + prodexistencia + '}';
     }
+    
+
+    
+
 
  
     
