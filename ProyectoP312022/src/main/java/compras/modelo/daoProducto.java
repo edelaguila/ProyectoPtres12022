@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class daoProducto {
 
-    private static final String SQL_SELECT = "SELECT prodid, provid, prodnombre,prodmarca,prodprecio FROM tbl_producto";
-    private static final String SQL_INSERT = "INSERT INTO tbl_producto ( provid, prodnombre, prodmarca, prodprecio) VALUES (?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_producto SET prodnombre = ?, prodmarca = ?, prodprecio = ? WHERE tbl_producto.prodid = ? AND tbl_producto.provid = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE tbl_producto.prodid = ? AND tbl_producto.provid = ?";
-    private static final String SQL_QUERY = "SELECT prodid, provid, prodnombre,prodmarca,prodprecio FROM tbl_producto WHERE prodid=?";
+    private static final String SQL_SELECT = "SELECT prodid, provid, prodnombre,prodmarca,prodprecio,prodlinea,prodexistencia FROM tbl_producto";
+    private static final String SQL_INSERT = "INSERT INTO tbl_producto( provid, prodnombre, prodmarca, prodprecio, Prodlinea, prodexistencia) VALUES ( ?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_producto SET provid = ?,prodnombre = ?,prodmarca = ?, prodprecio = ?, Prodlinea = ?, prodexistencia = ? WHERE tbl_producto.prodid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE tbl_producto.prodid = ?";
+    private static final String SQL_QUERY = "SELECT prodid, provid, prodnombre,prodmarca,prodprecio,prodlinea,prodexistencia FROM tbl_producto WHERE tbl_producto.prodid = ?";
 
     public List<clsProducto> select() {
         Connection conn = null;
@@ -40,6 +40,8 @@ public class daoProducto {
                 String prodnombre = rs.getString("prodnombre");
                 String prodmarca = rs.getString("prodmarca");
                 int prodprecio = rs.getInt("prodprecio");
+                String prodlinea = rs.getString("prodlinea");
+                String prodexistencia = rs.getString("prodexistencia");
 
                 producto = new clsProducto();
                 producto.setProdid(prodid);
@@ -47,6 +49,8 @@ public class daoProducto {
                 producto.setProdnombre(prodnombre);
                 producto.setProdmarca(prodmarca);
                 producto.setProdprecio(prodprecio);
+                producto.setProdlinea(prodlinea);
+                producto.setProdexistencia(prodexistencia);
 
                 product.add(producto);
             }
@@ -73,7 +77,8 @@ public class daoProducto {
             stmt.setString(2, producto.getProdnombre());
             stmt.setString(3, producto.getProdmarca());
             stmt.setInt(4, producto.getProdprecio());
-
+            stmt.setString(5,producto.getProdlinea());
+            stmt.setString(6, producto.getProdexistencia());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -96,12 +101,13 @@ public class daoProducto {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, producto.getProdnombre());
-            stmt.setString(2, producto.getProdmarca());
-            stmt.setInt(3, producto.getProdprecio());
-            stmt.setInt(4, producto.getProdid());
-            stmt.setInt(5, producto.getProvid());
-
+            stmt.setInt(1, producto.getProvid());
+            stmt.setString(2, producto.getProdnombre());
+            stmt.setString(3, producto.getProdmarca());
+            stmt.setInt(4, producto.getProdprecio());
+            stmt.setString(5, producto.getProdlinea());
+            stmt.setString(6, producto.getProdexistencia());                      
+            stmt.setInt(7, producto.getProdid());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
@@ -125,7 +131,6 @@ public class daoProducto {
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, producto.getProdid());
-            stmt.setInt(2, producto.getProvid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -154,12 +159,16 @@ public class daoProducto {
                 String prodnombre = rs.getString("prodnombre");
                 String prodmarca = rs.getString("prodmarca");
                 int prodprecio = rs.getInt("prodprecio");
+                String prodlinea = rs.getString("prodlinea");
+                String prodexistencia = rs.getString("prodexistencia");
 
                 producto = new clsProducto();
                 producto.setProvid(provid);
                 producto.setProdnombre(prodnombre);
                 producto.setProdmarca(prodmarca);
                 producto.setProdprecio(prodprecio);
+                producto.setProdlinea(prodlinea);
+                producto.setProdexistencia(prodexistencia);
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
