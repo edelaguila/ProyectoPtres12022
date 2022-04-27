@@ -18,11 +18,11 @@ import seguridad.modelo.clsConexion;
  */
 public class daoProveedor {
 
-    private static final String SQL_SELECT2 = "SELECT provid, provnombre, provestado, provtelefono, provdireccion FROM tbl_proveedor";
-    private static final String SQL_INSERT = "INSERT INTO tbl_proveedor(provnombre,provestado,provtelefono,provdireccion) VALUES(?, ?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET provnombre = ?, provestado = ?, provtelefono = ?, provdireccion = ? WHERE tbl_proveedor.provid = ?";
+    private static final String SQL_SELECT2 = "SELECT provid, provnombre, provsaldo, provestado, provtelefono, provdireccion FROM tbl_proveedor";
+    private static final String SQL_INSERT = "INSERT INTO tbl_proveedor(provnombre,provsaldo,provestado,provtelefono,provdireccion) VALUES(?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET provnombre = ?, provsaldo = ?, provestado = ?, provtelefono = ?, provdireccion = ? WHERE tbl_proveedor.provid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_proveedor WHERE tbl_proveedor.provid = ?";
-    private static final String SQL_QUERY = "SELECT provid, provnombre, provestado, provtelefono, provdireccion FROM tbl_proveedor WHERE provid = ?";
+    private static final String SQL_QUERY = "SELECT provid, provnombre, provsaldo, provestado, provtelefono, provdireccion FROM tbl_proveedor WHERE provid = ?";
 
     public List<clsProveedor> select() {
         Connection conn = null;
@@ -37,6 +37,7 @@ public class daoProveedor {
             while (rs.next()) {
                 int provid = rs.getInt("provid");
                 String provnombre = rs.getString("provnombre");
+                int provsaldo = rs.getInt("provsaldo");
                 String provestado = rs.getString("provestado");
                 int provtelefono = rs.getInt("provtelefono");
                 String provdireccion = rs.getString("provdireccion");
@@ -45,6 +46,7 @@ public class daoProveedor {
                 usuario = new clsProveedor();
                 usuario.setprovid(provid);
                 usuario.setprovnombre(provnombre);
+                usuario.setprovsaldo(provsaldo);
                 usuario.setprovestado(provestado);
                 usuario.setprovtelefono(provtelefono);
                 usuario.setprovtdireccion(provdireccion);
@@ -71,9 +73,10 @@ public class daoProveedor {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, proveedor.getprovnombre());
-            stmt.setString(2, proveedor.getprovestado());
-            stmt.setInt(3, proveedor.getprovtelefono());
-            stmt.setString(4, proveedor.getprovtdireccion());
+            stmt.setInt(2, proveedor.getprovsaldo());
+            stmt.setString(3, proveedor.getprovestado());
+            stmt.setInt(4, proveedor.getprovtelefono());
+            stmt.setString(5, proveedor.getprovtdireccion());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -97,10 +100,11 @@ public class daoProveedor {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, proveedor.getprovnombre());
-            stmt.setString(2, proveedor.getprovestado());
-            stmt.setInt(3, proveedor.getprovtelefono());
-            stmt.setString(4, proveedor.getprovtdireccion());
-            stmt.setInt(5, proveedor.getprovid());
+            stmt.setInt(2, proveedor.getprovsaldo());
+            stmt.setString(3, proveedor.getprovestado());
+            stmt.setInt(4, proveedor.getprovtelefono());
+            stmt.setString(5, proveedor.getprovtdireccion());
+            stmt.setInt(6, proveedor.getprovid());
 
 
 
@@ -152,6 +156,7 @@ public class daoProveedor {
             while (rs.next()) {
                 int provid = rs.getInt("provid");
                 String provnombre = rs.getString("provnombre");
+                int provsaldo = rs.getInt("provsaldo");
                 String provestado = rs.getString("provestado");
                 int provtelefono = rs.getInt("provtelefono");
                 String provdireccion = rs.getString("provdireccion");
@@ -159,6 +164,7 @@ public class daoProveedor {
                 proveedor = new clsProveedor();
                 proveedor.setprovid(provid);
                 proveedor.setprovnombre(provnombre);
+                proveedor.setprovsaldo(provsaldo);
                 proveedor.setprovestado(provestado);
                 proveedor.setprovtelefono(provtelefono);
                 proveedor.setprovtdireccion(provdireccion);
