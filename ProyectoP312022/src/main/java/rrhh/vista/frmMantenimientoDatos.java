@@ -35,7 +35,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         modelo.addColumn("Estado");
         daoAplicacion aplicacionDAO = new daoAplicacion();
         List<clsAplicacion> aplicaciones = aplicacionDAO.select();
-        tablaDatos.setModel(modelo);
+        tablaEmpleados.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < aplicaciones.size(); i++) {
             dato[0] = Integer.toString(aplicaciones.get(i).getId_aplicacion());
@@ -80,24 +80,18 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         txtbuscado = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaDatos = new javax.swing.JTable();
+        tablaEmpleados = new javax.swing.JTable();
         cbox_aplicacion = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
-        label5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        txtEstado1 = new javax.swing.JTextField();
-        label7 = new javax.swing.JLabel();
+        txtSalario = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
-        txtEstado2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtDias = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
-        label10 = new javax.swing.JLabel();
-        txtNombre2 = new javax.swing.JTextField();
-        txtEstado3 = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
         label11 = new javax.swing.JLabel();
         label12 = new javax.swing.JLabel();
-        txtNombre3 = new javax.swing.JTextField();
         label6 = new javax.swing.JLabel();
         label13 = new javax.swing.JLabel();
 
@@ -118,7 +112,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 378, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +120,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 378, 95, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +128,7 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 419, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Datos");
@@ -146,8 +140,8 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 378, 95, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 420, 102, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 95, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 102, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,28 +149,28 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 419, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 95, -1));
 
-        tablaDatos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaEmpleados.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No.nomina", "Fecha Nomina", "Empleado", "Cargo", "Departamento", "Percepciones", "Deducciones", "Dias Laborados"
+                "Id empleado", "Nombre", "Salario", "Estado", "Dias laborados"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaDatos);
+        jScrollPane1.setViewportView(tablaEmpleados);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 680, 303));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 680, 303));
 
         cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
@@ -184,20 +178,11 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 cbox_aplicacionActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 263, -1));
+        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 263, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("-----------------Ingreso de datos del empleado-----------------");
-        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 360, -1));
-
-        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado.setOpaque(false);
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 260, -1));
-
-        label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Fecha nomina");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 360, -1));
 
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -205,70 +190,52 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 378, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 100, -1));
 
-        txtEstado1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado1.setOpaque(false);
-        getContentPane().add(txtEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 260, -1));
-
-        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label7.setText("Cargo");
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 172, -1, -1));
+        txtSalario.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtSalario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtSalario.setOpaque(false);
+        getContentPane().add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 260, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label8.setText("Nombre empleados");
-        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 137, -1, -1));
+        label8.setText("Nombre empleado");
+        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        txtNombre1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtNombre1.setOpaque(false);
-        getContentPane().add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 260, -1));
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtNombre.setOpaque(false);
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 260, -1));
 
-        txtEstado2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado2.setOpaque(false);
-        txtEstado2.addActionListener(new java.awt.event.ActionListener() {
+        txtDias.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtDias.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtDias.setOpaque(false);
+        txtDias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEstado2ActionPerformed(evt);
+                txtDiasActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 260, -1));
+        getContentPane().add(txtDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 260, -1));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label9.setText("Percepciones");
-        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 242, -1, -1));
+        label9.setText("Salario empleado");
+        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label10.setText("Departamento");
-        getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 207, -1, -1));
-
-        txtNombre2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtNombre2.setOpaque(false);
-        getContentPane().add(txtNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 260, -1));
-
-        txtEstado3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado3.setOpaque(false);
-        getContentPane().add(txtEstado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 260, -1));
+        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtEstado.setOpaque(false);
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 260, -1));
 
         label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label11.setText("Dias laborados");
-        getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, -1, -1));
+        getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label12.setText("Deducciones");
-        getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 277, -1, -1));
-
-        txtNombre3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtNombre3.setOpaque(false);
-        getContentPane().add(txtNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 260, -1));
+        label12.setText("Empleado estado");
+        getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("empledos");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
 
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label13.setText(".");
@@ -345,9 +312,9 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtEstado2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstado2ActionPerformed
+    private void txtDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEstado2ActionPerformed
+    }//GEN-LAST:event_txtDiasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -360,26 +327,20 @@ public class frmMantenimientoDatos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
-    private javax.swing.JLabel label10;
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
     private javax.swing.JLabel label13;
     private javax.swing.JLabel label4;
-    private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
-    private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaDatos;
+    private javax.swing.JTable tablaEmpleados;
+    private javax.swing.JTextField txtDias;
     private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtEstado1;
-    private javax.swing.JTextField txtEstado2;
-    private javax.swing.JTextField txtEstado3;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
-    private javax.swing.JTextField txtNombre3;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }
