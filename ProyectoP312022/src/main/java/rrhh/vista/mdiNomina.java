@@ -7,6 +7,7 @@ package rrhh.vista;
 
 import seguridad.vista.*;
 import java.awt.Dimension;
+import java.io.IOException;
 
 /**
  *
@@ -47,6 +48,9 @@ public class mdiNomina extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -102,6 +106,26 @@ public class mdiNomina extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu3.setText("Herramientas");
+
+        jMenuItem8.setText("Calculadora");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem8);
+
+        jMenuItem9.setText("Bloc de notas");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +154,44 @@ public class mdiNomina extends javax.swing.JFrame {
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2); 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+           try        
+    {
+        Runtime rt = Runtime.getRuntime();           
+        Process p = rt.exec("calc");            
+        p.waitFor();        
+    }        
+    catch ( IOException ioe )       
+    {            
+        ioe.printStackTrace();
+    }         
+    catch ( InterruptedException ie )
+    {            
+        ie.printStackTrace();     
+    }
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+ try        
+    {
+        Runtime rt = Runtime.getRuntime();           
+        Process p = rt.exec("notepad");            
+        p.waitFor();        
+    }        
+    catch ( IOException ioe )       
+    {            
+        ioe.printStackTrace();
+    }         
+    catch ( InterruptedException ie )
+    {            
+        ie.printStackTrace();     
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +247,7 @@ public class mdiNomina extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
@@ -195,5 +258,7 @@ public class mdiNomina extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

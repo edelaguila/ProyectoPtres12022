@@ -5,9 +5,9 @@ import seguridad.controlador.*;
 public class clsEmpleados {
     private int empid;
     private String empnombre;
-    private int empsueldo; 
+    private String empsueldo; 
     private String empestado;
-    private int empdias;
+    private String empdias;
    
     public clsEmpleados() {
     }
@@ -16,14 +16,14 @@ public class clsEmpleados {
         this.empid = p_empid;
     }
     
-    public clsEmpleados(String empnombre, int empsueldo, String empestado, int empdias) {
+    public clsEmpleados(String empnombre, String empsueldo, String empestado, String empdias) {
         this.empnombre = empnombre;
         this.empsueldo = empsueldo;
         this.empestado = empestado;
         this.empdias = empdias;
     }
     
-    public clsEmpleados(int empid, String empnombre, int empsueldo, String empestado, int empdias) {
+    public clsEmpleados(int empid, String empnombre, String empsueldo, String empestado, String empdias) {
         this.empid = empid;
         this.empnombre = empnombre;
         this.empsueldo = empsueldo;
@@ -52,11 +52,11 @@ public class clsEmpleados {
         this.empnombre = empnombre;
     }
 
-    public int getempsueldo() {
+    public String getempsueldo() {
         return empsueldo;
     }
 
-    public void setempsueldo(int empsueldo) {
+    public void setempsueldo(String empsueldo) {
         this.empsueldo = empsueldo;
     }
 
@@ -68,11 +68,11 @@ public class clsEmpleados {
         this.empestado = empestado;
     }
 
-    public int getempdias() {
+    public String getempdias() {
         return empdias;
     }
 
-    public void setempdias(int empdias) {
+    public void setempdias(String empdias) {
         this.empdias = empdias;
     }
 }

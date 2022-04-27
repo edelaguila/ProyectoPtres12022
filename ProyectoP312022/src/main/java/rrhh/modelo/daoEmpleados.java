@@ -36,9 +36,9 @@ public class daoEmpleados {
             while (rs.next()) {
                 int id = rs.getInt("empid");
                 String nombre = rs.getString("empnombre");
-                int sueldo = rs.getInt("empsueldo");
+                String sueldo = rs.getString("empsueldo");
                 String estado = rs.getString("empestado");
-                int dias = rs.getInt("empdias");
+                String dias = rs.getString("empdias");
                
 
                 empleado = new clsEmpleados();
@@ -70,9 +70,9 @@ public class daoEmpleados {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, empleado.getempnombre());
-            stmt.setInt(2, empleado.getempsueldo());
+            stmt.setString(2, empleado.getempsueldo());
             stmt.setString(3, empleado.getempestado());
-            stmt.setInt(4, empleado.getempdias());
+            stmt.setString(4, empleado.getempdias());
                   
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -96,9 +96,9 @@ public class daoEmpleados {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, empleado.getempnombre());
-            stmt.setInt(2, empleado.getempsueldo());
+            stmt.setString(2, empleado.getempsueldo());
             stmt.setString(3, empleado.getempestado());
-            stmt.setInt(4, empleado.getempdias());
+            stmt.setString(4, empleado.getempdias());
             stmt.setInt(5, empleado.getempid());
 
             rows = stmt.executeUpdate();
@@ -150,9 +150,9 @@ public class daoEmpleados {
             while (rs.next()) {
                 int id = rs.getInt("empid");
                 String nombre = rs.getString("empnombre");
-                int sueldo = rs.getInt("empsueldo");
+                String sueldo = rs.getString("empsueldo");
                 String estado = rs.getString("empestado");
-                int dias = rs.getInt("empdias");
+                String dias = rs.getString("empdias");
                 
 
                 empleado = new clsEmpleados();

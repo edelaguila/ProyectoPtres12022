@@ -37,13 +37,13 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         daoEmpleados empleadoDAO = new daoEmpleados();
         List<clsEmpleados> empleados = empleadoDAO.select();
         tablaEmpleados.setModel(modelo);
-        String[] dato = new String[3];
+        String[] dato = new String[6];
         for (int i = 0; i < empleados.size(); i++) {
             dato[0] = Integer.toString(empleados.get(i).getempid());
             dato[1] = empleados.get(i).getempnombre();
-            dato[2] = Integer.toString(empleados.get(i).getempsueldo());
+            dato[2] = empleados.get(i).getempsueldo();
             dato[3] = empleados.get(i).getempestado();
-            dato[5] = Integer.toString(empleados.get(i).getempdias());
+            dato[4] = empleados.get(i).getempdias();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -55,9 +55,9 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         empleadoAConsultar.setempid(Integer.parseInt(txtbuscado.getText()));
         empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
         txtNombre.setText(empleadoAConsultar.getempnombre());
-        txtSalario.setText(Integer.toString(empleadoAConsultar.getempsueldo()));
+        txtSalario.setText(empleadoAConsultar.getempsueldo());
         txtEstado.setText(empleadoAConsultar.getempestado());
-        txtDias.setText(Integer.toString(empleadoAConsultar.getempdias()));
+        txtDias.setText(empleadoAConsultar.getempdias());
     }
 
     public frmMantenimientoEmpleados() {
@@ -262,9 +262,9 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         daoEmpleados empleadoDAO = new daoEmpleados();
         clsEmpleados empleadoAInsertar = new clsEmpleados();
         empleadoAInsertar.setempnombre(txtNombre.getText());
-        empleadoAInsertar.setempsueldo(Integer.parseInt(txtSalario.getText()));
+        empleadoAInsertar.setempsueldo(txtSalario.getText());
         empleadoAInsertar.setempestado(txtEstado.getText());
-        empleadoAInsertar.setempdias(Integer.parseInt(txtDias.getText()));
+        empleadoAInsertar.setempdias(txtDias.getText());
         empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -280,9 +280,9 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         clsEmpleados empleadoAActualizar = new clsEmpleados();
         empleadoAActualizar.setempid(Integer.parseInt(txtbuscado.getText()));
         empleadoAActualizar.setempnombre(txtNombre.getText());
-        empleadoAActualizar.setempsueldo(Integer.parseInt(txtSalario.getText()));
+        empleadoAActualizar.setempsueldo(txtSalario.getText());
         empleadoAActualizar.setempestado(txtEstado.getText());
-        empleadoAActualizar.setempdias(Integer.parseInt(txtDias.getText()));  
+        empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
