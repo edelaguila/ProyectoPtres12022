@@ -24,12 +24,12 @@ public class daoNomina {
     private static final String SQL_QUERY = "SELECT nomid, nomnombre, nomcargo,  nombredepartamento, nompercepciones, nomdeducciones, nomdiaslaborados FROM tbl_nomina WHERE nomid=?";
     private static final String SQL_QUERYN = "SELECT nomid, nomnombre, nomcargo, nombredepartamento, nompercepciones, nomdeducciones, nomdiaslaborados FROM tbl_nomina WHERE nomnombre=?";    
 
-    public List<clsNomina> select() {
+    public List<clsNominas> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsNomina usuario = null;
-        List<clsNomina> usuarios = new ArrayList<clsNomina>();
+        clsNominas usuario = null;
+        List<clsNominas> usuarios = new ArrayList<clsNominas>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
@@ -44,7 +44,7 @@ public class daoNomina {
                 String Nomdiaslaborados = rs.getString("nomdiaslaborados");
                 
 
-                usuario = new clsNomina();
+                usuario = new clsNominas();
                 usuario.setnomid(Nomid);
                 usuario.setnomnombre(Nomnombre);
                 usuario.setnomcargo(Nomcargo);
@@ -66,7 +66,7 @@ public class daoNomina {
         return usuarios;
     }
 
-    public int insert(clsNomina usuario) {
+    public int insert(clsNominas usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -94,7 +94,7 @@ public class daoNomina {
         return rows;
     }
 
-    public int update(clsNomina usuario) {
+    public int update(clsNominas usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -124,7 +124,7 @@ public class daoNomina {
         return rows;
     }
 
-    public int delete(clsNomina usuario) {
+    public int delete(clsNominas usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -146,7 +146,7 @@ public class daoNomina {
         return rows;
     }
 
-    public clsNomina query(clsNomina usuario) 
+    public clsNominas query(clsNominas usuario) 
     {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -167,7 +167,7 @@ public class daoNomina {
                 String nomdiaslaboradose = rs.getString("nomdiaslaboradose");
                 
 
-                usuario = new clsNomina();
+                usuario = new clsNominas();
                 usuario.setnomid(Nomid);
                 usuario.setnomnombre(nomnombre);
                 usuario.setnomcargo(nomcargo);
@@ -189,7 +189,7 @@ public class daoNomina {
         //return personas;  // Si se utiliza un ArrayList
         return usuario;
     }
-public clsNomina queryn(clsNomina usuario) {
+public clsNominas queryn(clsNominas usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -209,7 +209,7 @@ public clsNomina queryn(clsNomina usuario) {
                 String nomdeducciones = rs.getString("nomdeducciones");
                 String nomdiaslaboradose = rs.getString("nomdiaslaboradose");
                 
-                usuario = new clsNomina();
+                usuario = new clsNominas();
                 usuario.setnomid(Nomid);
                 usuario.setnomnombre(nomnombre);
                 usuario.setnomcargo(nomcargo);
