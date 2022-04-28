@@ -48,13 +48,13 @@ CREATE TABLE IF NOT EXISTS tbl_producto(
     
   CREATE TABLE IF NOT EXISTS tbl_compraencabezado(
          comid INT NOT NULL AUTO_INCREMENT,
+         provid INT NOT NULL,
          comserie INT(11) NOT NULL,
          comfechaemi DATE NOT NULL,
-         comfechavenci DATE NOT NULL,
-         provid INT NOT NULL,
+         comfechavenci DATE NOT NULL,      
          ordid INT NOT NULL,
       
-      PRIMARY KEY(comid,comserie),
+      PRIMARY KEY(comid,comserie,provid),
       FOREIGN KEY (provid) REFERENCES tbl_ordecompraencabezado(provid),
       FOREIGN KEY (ordid) REFERENCES tbl_ordecompraencabezado(ordid)
   )ENGINE = InnoDB CHARACTER SET = latin1; 
@@ -92,13 +92,13 @@ CREATE TABLE IF NOT EXISTS tbl_producto(
      conid INT NOT NULL,
      cuentadoc INT(11) NOT NULL,
      cuentaslado INT(11) NOT NULL,
-     cuentfechaemi DATE NOT NULL,
-     cuentfechavenci DATE NOT NULL,
      cuentavalor INT(11) NOT NULL,
      cuentareferencia INT (11) NOT NULL,
+     comid INT NOT NULL,
      provid INT NOT NULL,
+     
 
      
      FOREIGN KEY (conid) REFERENCES tbl_concepto(conid),
-     FOREIGN KEY (provid) REFERENCES tbl_compraencabezado(provid)
+     FOREIGN KEY (provid,comid) REFERENCES tbl_compraencabezado(provid,comid)
     )ENGINE = InnoDB CHARACTER SET = latin1;
