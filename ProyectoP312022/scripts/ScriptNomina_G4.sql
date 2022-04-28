@@ -11,3 +11,11 @@ CREATE TABLE IF NOT EXISTS tbl_empleados (
 	PRIMARY KEY (empid) )
 ENGINE = InnoDB CHARACTER SET = latin1;
 
+CREATE TABLE IF NOT EXISTS tbl_departamentos (
+	deparid INT NOT NULL AUTO_INCREMENT,
+	deparnombre VARCHAR(45) NOT NULL,
+        deparestado VARCHAR(40) NOT NULL,
+	PRIMARY KEY (deparid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+
+
