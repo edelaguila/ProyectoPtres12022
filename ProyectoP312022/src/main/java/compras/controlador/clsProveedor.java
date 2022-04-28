@@ -3,6 +3,7 @@ package compras.controlador;
 public class clsProveedor {
     private int provid;
     private String provnombre;
+    private int provsaldo;
     private String provestado;
     private int provtelefono;
     private String provdireccion;
@@ -65,9 +66,16 @@ public class clsProveedor {
     public void setprovtdireccion(String provdireccion) {
         this.provdireccion = provdireccion;
     }
+    public int getprovsaldo() {
+        return provsaldo;
+    }
+
+    public void setprovsaldo(int provsaldo) {
+        this.provsaldo = provsaldo;
+    }
     @Override
     public String toString() {
-        return "tbl_proveedor{" + "provid=" + provid + ", provnombre=" + provnombre + ", provestado=" + provestado + ", provtelefono=" + provtelefono + ", provdireccion" + provdireccion + '}';
+        return "tbl_proveedor{" + "provid=" + provid + ", provnombre=" + provnombre + ", provsaldo=" + provsaldo + ", provestado=" + provestado + ", provtelefono=" + provtelefono + ", provdireccion" + provdireccion + '}';
     }
     
     
