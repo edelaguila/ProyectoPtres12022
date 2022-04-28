@@ -125,7 +125,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 299, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("PRODUCTOS");
+        label1.setText("CONCEPTO");
         getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(686, 0, -1, -1));
 
         btnModificar.setText("Modificar");
