@@ -29,18 +29,18 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("codigo_departamento");
-        modelo.addColumn("nombre_departamento");
-        modelo.addColumn("estatus_departamento");
+        modelo.addColumn("deparid");
+        modelo.addColumn("deparnombre");
+        modelo.addColumn("deparestado");
         
         daodepartamento vendedorDAO = new daodepartamento();
         List<clsdepartamento> vendedores = vendedorDAO.select();
         tablaVendedores.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < vendedores.size(); i++) {
-            dato[0] = Integer.toString(vendedores.get(i).getcodigo_departamento());
-            dato[1] = vendedores.get(i).getnombre_departamento();
-            dato[2] = vendedores.get(i).getestatus_departamento();
+            dato[0] = Integer.toString(vendedores.get(i).getdeparid());
+            dato[1] = vendedores.get(i).getdeparnombre();
+            dato[2] = vendedores.get(i).getdeparestado();
             
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -50,9 +50,9 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
     public void buscarVendedor() {
         clsdepartamento vendedorAConsultar = new clsdepartamento();
         daodepartamento vendedorDAO = new daodepartamento();
-        vendedorAConsultar.setcodigo_departamento(Integer.parseInt(txtbuscado.getText()));
+        vendedorAConsultar.setdeparid(Integer.parseInt(txtbuscado.getText()));
         vendedorAConsultar = vendedorDAO.query(vendedorAConsultar);
-        txtNombre.setText(vendedorAConsultar.getnombre_departamento());        
+        txtNombre.setText(vendedorAConsultar.getdeparnombre());        
     }
 
     public frmMantenimientodepartamento() {
@@ -160,7 +160,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "codigo_departamento", "nombre_departamento", "direccion"
+                "deparid", "deparnombre", "deparestado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -207,7 +207,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         daodepartamento vendedorDAO = new daodepartamento();
         clsdepartamento vendedorAEliminar = new clsdepartamento();
-        vendedorAEliminar.setcodigo_departamento(Integer.parseInt(txtbuscado.getText()));
+        vendedorAEliminar.setdeparid(Integer.parseInt(txtbuscado.getText()));
         vendedorDAO.delete(vendedorAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -215,8 +215,8 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         daodepartamento vendedorDAO = new daodepartamento();
         clsdepartamento vendedorAInsertar = new clsdepartamento();
-        vendedorAInsertar.setnombre_departamento(txtNombre.getText());
-         vendedorAInsertar.setestatus_departamento(txtDireccion.getText());
+        vendedorAInsertar.setdeparnombre(txtNombre.getText());
+         vendedorAInsertar.setdeparestado(txtDireccion.getText());
         vendedorDAO.insert(vendedorAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -230,8 +230,8 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
 //        // TODO add your handling code here:
         daodepartamento vendedorDAO = new daodepartamento();
         clsdepartamento vendedorAActualizar = new clsdepartamento();
-        vendedorAActualizar.setcodigo_departamento(Integer.parseInt(txtbuscado.getText()));
-        vendedorAActualizar.setnombre_departamento(txtNombre.getText());
+        vendedorAActualizar.setdeparid(Integer.parseInt(txtbuscado.getText()));
+        vendedorAActualizar.setdeparnombre(txtNombre.getText());
         vendedorDAO.update(vendedorAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
