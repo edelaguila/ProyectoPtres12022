@@ -5,6 +5,7 @@
  */
 package rrhh.modelo;
 
+import prototipos.modelo.*;
 
 /**
  *
