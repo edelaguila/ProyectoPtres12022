@@ -231,7 +231,6 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 260, -1));
 
         label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label11.setText("Dias laborados");
         getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N

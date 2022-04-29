@@ -92,10 +92,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtSalario = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtDias = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
-        label11 = new javax.swing.JLabel();
         label12 = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
         label13 = new javax.swing.JLabel();
@@ -162,11 +160,11 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id empleado", "Nombre", "Salario", "Estado", "Dias laborados"
+                "Id Concepto", "Nombre", "Efecto", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -203,7 +201,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         getContentPane().add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 260, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label8.setText("Nombre empleado");
+        label8.setText("Nombre");
         getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -211,18 +209,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtNombre.setOpaque(false);
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 260, -1));
 
-        txtDias.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtDias.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtDias.setOpaque(false);
-        txtDias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDiasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 260, -1));
-
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label9.setText("Salario empleado");
+        label9.setText("Efecto ");
         getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -230,16 +218,12 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtEstado.setOpaque(false);
         getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 260, -1));
 
-        label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label11.setText("Dias laborados");
-        getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
-
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label12.setText("Empleado estado");
+        label12.setText("Estado");
         getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("empledos");
+        label6.setText("Concepto");
         getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, -1));
 
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -321,10 +305,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiasActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -336,7 +316,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
-    private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
     private javax.swing.JLabel label13;
     private javax.swing.JLabel label4;
@@ -346,7 +325,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaEmpleados;
-    private javax.swing.JTextField txtDias;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
