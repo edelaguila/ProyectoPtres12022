@@ -1,55 +1,55 @@
 package rrhh.controlador;
 
 public class clscargo {
-    private int idcargo;
-    private String nombrecargo;
-    private String estatuscargo;
+    private int carid;
+    private String carnombre;
+    private String carestatus;
 
     public clscargo() {
     }
 
-    public clscargo(int idcargo) {
-        this.idcargo = idcargo;
+    public clscargo(int carid) {
+        this.carid = carid;
     }
     
     public clscargo(String snombre, String sestado) {
-        this.nombrecargo = snombre;
-        this.estatuscargo = sestado;
+        this.carnombre = snombre;
+        this.carestatus = sestado;
     }
     
-    public clscargo(int idcargo, String snombre, String sestado) {
-        this.idcargo = idcargo;
-        this.nombrecargo = snombre;
-        this.estatuscargo = sestado;
+    public clscargo(int carid, String snombre, String sestado) {
+        this.carid = carid;
+        this.carnombre = snombre;
+        this.carestatus = sestado;
     }
     
 
-    public int getidcargo() {
-        return idcargo;
+    public int getcarid() {
+        return carid;
     }
 
-    public void setidcargo(int idcargo) {
-        this.idcargo = idcargo;
+    public void setcarid(int carid) {
+        this.carid = carid;
     }
 
-    public String getnombrecargo() {
-        return nombrecargo;
+    public String getcarnombre() {
+        return carnombre;
     }
 
-    public void setnombrecargo(String snombre) {
-        this.nombrecargo = snombre;
+    public void setcarnombre(String snombre) {
+        this.carnombre = snombre;
     }
 
-    public String getestatuscargo() {
-        return estatuscargo;
+    public String getcarestatus() {
+        return carestatus;
     }
 
-    public void setestatuscargo(String sestado) {
-        this.estatuscargo = sestado;
+    public void setcarestatus(String sestado) {
+        this.carestatus = sestado;
     }
     @Override
     public String toString() {
-        return "tbl_cargo{" + "idcargo=" + idcargo + ", nombrecargo="  +  nombrecargo +", estatus=" + estatuscargo +  "}";
+        return "tbl_cargo{" + "carid=" + carid + ", carnombre="  +  carnombre +", estatus=" + carestatus +  "}";
     }
     
     

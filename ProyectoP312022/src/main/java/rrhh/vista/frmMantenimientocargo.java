@@ -19,12 +19,7 @@ import java.io.File;
 public class frmMantenimientocargo extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-        /*daocargo cargoDAO = new daocargo();
-        List<clscargo> vendedores = cargoDAO.select();
-        cbox_empleado.addItem("Seleccione una opción");
-        for (int i = 0; i < empleados.size(); i++) {
-            cbox_empleado.addItem(empleados.get(i).getNombreEmpleado());
-        }*/
+
     }
 
     public void llenadoDeTablas() {
@@ -34,26 +29,26 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         modelo.addColumn("Estado");
         
         daocargo cargoDAO = new daocargo();
-        List<clscargo> vendedores = cargoDAO.select();
-        tablaVendedores.setModel(modelo);
+        List<clscargo> cargos = cargoDAO.select();
+        tablaCargos.setModel(modelo);
         String[] dato = new String[3];
-        for (int i = 0; i < vendedores.size(); i++) {
-            dato[0] = Integer.toString(vendedores.get(i).getidcargo());
-            dato[1] = vendedores.get(i).getnombrecargo();
-            dato[2] = vendedores.get(i).getestatuscargo();
+        for (int i = 0; i < cargos.size(); i++) {
+            dato[0] = Integer.toString(cargos.get(i).getcarid());
+            dato[1] = cargos.get(i).getcarnombre();
+            dato[2] = cargos.get(i).getcarestatus();
             
-            //System.out.println("vendedor:" + vendedores);
+            //System.out.println("cargo:" + cargos);
             modelo.addRow(dato);
         }
     }
 
-    public void buscarVendedor() {
-        clscargo vendedorAConsultar = new clscargo();
+    public void buscarCargo() {
+        clscargo cargoAConsultar = new clscargo();
         daocargo cargoDAO = new daocargo();
-        vendedorAConsultar.setidcargo(Integer.parseInt(txtbuscado.getText()));
-        vendedorAConsultar = cargoDAO.query(vendedorAConsultar);
-        txtNombre.setText(vendedorAConsultar.getnombrecargo());   
-        txtEstado.setText(vendedorAConsultar.getestatuscargo());
+        cargoAConsultar.setcarid(Integer.parseInt(txtbuscado.getText()));
+        cargoAConsultar = cargoDAO.query(cargoAConsultar);
+        txtNombre.setText(cargoAConsultar.getcarnombre());   
+        txtEstado.setText(cargoAConsultar.getcarestatus());
         
     }
 
@@ -84,7 +79,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaVendedores = new javax.swing.JTable();
+        tablaCargos = new javax.swing.JTable();
         txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
@@ -145,8 +140,8 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
             }
         });
 
-        tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCargos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaCargos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -162,19 +157,19 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaVendedores);
+        jScrollPane1.setViewportView(tablaCargos);
 
         txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstado.setOpaque(false);
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estatus cargo");
+        label5.setText("Estado cargo");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
 
-        jButton2.setText("Ayuda");
+        jButton2.setText("btnAyuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -217,12 +212,12 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
                         .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
                         .addComponent(label1)
                         .addGap(294, 294, 294))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
                         .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
@@ -251,7 +246,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
                             .addComponent(btnBuscar)
                             .addComponent(btnLimpiar)
                             .addComponent(jButton2))
-                        .addContainerGap(78, Short.MAX_VALUE))
+                        .addContainerGap(83, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lb)
                         .addGap(10, 10, 10)
@@ -265,34 +260,34 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         daocargo cargoDAO = new daocargo();
-        clscargo vendedorAEliminar = new clscargo();
-        vendedorAEliminar.setidcargo(Integer.parseInt(txtbuscado.getText()));
-        cargoDAO.delete(vendedorAEliminar);
+        clscargo cargoAEliminar = new clscargo();
+        cargoAEliminar.setcarid(Integer.parseInt(txtbuscado.getText()));
+        cargoDAO.delete(cargoAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 //        daocargo cargoDAO = new daocargo();
          daocargo cargoDAO = new daocargo();        
-         clscargo vendedorAInsertar = new clscargo();
-        vendedorAInsertar.setnombrecargo(txtNombre.getText());
-         vendedorAInsertar.setestatuscargo(txtEstado.getText());
-        cargoDAO.insert(vendedorAInsertar);
+         clscargo cargoAInsertar = new clscargo();
+        cargoAInsertar.setcarnombre(txtNombre.getText());
+         cargoAInsertar.setcarestatus(txtEstado.getText());
+        cargoDAO.insert(cargoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscarVendedor();
+        buscarCargo();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         daocargo cargoDAO = new daocargo();
         clscargo cargoAActualizar = new clscargo();
-        cargoAActualizar.setidcargo(Integer.parseInt(txtbuscado.getText()));
-        cargoAActualizar.setnombrecargo(txtNombre.getText());
-         cargoAActualizar.setestatuscargo(txtEstado.getText());
+        cargoAActualizar.setcarid(Integer.parseInt(txtbuscado.getText()));
+        cargoAActualizar.setcarnombre(txtNombre.getText());
+         cargoAActualizar.setcarestatus(txtEstado.getText());
        cargoDAO.update(cargoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -341,7 +336,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaVendedores;
+    private javax.swing.JTable tablaCargos;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
