@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class daocargo {
 
-    private static final String SQL_SELECT = "SELECT idcargo, nombrecargo, estatuscargo FROM tbl_cargo";
-    private static final String SQL_INSERT = "INSERT INTO tbl_cargo(nombrecargo,estatuscargo) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_cargo SET nombrecargo=?, estatuscargo=? WHERE idcargo = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_cargo WHERE idcargo=?";
-    private static final String SQL_QUERY = "SELECT  idcargo, nombrecargo, estatuscargo FROM tbl_cargo WHERE idcargo = ?";
+    private static final String SQL_SELECT = "SELECT carid, carnombre, carestatus FROM tbl_cargo";
+    private static final String SQL_INSERT = "INSERT INTO tbl_cargo(carnombre,carestatus) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_cargo SET carnombre=?, carestatus=? WHERE carid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_cargo WHERE carid=?";
+    private static final String SQL_QUERY = "SELECT  carid, carnombre, carestatus FROM tbl_cargo WHERE carid = ?";
 
     public List<clscargo> select() {
         Connection conn = null;
@@ -33,14 +33,14 @@ public class daocargo {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("idcargo");
-                String nombre = rs.getString("nombrecargo");
-                String estatus = rs.getString("estatuscargo");
+                int id = rs.getInt("carid");
+                String nombre = rs.getString("carnombre");
+                String estatus = rs.getString("carestatus");
 
                 cargo = new clscargo();
-                cargo.setidcargo(id);
-                cargo.setnombrecargo(nombre);
-                cargo.setestatuscargo(estatus);
+                cargo.setcarid(id);
+                cargo.setcarnombre(nombre);
+                cargo.setcarestatus(estatus);
 
                 cargos.add(cargo);
             }
@@ -63,8 +63,8 @@ public class daocargo {
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, cargo.getnombrecargo());
-            stmt.setString(2, cargo.getestatuscargo());
+            stmt.setString(1, cargo.getcarnombre());
+            stmt.setString(2, cargo.getcarestatus());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -89,9 +89,9 @@ public class daocargo {
             stmt = conn.prepareStatement(SQL_UPDATE);
             
          
-            stmt.setString(1, cargo.getnombrecargo());
-            stmt.setString(2, cargo.getestatuscargo());
-            stmt.setInt(3, cargo.getidcargo());
+            stmt.setString(1, cargo.getcarnombre());
+            stmt.setString(2, cargo.getcarestatus());
+            stmt.setInt(3, cargo.getcarid());
             
             
             rows = stmt.executeUpdate();
@@ -116,7 +116,7 @@ public class daocargo {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, cargo.getidcargo());
+            stmt.setInt(1, cargo.getcarid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -137,17 +137,17 @@ public class daocargo {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, cargo.getidcargo());
+            stmt.setInt(1, cargo.getcarid());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("idcargo");
-                String nombre = rs.getString("nombrecargo");
-                String estatus = rs.getString("estatuscargo");
+                int id = rs.getInt("carid");
+                String nombre = rs.getString("carnombre");
+                String estatus = rs.getString("carestatus");
 
                 cargo = new clscargo();
-                cargo.setidcargo(id);
-                cargo.setnombrecargo(nombre);
-                cargo.setestatuscargo(estatus);
+                cargo.setcarid(id);
+                cargo.setcarnombre(nombre);
+                cargo.setcarestatus(estatus);
                 
             }
             //System.out.println("Registros buscado:" + persona);

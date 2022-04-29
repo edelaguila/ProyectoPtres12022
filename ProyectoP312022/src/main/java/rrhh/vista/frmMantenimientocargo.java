@@ -38,9 +38,9 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         tablaVendedores.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < vendedores.size(); i++) {
-            dato[0] = Integer.toString(vendedores.get(i).getidcargo());
-            dato[1] = vendedores.get(i).getnombrecargo();
-            dato[2] = vendedores.get(i).getestatuscargo();
+            dato[0] = Integer.toString(vendedores.get(i).getcarid());
+            dato[1] = vendedores.get(i).getcarnombre();
+            dato[2] = vendedores.get(i).getcarestatus();
             
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -50,10 +50,10 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
     public void buscarVendedor() {
         clscargo vendedorAConsultar = new clscargo();
         daocargo cargoDAO = new daocargo();
-        vendedorAConsultar.setidcargo(Integer.parseInt(txtbuscado.getText()));
+        vendedorAConsultar.setcarid(Integer.parseInt(txtbuscado.getText()));
         vendedorAConsultar = cargoDAO.query(vendedorAConsultar);
-        txtNombre.setText(vendedorAConsultar.getnombrecargo());   
-        txtEstado.setText(vendedorAConsultar.getestatuscargo());
+        txtNombre.setText(vendedorAConsultar.getcarnombre());   
+        txtEstado.setText(vendedorAConsultar.getcarestatus());
         
     }
 
@@ -266,7 +266,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         daocargo cargoDAO = new daocargo();
         clscargo vendedorAEliminar = new clscargo();
-        vendedorAEliminar.setidcargo(Integer.parseInt(txtbuscado.getText()));
+        vendedorAEliminar.setcarid(Integer.parseInt(txtbuscado.getText()));
         cargoDAO.delete(vendedorAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -275,8 +275,8 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
 //        daocargo cargoDAO = new daocargo();
          daocargo cargoDAO = new daocargo();        
          clscargo vendedorAInsertar = new clscargo();
-        vendedorAInsertar.setnombrecargo(txtNombre.getText());
-         vendedorAInsertar.setestatuscargo(txtEstado.getText());
+        vendedorAInsertar.setcarnombre(txtNombre.getText());
+         vendedorAInsertar.setcarestatus(txtEstado.getText());
         cargoDAO.insert(vendedorAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -290,9 +290,9 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         daocargo cargoDAO = new daocargo();
         clscargo cargoAActualizar = new clscargo();
-        cargoAActualizar.setidcargo(Integer.parseInt(txtbuscado.getText()));
-        cargoAActualizar.setnombrecargo(txtNombre.getText());
-         cargoAActualizar.setestatuscargo(txtEstado.getText());
+        cargoAActualizar.setcarid(Integer.parseInt(txtbuscado.getText()));
+        cargoAActualizar.setcarnombre(txtNombre.getText());
+         cargoAActualizar.setcarestatus(txtEstado.getText());
        cargoDAO.update(cargoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
