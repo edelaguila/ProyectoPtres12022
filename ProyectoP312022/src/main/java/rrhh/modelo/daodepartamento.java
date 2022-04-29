@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class daodepartamento {
 
-    private static final String SQL_SELECT = "SELECT codigo_departamento, nombre_departamento, estatus_departamento FROM departamento";
-    private static final String SQL_INSERT = "INSERT INTO departamento(nombre_departamento,estatus_departamento) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE departemento SET nombre_departamento=?, estatus_departamento=? WHERE codigo_departamento = ?";
-    private static final String SQL_DELETE = "DELETE FROM departamento WHERE odigo_departamento=?";
-    private static final String SQL_QUERY = "SELECT  codigo_departamento, nombre_departamento, estatus_departamento FROM departamento WHERE nombre_departamento = ?";
+    private static final String SQL_SELECT = "SELECT deparid, deparnombre, deparestado FROM tbl_departamentos";
+    private static final String SQL_INSERT = "INSERT INTO tbl_departamentos(deparnombre, deparestado) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_departamentos SET deparnombre=?, deparestado=? WHERE deparid= ?";
+    private static final String SQL_DELETE = "DELETE FROM departamento WHERE deparid=?";
+    private static final String SQL_QUERY = "SELECT  deparid,  deparnombre, deparestado FROM tbl_departamentos WHERE deparnombre= ?";
 
     public List<clsdepartamento> select() {
         Connection conn = null;
@@ -33,14 +33,14 @@ public class daodepartamento {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int codigo = rs.getInt("codigo_departamento");
-                String nombre = rs.getString("nombre_departamento");
-                String estatus = rs.getString("estatus_departamento");
+                int codigo = rs.getInt("deparid");
+                String nombre = rs.getString("deparnombre");
+                String estatus = rs.getString("deparestado");
 
                 usuario = new clsdepartamento();
-                usuario.setcodigo_departamento(codigo);
-                usuario.setnombre_departamento(nombre);
-                usuario.setestatus_departamento(estatus);
+                usuario.setdeparid(codigo);
+                usuario.setdeparnombre(nombre);
+                usuario.setdeparestado(estatus);
 
                 usuarios.add(usuario);
             }
@@ -63,8 +63,8 @@ public class daodepartamento {
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, perfil.getnombre_departamento());
-            stmt.setString(2, perfil.getestatus_departamento());
+            stmt.setString(1, perfil.getdeparnombre());
+            stmt.setString(2, perfil.getdeparestado());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -88,8 +88,8 @@ public class daodepartamento {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
              
-            stmt.setString(2, perfil.getnombre_departamento());
-            stmt.setString(3, perfil.getestatus_departamento());
+            stmt.setString(2, perfil.getdeparnombre());
+            stmt.setString(3, perfil.getdeparestado());
             
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -113,7 +113,7 @@ public class daodepartamento {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, perfil.getcodigo_departamento());
+            stmt.setInt(1, perfil.getdeparid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -134,17 +134,17 @@ public class daodepartamento {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, perfil.getnombre_departamento());
+            stmt.setString(1, perfil.getdeparnombre());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int codigo = rs.getInt("codigo_departamento");
-                String nombre = rs.getString("nombre_departamento");
-                String estatus = rs.getString("estatus_departamento");
+                int codigo = rs.getInt("deparid");
+                String nombre = rs.getString("deparnombre");
+                String estatus = rs.getString("getdeparestado");
 
                 perfil = new clsdepartamento();
-                perfil.setcodigo_departamento(codigo);
-                perfil.setnombre_departamento(nombre);
-                perfil.setestatus_departamento(estatus);
+                perfil.setdeparid(codigo);
+                perfil.setdeparnombre(nombre);
+                perfil.setdeparestado(estatus);
                 
             }
             //System.out.println("Registros buscado:" + persona);
