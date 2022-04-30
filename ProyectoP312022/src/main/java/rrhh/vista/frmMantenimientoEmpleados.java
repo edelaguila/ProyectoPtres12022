@@ -289,7 +289,9 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbox_trabajadores.setSelectedIndex(0);
         txtNombre.setText("");
+        txtSalario.setText("");
         txtEstado.setText("");
+        txtDias.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);

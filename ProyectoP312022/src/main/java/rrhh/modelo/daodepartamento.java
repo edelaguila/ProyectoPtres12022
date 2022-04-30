@@ -19,8 +19,8 @@ public class daodepartamento {
     private static final String SQL_SELECT = "SELECT deparid, deparnombre, deparestado FROM tbl_departamentos";
     private static final String SQL_INSERT = "INSERT INTO tbl_departamentos(deparnombre, deparestado) VALUES(?, ?)";
     private static final String SQL_UPDATE = "UPDATE tbl_departamentos SET deparnombre=?, deparestado=? WHERE deparid= ?";
-    private static final String SQL_DELETE = "DELETE FROM departamento WHERE deparid=?";
-    private static final String SQL_QUERY = "SELECT  deparid,  deparnombre, deparestado FROM tbl_departamentos WHERE deparnombre= ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_departamentos WHERE deparid=?";
+    private static final String SQL_QUERY = "SELECT  deparid,  deparnombre, deparestado FROM tbl_departamentos WHERE deparid= ?";
 
     public List<clsdepartamento> select() {
         Connection conn = null;
@@ -88,8 +88,9 @@ public class daodepartamento {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
              
-            stmt.setString(2, perfil.getdeparnombre());
-            stmt.setString(3, perfil.getdeparestado());
+             stmt.setString(1, perfil.getdeparnombre());
+            stmt.setString(2, perfil.getdeparestado());
+            stmt.setInt(3, perfil.getdeparid());
             
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -134,12 +135,12 @@ public class daodepartamento {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setString(1, perfil.getdeparnombre());
+           stmt.setInt(1, perfil.getdeparid());
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int codigo = rs.getInt("deparid");
                 String nombre = rs.getString("deparnombre");
-                String estatus = rs.getString("getdeparestado");
+                String estatus = rs.getString("deparestado");
 
                 perfil = new clsdepartamento();
                 perfil.setdeparid(codigo);
