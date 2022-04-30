@@ -52,7 +52,8 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         daodepartamento vendedorDAO = new daodepartamento();
         vendedorAConsultar.setdeparid(Integer.parseInt(txtbuscado.getText()));
         vendedorAConsultar = vendedorDAO.query(vendedorAConsultar);
-        txtNombre.setText(vendedorAConsultar.getdeparnombre());        
+        txtNombre.setText(vendedorAConsultar.getdeparnombre());   
+        txtEstado.setText(vendedorAConsultar.getdeparestado());
     }
 
     public frmMantenimientodepartamento() {
@@ -83,7 +84,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
-        txtDireccion = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -137,7 +138,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Nombre departametno");
+        label3.setText("Nombre departamento");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
         getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 102, -1));
 
@@ -175,10 +176,10 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 20, 556, 303));
 
-        txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtDireccion.setOpaque(false);
-        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 263, -1));
+        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtEstado.setOpaque(false);
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 263, -1));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText(".");
@@ -197,7 +198,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 100, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("direccion");
+        label6.setText("Estado");
         getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         pack();
@@ -216,7 +217,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         daodepartamento vendedorDAO = new daodepartamento();
         clsdepartamento vendedorAInsertar = new clsdepartamento();
         vendedorAInsertar.setdeparnombre(txtNombre.getText());
-         vendedorAInsertar.setdeparestado(txtDireccion.getText());
+         vendedorAInsertar.setdeparestado(txtEstado.getText());
         vendedorDAO.insert(vendedorAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -232,6 +233,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         clsdepartamento vendedorAActualizar = new clsdepartamento();
         vendedorAActualizar.setdeparid(Integer.parseInt(txtbuscado.getText()));
         vendedorAActualizar.setdeparnombre(txtNombre.getText());
+        vendedorAActualizar.setdeparestado(txtEstado.getText());
         vendedorDAO.update(vendedorAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -239,7 +241,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        
         txtNombre.setText("");
-        txtDireccion.setText("");
+        txtEstado.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
@@ -282,7 +284,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaVendedores;
-    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables

@@ -18,4 +18,10 @@ CREATE TABLE IF NOT EXISTS tbl_departamentos (
 	PRIMARY KEY (deparid))
 ENGINE = InnoDB CHARACTER SET = latin1;
 
+CREATE TABLE IF NOT EXISTS tbl_cargo (
+	carid INT NOT NULL AUTO_INCREMENT,
+	carnombre VARCHAR(45) NOT NULL,
+        carestatus VARCHAR(40) NOT NULL,
+	PRIMARY KEY (carid))
+ENGINE = InnoDB CHARACTER SET = latin1;
 
