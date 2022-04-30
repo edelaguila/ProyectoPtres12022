@@ -25,3 +25,12 @@ CREATE TABLE IF NOT EXISTS tbl_cargo (
 	PRIMARY KEY (carid))
 ENGINE = InnoDB CHARACTER SET = latin1;
 
+
+CREATE TABLE IF NOT EXISTS tbl_concepto (
+	concepid INT NOT NULL AUTO_INCREMENT,
+	concepnombre VARCHAR(45) NOT NULL,
+        concepefecto VARCHAR(1) NOT NULL,
+	concepestado VARCHAR(4) NOT NULL,
+	PRIMARY KEY (concepid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+

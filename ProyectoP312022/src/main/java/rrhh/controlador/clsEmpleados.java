@@ -3,6 +3,7 @@ package rrhh.controlador;
 import seguridad.controlador.*;
 
 public class clsEmpleados {
+    
     private int empid;
     private String empnombre;
     private String empsueldo; 
