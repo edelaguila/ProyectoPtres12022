@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package rrhh.modelo;
-
-import rrhh.controlador.clsEmpleados;
+//inport
+import rrhh.controlador.clsConcepto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,39 +16,39 @@ import java.util.List;
  */
 public class daoConcepto {
     
-    private static final String SQL_SELECT = "SELECT empid, empnombre, empsueldo, empestado, empdias  FROM tbl_empleados";
-    private static final String SQL_INSERT = "INSERT INTO tbl_empleados(empnombre, empsueldo, empestado, empdias) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_empleados SET empnombre=?, empsueldo=?, empestado=?, empdias=? WHERE empid = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_empleados WHERE empid=?";
-    private static final String SQL_QUERY = "SELECT empid, empnombre, empsueldo, empestado, empdias FROM tbl_empleados WHERE empid=?";
+    private static final String SQL_SELECT = "SELECT concepid, concepnombre, concepefecto, concepestado  FROM tbl_concepto";
+    private static final String SQL_INSERT = "INSERT INTO tbl_concepto(concepnombre, concepefecto, concepestado) VALUES(?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_concepto SET concepnombre=?, concepefecto=?, concepestado=? WHERE concepid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_concepto WHERE concepid=?";
+    private static final String SQL_QUERY = "SELECT concepid, concepnombre, concepefecto, concepestado FROM tbl_concepto WHERE concepid=?";
   
 
-    public List<clsEmpleados> select() {
+    public List<clsConcepto> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsEmpleados empleado = null;
-        List<clsEmpleados> empleados = new ArrayList<clsEmpleados>();
+        clsConcepto concepto = null;
+        List<clsConcepto> conceptos = new ArrayList<clsConcepto>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("empid");
-                String nombre = rs.getString("empnombre");
-                String sueldo = rs.getString("empsueldo");
-                String estado = rs.getString("empestado");
-                String dias = rs.getString("empdias");
+                int id = rs.getInt("concepid");
+                String nombre = rs.getString("concepnombre");
+                String efecto = rs.getString("concepefecto");
+                String estado = rs.getString("concepestado");
+         
                
 
-                empleado = new clsEmpleados();
-                empleado.setempid(id);
-                empleado.setempnombre(nombre);
-                empleado.setempsueldo(sueldo);
-                empleado.setempestado(estado);
-                empleado.setempdias(dias);
+                concepto = new clsConcepto();
+                concepto.setconcepid(id);
+                concepto.setconcepnombre(nombre);
+                concepto.setconcepefecto(efecto);
+                concepto.setconcepestado(estado);
+                
                
-                empleados.add(empleado);
+                conceptos.add(concepto);
             }
 
         } catch (SQLException ex) {
@@ -59,20 +59,20 @@ public class daoConcepto {
             clsConexion.close(conn);
         }
 
-        return empleados;
+        return conceptos;
     }
 
-    public int insert(clsEmpleados empleado) {
+    public int insert(clsConcepto concepto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, empleado.getempnombre());
-            stmt.setString(2, empleado.getempsueldo());
-            stmt.setString(3, empleado.getempestado());
-            stmt.setString(4, empleado.getempdias());
+            stmt.setString(1, concepto.getconcepnombre());
+            stmt.setString(2, concepto.getconcepefecto());
+            stmt.setString(3, concepto.getconcepestado());
+           
                   
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -87,7 +87,7 @@ public class daoConcepto {
         return rows;
     }
 
-    public int update(clsEmpleados empleado) {
+    public int update(clsConcepto concepto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -95,11 +95,10 @@ public class daoConcepto {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, empleado.getempnombre());
-            stmt.setString(2, empleado.getempsueldo());
-            stmt.setString(3, empleado.getempestado());
-            stmt.setString(4, empleado.getempdias());
-            stmt.setInt(5, empleado.getempid());
+            stmt.setString(1, concepto.getconcepnombre());
+            stmt.setString(2, concepto.getconcepefecto());
+            stmt.setString(3, concepto.getconcepestado());
+            stmt.setInt(4, concepto.getconcepid());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -114,7 +113,7 @@ public class daoConcepto {
         return rows;
     }
 
-    public int delete(clsEmpleados empleado) {
+    public int delete(clsConcepto concepto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -123,7 +122,7 @@ public class daoConcepto {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, empleado.getempid());
+            stmt.setInt(1, concepto.getconcepid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -136,7 +135,7 @@ public class daoConcepto {
         return rows;
     }
 
-    public clsEmpleados query(clsEmpleados empleado) 
+    public clsConcepto query(clsConcepto concepto) 
     {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -145,22 +144,22 @@ public class daoConcepto {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, empleado.getempid());
+            stmt.setInt(1, concepto.getconcepid());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("empid");
-                String nombre = rs.getString("empnombre");
-                String sueldo = rs.getString("empsueldo");
-                String estado = rs.getString("empestado");
-                String dias = rs.getString("empdias");
+                int id = rs.getInt("concepid");
+                String nombre = rs.getString("concepnombre");
+                String efecto = rs.getString("concepefecto");
+                String estado = rs.getString("concepestado");
+               
                 
 
-                empleado = new clsEmpleados();
-                empleado.setempid(id);
-                empleado.setempnombre(nombre);
-                empleado.setempsueldo(sueldo);
-                empleado.setempestado(estado);
-                empleado.setempdias(dias);       
+                concepto = new clsConcepto();
+                concepto.setconcepid(id);
+                concepto.setconcepnombre(nombre);
+                concepto.setconcepefecto(efecto);
+                concepto.setconcepestado(estado);
+                 
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
@@ -172,6 +171,6 @@ public class daoConcepto {
         }
 
         //return personas;  // Si se utiliza un ArrayList
-        return empleado;
+        return concepto;
     }
 }
