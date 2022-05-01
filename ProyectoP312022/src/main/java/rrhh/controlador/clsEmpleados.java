@@ -9,6 +9,8 @@ public class clsEmpleados {
     private String empsueldo; 
     private String empestado;
     private String empdias;
+    private String empcargo;
+    private String empdepart;
    
     public clsEmpleados() {
     }
@@ -17,19 +19,23 @@ public class clsEmpleados {
         this.empid = p_empid;
     }
     
-    public clsEmpleados(String empnombre, String empsueldo, String empestado, String empdias) {
+    public clsEmpleados(String empnombre, String empsueldo, String empestado, String empdias, String empcargo, String empdepart) {
         this.empnombre = empnombre;
         this.empsueldo = empsueldo;
         this.empestado = empestado;
         this.empdias = empdias;
+        this.empcargo = empcargo;
+        this.empdepart=empdepart;
     }
     
-    public clsEmpleados(int empid, String empnombre, String empsueldo, String empestado, String empdias) {
+    public clsEmpleados(int empid, String empnombre, String empsueldo, String empestado, String empdias,String empcargo, String empdepart) {
         this.empid = empid;
         this.empnombre = empnombre;
         this.empsueldo = empsueldo;
         this.empestado = empestado;
         this.empdias = empdias;
+        this.empcargo = empcargo;
+        this.empdepart = empdepart;
     }
     
     @Override
@@ -75,5 +81,21 @@ public class clsEmpleados {
 
     public void setempdias(String empdias) {
         this.empdias = empdias;
+    }
+    
+     public String getempcargo() {
+        return empcargo;
+    }
+
+    public void setempcargo(String empcargo) {
+        this.empcargo = empcargo;
+    }
+
+    public String getempdepart() {
+        return empdepart;
+    }
+
+    public void setempdepart(String empdepart) {
+        this.empdepart = empdepart;
     }
 }

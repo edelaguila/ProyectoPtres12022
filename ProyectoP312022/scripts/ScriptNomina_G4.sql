@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS tbl_empleados (
         empsueldo VARCHAR(40) NOT NULL,
   	empestado VARCHAR(45) NOT NULL,
   	empdias VARCHAR(40) NOT NULL,
+        empcargo VARCHAR(45) NOT NULL,
+  	empdepart VARCHAR(40) NOT NULL,
 	PRIMARY KEY (empid) )
 ENGINE = InnoDB CHARACTER SET = latin1;
 
