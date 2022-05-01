@@ -29,33 +29,33 @@ public class clsConcepto {
         this.Concepestado = estado;
     }
 
-    public int getId_Concepto() {
+    public int getconcepid() {
         return Concepid;
     }
 
-    public void setId_Concepto(int id_Concepto) {
+    public void setconcepid(int id_Concepto) {
         this.Concepid = id_Concepto;
     }
 
-    public String getNombre() {
+    public String getconcepnombre() {
         return Concepnombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setconcepnombre(String nombre) {
         this.Concepnombre = nombre;
     }
 
-    public String getestado() {
+    public String getconcepestado() {
         return Concepestado;
     }
 
-    public void setestado(String estado) {
+    public void setconcepestado(String estado) {
         this.Concepestado = estado;
     }
-    public String getefecto() {
+    public String getconcepefecto() {
         return Concepefecto;
     }
-     public void setefecto(String efecto) {
+     public void setconcepefecto(String efecto) {
         this.Concepefecto = efecto;
      }
 
