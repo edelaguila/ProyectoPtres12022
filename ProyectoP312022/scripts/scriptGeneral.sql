@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS tbl_usuario (
 	usudireccion VARCHAR(80),
 	PRIMARY KEY (usuid) )
 ENGINE = InnoDB CHARACTER SET = latin1;
-
 CREATE TABLE IF NOT EXISTS tbl_perfil (
     perid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     pernombre VARCHAR(30) NOT NULL,
