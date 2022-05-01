@@ -6,8 +6,8 @@
 package rrhh.vista;
 
 
-import rrhh.modelo.daoEmpleados;
-import rrhh.controlador.clsEmpleados;
+import rrhh.modelo.daoConcepto;
+import rrhh.controlador.clsConcepto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -19,30 +19,32 @@ import java.io.File;
 public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
-        daoEmpleados EmpleadoDAO = new daoEmpleados();
-        List<clsEmpleados> empleados = EmpleadoDAO.select();
+        daoConcepto EmpleadoDAO = new daoConcepto();
+        List<clsConcepto> empleados = EmpleadoDAO.select();
         cbox_trabajadores.addItem("Seleccione una opción");
         for (int i = 0; i < empleados.size(); i++) {
-            cbox_trabajadores.addItem(empleados.get(i).getempnombre());
+            cbox_trabajadores.addItem(empleados.get(i).getconcepnombre());
         }
     }
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         //modelo.addColumn("Id empleado");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Salario");
-        modelo.addColumn("Estado");
+        modelo.addColumn("concepid");
+        modelo.addColumn("concepnombre");
+        modelo.addColumn("concepefecto");
+        modelo.addColumn("concepestado");
         //modelo.addColumn("Dias laborados");
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        List<clsEmpleados> empleados = empleadoDAO.select();
+        daoConcepto empleadoDAO = new daoConcepto();
+        List<clsConcepto> empleados = empleadoDAO.select();
         tablaEmpleados.setModel(modelo);
         String[] dato = new String[6];
         for (int i = 0; i < empleados.size(); i++) {
            // dato[0] = Integer.toString(empleados.get(i).getempid());
-            dato[1] = empleados.get(i).getempnombre();
-            dato[2] = empleados.get(i).getempsueldo();
-            dato[3] = empleados.get(i).getempestado();
+            dato[1] = empleados.get(i).getconcepnombre();
+            dato[2] = empleados.get(i).getconcepefecto();
+            dato[3] = empleados.get(i).getconcepestado();
+           
             //dato[4] = empleados.get(i).getempdias();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -50,13 +52,13 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     }
 
     public void buscaraplicacion() {
-        clsEmpleados empleadoAConsultar = new clsEmpleados();
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        empleadoAConsultar.setempid(Integer.parseInt(txtbuscado.getText()));
+        clsConcepto empleadoAConsultar = new clsConcepto();
+        daoConcepto empleadoDAO = new daoConcepto();
+        empleadoAConsultar.setconcepid(Integer.parseInt(txtbuscado.getText()));
         empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
-        txtNombre.setText(empleadoAConsultar.getempnombre());
-        txtSalario.setText(empleadoAConsultar.getempsueldo());
-        txtEstado.setText(empleadoAConsultar.getempestado());
+        txtNombre.setText(empleadoAConsultar.getconcepnombre());
+        txtEfecto.setText(empleadoAConsultar.getconcepefecto());
+        txtEstado.setText(empleadoAConsultar.getconcepestado());
         //txtDias.setText(empleadoAConsultar.getempdias());
     }
 
@@ -89,7 +91,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_trabajadores = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        txtSalario = new javax.swing.JTextField();
+        txtEfecto = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
@@ -195,10 +197,10 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 100, -1));
 
-        txtSalario.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtSalario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtSalario.setOpaque(false);
-        getContentPane().add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 260, -1));
+        txtEfecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEfecto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtEfecto.setOpaque(false);
+        getContentPane().add(txtEfecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 260, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Nombre");
@@ -235,19 +237,19 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        clsEmpleados empleadoAEliminar = new clsEmpleados();
-        empleadoAEliminar.setempid(Integer.parseInt(txtbuscado.getText()));
+        daoConcepto empleadoDAO = new daoConcepto();
+        clsConcepto empleadoAEliminar = new clsConcepto();
+        empleadoAEliminar.setconcepid(Integer.parseInt(txtbuscado.getText()));
         empleadoDAO.delete(empleadoAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        clsEmpleados empleadoAInsertar = new clsEmpleados();
-        empleadoAInsertar.setempnombre(txtNombre.getText());
-        empleadoAInsertar.setempsueldo(txtSalario.getText());
-        empleadoAInsertar.setempestado(txtEstado.getText());
+        daoConcepto empleadoDAO = new daoConcepto();
+        clsConcepto empleadoAInsertar = new clsConcepto();
+        empleadoAInsertar.setconcepnombre(txtNombre.getText());
+        empleadoAInsertar.setconcepefecto(txtEfecto.getText());
+        empleadoAInsertar.setconcepestado(txtEstado.getText());
         //empleadoAInsertar.setempdias(txtDias.getText());
         empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
@@ -260,12 +262,12 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        clsEmpleados empleadoAActualizar = new clsEmpleados();
-        empleadoAActualizar.setempid(Integer.parseInt(txtbuscado.getText()));
-        empleadoAActualizar.setempnombre(txtNombre.getText());
-        empleadoAActualizar.setempsueldo(txtSalario.getText());
-        empleadoAActualizar.setempestado(txtEstado.getText());
+        daoConcepto empleadoDAO = new daoConcepto();
+        clsConcepto empleadoAActualizar = new clsConcepto();
+        empleadoAActualizar.setconcepid(Integer.parseInt(txtbuscado.getText()));
+        empleadoAActualizar.setconcepnombre(txtNombre.getText());
+        empleadoAActualizar.setconcepefecto(txtEfecto.getText());
+        empleadoAActualizar.setconcepestado(txtEstado.getText());
         //empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
         llenadoDeTablas();
@@ -325,9 +327,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaEmpleados;
+    private javax.swing.JTextField txtEfecto;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }
