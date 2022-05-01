@@ -99,6 +99,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         label12 = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
         label13 = new javax.swing.JLabel();
+        label14 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -234,8 +235,8 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label12.setText("Empleado estado");
-        getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        label12.setText("Dias");
+        getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("empledos");
@@ -244,6 +245,10 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label13.setText(".");
         getContentPane().add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 430, 20, -1));
+
+        label14.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label14.setText("Empleado estado");
+        getContentPane().add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -340,6 +345,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
     private javax.swing.JLabel label13;
+    private javax.swing.JLabel label14;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label8;
