@@ -41,6 +41,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         String[] dato = new String[6];
         for (int i = 0; i < empleados.size(); i++) {
            // dato[0] = Integer.toString(empleados.get(i).getempid());
+           dato[0] = Integer.toString(empleados.get(i).getconcepid());
             dato[1] = empleados.get(i).getconcepnombre();
             dato[2] = empleados.get(i).getconcepefecto();
             dato[3] = empleados.get(i).getconcepestado();
@@ -276,6 +277,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbox_trabajadores.setSelectedIndex(0);
         txtNombre.setText("");
+        txtEfecto.setText("");
         txtEstado.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
