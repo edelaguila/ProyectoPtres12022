@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS tbl_empleados (
         empsueldo VARCHAR(40) NOT NULL,
   	empestado VARCHAR(45) NOT NULL,
   	empdias VARCHAR(40) NOT NULL,
+        empcargo VARCHAR(45) NOT NULL,
+  	empdepart VARCHAR(40) NOT NULL,
 	PRIMARY KEY (empid) )
 ENGINE = InnoDB CHARACTER SET = latin1;
 
@@ -32,5 +34,16 @@ CREATE TABLE IF NOT EXISTS tbl_concepto (
         concepefecto VARCHAR(1) NOT NULL,
 	concepestado VARCHAR(4) NOT NULL,
 	PRIMARY KEY (concepid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS tbl_nomina (
+	nomiid INT NOT NULL AUTO_INCREMENT,
+	nominombre VARCHAR(45) NOT NULL,
+        nomicargo VARCHAR(45) NOT NULL,
+	nomidepart VARCHAR(45) NOT NULL,
+	nomisalario VARCHAR(45) NOT NULL,
+	nomiconcepto VARCHAR(45) NOT NULL,
+	nomivalor VARCHAR(45) NOT NULL,
+	PRIMARY KEY (nomiid))
 ENGINE = InnoDB CHARACTER SET = latin1;
 

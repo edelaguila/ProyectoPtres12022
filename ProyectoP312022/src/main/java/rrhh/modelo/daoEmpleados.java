@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class daoEmpleados {
 
-    private static final String SQL_SELECT = "SELECT empid, empnombre, empsueldo, empestado, empdias  FROM tbl_empleados";
-    private static final String SQL_INSERT = "INSERT INTO tbl_empleados(empnombre, empsueldo, empestado, empdias) VALUES(?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_empleados SET empnombre=?, empsueldo=?, empestado=?, empdias=? WHERE empid = ?";
+    private static final String SQL_SELECT = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart  FROM tbl_empleados";
+    private static final String SQL_INSERT = "INSERT INTO tbl_empleados(empnombre, empsueldo, empestado, empdias, empcargo, empdepart) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_empleados SET empnombre=?, empsueldo=?, empestado=?, empdias=?, empcargo=?, empdepart=? WHERE empid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_empleados WHERE empid=?";
-    private static final String SQL_QUERY = "SELECT empid, empnombre, empsueldo, empestado, empdias FROM tbl_empleados WHERE empid=?";
+    private static final String SQL_QUERY = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart FROM tbl_empleados WHERE empid=?";
   
 
     public List<clsEmpleados> select() {
@@ -39,7 +39,8 @@ public class daoEmpleados {
                 String sueldo = rs.getString("empsueldo");
                 String estado = rs.getString("empestado");
                 String dias = rs.getString("empdias");
-               
+                String cargo = rs.getString("empcargo");
+                String depart = rs.getString("empdepart");
 
                 empleado = new clsEmpleados();
                 empleado.setempid(id);
@@ -47,7 +48,9 @@ public class daoEmpleados {
                 empleado.setempsueldo(sueldo);
                 empleado.setempestado(estado);
                 empleado.setempdias(dias);
-               
+                empleado.setempcargo(cargo);
+                empleado.setempdepart(depart);
+                
                 empleados.add(empleado);
             }
 
@@ -73,7 +76,9 @@ public class daoEmpleados {
             stmt.setString(2, empleado.getempsueldo());
             stmt.setString(3, empleado.getempestado());
             stmt.setString(4, empleado.getempdias());
-                  
+            stmt.setString(5, empleado.getempcargo());
+            stmt.setString(6, empleado.getempdepart());
+            
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -99,7 +104,9 @@ public class daoEmpleados {
             stmt.setString(2, empleado.getempsueldo());
             stmt.setString(3, empleado.getempestado());
             stmt.setString(4, empleado.getempdias());
-            stmt.setInt(5, empleado.getempid());
+            stmt.setString(5, empleado.getempcargo());
+            stmt.setString(6, empleado.getempdepart());
+            stmt.setInt(7, empleado.getempid());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -153,14 +160,17 @@ public class daoEmpleados {
                 String sueldo = rs.getString("empsueldo");
                 String estado = rs.getString("empestado");
                 String dias = rs.getString("empdias");
-                
+                String cargo = rs.getString("empcargo");
+                String depart = rs.getString("empdepart");
 
                 empleado = new clsEmpleados();
                 empleado.setempid(id);
                 empleado.setempnombre(nombre);
                 empleado.setempsueldo(sueldo);
                 empleado.setempestado(estado);
-                empleado.setempdias(dias);       
+                empleado.setempdias(dias);   
+                empleado.setempcargo(cargo);
+                empleado.setempdepart(depart);  
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {

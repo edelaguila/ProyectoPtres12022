@@ -27,9 +27,9 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
     public void llenadoDeCombos() {
         daoUsuario usuarioDAO = new daoUsuario();
         List<clsUsuario> usuarios = usuarioDAO.select();
-        cbox_aplicacion.addItem("Seleccione una opción");
+        cbox_usuarios.addItem("Seleccione una opción");
         for (int i = 0; i < usuarios.size(); i++) {
-            cbox_aplicacion.addItem(usuarios.get(i).getUsunombre());
+            cbox_usuarios.addItem(usuarios.get(i).getUsunombre());
         }
     }
     
@@ -93,7 +93,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaasignacion = new javax.swing.JTable();
         label4 = new javax.swing.JLabel();
-        cbox_aplicacion = new javax.swing.JComboBox<>();
+        cbox_usuarios = new javax.swing.JComboBox<>();
         label2 = new javax.swing.JLabel();
         label5 = new javax.swing.JLabel();
 
@@ -183,13 +183,13 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         label4.setText("Nombre");
         getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 20, -1, -1));
 
-        cbox_aplicacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cbox_aplicacion.addActionListener(new java.awt.event.ActionListener() {
+        cbox_usuarios.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_aplicacionActionPerformed(evt);
+                cbox_usuariosActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_aplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 220, -1));
+        getContentPane().add(cbox_usuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 220, -1));
 
         label2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label2.setText("Usuarios asignados");
@@ -221,7 +221,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         daoPerfilUsuario perfilusuarioDAO = new daoPerfilUsuario();
         clsPerfilUsuario perfilusuarioAInsertar = new clsPerfilUsuario();
         perfilusuarioAInsertar.setNombrePerfil(txtNombre.getText());
-        perfilusuarioAInsertar.setNombreUsuario(cbox_aplicacion.getSelectedItem().toString());
+        perfilusuarioAInsertar.setNombreUsuario(cbox_usuarios.getSelectedItem().toString());
         perfilusuarioDAO.insert(perfilusuarioAInsertar);
         llenadoDeTablas();
         
@@ -245,10 +245,10 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void cbox_aplicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_aplicacionActionPerformed
+    private void cbox_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_usuariosActionPerformed
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbox_aplicacionActionPerformed
+    }//GEN-LAST:event_cbox_usuariosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,7 +256,7 @@ public class frmMantenimientoPperfilusuarios extends javax.swing.JInternalFrame 
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> cbox_aplicacion;
+    private javax.swing.JComboBox<String> cbox_usuarios;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label2;
