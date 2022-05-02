@@ -11,57 +11,91 @@ package rrhh.controlador;
  * @author visitante
  */
 public class clsNomina {
-    private int Concepid;
-    private String Concepnombre;
-    private String Concepefecto; 
-    private String Concepestado;
-    
+    private int nomiid;
+    private String nominombre;
+    private String nomicargo; 
+    private String nomidepart;
+    private String nomisalario;
+    private String nomiconcepto;
+    private String nomivalor; 
 
     public clsNomina() {
     }
 
-    public clsNomina(int id_Concepto) {
-        this.Concepid= id_Concepto;
+    public clsNomina(int nomiid, String nominombre, String nomicargo, String nomidepart, String nomisalario, String nomiconcepto, String nomivalor) {
+        this.nomiid= nomiid;
+        this.nominombre = nominombre;
+        this.nomicargo = nomicargo;
+        this.nomidepart = nomidepart;
+        this.nomisalario = nomisalario;
+        this.nomiconcepto = nomiconcepto;
+        this.nomivalor = nomivalor;
     }
 
-    public clsNomina(String nombre, String estado) {
-        this. Concepnombre = nombre;
-        this.Concepestado = estado;
+    public clsNomina(String nominombre, String nomicargo, String nomidepart, String nomisalario, String nomiconcepto, String nomivalor) {
+        this.nomiid= nomiid;
+        this.nominombre = nominombre;
+        this.nomicargo = nomicargo;
+        this.nomidepart = nomidepart;
+        this.nomisalario = nomisalario;
+        this.nomiconcepto = nomiconcepto;
+        this.nomivalor = nomivalor;
     }
 
-    public int getconcepid() {
-        return Concepid;
+    public int getnomiid() {
+        return nomiid;
     }
 
-    public void setconcepid(int id_Concepto) {
-        this.Concepid = id_Concepto;
+    public void setnomiid(int nomiid) {
+        this.nomiid = nomiid;
     }
 
-    public String getconcepnombre() {
-        return Concepnombre;
+    public String getnominombre() {
+        return nominombre;
     }
 
-    public void setconcepnombre(String nombre) {
-        this.Concepnombre = nombre;
+    public void setnominombre(String nominombre) {
+        this.nominombre = nominombre;
     }
 
-    public String getconcepestado() {
-        return Concepestado;
+    public String getnomicargo() {
+        return nomicargo;
     }
 
-    public void setconcepestado(String estado) {
-        this.Concepestado = estado;
+    public void setnomicargo(String nomicargo) {
+        this.nomicargo = nomicargo;
     }
-    public String getconcepefecto() {
-        return Concepefecto;
+    public String getnomidepart() {
+        return nomidepart;
     }
-     public void setconcepefecto(String efecto) {
-        this.Concepefecto = efecto;
+     public void setnomidepart(String nomidepart) {
+        this.nomidepart = nomidepart;
      }
+     
+      public String getnomisalario() {
+        return nomisalario;
+    }
+     public void setnomisalario(String nomisalario) {
+        this.nomisalario = nomisalario;
+    }
 
+      public String getnomiconcepto() {
+        return nomiconcepto;
+    }
+     public void setnomiconcepto(String nomiconcepto) {
+        this.nomiconcepto = nomiconcepto;
+    }
+     
+     public String getnomivalor() {
+        return nomivalor;
+    }
+     public void setnomivalor(String nomivalor) {
+        this.nomivalor = nomivalor;
+    } 
+     
     @Override
     public String toString() {
-        return "tbl_Concepto{" + "Concepid=" + Concepid + ", Concepnombre=" + Concepnombre + ", Concepestado=" + Concepestado + ",Concepefecto="+ Concepefecto+'}';
+        return "tbl_nomina{" + "nomiid=" + nomiid + ", nominombre=" + nominombre + ", nomicargo=" + nomicargo + ",nomidepart="+ nomidepart+",nomisalario="+ nomisalario+",nomiconcepto"+nomiconcepto+",nomivalor"+nomivalor+'}';
     }
     
      }
