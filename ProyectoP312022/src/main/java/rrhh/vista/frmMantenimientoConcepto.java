@@ -52,7 +52,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         }
     }
 
-    public void buscaraplicacion() {
+    public void buscarconceptos() {
         clsConcepto empleadoAConsultar = new clsConcepto();
         daoConcepto empleadoDAO = new daoConcepto();
         empleadoAConsultar.setconcepid(Integer.parseInt(txtbuscado.getText()));
@@ -258,7 +258,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscaraplicacion();
+        buscarconceptos();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
