@@ -117,7 +117,7 @@ public class mdiNomina extends javax.swing.JFrame {
 
         jMenu4.setText("Nomina");
 
-        jMenuItem6.setText("Asignacion de trabajadores");
+        jMenuItem6.setText("Generar Nomina");
         jMenu4.add(jMenuItem6);
 
         jMenuItem7.setText("Visualizacion Nomina");
