@@ -124,6 +124,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         label5 = new javax.swing.JLabel();
         cbox_departamentos = new javax.swing.JComboBox<>();
         label7 = new javax.swing.JLabel();
+        label10 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -231,8 +232,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         getContentPane().add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 260, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label8.setText("Nombre empleado");
-        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 450, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -271,7 +271,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
 
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label13.setText(".");
-        getContentPane().add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 430, 20, -1));
+        getContentPane().add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 450, 20, -1));
 
         label14.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label14.setText("Empleado estado");
@@ -292,6 +292,10 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label7.setText("Departamentos disponibles");
         getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+
+        label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label10.setText("Nombre empleado");
+        getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -395,6 +399,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
+    private javax.swing.JLabel label10;
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label12;
     private javax.swing.JLabel label13;

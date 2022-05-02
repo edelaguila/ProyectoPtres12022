@@ -36,3 +36,14 @@ CREATE TABLE IF NOT EXISTS tbl_concepto (
 	PRIMARY KEY (concepid))
 ENGINE = InnoDB CHARACTER SET = latin1;
 
+CREATE TABLE IF NOT EXISTS tbl_nomina (
+	nomiid INT NOT NULL AUTO_INCREMENT,
+	nominombre VARCHAR(45) NOT NULL,
+        nomicargo VARCHAR(45) NOT NULL,
+	nomidepart VARCHAR(45) NOT NULL,
+	nomisalario VARCHAR(45) NOT NULL,
+	nomiconcepto VARCHAR(45) NOT NULL,
+	nomivalor VARCHAR(45) NOT NULL,
+	PRIMARY KEY (nomiid))
+ENGINE = InnoDB CHARACTER SET = latin1;
+

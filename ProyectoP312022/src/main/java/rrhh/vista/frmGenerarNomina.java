@@ -47,8 +47,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         daocargo cargoDAO = new daocargo();
         cargoAConsultar.setcarid(Integer.parseInt(txtbuscado.getText()));
         cargoAConsultar = cargoDAO.query(cargoAConsultar);
-        txtNombre.setText(cargoAConsultar.getcarnombre());   
-        txtEstado.setText(cargoAConsultar.getcarestatus());
+        txtFinicial.setText(cargoAConsultar.getcarnombre());   
+        txtFfinal.setText(cargoAConsultar.getcarestatus());
         
     }
 
@@ -76,14 +76,15 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
+        txtFinicial = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCargos = new javax.swing.JTable();
-        txtEstado = new javax.swing.JTextField();
+        txtFfinal = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        label6 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -92,8 +93,9 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Cargo");
+        setTitle("Generacion de nominas");
         setVisible(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,13 +103,15 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 95, -1));
 
-        btnRegistrar.setText("Registrar");
+        btnRegistrar.setText("Generar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,9 +119,11 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("CARGO");
+        label1.setText("Visualizacion de la nomina");
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,13 +131,17 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Nombre cargo");
+        label3.setText("Fecha inicial");
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 102, -1));
 
-        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtNombre.setOpaque(false);
+        txtFinicial.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtFinicial.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtFinicial.setOpaque(false);
+        getContentPane().add(txtFinicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 199, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +149,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 95, -1));
 
         tablaCargos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaCargos.setModel(new javax.swing.table.DefaultTableModel(
@@ -146,11 +157,11 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Estado"
+                "ID Nomina", "Nombre empleado", "Cargo", "Departamento", "Salario", "Conceptos", "Valor Nomina"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -159,15 +170,25 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaCargos);
 
-        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado.setOpaque(false);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 780, 303));
+
+        txtFfinal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtFfinal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtFfinal.setOpaque(false);
+        txtFfinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFfinalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtFfinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 199, -1));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estado cargo");
+        label5.setText("Fecha final");
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
+        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 20, 13, -1));
 
         jButton2.setText("btnAyuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -175,84 +196,11 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label3)
-                            .addComponent(label5))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtNombre))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
-                        .addComponent(label1)
-                        .addGap(294, 294, 294))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
-                        .addGap(22, 22, 22))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(label1)
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label5))
-                        .addGap(142, 142, 142)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegistrar)
-                            .addComponent(btnEliminar)
-                            .addComponent(btnModificar))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar)
-                            .addComponent(btnLimpiar)
-                            .addComponent(jButton2))
-                        .addContainerGap(83, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lb)
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
+        label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label6.setText("-----------------Generacion de nomina-----------------");
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 360, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -270,8 +218,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 //        daocargo cargoDAO = new daocargo();
          daocargo cargoDAO = new daocargo();        
          clscargo cargoAInsertar = new clscargo();
-        cargoAInsertar.setcarnombre(txtNombre.getText());
-         cargoAInsertar.setcarestatus(txtEstado.getText());
+        cargoAInsertar.setcarnombre(txtFinicial.getText());
+         cargoAInsertar.setcarestatus(txtFfinal.getText());
         cargoDAO.insert(cargoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -286,16 +234,16 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         daocargo cargoDAO = new daocargo();
         clscargo cargoAActualizar = new clscargo();
         cargoAActualizar.setcarid(Integer.parseInt(txtbuscado.getText()));
-        cargoAActualizar.setcarnombre(txtNombre.getText());
-         cargoAActualizar.setcarestatus(txtEstado.getText());
+        cargoAActualizar.setcarnombre(txtFinicial.getText());
+         cargoAActualizar.setcarestatus(txtFfinal.getText());
        cargoDAO.update(cargoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        
-        txtNombre.setText("");
-        txtEstado.setText("");
+        txtFinicial.setText("");
+        txtFfinal.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
@@ -321,6 +269,10 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void txtFfinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFfinalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFfinalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -333,12 +285,13 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label5;
+    private javax.swing.JLabel label6;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaCargos;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtFfinal;
+    private javax.swing.JTextField txtFinicial;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }
