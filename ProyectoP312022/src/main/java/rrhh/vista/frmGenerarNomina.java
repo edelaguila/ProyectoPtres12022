@@ -24,13 +24,16 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
     public void procesos() {
      //iniciamos la busqueda   
-     int contador = 1;
+     int contador = 1, x =1;
      int limite;
      
      limite = Integer.parseInt(limitante.getText());
-     
+    //inicia la busqueda de empleados 
     clsEmpleados empleadoAConsultar = new clsEmpleados();
     daoEmpleados empleadoDAO = new daoEmpleados();
+    // inicia la busqueda de conceptos
+    clsConcepto conceptoAConsultar = new clsConcepto();
+        daoConcepto conceptoDAO = new daoConcepto();
      
     while (contador <= limite) {
     
@@ -40,17 +43,49 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     empleadoAConsultar.getempcargo();
     empleadoAConsultar.getempdepart();
     empleadoAConsultar.getempsueldo();       
+    
+    
+    while (x<=9){
+        
+        conceptoAConsultar.setconcepid(x);
+        conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
+        
+        conceptoAConsultar.getconcepnombre();
+        conceptoAConsultar.getconcepefecto();
+    x++;             
+    }
+    
+    //"procedemos a hacer que cada concepto sume o reste al salario" by byron 
+   if ((conceptoAConsultar.getconcepnombre() == "IGSS")||(conceptoAConsultar.getconcepnombre() == "igss")){
+    double igss = 0.0483;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
+    
+    double valorIgss = salario - salario * igss;
+
+    }    
+    if ((conceptoAConsultar.getconcepnombre() == "ISR")||(conceptoAConsultar.getconcepnombre() == "isr")){
+    double isr = 0.05;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
+    
+    double valorIsr = salario - salario * isr;
+
+    }    
+    if ((conceptoAConsultar.getconcepnombre() == "CHEQUES")||(conceptoAConsultar.getconcepnombre() == "cheques")){
+    double cheque = 500;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
+    
+    double valorCheque = salario +cheque;
+
+    }    
+    
     contador++;
-    
-    
-    
-    
-    
-    
     }
         
     }
-
+ 
+    
+    
+    
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Id cargo");
@@ -116,7 +151,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 GenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 95, -1));
+        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Visualizacion de la nomina");
