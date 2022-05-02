@@ -7,6 +7,10 @@ package rrhh.vista;
 
 import rrhh.modelo.daocargo;
 import rrhh.controlador.clscargo;
+import rrhh.modelo.daoEmpleados;
+import rrhh.controlador.clsEmpleados;
+import rrhh.modelo.daoConcepto;
+import rrhh.controlador.clsConcepto;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +22,33 @@ import java.io.File;
  */
 public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
-    public void llenadoDeCombos() {
-
+    public void procesos() {
+     //iniciamos la busqueda   
+     int contador = 1;
+     int limite;
+     
+     limite = Integer.parseInt(limitante.getText());
+     
+    clsEmpleados empleadoAConsultar = new clsEmpleados();
+    daoEmpleados empleadoDAO = new daoEmpleados();
+     
+    while (contador <= limite) {
+    
+    empleadoAConsultar.setempid(contador);
+    empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
+    empleadoAConsultar.getempnombre();
+    empleadoAConsultar.getempcargo();
+    empleadoAConsultar.getempdepart();
+    empleadoAConsultar.getempsueldo();       
+    contador++;
+    
+    
+    
+    
+    
+    
+    }
+        
     }
 
     public void llenadoDeTablas() {
@@ -42,20 +71,12 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         }
     }
 
-    public void buscarCargo() {
-        clscargo cargoAConsultar = new clscargo();
-        daocargo cargoDAO = new daocargo();
-        cargoAConsultar.setcarid(Integer.parseInt(txtbuscado.getText()));
-        cargoAConsultar = cargoDAO.query(cargoAConsultar);
-        txtFinicial.setText(cargoAConsultar.getcarnombre());   
-        txtFfinal.setText(cargoAConsultar.getcarestatus());
-        
-    }
+ 
 
     public frmGenerarNomina() {
         initComponents();
         llenadoDeTablas();
-        llenadoDeCombos();
+        procesos();
     }
 
     /**
@@ -69,21 +90,13 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
         lb2 = new javax.swing.JLabel();
         lbusu = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
+        Generar = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
-        btnModificar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
-        txtbuscado = new javax.swing.JTextField();
-        txtFinicial = new javax.swing.JTextField();
-        btnLimpiar = new javax.swing.JButton();
+        limitante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCargos = new javax.swing.JTable();
-        txtFfinal = new javax.swing.JTextField();
-        label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         label6 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -97,59 +110,31 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        Generar.setText("Generar");
+        Generar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                GenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 95, -1));
-
-        btnRegistrar.setText("Generar");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 95, -1));
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 95, -1));
+        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Visualizacion de la nomina");
         getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
 
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 95, -1));
-
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Fecha inicial");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 102, -1));
+        label3.setText("Cantidad de empleados");
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        txtFinicial.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtFinicial.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtFinicial.setOpaque(false);
-        getContentPane().add(txtFinicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 199, -1));
-
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        limitante.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        limitante.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        limitante.setOpaque(false);
+        limitante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                limitanteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 95, -1));
+        getContentPane().add(limitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 110, -1));
 
         tablaCargos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaCargos.setModel(new javax.swing.table.DefaultTableModel(
@@ -170,128 +155,39 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaCargos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 780, 303));
-
-        txtFfinal.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtFfinal.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtFfinal.setOpaque(false);
-        txtFfinal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFfinalActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtFfinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 199, -1));
-
-        label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Fecha final");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 880, 303));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
         getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 20, 13, -1));
 
-        jButton2.setText("btnAyuda");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
-
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("-----------------Generacion de nomina-----------------");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 360, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 360, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-        daocargo cargoDAO = new daocargo();
-        clscargo cargoAEliminar = new clscargo();
-        cargoAEliminar.setcarid(Integer.parseInt(txtbuscado.getText()));
-        cargoDAO.delete(cargoAEliminar);
-        llenadoDeTablas();
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void GenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarActionPerformed
 //        daocargo cargoDAO = new daocargo();
-         daocargo cargoDAO = new daocargo();        
-         clscargo cargoAInsertar = new clscargo();
-        cargoAInsertar.setcarnombre(txtFinicial.getText());
-         cargoAInsertar.setcarestatus(txtFfinal.getText());
-        cargoDAO.insert(cargoAInsertar);
-        llenadoDeTablas();
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        buscarCargo();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-        daocargo cargoDAO = new daocargo();
-        clscargo cargoAActualizar = new clscargo();
-        cargoAActualizar.setcarid(Integer.parseInt(txtbuscado.getText()));
-        cargoAActualizar.setcarnombre(txtFinicial.getText());
-         cargoAActualizar.setcarestatus(txtFfinal.getText());
-       cargoDAO.update(cargoAActualizar);
-        llenadoDeTablas();
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        
-        txtFinicial.setText("");
-        txtFfinal.setText("");
-        txtbuscado.setText("");
-        btnRegistrar.setEnabled(true);
-        btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true);
+    }//GEN-LAST:event_GenerarActionPerformed
 
+    private void limitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limitanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        try {
-            if ((new File("src\\main\\java\\ayudas\\ProcesoMayor.chm")).exists()) {
-                Process p = Runtime
-                        .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\ProcesoMayor.chm");
-                p.waitFor();
-            } else {
-                System.out.println("La ayuda no Fue encontrada");
-            }
-            System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void txtFfinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFfinalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFfinalActionPerformed
+    }//GEN-LAST:event_limitanteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnRegistrar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Generar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
-    private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
+    private javax.swing.JTextField limitante;
     private javax.swing.JTable tablaCargos;
-    private javax.swing.JTextField txtFfinal;
-    private javax.swing.JTextField txtFinicial;
-    private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }

@@ -66,7 +66,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         }
     }
 
-    public void buscaraplicacion() {
+    public void buscarEmpleados() {
         clsEmpleados empleadoAConsultar = new clsEmpleados();
         daoEmpleados empleadoDAO = new daoEmpleados();
         empleadoAConsultar.setempid(Integer.parseInt(txtbuscado.getText()));
@@ -324,7 +324,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscaraplicacion();
+        buscarEmpleados();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
