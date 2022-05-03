@@ -5,8 +5,8 @@
  */
 package rrhh.vista;
 
-import rrhh.modelo.daocargo;
-import rrhh.controlador.clscargo;
+import rrhh.modelo.daoNomina;
+import rrhh.controlador.clsNomina;
 import rrhh.modelo.daoEmpleados;
 import rrhh.controlador.clsEmpleados;
 import rrhh.modelo.daoConcepto;
@@ -34,6 +34,9 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     // inicia la busqueda de conceptos
     clsConcepto conceptoAConsultar = new clsConcepto();
         daoConcepto conceptoDAO = new daoConcepto();
+        
+        daoNomina nominaDAO = new daoNomina();
+        clsEmpleados empleadoAInsertar = new clsEmpleados();
      
     while (contador <= limite) {
     
@@ -45,7 +48,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     empleadoAConsultar.getempsueldo();       
     
     
-    while (x<=9){
+    while (x<=7){
         
         conceptoAConsultar.setconcepid(x);
         conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
@@ -60,24 +63,59 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     double igss = 0.0483;
     double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
     
-    double valorIgss = salario - salario * igss;
+    double v1 = salario - salario * igss;
+    double vigss = salario-v1;
 
     }    
     if ((conceptoAConsultar.getconcepnombre() == "ISR")||(conceptoAConsultar.getconcepnombre() == "isr")){
     double isr = 0.05;
     double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
     
-    double valorIsr = salario - salario * isr;
+    double v2 = salario - salario * isr;
+     double vigss = salario-v1;
 
     }    
     if ((conceptoAConsultar.getconcepnombre() == "CHEQUES")||(conceptoAConsultar.getconcepnombre() == "cheques")){
     double cheque = 500;
     double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
     
-    double valorCheque = salario +cheque;
+    double v3 = salario +cheque;
 
     }    
+    if ((conceptoAConsultar.getconcepnombre() == "FERIADO")||(conceptoAConsultar.getconcepnombre() == "feriado")){
+    double feriado = 0;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
     
+    double v4 = 0;
+
+    }  
+    if ((conceptoAConsultar.getconcepnombre() == "HORAS EXTRAS")||(conceptoAConsultar.getconcepnombre() == "horas extras")){
+    double horas = 7;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo())/30;
+    double extra = salario/8;
+    double horaExtra = extra * 1.5;
+    double calculo = horaExtra * horas;
+    
+    
+    }  
+     if ((conceptoAConsultar.getconcepnombre() == "BONOS")||(conceptoAConsultar.getconcepnombre() == "bonos")){
+    double bonos = 100;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
+    
+    double v6 = salario + bonos ;
+
+    }   
+    if ((conceptoAConsultar.getconcepnombre() == "OTROS")||(conceptoAConsultar.getconcepnombre() == "otros")){
+    double otros = 500;
+    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
+    
+    double v7 = salario - otros ;
+
+    }   
+    
+    double total =  ;
+     
+     
     contador++;
     }
         
@@ -88,18 +126,26 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Id cargo");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Estado");
+        modelo.addColumn("Id Nomina");
+        modelo.addColumn("Nombre empleado");
+        modelo.addColumn("Cargo");
+         modelo.addColumn("Departamento");
+        modelo.addColumn("Salario");
+        modelo.addColumn("conceptos");
+        modelo.addColumn("Valor Nomina");
         
-        daocargo cargoDAO = new daocargo();
-        List<clscargo> cargos = cargoDAO.select();
-        tablaCargos.setModel(modelo);
-        String[] dato = new String[3];
-        for (int i = 0; i < cargos.size(); i++) {
-            dato[0] = Integer.toString(cargos.get(i).getcarid());
-            dato[1] = cargos.get(i).getcarnombre();
-            dato[2] = cargos.get(i).getcarestatus();
+        daoNomina nominaDAO = new daoNomina();
+        List<clsNomina> nominas = nominaDAO.select();
+        Nomina.setModel(modelo);
+        String[] dato = new String[8];
+        for (int i = 0; i < nominas.size(); i++) {
+            dato[0] = Integer.toString(nominas.get(i).getnomiid());
+            dato[1] = nominas.get(i).getnominombre();
+            dato[2] = nominas.get(i).getnomicargo();
+            dato[3] = nominas.get(i).getnomidepart();
+            dato[4] = nominas.get(i).getnomisalario();
+            dato[5] = nominas.get(i).getnomiconcepto();
+            dato[6] = nominas.get(i).getnomivalor();
             
             //System.out.println("cargo:" + cargos);
             modelo.addRow(dato);
@@ -130,7 +176,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         label3 = new javax.swing.JLabel();
         limitante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaCargos = new javax.swing.JTable();
+        Nomina = new javax.swing.JTable();
         lb = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
 
@@ -171,8 +217,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         });
         getContentPane().add(limitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 110, -1));
 
-        tablaCargos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaCargos.setModel(new javax.swing.table.DefaultTableModel(
+        Nomina.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Nomina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -188,7 +234,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaCargos);
+        jScrollPane1.setViewportView(Nomina);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 880, 303));
 
@@ -215,6 +261,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Generar;
+    private javax.swing.JTable Nomina;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
@@ -223,6 +270,5 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTextField limitante;
-    private javax.swing.JTable tablaCargos;
     // End of variables declaration//GEN-END:variables
 }
