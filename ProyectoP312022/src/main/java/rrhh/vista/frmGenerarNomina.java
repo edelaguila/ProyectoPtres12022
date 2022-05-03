@@ -55,67 +55,16 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         
         conceptoAConsultar.getconcepnombre();
         conceptoAConsultar.getconcepefecto();
+        
+        System.out.println(conceptoAConsultar.getconcepnombre());
+        System.out.println(conceptoAConsultar.getconcepefecto());
     x++;             
     }
-    
-    //"procedemos a hacer que cada concepto sume o reste al salario" by byron 
-   if ((conceptoAConsultar.getconcepnombre() == "IGSS")||(conceptoAConsultar.getconcepnombre() == "igss")){
-    double igss = 0.0483;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
-    
-    double v1 = salario - salario * igss;
-    double vigss = salario-v1;
-
-    }    
-    if ((conceptoAConsultar.getconcepnombre() == "ISR")||(conceptoAConsultar.getconcepnombre() == "isr")){
-    double isr = 0.05;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
-    
-    double v2 = salario - salario * isr;
-     double vigss = salario-v1;
-
-    }    
-    if ((conceptoAConsultar.getconcepnombre() == "CHEQUES")||(conceptoAConsultar.getconcepnombre() == "cheques")){
-    double cheque = 500;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
-    
-    double v3 = salario +cheque;
-
-    }    
-    if ((conceptoAConsultar.getconcepnombre() == "FERIADO")||(conceptoAConsultar.getconcepnombre() == "feriado")){
-    double feriado = 0;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
-    
-    double v4 = 0;
-
-    }  
-    if ((conceptoAConsultar.getconcepnombre() == "HORAS EXTRAS")||(conceptoAConsultar.getconcepnombre() == "horas extras")){
-    double horas = 7;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo())/30;
-    double extra = salario/8;
-    double horaExtra = extra * 1.5;
-    double calculo = horaExtra * horas;
-    
-    
-    }  
-     if ((conceptoAConsultar.getconcepnombre() == "BONOS")||(conceptoAConsultar.getconcepnombre() == "bonos")){
-    double bonos = 100;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
-    
-    double v6 = salario + bonos ;
-
-    }   
-    if ((conceptoAConsultar.getconcepnombre() == "OTROS")||(conceptoAConsultar.getconcepnombre() == "otros")){
-    double otros = 500;
-    double salario = Integer.parseInt(empleadoAConsultar.getempsueldo());
-    
-    double v7 = salario - otros ;
-
-    }   
-    
-    double total =  ;
-     
-     
+    System.out.println("mostrando resultados");
+    System.out.println(empleadoAConsultar.getempnombre());
+    System.out.println(empleadoAConsultar.getempcargo());
+    System.out.println(empleadoAConsultar.getempdepart());
+    System.out.println(empleadoAConsultar.getempsueldo());
     contador++;
     }
         
@@ -157,7 +106,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     public frmGenerarNomina() {
         initComponents();
         llenadoDeTablas();
-        procesos();
+        
     }
 
     /**
@@ -250,7 +199,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarActionPerformed
-//        daocargo cargoDAO = new daocargo();
+procesos();//        daocargo cargoDAO = new daocargo();
        
     }//GEN-LAST:event_GenerarActionPerformed
 
