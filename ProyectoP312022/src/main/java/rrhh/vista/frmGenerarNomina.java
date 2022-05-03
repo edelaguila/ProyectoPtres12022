@@ -5,8 +5,8 @@
  */
 package rrhh.vista;
 
-import rrhh.modelo.daocargo;
-import rrhh.controlador.clscargo;
+import rrhh.modelo.daoNomina;
+import rrhh.controlador.clsNomina;
 import rrhh.modelo.daoEmpleados;
 import rrhh.controlador.clsEmpleados;
 import rrhh.modelo.daoConcepto;
@@ -24,13 +24,19 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
     public void procesos() {
      //iniciamos la busqueda   
-     int contador = 1;
+     int contador = 1, x =1;
      int limite;
      
      limite = Integer.parseInt(limitante.getText());
-     
+    //inicia la busqueda de empleados 
     clsEmpleados empleadoAConsultar = new clsEmpleados();
     daoEmpleados empleadoDAO = new daoEmpleados();
+    // inicia la busqueda de conceptos
+    clsConcepto conceptoAConsultar = new clsConcepto();
+        daoConcepto conceptoDAO = new daoConcepto();
+        
+        daoNomina nominaDAO = new daoNomina();
+        clsEmpleados empleadoAInsertar = new clsEmpleados();
      
     while (contador <= limite) {
     
@@ -40,31 +46,55 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     empleadoAConsultar.getempcargo();
     empleadoAConsultar.getempdepart();
     empleadoAConsultar.getempsueldo();       
+    
+    
+    while (x<=7){
+        
+        conceptoAConsultar.setconcepid(x);
+        conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
+        
+        conceptoAConsultar.getconcepnombre();
+        conceptoAConsultar.getconcepefecto();
+        
+        System.out.println(conceptoAConsultar.getconcepnombre());
+        System.out.println(conceptoAConsultar.getconcepefecto());
+    x++;             
+    }
+    System.out.println("mostrando resultados");
+    System.out.println(empleadoAConsultar.getempnombre());
+    System.out.println(empleadoAConsultar.getempcargo());
+    System.out.println(empleadoAConsultar.getempdepart());
+    System.out.println(empleadoAConsultar.getempsueldo());
     contador++;
-    
-    
-    
-    
-    
-    
     }
         
     }
-
+ 
+    
+    
+    
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Id cargo");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Estado");
+        modelo.addColumn("Id Nomina");
+        modelo.addColumn("Nombre empleado");
+        modelo.addColumn("Cargo");
+         modelo.addColumn("Departamento");
+        modelo.addColumn("Salario");
+        modelo.addColumn("conceptos");
+        modelo.addColumn("Valor Nomina");
         
-        daocargo cargoDAO = new daocargo();
-        List<clscargo> cargos = cargoDAO.select();
-        tablaCargos.setModel(modelo);
-        String[] dato = new String[3];
-        for (int i = 0; i < cargos.size(); i++) {
-            dato[0] = Integer.toString(cargos.get(i).getcarid());
-            dato[1] = cargos.get(i).getcarnombre();
-            dato[2] = cargos.get(i).getcarestatus();
+        daoNomina nominaDAO = new daoNomina();
+        List<clsNomina> nominas = nominaDAO.select();
+        Nomina.setModel(modelo);
+        String[] dato = new String[8];
+        for (int i = 0; i < nominas.size(); i++) {
+            dato[0] = Integer.toString(nominas.get(i).getnomiid());
+            dato[1] = nominas.get(i).getnominombre();
+            dato[2] = nominas.get(i).getnomicargo();
+            dato[3] = nominas.get(i).getnomidepart();
+            dato[4] = nominas.get(i).getnomisalario();
+            dato[5] = nominas.get(i).getnomiconcepto();
+            dato[6] = nominas.get(i).getnomivalor();
             
             //System.out.println("cargo:" + cargos);
             modelo.addRow(dato);
@@ -76,7 +106,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     public frmGenerarNomina() {
         initComponents();
         llenadoDeTablas();
-        procesos();
+        
     }
 
     /**
@@ -95,7 +125,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         label3 = new javax.swing.JLabel();
         limitante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaCargos = new javax.swing.JTable();
+        Nomina = new javax.swing.JTable();
         lb = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
 
@@ -116,7 +146,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 GenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 95, -1));
+        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Visualizacion de la nomina");
@@ -136,8 +166,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         });
         getContentPane().add(limitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 110, -1));
 
-        tablaCargos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaCargos.setModel(new javax.swing.table.DefaultTableModel(
+        Nomina.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Nomina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -153,7 +183,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaCargos);
+        jScrollPane1.setViewportView(Nomina);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 880, 303));
 
@@ -169,7 +199,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarActionPerformed
-//        daocargo cargoDAO = new daocargo();
+procesos();//        daocargo cargoDAO = new daocargo();
        
     }//GEN-LAST:event_GenerarActionPerformed
 
@@ -180,6 +210,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Generar;
+    private javax.swing.JTable Nomina;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
@@ -188,6 +219,5 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTextField limitante;
-    private javax.swing.JTable tablaCargos;
     // End of variables declaration//GEN-END:variables
 }
