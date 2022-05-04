@@ -26,14 +26,20 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
             cbox_trabajadores.addItem(empleados.get(i).getconcepnombre());
         }
     }
-
+   
      public void efecto() {    
         cbox_efecto.addItem("Seleccione una opción");
         cbox_efecto.addItem("+");
         cbox_efecto.addItem("-");
     }
     
+    public void asignar() {    
+        cbox_asigna.addItem("Seleccione una opción");
+        cbox_asigna.addItem("Todos");
+        cbox_asigna.addItem("Todos a exepcion de:");
+    } 
     
+
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         //modelo.addColumn("Id empleado");
@@ -78,6 +84,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         llenadoDeCombos();
         efecto();
+        asignar();
     }
 
     /**
@@ -113,6 +120,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto = new javax.swing.JComboBox<>();
         label14 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
+        label5 = new javax.swing.JLabel();
+        cbox_asigna = new javax.swing.JComboBox<>();
+        label7 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -121,7 +131,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento empleados");
+        setTitle("Mantenimiento Conceptos");
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -131,7 +141,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +149,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 95, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +157,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Datos");
@@ -159,8 +169,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 95, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 102, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 95, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 102, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +178,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 95, -1));
 
         tablaEmpleados.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaEmpleados.setModel(new javax.swing.table.DefaultTableModel(
@@ -197,7 +207,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 cbox_trabajadoresActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_trabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, 263, -1));
+        getContentPane().add(cbox_trabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 360, 263, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("-----------------Ingreso de datos del empleado-----------------");
@@ -209,7 +219,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 100, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, 100, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Nombre");
@@ -235,7 +245,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Concepto");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, -1, -1));
 
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label13.setText(".");
@@ -257,6 +267,22 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstado.setOpaque(false);
         getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 260, -1));
+
+        label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label5.setText("-----------------------------Asignacion ------------------------------");
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 380, -1));
+
+        cbox_asigna.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_asigna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_asignaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbox_asigna, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 260, -1));
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("Empleados");
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -304,6 +330,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbox_trabajadores.setSelectedIndex(0);
         cbox_efecto.setSelectedIndex(0);
+        cbox_asigna.setSelectedIndex(0);
         txtNombre.setText("");
         txtValor.setText("");
         txtbuscado.setText("");
@@ -340,6 +367,11 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbox_efectoActionPerformed
 
+    private void cbox_asignaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_asignaActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_asignaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -347,6 +379,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cbox_asigna;
     private javax.swing.JComboBox<String> cbox_efecto;
     private javax.swing.JComboBox<String> cbox_trabajadores;
     private javax.swing.JButton jButton2;
@@ -356,7 +389,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label13;
     private javax.swing.JLabel label14;
     private javax.swing.JLabel label4;
+    private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
     private javax.swing.JLabel lb2;
