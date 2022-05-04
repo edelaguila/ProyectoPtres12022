@@ -41,6 +41,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         modelo.addColumn("concepnombre");
         modelo.addColumn("concepefecto");
         modelo.addColumn("concepestado");
+        modelo.addColumn("concepvalor");
         //modelo.addColumn("Dias laborados");
         daoConcepto empleadoDAO = new daoConcepto();
         List<clsConcepto> empleados = empleadoDAO.select();
@@ -52,6 +53,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
             dato[1] = empleados.get(i).getconcepnombre();
             dato[2] = empleados.get(i).getconcepefecto();
             dato[3] = empleados.get(i).getconcepestado();
+            dato[4] = empleados.get(i).getconcepvalor();
            
             //dato[4] = empleados.get(i).getempdias();
             //System.out.println("vendedor:" + vendedores);
@@ -66,7 +68,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
         txtNombre.setText(empleadoAConsultar.getconcepnombre());
         cbox_efecto.setSelectedItem(empleadoAConsultar.getconcepefecto());
-        txtValor.setText(empleadoAConsultar.getconcepestado());
+        txtEstado.setText(empleadoAConsultar.getconcepestado());
+        txtValor.setText(empleadoAConsultar.getconcepvalor());
         //txtDias.setText(empleadoAConsultar.getempdias());
     }
 
@@ -173,11 +176,11 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id Concepto", "Nombre", "Efecto", "Estado"
+                "Id Concepto", "Nombre", "Efecto", "Estado", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -272,7 +275,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         clsConcepto empleadoAInsertar = new clsConcepto();
         empleadoAInsertar.setconcepnombre(txtNombre.getText());
         empleadoAInsertar.setconcepefecto(cbox_efecto.getSelectedItem().toString());
-        empleadoAInsertar.setconcepestado(txtValor.getText());
+        empleadoAInsertar.setconcepestado(txtEstado.getText());
+        empleadoAInsertar.setconcepvalor(txtValor.getText());
         //empleadoAInsertar.setempdias(txtDias.getText());
         empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
@@ -291,6 +295,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         empleadoAActualizar.setconcepnombre(txtNombre.getText());
         empleadoAActualizar.setconcepefecto(cbox_efecto.getSelectedItem().toString());
         empleadoAActualizar.setconcepestado(txtValor.getText());
+         empleadoAActualizar.setconcepvalor(txtEstado.getText());
         //empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
         llenadoDeTablas();

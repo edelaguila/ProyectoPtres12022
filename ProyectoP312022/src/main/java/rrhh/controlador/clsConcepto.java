@@ -15,6 +15,7 @@ public class clsConcepto {
     private String Concepnombre;
     private String Concepefecto; 
     private String Concepestado;
+    private String Concepvalor; 
     
 
     public clsConcepto() {
@@ -27,6 +28,13 @@ public class clsConcepto {
     public clsConcepto(String nombre, String estado) {
         this. Concepnombre = nombre;
         this.Concepestado = estado;
+        
+    }
+     public clsConcepto(String nombre, String estado, String efecto, String valor) {
+        this. Concepnombre = nombre;
+        this.Concepestado = estado;
+        this. Concepefecto = nombre;
+        this.Concepvalor = valor;
     }
 
     public int getconcepid() {
@@ -58,6 +66,13 @@ public class clsConcepto {
      public void setconcepefecto(String efecto) {
         this.Concepefecto = efecto;
      }
+       public String getconcepvalor() {
+        return Concepvalor;
+    }
+     public void setconcepvalor(String valor) {
+        this.Concepvalor = valor;
+     }
+     
 
     @Override
     public String toString() {

@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class daoConcepto {
     
-    private static final String SQL_SELECT = "SELECT concepid, concepnombre, concepefecto, concepestado  FROM tbl_concepto";
-    private static final String SQL_INSERT = "INSERT INTO tbl_concepto(concepnombre, concepefecto, concepestado) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_concepto SET concepnombre=?, concepefecto=?, concepestado=? WHERE concepid = ?";
+    private static final String SQL_SELECT = "SELECT concepid, concepnombre, concepefecto, concepestado, concepvalor  FROM tbl_concepto";
+    private static final String SQL_INSERT = "INSERT INTO tbl_concepto(concepnombre, concepefecto, concepestado, concepvalor) VALUES(?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_concepto SET concepnombre=?, concepefecto=?, concepestado=?, concepvalor=? WHERE concepid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_concepto WHERE concepid=?";
-    private static final String SQL_QUERY = "SELECT concepid, concepnombre, concepefecto, concepestado FROM tbl_concepto WHERE concepid=?";
+    private static final String SQL_QUERY = "SELECT concepid, concepnombre, concepefecto, concepestado,concepvalor FROM tbl_concepto WHERE concepid=?";
   
 
     public List<clsConcepto> select() {
@@ -38,6 +38,7 @@ public class daoConcepto {
                 String nombre = rs.getString("concepnombre");
                 String efecto = rs.getString("concepefecto");
                 String estado = rs.getString("concepestado");
+                String valor = rs.getString("concepvalor");
          
                
 
@@ -46,6 +47,7 @@ public class daoConcepto {
                 concepto.setconcepnombre(nombre);
                 concepto.setconcepefecto(efecto);
                 concepto.setconcepestado(estado);
+                concepto.setconcepvalor(valor);
                 
                
                 conceptos.add(concepto);
@@ -72,6 +74,7 @@ public class daoConcepto {
             stmt.setString(1, concepto.getconcepnombre());
             stmt.setString(2, concepto.getconcepefecto());
             stmt.setString(3, concepto.getconcepestado());
+              stmt.setString(4, concepto.getconcepvalor());
            
                   
             System.out.println("ejecutando query:" + SQL_INSERT);
@@ -98,7 +101,8 @@ public class daoConcepto {
             stmt.setString(1, concepto.getconcepnombre());
             stmt.setString(2, concepto.getconcepefecto());
             stmt.setString(3, concepto.getconcepestado());
-            stmt.setInt(4, concepto.getconcepid());
+            stmt.setString(4, concepto.getconcepvalor());
+            stmt.setInt(5, concepto.getconcepid());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -151,6 +155,7 @@ public class daoConcepto {
                 String nombre = rs.getString("concepnombre");
                 String efecto = rs.getString("concepefecto");
                 String estado = rs.getString("concepestado");
+                String valor = rs.getString("concepvalor");
                
                 
 
@@ -159,6 +164,7 @@ public class daoConcepto {
                 concepto.setconcepnombre(nombre);
                 concepto.setconcepefecto(efecto);
                 concepto.setconcepestado(estado);
+                concepto.setconcepvalor(valor);
                  
             }
             //System.out.println("Registros buscado:" + persona);
