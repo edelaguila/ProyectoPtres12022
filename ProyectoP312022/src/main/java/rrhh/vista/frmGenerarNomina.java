@@ -22,54 +22,79 @@ import java.io.File;
  */
 public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
-    public void procesos() {
-     //iniciamos la busqueda   
-     int contador = 1, x =1;
-     int limite;
-     
-     limite = Integer.parseInt(limitante.getText());
-    //inicia la busqueda de empleados 
-    clsEmpleados empleadoAConsultar = new clsEmpleados();
-    daoEmpleados empleadoDAO = new daoEmpleados();
-    // inicia la busqueda de conceptos
-    clsConcepto conceptoAConsultar = new clsConcepto();
-        daoConcepto conceptoDAO = new daoConcepto();
-        
-        daoNomina nominaDAO = new daoNomina();
-        clsEmpleados empleadoAInsertar = new clsEmpleados();
-     
-    while (contador <= limite) {
-    
-    empleadoAConsultar.setempid(contador);
-    empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
-    empleadoAConsultar.getempnombre();
-    empleadoAConsultar.getempcargo();
-    empleadoAConsultar.getempdepart();
-    empleadoAConsultar.getempsueldo();       
-    
-    
-    while (x<=7){
-        
-        conceptoAConsultar.setconcepid(x);
-        conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
-        
-        conceptoAConsultar.getconcepnombre();
-        conceptoAConsultar.getconcepefecto();
-        
-        System.out.println(conceptoAConsultar.getconcepnombre());
-        System.out.println(conceptoAConsultar.getconcepefecto());
-    x++;             
+    frmGenerarNomina(frmMantenimientoConcepto aThis, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    System.out.println("mostrando resultados");
-    System.out.println(empleadoAConsultar.getempnombre());
-    System.out.println(empleadoAConsultar.getempcargo());
-    System.out.println(empleadoAConsultar.getempdepart());
-    System.out.println(empleadoAConsultar.getempsueldo());
+
+   
+    public void asigna(){
+    
+    cbox_Asigna.addItem("Seleccione una opción");
+    cbox_Asigna.addItem("Algunos");
+    cbox_Asigna.addItem("Muchos");
+    cbox_Asigna.addItem("Muchos a exepcion de:");
+    
+    }
+    
+    public void proceso(){
+    int contador = 1, contador2 = 1;
+    int limitante, limitante2;
+    int matriz[][],nfilas,ncol;
+    
+    
+    if (cbox_Asigna.getSelectedItem().toString()=="Muchos"){
+        
+    limitante = Integer.parseInt(limite.getText());
+    limitante2 = Integer.parseInt(limite2.getText());
+    //llama a todos los empleados que estan registrados
+     clsEmpleados empleadoAConsultar = new clsEmpleados();
+     daoEmpleados empleadoDAO = new daoEmpleados();
+     //esto registra todos los datos en la nomina
+      daoNomina nominaDAO = new daoNomina();
+        clsNomina nominaAInsertar = new clsNomina();
+     //llama a todos los conceptos registrados
+     clsConcepto concepAConsultar = new clsConcepto();
+     daoConcepto concepDAO = new daoConcepto();   
+    
+    
+    while(contador<=limitante){
+     empleadoAConsultar.setempid(contador);
+     empleadoAConsultar = empleadoDAO.query(empleadoAConsultar); 
+     
+      empleadoAConsultar.getempnombre();
+      empleadoAConsultar.getempcargo();
+      empleadoAConsultar.getempdepart();    
+      empleadoAConsultar.getempsueldo();
+      
+      while(contador2<=limitante2){
+       concepAConsultar.setconcepid(contador2);
+       concepAConsultar = concepDAO.query(concepAConsultar);
+
+        concepAConsultar.getconcepnombre();
+        concepAConsultar.getconcepefecto();
+        concepAConsultar.getconcepestado();
+        concepAConsultar.getconcepvalor();
+          
+
+     contador2++;
+      }
+     
+      nominaAInsertar.setnominombre( empleadoAConsultar.getempnombre());
+      nominaAInsertar.setnomicargo(empleadoAConsultar.getempcargo());
+      nominaAInsertar.setnomidepart(empleadoAConsultar.getempdepart());
+      nominaAInsertar.setnomisalario(empleadoAConsultar.getempsueldo());
+      nominaAInsertar.setnomiconcepto(concepAConsultar.getconcepnombre());
+      nominaAInsertar.setnomivalor(empleadoAConsultar.getempsueldo());
+      nominaDAO.insert(nominaAInsertar);
+      
+      llenadoDeTablas();
+      
     contador++;
+     
     }
-        
+  
     }
- 
+    }
     
     
     
@@ -106,7 +131,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     public frmGenerarNomina() {
         initComponents();
         llenadoDeTablas();
-        
+        asigna();
+        proceso();
     }
 
     /**
@@ -122,12 +148,17 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         lbusu = new javax.swing.JLabel();
         Generar = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
-        label3 = new javax.swing.JLabel();
-        limitante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Nomina = new javax.swing.JTable();
         lb = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
+        cbox_Asigna = new javax.swing.JComboBox<>();
+        label8 = new javax.swing.JLabel();
+        limite = new javax.swing.JTextField();
+        label10 = new javax.swing.JLabel();
+        limite2 = new javax.swing.JTextField();
+        label11 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -146,25 +177,11 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
                 GenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 95, -1));
+        getContentPane().add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Visualizacion de la nomina");
         getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
-
-        label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Cantidad de empleados");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
-
-        limitante.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        limitante.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        limitante.setOpaque(false);
-        limitante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limitanteActionPerformed(evt);
-            }
-        });
-        getContentPane().add(limitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 110, -1));
 
         Nomina.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         Nomina.setModel(new javax.swing.table.DefaultTableModel(
@@ -185,39 +202,77 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(Nomina);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 880, 303));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 880, 303));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
         getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 20, 13, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("-----------------Generacion de nomina-----------------");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 360, -1));
+        label6.setText("-----------------Asignacion de conceptos-----------------");
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, -1));
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("-----------------Generacion de nomina-----------------");
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 360, -1));
+
+        cbox_Asigna.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_Asigna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_AsignaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbox_Asigna, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 200, 30));
+
+        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label8.setText("Tipo");
+        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        limite.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        limite.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        limite.setOpaque(false);
+        getContentPane().add(limite, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 130, 20));
+
+        label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label10.setText("No. empleados");
+        getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 110, -1));
+
+        limite2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        limite2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        limite2.setOpaque(false);
+        getContentPane().add(limite2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 130, 20));
+
+        label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label11.setText("No. Conceptos");
+        getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void GenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarActionPerformed
-procesos();//        daocargo cargoDAO = new daocargo();
-       
+proceso();
     }//GEN-LAST:event_GenerarActionPerformed
 
-    private void limitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limitanteActionPerformed
+    private void cbox_AsignaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_AsignaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_limitanteActionPerformed
+    }//GEN-LAST:event_cbox_AsignaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Generar;
     private javax.swing.JTable Nomina;
+    private javax.swing.JComboBox<String> cbox_Asigna;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
-    private javax.swing.JLabel label3;
+    private javax.swing.JLabel label10;
+    private javax.swing.JLabel label11;
     private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTextField limitante;
+    private javax.swing.JTextField limite;
+    private javax.swing.JTextField limite2;
     // End of variables declaration//GEN-END:variables
 }
