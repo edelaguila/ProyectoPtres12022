@@ -38,7 +38,7 @@ public class daoConcepto {
                 int conid = rs.getInt("conid");
                 String connombre = rs.getString("connombre");
                 String conefecto = rs.getString("conefecto");
-                String conestatus = rs.getString("conestatus");
+                boolean conestatus = rs.getBoolean("conestatus");
 
                 concepto = new clsConcepto();
                 concepto.setConid(conid);
@@ -70,7 +70,7 @@ public class daoConcepto {
             stmt.setInt(1, concepto.getConid());
             stmt.setString(2, concepto.getConnombre());
             stmt.setString(3, concepto.getConefecto());
-            stmt.setString(4, concepto.getConestatus());
+            stmt.setBoolean(4, concepto.getConestatus());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -97,7 +97,7 @@ public class daoConcepto {
             stmt.setInt(4, concepto.getConid());
             stmt.setString(1, concepto.getConnombre());
             stmt.setString(2, concepto.getConefecto());
-            stmt.setString(3, concepto.getConestatus());
+            stmt.setBoolean(3, concepto.getConestatus());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -149,7 +149,7 @@ public class daoConcepto {
                 int conid = rs.getInt("conid");
                 String connombre = rs.getString("connombre");
                 String conefecto = rs.getString("conefecto");
-                String conestatus = rs.getString("conestatus");
+                boolean conestatus = rs.getBoolean("conestatus");
 
                 concepto = new clsConcepto();
                 concepto.setConid(conid);
