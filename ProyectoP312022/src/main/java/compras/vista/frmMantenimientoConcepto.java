@@ -223,9 +223,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         conceptoAInsertar.setConnombre(txtConNombre.getText());
         conceptoAInsertar.setConefecto(txtConEfecto.getText());
         if (ComboEstado.getSelectedItem().equals("Activo")) {
-            conceptoAInsertar.setConestatus(Boolean.parseBoolean("0"));
+            conceptoAInsertar.setConestatus(true);
         } else {
-            conceptoAInsertar.setConestatus(Boolean.parseBoolean("1"));
+            conceptoAInsertar.setConestatus(false);
         }
         conceptoDAO.insert(conceptoAInsertar);
         llenadoDeTablas();
