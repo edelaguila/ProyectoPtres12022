@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package seguridad.vista;
+package compras.vista;
 
 import compras.controlador.clsOrdenesCompras;
 import seguridad.vista.*;
