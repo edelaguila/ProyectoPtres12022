@@ -39,7 +39,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     public void proceso(){
     int contador = 1, contador2 = 1;
     int limitante, limitante2;
-    int matriz[][],nfilas,ncol;
+   String a=""; 
     
     
     if (cbox_Asigna.getSelectedItem().toString()=="Muchos"){
@@ -70,12 +70,12 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
        concepAConsultar.setconcepid(contador2);
        concepAConsultar = concepDAO.query(concepAConsultar);
 
-        concepAConsultar.getconcepnombre();
+       
         concepAConsultar.getconcepefecto();
         concepAConsultar.getconcepestado();
         concepAConsultar.getconcepvalor();
           
-
+        a = a + concepAConsultar.getconcepnombre()+","; 
      contador2++;
       }
      
@@ -83,7 +83,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
       nominaAInsertar.setnomicargo(empleadoAConsultar.getempcargo());
       nominaAInsertar.setnomidepart(empleadoAConsultar.getempdepart());
       nominaAInsertar.setnomisalario(empleadoAConsultar.getempsueldo());
-      nominaAInsertar.setnomiconcepto(concepAConsultar.getconcepnombre());
+      nominaAInsertar.setnomiconcepto(a);
       nominaAInsertar.setnomivalor(empleadoAConsultar.getempsueldo());
       nominaDAO.insert(nominaAInsertar);
       
