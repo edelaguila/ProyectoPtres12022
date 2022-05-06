@@ -21,7 +21,7 @@ public class daoEmpleados {
     private static final String SQL_UPDATE = "UPDATE tbl_empleados SET empnombre=?, empsueldo=?, empestado=?, empdias=?, empcargo=?, empdepart=? WHERE empid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_empleados WHERE empid=?";
     private static final String SQL_QUERY = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart FROM tbl_empleados WHERE empid=?";
-  
+     private static final String SQL_QUERY2 = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart FROM tbl_empleados WHERE empnombre=?";
 
     public List<clsEmpleados> select() {
         Connection conn = null;
@@ -184,4 +184,49 @@ public class daoEmpleados {
         //return personas;  // Si se utiliza un ArrayList
         return empleado;
     }
+    
+    public clsEmpleados query2(clsEmpleados empleado) 
+    {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY);
+            stmt.setString(1, empleado.getempnombre());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("empid");
+                String nombre = rs.getString("empnombre");
+                String sueldo = rs.getString("empsueldo");
+                String estado = rs.getString("empestado");
+                String dias = rs.getString("empdias");
+                String cargo = rs.getString("empcargo");
+                String depart = rs.getString("empdepart");
+
+                empleado = new clsEmpleados();
+                empleado.setempid(id);
+                empleado.setempnombre(nombre);
+                empleado.setempsueldo(sueldo);
+                empleado.setempestado(estado);
+                empleado.setempdias(dias);   
+                empleado.setempcargo(cargo);
+                empleado.setempdepart(depart);  
+            }
+            //System.out.println("Registros buscado:" + persona);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(rs);
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
+        //return personas;  // Si se utiliza un ArrayList
+        return empleado;
+    }
+    
+    
+    
 }
