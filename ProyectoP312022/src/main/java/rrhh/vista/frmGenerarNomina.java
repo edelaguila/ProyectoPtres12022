@@ -35,10 +35,14 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
     cbox_Asigna.addItem("Muchos a exepcion de:");
     
     }
+   
+   
     
     public void proceso(){
+         double sueldoliquido=0, c;
     int contador = 1, contador2 = 1;
     int limitante, limitante2;
+    double porcentaje,porcentaje2,valorigss,valorisr,valorhoras;
    String a=""; 
     
     
@@ -64,18 +68,56 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
       empleadoAConsultar.getempnombre();
       empleadoAConsultar.getempcargo();
       empleadoAConsultar.getempdepart();    
-      empleadoAConsultar.getempsueldo();
+      
+      c = Integer.parseInt(empleadoAConsultar.getempsueldo()); 
+      
       
       while(contador2<=limitante2){
        concepAConsultar.setconcepid(contador2);
        concepAConsultar = concepDAO.query(concepAConsultar);
 
-       
-        concepAConsultar.getconcepefecto();
-        concepAConsultar.getconcepestado();
-        concepAConsultar.getconcepvalor();
-          
+
+        
         a = a + concepAConsultar.getconcepnombre()+","; 
+        
+       if (concepAConsultar.getconcepnombre()=="IGSS" & concepAConsultar.getconcepnombre()=="igss" ){
+       
+       if(concepAConsultar.getconcepefecto()=="-"){
+       double valor = Integer.parseInt(concepAConsultar.getconcepvalor());
+       double sueldo = Integer.parseInt(empleadoAConsultar.getempsueldo()) ;
+       porcentaje = sueldo - sueldo * valor;
+       valorigss=sueldo - porcentaje;
+       
+       sueldoliquido = c - valorigss; 
+       
+       }
+
+       }
+       
+       if (concepAConsultar.getconcepnombre()=="ISR" & concepAConsultar.getconcepnombre()=="isr" ){
+       
+       if(concepAConsultar.getconcepefecto()=="-"){
+       double valor = Integer.parseInt(concepAConsultar.getconcepvalor());
+       double sueldo = Integer.parseInt(empleadoAConsultar.getempsueldo()) ;
+       porcentaje2 = sueldo - sueldo * valor;
+       valorisr =sueldo - porcentaje2;
+       sueldoliquido = c - valorisr; 
+       }
+       }
+       if (concepAConsultar.getconcepnombre()=="HORAS" & concepAConsultar.getconcepnombre()=="horas" & concepAConsultar.getconcepnombre()=="horas extras" ){
+       
+       if(concepAConsultar.getconcepefecto()=="+"){
+       double hora =  Integer.parseInt(empleadoAConsultar.getempdias());
+       double valor = Integer.parseInt(concepAConsultar.getconcepvalor());
+       double sueldo = Integer.parseInt(empleadoAConsultar.getempsueldo()) ;
+       
+       valorhoras = valor * hora;
+       sueldoliquido = c - valorhoras;
+       
+       }
+       }
+        
+        
      contador2++;
       }
      
@@ -84,7 +126,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
       nominaAInsertar.setnomidepart(empleadoAConsultar.getempdepart());
       nominaAInsertar.setnomisalario(empleadoAConsultar.getempsueldo());
       nominaAInsertar.setnomiconcepto(a);
-      nominaAInsertar.setnomivalor(empleadoAConsultar.getempsueldo());
+      nominaAInsertar.setnomivalor(String.valueOf(sueldoliquido));
       nominaDAO.insert(nominaAInsertar);
       
       llenadoDeTablas();
@@ -95,6 +137,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
   
     }
     }
+    
+    
     
     
     
@@ -159,6 +203,8 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         label10 = new javax.swing.JLabel();
         limite2 = new javax.swing.JTextField();
         label11 = new javax.swing.JLabel();
+        cbox_Asigna1 = new javax.swing.JComboBox<>();
+        label9 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -181,7 +227,7 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Visualizacion de la nomina");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, -1, -1));
 
         Nomina.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         Nomina.setModel(new javax.swing.table.DefaultTableModel(
@@ -202,11 +248,11 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(Nomina);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 880, 303));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 880, 303));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
-        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 20, 13, -1));
+        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 13, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("-----------------Asignacion de conceptos-----------------");
@@ -246,6 +292,18 @@ public class frmGenerarNomina extends javax.swing.JInternalFrame {
         label11.setText("No. Conceptos");
         getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 110, -1));
 
+        cbox_Asigna1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_Asigna1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_Asigna1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbox_Asigna1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 200, -1));
+
+        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label9.setText("Empleado");
+        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -257,11 +315,16 @@ proceso();
         // TODO add your handling code here:
     }//GEN-LAST:event_cbox_AsignaActionPerformed
 
+    private void cbox_Asigna1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_Asigna1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_Asigna1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Generar;
     private javax.swing.JTable Nomina;
     private javax.swing.JComboBox<String> cbox_Asigna;
+    private javax.swing.JComboBox<String> cbox_Asigna1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label10;
@@ -269,6 +332,7 @@ proceso();
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
