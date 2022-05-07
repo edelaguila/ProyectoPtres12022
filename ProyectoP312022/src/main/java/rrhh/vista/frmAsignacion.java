@@ -81,7 +81,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         clsEmpleados empleadoAConsultar = new clsEmpleados();
         daoEmpleados empleadoDAO = new daoEmpleados();
         
-        empleadoAConsultar.setempnombre();
+        empleadoAConsultar.setempnombre(cbox_empleados.getSelectedItem().toString());
         empleadoAConsultar = empleadoDAO.query2(empleadoAConsultar);
         
         empleadoAConsultar.getempsueldo();     
