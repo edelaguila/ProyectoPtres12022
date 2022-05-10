@@ -22,6 +22,11 @@ import java.io.File;
  */
 public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
 
+    
+    
+ 
+
+
     public void llenadoDeCombosCar() {
         daocargo cargoDAO = new daocargo();
         List<clscargo> cargos = cargoDAO.select();
@@ -46,7 +51,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Salario");
         modelo.addColumn("Estado");
-        modelo.addColumn("Dias laborados");
+        modelo.addColumn("Horas extras");
         modelo.addColumn("Cargo");
         modelo.addColumn("Departamento");
         daoEmpleados empleadoDAO = new daoEmpleados();
@@ -74,7 +79,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         txtNombre.setText(empleadoAConsultar.getempnombre());
         txtSalario.setText(empleadoAConsultar.getempsueldo());
         txtEstado.setText(empleadoAConsultar.getempestado());
-        txtDias.setText(empleadoAConsultar.getempdias());
+        txtHoras.setText(empleadoAConsultar.getempdias());
         cbox_cargos.setSelectedItem(empleadoAConsultar.getempcargo());
         cbox_departamentos.setSelectedItem(empleadoAConsultar.getempdepart());
       
@@ -85,6 +90,9 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         llenadoDeCombosCar();
         llenadoDeCombosDepar();
+        
+   
+        
     }
 
     /**
@@ -103,7 +111,6 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         label1 = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
-        txtbuscado = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
@@ -113,7 +120,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         txtSalario = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtDias = new javax.swing.JTextField();
+        txtHoras = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         label11 = new javax.swing.JLabel();
@@ -125,6 +132,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         cbox_departamentos = new javax.swing.JComboBox<>();
         label7 = new javax.swing.JLabel();
         label10 = new javax.swing.JLabel();
+        txtbuscado = new javax.swing.JTextField();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -163,7 +171,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Datos");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, -1, -1));
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +180,6 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 95, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 102, -1));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +195,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id empleado", "Nombre", "Salario", "Estado", "Dias laborados", "Cargo", "Departamento"
+                "Id empleado", "Nombre", "Salario", "Estado", "Horas Extras", "Cargo", "Departamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -239,15 +246,15 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         txtNombre.setOpaque(false);
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 260, -1));
 
-        txtDias.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtDias.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtDias.setOpaque(false);
-        txtDias.addActionListener(new java.awt.event.ActionListener() {
+        txtHoras.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtHoras.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtHoras.setOpaque(false);
+        txtHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDiasActionPerformed(evt);
+                txtHorasActionPerformed(evt);
             }
         });
-        getContentPane().add(txtDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 260, -1));
+        getContentPane().add(txtHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 260, -1));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label9.setText("Salario empleado");
@@ -262,7 +269,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label12.setText("Dias");
+        label12.setText("Horas Extras");
         getContentPane().add(label12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -296,6 +303,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label10.setText("Nombre empleado");
         getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 102, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,16 +318,21 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+       
+     
         daoEmpleados empleadoDAO = new daoEmpleados();
         clsEmpleados empleadoAInsertar = new clsEmpleados();
         empleadoAInsertar.setempnombre(txtNombre.getText());
         empleadoAInsertar.setempsueldo(txtSalario.getText());
         empleadoAInsertar.setempestado(txtEstado.getText());
-        empleadoAInsertar.setempdias(txtDias.getText());
+        empleadoAInsertar.setempdias(txtHoras.getText());
         empleadoAInsertar.setempcargo(cbox_cargos.getSelectedItem().toString());
         empleadoAInsertar.setempdepart(cbox_departamentos.getSelectedItem().toString());
         empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
+    
+        
+       
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -335,7 +348,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         empleadoAActualizar.setempnombre(txtNombre.getText());
         empleadoAActualizar.setempsueldo(txtSalario.getText());
         empleadoAActualizar.setempestado(txtEstado.getText());
-        empleadoAActualizar.setempdias(txtDias.getText());  
+        empleadoAActualizar.setempdias(txtHoras.getText());  
         empleadoAActualizar.setempcargo(cbox_cargos.getSelectedItem().toString());
         empleadoAActualizar.setempdepart(cbox_departamentos.getSelectedItem().toString());
         empleadoDAO.update(empleadoAActualizar);
@@ -348,8 +361,7 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         txtNombre.setText("");
         txtSalario.setText("");
         txtEstado.setText("");
-        txtDias.setText("");
-        txtbuscado.setText("");
+        txtHoras.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -379,9 +391,9 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasActionPerformed
+    private void txtHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHorasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiasActionPerformed
+    }//GEN-LAST:event_txtHorasActionPerformed
 
     private void cbox_departamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_departamentosActionPerformed
         // TODO add your handling code here:
@@ -413,8 +425,8 @@ public class frmMantenimientoEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaEmpleados;
-    private javax.swing.JTextField txtDias;
     private javax.swing.JTextField txtEstado;
+    private javax.swing.JTextField txtHoras;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
     private javax.swing.JTextField txtbuscado;
