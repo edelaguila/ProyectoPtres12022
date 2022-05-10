@@ -98,4 +98,8 @@ public class clsEmpleados {
     public void setempdepart(String empdepart) {
         this.empdepart = empdepart;
     }
+
+    public int setempid() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

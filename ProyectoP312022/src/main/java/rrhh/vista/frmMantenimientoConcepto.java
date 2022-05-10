@@ -6,6 +6,7 @@
 package rrhh.vista;
 
 
+import java.awt.Dimension;
 import rrhh.modelo.daoConcepto;
 import rrhh.controlador.clsConcepto;
 import java.util.List;
@@ -26,14 +27,14 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
             cbox_trabajadores.addItem(empleados.get(i).getconcepnombre());
         }
     }
-
+   
      public void efecto() {    
         cbox_efecto.addItem("Seleccione una opción");
         cbox_efecto.addItem("+");
         cbox_efecto.addItem("-");
     }
     
-    
+
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         //modelo.addColumn("Id empleado");
@@ -78,6 +79,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         llenadoDeCombos();
         efecto();
+     
     }
 
     /**
@@ -121,7 +123,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento empleados");
+        setTitle("Mantenimiento Conceptos");
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -197,7 +199,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 cbox_trabajadoresActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_trabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, 263, -1));
+        getContentPane().add(cbox_trabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 360, 263, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("-----------------Ingreso de datos del empleado-----------------");
@@ -235,7 +237,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Concepto");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 360, -1, -1));
 
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label13.setText(".");

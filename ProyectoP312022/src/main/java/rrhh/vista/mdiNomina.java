@@ -5,7 +5,7 @@
  */
 package rrhh.vista;
 
-import seguridad.vista.*;
+
 import java.awt.Dimension;
 import java.io.IOException;
 
