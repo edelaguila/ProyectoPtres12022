@@ -21,7 +21,7 @@ public class daoEmpleados {
     private static final String SQL_UPDATE = "UPDATE tbl_empleados SET empnombre=?, empsueldo=?, empestado=?, empdias=?, empcargo=?, empdepart=? WHERE empid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_empleados WHERE empid=?";
     private static final String SQL_QUERY = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart FROM tbl_empleados WHERE empid=?";
-     private static final String SQL_QUERY2 = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart FROM tbl_empleados WHERE empnombre=?";
+    private static final String SQL_QUERY2 = "SELECT empid, empnombre, empsueldo, empestado, empdias, empcargo, empdepart FROM tbl_empleados WHERE empnombre=?";
 
     public List<clsEmpleados> select() {
         Connection conn = null;
@@ -192,8 +192,8 @@ public class daoEmpleados {
         ResultSet rs = null;
         try {
             conn = clsConexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY);
+            System.out.println("Ejecutando query:" + SQL_QUERY2);
+            stmt = conn.prepareStatement(SQL_QUERY2);
             stmt.setString(1, empleado.getempnombre());
             rs = stmt.executeQuery();
             while (rs.next()) {

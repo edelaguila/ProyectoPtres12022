@@ -297,8 +297,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         empleadoAActualizar.setconcepid(Integer.parseInt(txtbuscado.getText()));
         empleadoAActualizar.setconcepnombre(txtNombre.getText());
         empleadoAActualizar.setconcepefecto(cbox_efecto.getSelectedItem().toString());
-        empleadoAActualizar.setconcepestado(txtValor.getText());
-         empleadoAActualizar.setconcepvalor(txtEstado.getText());
+        empleadoAActualizar.setconcepestado(txtEstado.getText());
+         empleadoAActualizar.setconcepvalor(txtValor.getText());
         //empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
         llenadoDeTablas();
