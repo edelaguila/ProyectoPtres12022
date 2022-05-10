@@ -76,7 +76,7 @@ public class clsConcepto {
 
     @Override
     public String toString() {
-        return "tbl_Concepto{" + "Concepid=" + Concepid + ", Concepnombre=" + Concepnombre + ", Concepestado=" + Concepestado + ",Concepefecto="+ Concepefecto+'}';
+        return "tbl_concepto{" + "concepid=" + Concepid + ", concepnombre=" + Concepnombre + ", concepestado=" + Concepestado + ",concepefecto="+ Concepefecto+ ", concepvalor "+ Concepvalor +'}';
     }
     
      }

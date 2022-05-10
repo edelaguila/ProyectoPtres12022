@@ -6,12 +6,12 @@
 package rrhh.vista;
 
 
-import java.awt.Dimension;
 import rrhh.modelo.daoConcepto;
 import rrhh.controlador.clsConcepto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+
 
 /**
  *
@@ -33,7 +33,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto.addItem("+");
         cbox_efecto.addItem("-");
     }
-    
+
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -49,15 +49,14 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         tablaEmpleados.setModel(modelo);
         String[] dato = new String[6];
         for (int i = 0; i < empleados.size(); i++) {
-           // dato[0] = Integer.toString(empleados.get(i).getempid());
+           
            dato[0] = Integer.toString(empleados.get(i).getconcepid());
             dato[1] = empleados.get(i).getconcepnombre();
             dato[2] = empleados.get(i).getconcepefecto();
             dato[3] = empleados.get(i).getconcepestado();
             dato[4] = empleados.get(i).getconcepvalor();
            
-            //dato[4] = empleados.get(i).getempdias();
-            //System.out.println("vendedor:" + vendedores);
+            
             modelo.addRow(dato);
         }
     }
@@ -71,7 +70,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto.setSelectedItem(empleadoAConsultar.getconcepefecto());
         txtEstado.setText(empleadoAConsultar.getconcepestado());
         txtValor.setText(empleadoAConsultar.getconcepvalor());
-        //txtDias.setText(empleadoAConsultar.getempdias());
+      
     }
 
     public frmMantenimientoConcepto() {
@@ -79,8 +78,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         llenadoDeCombos();
         efecto();
-     
-    }
+    
+  
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,7 +220,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtNombre.setOpaque(false);
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 260, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 200, -1));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label9.setText("Efecto ");
@@ -229,7 +229,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtValor.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtValor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtValor.setOpaque(false);
-        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 260, -1));
+        getContentPane().add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, -1));
 
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label12.setText("Valor");
@@ -241,7 +241,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
         label13.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label13.setText(".");
-        getContentPane().add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 430, 20, -1));
+        getContentPane().add(label13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 400, 20, -1));
 
         cbox_efecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_efecto.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +249,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
                 cbox_efectoActionPerformed(evt);
             }
         });
-        getContentPane().add(cbox_efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 260, -1));
+        getContentPane().add(cbox_efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 200, -1));
 
         label14.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label14.setText("Estado");
@@ -258,7 +258,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstado.setOpaque(false);
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 260, -1));
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -282,6 +282,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         //empleadoAInsertar.setempdias(txtDias.getText());
         empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -296,8 +297,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         empleadoAActualizar.setconcepid(Integer.parseInt(txtbuscado.getText()));
         empleadoAActualizar.setconcepnombre(txtNombre.getText());
         empleadoAActualizar.setconcepefecto(cbox_efecto.getSelectedItem().toString());
-        empleadoAActualizar.setconcepestado(txtValor.getText());
-         empleadoAActualizar.setconcepvalor(txtEstado.getText());
+        empleadoAActualizar.setconcepestado(txtEstado.getText());
+         empleadoAActualizar.setconcepvalor(txtValor.getText());
         //empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
         llenadoDeTablas();

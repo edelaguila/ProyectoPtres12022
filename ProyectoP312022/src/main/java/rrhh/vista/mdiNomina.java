@@ -115,9 +115,9 @@ public class mdiNomina extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu4.setText("Nomina");
+        jMenu4.setText("Procesos");
 
-        jMenuItem6.setText("Generar Nomina");
+        jMenuItem6.setText("Asignacion de conceptos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -246,12 +246,12 @@ public class mdiNomina extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        frmGenerarNomina ventana = new frmGenerarNomina();
+        frmAsignacion ventana = new frmAsignacion();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        
+                                               
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
