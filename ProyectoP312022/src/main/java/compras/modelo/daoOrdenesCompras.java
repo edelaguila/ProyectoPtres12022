@@ -131,14 +131,11 @@ public class daoOrdenesCompras {
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
-            stmt = conn.prepareStatement(SQL_INSERT);
-
-         
+            stmt = conn.prepareStatement(SQL_INSERT2);
             stmt.setInt(1, ordenes.getprodid());
             stmt.setInt(2, ordenes.getordcantidad());
             stmt.setInt(3, ordenes.getordcosto());
-
-            System.out.println("ejecutando query:" + SQL_INSERT);
+            System.out.println("ejecutando query:" + SQL_INSERT2);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {

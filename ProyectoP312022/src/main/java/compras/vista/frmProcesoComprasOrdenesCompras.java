@@ -265,11 +265,13 @@ public class frmProcesoComprasOrdenesCompras extends javax.swing.JInternalFrame 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         daoOrdenesCompras ordenesDAO = new daoOrdenesCompras();
         clsOrdenesCompras productoAInsertar = new clsOrdenesCompras();
+        clsOrdenesCompras productoAInsertar2 = new clsOrdenesCompras();
+
         productoAInsertar.setordfecha(txtFecha.getText());
         productoAInsertar.setprovid(Integer.parseInt(txtProveedor.getText()));
-        productoAInsertar.setprodid(Integer.parseInt(txtProducto.getText()));
-        productoAInsertar.setordcantidad(Integer.parseInt(txtCantidad.getText()));
-        productoAInsertar.setordcosto(Integer.parseInt(txtCosto.getText()));
+        productoAInsertar2.setprodid(Integer.parseInt(txtProducto.getText()));
+        productoAInsertar2.setordcantidad(Integer.parseInt(txtCantidad.getText()));
+        productoAInsertar2.setordcosto(Integer.parseInt(txtCosto.getText()));
         
         ordenesDAO.insert(productoAInsertar);
         llenadoDeTablas();
