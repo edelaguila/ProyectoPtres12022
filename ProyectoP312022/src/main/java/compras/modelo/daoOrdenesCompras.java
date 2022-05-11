@@ -22,12 +22,12 @@ public class daoOrdenesCompras {
     private static final String SQL_SELECT = "SELECT ordid, ordfecha, provid FROM tbl_ordecompraencabezado";
     private static final String SQL_SELECT2 = "SELECT prodid, ordcantidad, ordcosto FROM tbl_ordecompradetalle";
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado(ordfecha, provid) VALUES ( ?,?)";
-    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle(prodid, ordcantidad, ordcosto) VALUES ( ?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado(ordfecha, provid) VALUES ( ?, ?)";
+    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle(prodid, ordcantidad, ordcosto) VALUES ( ?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE tbl_producto SET provid = ?,prodnombre = ?,prodmarca = ?, prodprecio = ?, Prodlinea = ?, prodexistencia = ? WHERE tbl_producto.prodid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE tbl_producto.prodid = ?";
-    private static final String SQL_QUERY = "SELECT prodid, provid, prodnombre,prodmarca,prodprecio,prodlinea,prodexistencia FROM tbl_producto WHERE tbl_producto.prodid = ?";
+    private static final String SQL_QUERY = "SELECT ordid, ordfecha, provid FROM tbl_ordecompraencabezado WHERE tbl_ordecompraencabezado.ordid = ?";
 
     public List<clsOrdenesCompras> select() {
         Connection conn = null;
@@ -199,7 +199,7 @@ public class daoOrdenesCompras {
         return rows;
     }
 
-    public clsProducto query(clsProducto producto) {
+    public clsOrdenesCompras query(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -207,24 +207,19 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, producto.getProdid());
+            stmt.setInt(1, producto.getordid());
              
             rs = stmt.executeQuery();
             while (rs.next()) {
+                int ordid = rs.getInt("ordid");
+                String ordfecha = rs.getString("ordfecha");
                 int provid = rs.getInt("provid");
-                String prodnombre = rs.getString("prodnombre");
-                String prodmarca = rs.getString("prodmarca");
-                int prodprecio = rs.getInt("prodprecio");
-                String prodlinea = rs.getString("prodlinea");
-                String prodexistencia = rs.getString("prodexistencia");
 
-                producto = new clsProducto();
-                producto.setProvid(provid);
-                producto.setProdnombre(prodnombre);
-                producto.setProdmarca(prodmarca);
-                producto.setProdprecio(prodprecio);
-                producto.setProdlinea(prodlinea);
-                producto.setProdexistencia(prodexistencia);
+                producto = new clsOrdenesCompras();
+                producto.setordid(ordid);
+                producto.setordfecha(ordfecha);
+                producto.setprovid(provid);
+
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {

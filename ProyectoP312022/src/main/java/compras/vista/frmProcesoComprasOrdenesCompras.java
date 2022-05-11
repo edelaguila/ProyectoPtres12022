@@ -274,6 +274,7 @@ public class frmProcesoComprasOrdenesCompras extends javax.swing.JInternalFrame 
         productoAInsertar2.setordcosto(Integer.parseInt(txtCosto.getText()));
         
         ordenesDAO.insert(productoAInsertar);
+        ordenesDAO.insert(productoAInsertar2);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
