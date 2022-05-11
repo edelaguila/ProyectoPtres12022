@@ -60,6 +60,8 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
     public void agrega(Stack pila){
     
      agregados.setText(String.valueOf(pila));
+   
+       
     }
  
 
@@ -92,7 +94,7 @@ efecto.addItem("+");
 efecto.addItem("-");
 }
     
-    public void procedimientos(){
+    public void procedimientosAdd(){
    String igss = "igss";
    String isr= "isr" ;
    String conceptos = concepto.getText();
@@ -138,12 +140,12 @@ efecto.addItem("-");
     }
 
     
-    
     public frmAsignacion() {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
         sumayresta();
+        
     }
 
     /**
@@ -319,20 +321,20 @@ efecto.addItem("-");
                 agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 95, -1));
+        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 95, -1));
         getContentPane().add(agregados, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 220, 30));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Empleados");
         getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
 
-        quitar.setText("quitar");
+        quitar.setText("reset");
         quitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quitarActionPerformed(evt);
             }
         });
-        getContentPane().add(quitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 95, -1));
+        getContentPane().add(quitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 95, -1));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label9.setText("Salario final");
@@ -411,36 +413,47 @@ efecto.addItem("-");
         // TODO add your handling code here:
     }//GEN-LAST:event_cbox_empleadosActionPerformed
 Stack<String> pila = new Stack<String>();
+
+int nagregados = 1; int n;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-         String nameconcepto; 
+       
+        String nameconcepto; 
         nameconcepto = concepto.getText(); 
         pila.push(nameconcepto); 
         agrega(pila); 
         
-        procedimientos();
+      
+        
+        procedimientosAdd();
         
         
-        
-        
+        n = nagregados++;
+      
     }//GEN-LAST:event_agregarActionPerformed
 
     private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
         // TODO add your handling code here:
+        int contador = 1;
+        
+        while(contador <= n){
         if(!pila.empty()){ 
                 pila.pop(); 
                 agrega(pila); 
         }
+        contador++;
+        }
+        salario.setText("");
     }//GEN-LAST:event_quitarActionPerformed
-
-    private void BUSCARSALARIOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUSCARSALARIOActionPerformed
-        // TODO add your handling code here:
-         buscarsalario();
-    }//GEN-LAST:event_BUSCARSALARIOActionPerformed
 
     private void efectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efectoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_efectoActionPerformed
+
+    private void BUSCARSALARIOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUSCARSALARIOActionPerformed
+        // TODO add your handling code here:
+        buscarsalario();
+    }//GEN-LAST:event_BUSCARSALARIOActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

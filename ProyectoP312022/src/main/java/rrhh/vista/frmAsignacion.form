@@ -363,7 +363,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="550" y="40" width="95" height="-1"/>
+          <AbsoluteConstraints x="550" y="50" width="95" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -389,14 +389,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="quitar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="quitar"/>
+        <Property name="text" type="java.lang.String" value="reset"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitarActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="550" y="70" width="95" height="-1"/>
+          <AbsoluteConstraints x="550" y="80" width="95" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
