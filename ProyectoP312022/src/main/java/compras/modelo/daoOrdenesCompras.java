@@ -22,8 +22,8 @@ public class daoOrdenesCompras {
     private static final String SQL_SELECT = "SELECT ordid, ordfecha, provid FROM tbl_ordecompraencabezado";
     private static final String SQL_SELECT2 = "SELECT prodid, ordcantidad, ordcosto FROM tbl_ordecompradetalle";
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado(  ordfecha, provid) VALUES ( ?,?)";
-    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle( prodid, ordcantidad, ordcosto) VALUES ( ?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado(ordfecha, provid) VALUES ( ?,?)";
+    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle(prodid, ordcantidad, ordcosto) VALUES ( ?,?,?)";
 
     private static final String SQL_UPDATE = "UPDATE tbl_producto SET provid = ?,prodnombre = ?,prodmarca = ?, prodprecio = ?, Prodlinea = ?, prodexistencia = ? WHERE tbl_producto.prodid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE tbl_producto.prodid = ?";
@@ -31,19 +31,14 @@ public class daoOrdenesCompras {
 
     public List<clsOrdenesCompras> select() {
         Connection conn = null;
-        Connection conn2 = null;
         PreparedStatement stmt = null;
-        PreparedStatement stmt2 = null;
         ResultSet rs = null;
-        ResultSet rs2 = null;
         clsOrdenesCompras ordenes = null;
         List<clsOrdenesCompras> orden = new ArrayList<clsOrdenesCompras>();
         try {
             conn = clsConexion.getConnection();
-            conn2 = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
-
             while (rs.next()) {
                 int ordid = rs.getInt("ordid");
                 String ordfecha = rs.getString("ordfecha");
@@ -58,16 +53,38 @@ public class daoOrdenesCompras {
 
                 orden.add(ordenes);
             }
-            while (rs2.next()) {
-          
-                int prodid = rs2.getInt("prodid");
-                int ordcantidad = rs2.getInt("ordcantidad");
-                int ordcosto = rs2.getInt("ordcosto");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(rs);
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
+        return orden;
+    }
+    public List<clsOrdenesCompras> select2() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        clsOrdenesCompras ordenes = null;
+        List<clsOrdenesCompras> orden = new ArrayList<clsOrdenesCompras>();
+        try {
+            conn = clsConexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT2);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int prodid = rs.getInt("prodid");
+                int ordcantidad = rs.getInt("ordcantidad");
+                int ordcosto = rs.getInt("ordcosto");
+
 
                 ordenes = new clsOrdenesCompras();
                 ordenes.setprodid(prodid);
                 ordenes.setordcantidad(ordcantidad);
                 ordenes.setordcosto(ordcosto);
+
 
                 orden.add(ordenes);
             }
@@ -78,9 +95,6 @@ public class daoOrdenesCompras {
             clsConexion.close(rs);
             clsConexion.close(stmt);
             clsConexion.close(conn);
-            clsConexion.close(rs2);
-            clsConexion.close(stmt2);
-            clsConexion.close(conn2);
         }
 
         return orden;
@@ -88,41 +102,55 @@ public class daoOrdenesCompras {
 
     public int insert(clsOrdenesCompras ordenes) {
         Connection conn = null;
-        Connection conn2 = null;
         PreparedStatement stmt = null;
-        PreparedStatement stmt2 = null;
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
-            conn2 = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt2 = conn2.prepareStatement(SQL_INSERT2);
 
          
             stmt.setString(1, ordenes.getordfecha());
             stmt.setInt(2, ordenes.getprovid());
-            stmt2.setInt(3, ordenes.getprodid());
-            stmt2.setInt(4,ordenes.getordcantidad());
-            stmt2.setInt(5, ordenes.getordcosto());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
-
-            System.out.println("ejecutando query:" + SQL_INSERT2);
-            rows = stmt2.executeUpdate();
             System.out.println("Registros afectados:" + rows);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
             clsConexion.close(stmt);
             clsConexion.close(conn);
-            clsConexion.close(stmt2);
-            clsConexion.close(conn2);
+
         }
 
         return rows;
     }
 
+    public int insert2(clsOrdenesCompras ordenes) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = clsConexion.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+
+         
+            stmt.setInt(1, ordenes.getprodid());
+            stmt.setInt(2, ordenes.getordcantidad());
+            stmt.setInt(3, ordenes.getordcosto());
+
+            System.out.println("ejecutando query:" + SQL_INSERT);
+            rows = stmt.executeUpdate();
+            System.out.println("Registros afectados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+
+        }
+
+        return rows;
+    }
 
     public int update(clsProducto producto) {
        Connection conn = null;

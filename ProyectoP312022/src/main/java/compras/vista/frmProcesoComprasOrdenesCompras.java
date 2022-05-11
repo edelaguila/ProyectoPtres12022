@@ -30,35 +30,27 @@ public class frmProcesoComprasOrdenesCompras extends javax.swing.JInternalFrame 
         modelo.addColumn("ID Orden");
         modelo.addColumn("Fecha");
         modelo.addColumn("ID Proveedor");
+        modelo.addColumn("ID Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Costo");
+
         daoOrdenesCompras ordenesDAO = new daoOrdenesCompras();
         List<clsOrdenesCompras> ordenes = ordenesDAO.select();
+        List<clsOrdenesCompras> ordenes2 = ordenesDAO.select2();
         tablaVendedores.setModel(modelo);
-        String[] dato = new String[4];
+        String[] dato = new String[6];
         for (int i = 0; i < ordenes.size(); i++) {
             dato[0] = Integer.toString(ordenes.get(i).getordid());
             dato[1] = ordenes.get(i).getordfecha();
             dato[2] = Integer.toString(ordenes.get(i).getprovid());
+            dato[3] = Integer.toString(ordenes2.get(i).getprodid());
+            dato[4] = Integer.toString(ordenes2.get(i).getordcantidad());
+            dato[5] = Integer.toString(ordenes2.get(i).getordcosto());
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
-    public void llenadoDeTablas2() {
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Producto");
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Costo");
-        daoOrdenesCompras ordenesDAO = new daoOrdenesCompras();
-        List<clsOrdenesCompras> ordenes = ordenesDAO.select();
-        tablaVendedores.setModel(modelo);
-        String[] dato = new String[4];
-        for (int i = 0; i < ordenes.size(); i++) {
-            dato[0] = Integer.toString(ordenes.get(i).getprodid());
-            dato[1] = Integer.toString(ordenes.get(i).getordcantidad());
-            dato[2] = Integer.toString(ordenes.get(i).getordcosto());
-            //System.out.println("vendedor:" + vendedores);
-            modelo.addRow(dato);
-        }
-    }
+
     public void buscarProducto() {
         clsProducto productoAConsultar = new clsProducto();
         daoProducto productoDAO = new daoProducto();
