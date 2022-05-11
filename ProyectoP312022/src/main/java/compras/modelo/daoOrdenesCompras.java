@@ -20,10 +20,10 @@ import java.util.List;
 public class daoOrdenesCompras {
 
     private static final String SQL_SELECT = "SELECT ordid, ordfecha, provid FROM tbl_ordecompraencabezado";
-    private static final String SQL_SELECT2 = "SELECT ordid, prodid, ordcantidad, ordcosto FROM tbl_ordecompradetalle";
+    private static final String SQL_SELECT2 = "SELECT prodid, ordcantidad, ordcosto FROM tbl_ordecompradetalle";
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado( ordid, ordfecha, provid) VALUES ( ?,?,?)";
-    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle( ordid, prodid, ordcantidad, ordcosto) VALUES ( ?,?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado(  ordfecha, provid) VALUES ( ?,?)";
+    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle( prodid, ordcantidad, ordcosto) VALUES ( ?,?,?)";
 
     private static final String SQL_UPDATE = "UPDATE tbl_producto SET provid = ?,prodnombre = ?,prodmarca = ?, prodprecio = ?, Prodlinea = ?, prodexistencia = ? WHERE tbl_producto.prodid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE tbl_producto.prodid = ?";
@@ -42,9 +42,7 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             conn2 = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
-            stmt2 = conn2.prepareStatement(SQL_SELECT2);
             rs = stmt.executeQuery();
-            rs2 = stmt2.executeQuery();
 
             while (rs.next()) {
                 int ordid = rs.getInt("ordid");
@@ -61,13 +59,12 @@ public class daoOrdenesCompras {
                 orden.add(ordenes);
             }
             while (rs2.next()) {
-                int ordid = rs2.getInt("ordid");
+          
                 int prodid = rs2.getInt("prodid");
                 int ordcantidad = rs2.getInt("ordcantidad");
                 int ordcosto = rs2.getInt("ordcosto");
 
                 ordenes = new clsOrdenesCompras();
-                ordenes.setordid(ordid);
                 ordenes.setprodid(prodid);
                 ordenes.setordcantidad(ordcantidad);
                 ordenes.setordcosto(ordcosto);
@@ -101,13 +98,12 @@ public class daoOrdenesCompras {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt2 = conn2.prepareStatement(SQL_INSERT2);
 
-            stmt.setInt(1, ordenes.getordid());
-            stmt.setString(2, ordenes.getordfecha());
-            stmt.setInt(3, ordenes.getprovid());
-            stmt2.setInt(4, ordenes.getordid());
-            stmt2.setInt(5, ordenes.getprodid());
-            stmt2.setInt(6,ordenes.getordcantidad());
-            stmt2.setInt(7, ordenes.getordcosto());
+         
+            stmt.setString(1, ordenes.getordfecha());
+            stmt.setInt(2, ordenes.getprovid());
+            stmt2.setInt(3, ordenes.getprodid());
+            stmt2.setInt(4,ordenes.getordcantidad());
+            stmt2.setInt(5, ordenes.getordcosto());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
