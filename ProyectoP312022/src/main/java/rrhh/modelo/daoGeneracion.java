@@ -6,7 +6,7 @@
 package rrhh.modelo;
 //inport
 
-import rrhh.controlador.clsAsignacion;
+import rrhh.controlador.clsGeneracion;
 import rrhh.controlador.clsGeneracion;
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,34 +25,38 @@ public class daoGeneracion {
     private static final String SQL_QUERY = "SELECT geid, genombre, geconcepto, gevalor FROM tbl_generacion WHERE geid=?";
   
 
-    public List<clsAsignacion> select() {
+    public List<clsGeneracion> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsAsignacion asigna = null;
-        List<clsAsignacion> asignas = new ArrayList<clsAsignacion>();
+        clsGeneracion genera = null;
+        List<clsGeneracion> generas = new ArrayList<clsGeneracion>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("aid");
-                String nombre = rs.getString("anombre");
-                String concepto = rs.getString("aconcepto");
-                String valor = rs.getString("avalor");
+                int id = rs.getInt("geid");
+                String geinicial = rs.getString("geinicial");
+                String gefinal = rs.getString("gefinal");
+                String genombre = rs.getString("genombre");
+                String geconcepto = rs.getString("geconcepto");
+                String gevalor = rs.getString("gevalor");
                
          
                
 
-                asigna = new clsAsignacion();
-                asigna.setaid(id);
-                asigna.setanombre(nombre);
-                asigna.setaconcepto(concepto);
-                asigna.setavalor(valor);
+                genera = new clsGeneracion();
+                genera.setgeid(id);
+                genera.setgeinicial(geinicial);
+                genera.setgefinal(gefinal);
+                genera.setgenombre(genombre);
+                genera.setgeconcepto(geconcepto);
+                genera.setgevalor(gevalor);
            
                 
                
-                asignas.add(asigna);
+                generas.add(genera);
             }
 
         } catch (SQLException ex) {
@@ -63,19 +67,22 @@ public class daoGeneracion {
             clsConexion.close(conn);
         }
 
-        return asignas;
+        return generas;
     }
 
-    public int insert(clsAsignacion asignas) {
+    public int insert(clsGeneracion generas) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, asignas.getanombre());
-            stmt.setString(2, asignas.getaconcepto());
-            stmt.setString(3, asignas.getavalor());
+            stmt.setString(1, generas.getgeinicial());
+            stmt.setString(2, generas.getgefinal());
+             stmt.setString(3, generas.getgenombre());  
+              stmt.setString(4, generas.getgeconcepto());
+            stmt.setString(5, generas.getgevalor());
+            
            
            
                   
@@ -92,7 +99,7 @@ public class daoGeneracion {
         return rows;
     }
 
-    public int update(clsAsignacion asigna) {
+    public int update(clsGeneracion genera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -100,10 +107,12 @@ public class daoGeneracion {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, asigna.getanombre());
-            stmt.setString(2, asigna.getaconcepto());
-            stmt.setString(3, asigna.getavalor());
-            stmt.setInt(4, asigna.getaid());
+            stmt.setString(1, genera.getgeinicial());
+            stmt.setString(2, genera.getgefinal());            
+            stmt.setString(3, genera.getgenombre());
+            stmt.setString(4, genera.getgeconcepto());
+            stmt.setString(5, genera.getgevalor());
+            stmt.setInt(6, genera.getgeid());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -118,7 +127,7 @@ public class daoGeneracion {
         return rows;
     }
 
-    public int delete(clsAsignacion asigna) {
+    public int delete(clsGeneracion genera) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -127,7 +136,7 @@ public class daoGeneracion {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, asigna.getaid());
+            stmt.setInt(1, genera.getgeid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -140,7 +149,7 @@ public class daoGeneracion {
         return rows;
     }
 
-    public clsAsignacion query(clsAsignacion asigna) 
+    public clsGeneracion query(clsGeneracion genera) 
     {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -149,22 +158,26 @@ public class daoGeneracion {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, asigna.getaid());
+            stmt.setInt(1, genera.getgeid());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("aid");
-                String nombre = rs.getString("anombre");
-                String concepto = rs.getString("aconcepto");
-                String valor = rs.getString("avalor");
-               
+                int id = rs.getInt("geid");
+                String geinicial = rs.getString("geinicial");
+                String gefinal = rs.getString("gefinal");
+                String genombre = rs.getString("genombre");
+                String geconcepto = rs.getString("geconcepto");
+                String gevalor = rs.getString("gevalor");
+                              
                
                 
 
-                asigna = new clsAsignacion();
-                asigna.setaid(id);
-                asigna.setanombre(nombre);
-                asigna.setaconcepto(concepto);
-                asigna.setavalor(valor);
+                genera = new clsGeneracion();
+                genera.setgeid(id);
+                genera.setgeinicial(geinicial);
+                genera.setgefinal(gefinal);
+                genera.setgenombre(genombre);
+                genera.setgeconcepto(geconcepto);
+                genera.setgevalor(gevalor);
               
                  
             }
@@ -178,6 +191,6 @@ public class daoGeneracion {
         }
 
         //return personas;  // Si se utiliza un ArrayList
-        return asigna;
+        return genera;
     }
 }
