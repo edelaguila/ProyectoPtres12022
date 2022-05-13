@@ -5,9 +5,9 @@
  */
 package compras.modelo;
 
+import compras.controlador.clsOrdenesCompras;
 import compras.modelo.*;
 import seguridad.modelo.*;
-import compras.controlador.clsCompras;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,39 +18,41 @@ import java.util.List;
  */
 public class daoOrdenesCompras {
 
-    private static final String SQL_SELECT = "SELECT comid ,provid, comserie, ordid FROM tbl_compraencabezado";
-    private static final String SQL_SELECT2 = "SELECT prodid, ordcantidad, ordcosto,comfechaemi,comfechavenci FROM tbl_compradetalle";
+    private static final String SQL_SELECT = "SELECT ordid ,ordfecha, provid FROM tbl_ordecompraencabezado";
+    private static final String SQL_SELECT2 = "SELECT ordcantidad, ordcosto, prodid FROM tbl_ordecompradetalle";
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_compraencabezado ( provid, comserie, ordid) VALUES ( ?, ?, ?)";
-    private static final String SQL_INSERT2 = "INSERT INTO tbl_compradetalle (prodid, ordcantidad, ordcosto, comfechaemi, comfechavenci) VALUES (?, ?, ?,?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado ( ordfecha, provid) VALUES ( ?, ?)";
+    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle (ordcantidad, ordcosto, prodid) VALUES (?, ?, ?)";
 
-    private static final String SQL_UPDATE = "UPDATE tbl_compraencabezado SET provid = ?, comserie = ?, ordid = ? WHERE tbl_compraencabezado.comid = ?";
-    private static final String SQL_UPDATE2 = "UPDATE tbl_compradetalle SET prodid = ?, ordcantidad = ?, ordcosto = ?, comfechaemi = ?, comfechavenci = ? WHERE tbl_compradetalle.comdetid = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_compraencabezado WHERE tbl_compraencabezado.comid = ?";
-    private static final String SQL_DELETE2 = "DELETE FROM tbl_compradetalle WHERE tbl_compradetalle.comdetid = ?";
-    private static final String SQL_QUERY = "SELECT comid ,provid, comserie, ordid FROM tbl_compraencabezado WHERE tbl_compraencabezado.comid = ?";
-    private static final String SQL_QUERY2 = "SELECT prodid, ordcantidad, ordcosto,comfechaemi,comfechavenci FROM tbl_compradetalle WHERE tbl_compradetalle.comdetid = ?";
-    public List<clsCompras> select() {
+    private static final String SQL_UPDATE = "UPDATE tbl_ordecompraencabezado SET ordfecha = ?, provid = ? WHERE tbl_ordecompraencabezado.ordid = ?";
+    private static final String SQL_UPDATE2 = "UPDATE tbl_ordecompradetalle SET ordcantidad = ?, ordcosto = ?, prodid = ? WHERE tbl_ordecompradetalle.ordcdetalleid  = ?";
+
+    private static final String SQL_DELETE = "DELETE FROM tbl_ordecompraencabezado WHERE tbl_ordecompraencabezado.ordid = ?";
+    private static final String SQL_DELETE2 = "DELETE FROM tbl_ordecompradetalle WHERE tbl_ordecompradetalle.ordcdetalleid = ?";
+
+    private static final String SQL_QUERY = "SELECT ordid ,ordfecha, provid FROM tbl_ordecompraencabezado WHERE tbl_ordecompraencabezado.ordid = ?";
+    private static final String SQL_QUERY2 = "SELECT ordcantidad, ordcosto,prodid FROM tbl_ordecompradetalle WHERE tbl_ordecompradetalle.ordcdetalleid = ?";
+    public List<clsOrdenesCompras> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsCompras compras = null;
-        List<clsCompras> compra= new ArrayList<clsCompras>();
+        clsOrdenesCompras compras = null;
+        List<clsOrdenesCompras> compra= new ArrayList<clsOrdenesCompras>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int comid = rs.getInt("comid");
-                int provid = rs.getInt("provid");
-                int comserie = rs.getInt("comserie");
                 int ordid = rs.getInt("ordid");
+                String ordfecha = rs.getString("ordfecha");
+                int provid = rs.getInt("provid");
+                
 
-                compras = new clsCompras();
-                compras.setComid(comid);
-                compras.setProvid(provid);
-                compras.setComserie(comserie);
-                compras.setOrdid(ordid);
+                compras = new clsOrdenesCompras();
+                compras.setordid(ordid);
+                compras.setordfecha(ordfecha);
+                compras.setprovid(provid);
+                
    
                 compra.add(compras);
             }
@@ -65,29 +67,27 @@ public class daoOrdenesCompras {
 
         return compra;
     }
-        public List<clsCompras> select2() {
+        public List<clsOrdenesCompras> select2() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        clsCompras compras = null;
-        List<clsCompras> compra= new ArrayList<clsCompras>();
+        clsOrdenesCompras compras = null;
+        List<clsOrdenesCompras> compra= new ArrayList<clsOrdenesCompras>();
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT2);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int prodid = rs.getInt("prodid");
                 int ordcantidad = rs.getInt("ordcantidad");
                 int ordcosto = rs.getInt("ordcosto");
-                String comfechaemi = rs.getString("comfechaemi");
-                String comfechavenci = rs.getString("comfechavenci");
+                int prodid = rs.getInt("prodid");
+
                 
-                compras = new clsCompras();
-                compras.setProdid(prodid);
-                compras.setOrdcantidad(ordcantidad);
-                compras.setOrdcosto(ordcosto);
-                compras.setComfechaemi(comfechaemi);
-                compras.setComfechavenci(comfechavenci);
+                compras = new clsOrdenesCompras();
+                compras.setordcantidad(ordcantidad);
+                compras.setordcosto(ordcosto);
+                compras.setprodid(prodid);
+
    
                 compra.add(compras);
             }
@@ -103,16 +103,15 @@ public class daoOrdenesCompras {
         return compra;
     }
 
-    public int insert(clsCompras producto) {
+    public int insert(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1, producto.getProvid());
-            stmt.setInt(2, producto.getComserie());
-            stmt.setInt(3, producto.getOrdid());
+            stmt.setString(1, producto.getordfecha());
+            stmt.setInt(2, producto.getprovid());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -126,18 +125,16 @@ public class daoOrdenesCompras {
         return rows;
     }
     
-        public int insert2(clsCompras producto) {
+        public int insert2(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = clsConexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT2);
-            stmt.setInt(1, producto.getProdid());
-            stmt.setInt(2, producto.getOrdcantidad());
-            stmt.setInt(3, producto.getOrdcosto());
-            stmt.setString(4, producto.getComfechaemi());
-            stmt.setString(5, producto.getComfechavenci());
+            stmt.setInt(1, producto.getordcantidad());
+            stmt.setInt(2, producto.getordcosto());
+            stmt.setInt(3, producto.getprodid());
             System.out.println("ejecutando query:" + SQL_INSERT2);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -152,7 +149,7 @@ public class daoOrdenesCompras {
     }
 
 
-    public int update(clsCompras producto) {
+    public int update(clsOrdenesCompras producto) {
        Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -160,10 +157,8 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setInt(1, producto.getProvid());
-            stmt.setInt(2, producto.getComserie());
-            stmt.setInt(3, producto.getOrdid());
-            stmt.setInt(4, producto.getComid());
+            stmt.setString(1, producto.getordfecha());
+            stmt.setInt(2, producto.getprovid());
                         
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -177,7 +172,7 @@ public class daoOrdenesCompras {
 
         return rows;
     }
-        public int update2(clsCompras producto) {
+        public int update2(clsOrdenesCompras producto) {
        Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -185,12 +180,9 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE2);
             stmt = conn.prepareStatement(SQL_UPDATE2);
-            stmt.setInt(1, producto.getProdid());
-            stmt.setInt(2, producto.getOrdcantidad());
-            stmt.setInt(3, producto.getOrdcosto());
-            stmt.setString(4, producto.getComfechaemi());
-            stmt.setString(5, producto.getComfechavenci());
-            stmt.setInt(6, producto.getComid());
+            stmt.setInt(2, producto.getordcantidad());
+            stmt.setInt(3, producto.getordcosto());
+            stmt.setInt(4, producto.getprodid());
                         
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -205,7 +197,7 @@ public class daoOrdenesCompras {
         return rows;
     }
 
-    public int delete(clsCompras producto) {
+    public int delete(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -214,7 +206,7 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, producto.getComid());
+            stmt.setInt(1, producto.getordid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -226,7 +218,7 @@ public class daoOrdenesCompras {
 
         return rows;
     }
-    public int delete2(clsCompras producto) {
+    public int delete2(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -235,7 +227,7 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE2);
             stmt = conn.prepareStatement(SQL_DELETE2);
-            stmt.setInt(1, producto.getComid());
+            stmt.setInt(1, producto.getordid());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -248,7 +240,7 @@ public class daoOrdenesCompras {
         return rows;
     }
 
-    public clsCompras query(clsCompras compras) {
+    public clsOrdenesCompras query(clsOrdenesCompras compras) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -256,20 +248,18 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, compras.getComid());
+            stmt.setInt(1, compras.getordid());
              
             rs = stmt.executeQuery();
             while (rs.next()) {
-                 int comid = rs.getInt("comid");
+                 int ordid = rs.getInt("ordid");
+                String ordfecha = rs.getString("ordfecha");
                 int provid = rs.getInt("provid");
-                int comserie = rs.getInt("comserie");
-                int ordid = rs.getInt("ordid");
 
-                compras = new clsCompras();
-                compras.setComid(comid);
-                compras.setProvid(provid);
-                compras.setComserie(comserie);
-                compras.setOrdid(ordid);
+                compras = new clsOrdenesCompras();
+                compras.setordid(ordid);
+                compras.setordfecha(ordfecha);
+                compras.setprovid(provid);
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
@@ -283,7 +273,7 @@ public class daoOrdenesCompras {
         //return personas;  // Si se utiliza un ArrayList
         return compras;
     }
-        public clsCompras query2(clsCompras compras) {
+        public clsOrdenesCompras query2(clsOrdenesCompras compras) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -291,22 +281,20 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY2);
             stmt = conn.prepareStatement(SQL_QUERY2);
-            stmt.setInt(1, compras.getComid());
+            stmt.setInt(1, compras.getordid());
              
             rs = stmt.executeQuery();
             while (rs.next()) {
-                 int prodid = rs.getInt("prodid");
                 int ordcantidad = rs.getInt("ordcantidad");
                 int ordcosto = rs.getInt("ordcosto");
-                String comfechaemi = rs.getString("comfechaemi");
-                String comfechavenci = rs.getString("comfechavenci");
+                int prodid = rs.getInt("prodid");
+
                 
-                compras = new clsCompras();
-                compras.setProdid(prodid);
-                compras.setOrdcantidad(ordcantidad);
-                compras.setOrdcosto(ordcosto);
-                compras.setComfechaemi(comfechaemi);
-                compras.setComfechavenci(comfechavenci);
+                compras = new clsOrdenesCompras();
+                compras.setordcantidad(ordcantidad);
+                compras.setordcosto(ordcosto);
+                compras.setprodid(prodid);
+
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {

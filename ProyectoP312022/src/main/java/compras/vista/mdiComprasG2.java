@@ -173,11 +173,11 @@ public class mdiComprasG2 extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        frmProcesoComprasOrdenesCompras ventana = new frmProcesoComprasOrdenesCompras();
-        jDesktopPane1.add(ventana);
+        frmProcesoComprasOrdenesCompras ventana2 = new frmProcesoComprasOrdenesCompras();
+        jDesktopPane1.add(ventana2);
         Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        Dimension FrameSize = ventana2.getSize();
+        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
