@@ -161,6 +161,11 @@ public class frmProcesoComprasOrdenesCompras extends javax.swing.JInternalFrame 
 
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtFecha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 220, 20));
 
         btnLimpiar.setText("Limpiar");
@@ -306,7 +311,6 @@ public class frmProcesoComprasOrdenesCompras extends javax.swing.JInternalFrame 
         txtProveedor.setText("");
         txtProducto.setText("");
         txtCantidad.setText("");
- 
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -335,6 +339,10 @@ public class frmProcesoComprasOrdenesCompras extends javax.swing.JInternalFrame 
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(rootPane, "INGRESE EL CODIGO DEL PRODUCTO QUE DESEA BUSCAR,ELIMINAR O REGISTRAR");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
