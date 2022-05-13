@@ -10,68 +10,91 @@ package rrhh.controlador;
  *
  * @author visitante
  */
-public class clsAsignacion {
-    private int aid;
-    private String anombre;
-    private String aconcepto; 
-    private String avalor; 
+public class clsGeneracion {
+    private int geid;
+    private String geinicial;
+    private String gefinal;
+    private String genombre;
+    private String geconcepto; 
+    private String gevalor; 
     
 
-    public clsAsignacion() {
+    public clsGeneracion() {
     }
 
-    public clsAsignacion(int id) {
-        this.aid= id;
+    public clsGeneracion(int id) {
+        this.geid= id;
     }
 
-    public clsAsignacion(String nombre,String concepto, String valor) {
-        this.anombre = nombre;
-        this.aconcepto = concepto;
-        this.avalor = valor;
+    public clsGeneracion(String geinicial,String gefinal, String nombre,String concepto, String valor) {
+        this.geinicial = geinicial;
+        this.gefinal = gefinal;
+        this.genombre = nombre;
+        this.geconcepto = concepto;
+        this.gevalor = valor;
         
     }
-     public clsAsignacion(int id, String nombre,String concepto, String valor) {
-        this.aid= id;
-        this.anombre = nombre;
-        this.aconcepto = concepto;
-        this.avalor = valor;
+     public clsGeneracion(int id,String geinicial,String gefinal, String nombre,String concepto, String valor) {
+        this.geid= id;
+        this.geinicial = geinicial;
+        this.gefinal = gefinal;
+        this.genombre = nombre;
+        this.geconcepto = concepto;
+        this.gevalor = valor;
     }
 
-    public int getaid() {
-        return aid;
+    public int getgeid() {
+        return geid;
     }
 
-    public void setaid(int id) {
-        this.aid = id;
+    public void setgeid(int id) {
+        this.geid = id;
     }
 
-    public String getanombre() {
-        return anombre;
+    public String getgeinicial() {
+        return geinicial;
     }
 
-    public void setanombre(String nombre) {
-        this.anombre = nombre;
+    public void setgeinicial(String geinicial) {
+        this.geinicial = geinicial;
     }
 
-    public String getaconcepto() {
-        return aconcepto;
+    public String getgefinal() {
+        return gefinal;
     }
 
-    public void setaconcepto(String concepto) {
-        this.aconcepto = concepto;
+    public void setgefinal(String gefinal) {
+        this.gefinal = gefinal;
     }
-    public String getavalor() {
-        return avalor;
+    
+    
+    public String getgenombre() {
+        return genombre;
     }
-     public void setavalor(String valor) {
-        this.avalor = valor;
+
+    public void setgenombre(String nombre) {
+        this.genombre = nombre;
+    }
+
+    public String getgeconcepto() {
+        return geconcepto;
+    }
+
+    public void setgeconcepto(String concepto) {
+        this.geconcepto = concepto;
+    }
+    public String getgevalor() {
+        return gevalor;
+    }
+     public void setgevalor(String valor) {
+        this.gevalor = valor;
      }
       
      
 
     @Override
     public String toString() {
-        return "tbl_asignacion{" + "aid=" + aid + ", anombre=" + anombre + ", aconcepto=" + aconcepto + ", avalor ="+ avalor +'}';
+        return "tbl_generacion{" + "geid=" + geid +"geinicial="+ geinicial+", gefinal="+gefinal+", genombre=" + genombre + ", geconcepto=" + geconcepto + ", gevalor ="+ gevalor +'}';
     }
     
      }

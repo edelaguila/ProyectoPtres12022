@@ -7,6 +7,7 @@ package rrhh.modelo;
 //inport
 
 import rrhh.controlador.clsAsignacion;
+import rrhh.controlador.clsGeneracion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,13 @@ import java.util.List;
  *
  * @author DELL
  */
-public class daoAsignacion {
+public class daoGeneracion {
     
-    private static final String SQL_SELECT = "SELECT aid, anombre, aconcepto, avalor  FROM tbl_asignacion";
-    private static final String SQL_INSERT = "INSERT INTO tbl_asignacion(anombre, aconcepto, avalor) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_asignacion SET anombre=?, aconcepto=?, avalor=? WHERE aid = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_asignacion WHERE aid=?";
-    private static final String SQL_QUERY = "SELECT aid, anombre, aconcepto, avalor FROM tbl_asignacion WHERE aid=?";
+    private static final String SQL_SELECT = "SELECT geid, geinicial, gefinal, genombre, geconcepto, gevalor  FROM tbl_generacion";
+    private static final String SQL_INSERT = "INSERT INTO tbl_generacion(geinicial, gefinal, genombre, geconcepto, gevalor) VALUES(?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_generacion SET geinicial =?,gefinal =?, genombre=?, geconcepto=?, gevalor=? WHERE geid = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_generacion WHERE geid=?";
+    private static final String SQL_QUERY = "SELECT geid, genombre, geconcepto, gevalor FROM tbl_generacion WHERE geid=?";
   
 
     public List<clsAsignacion> select() {
