@@ -21,7 +21,7 @@ public class daoOrdenesCompras {
     private static final String SQL_SELECT = "SELECT ordid ,ordfecha, provid FROM tbl_ordecompraencabezado";
     private static final String SQL_SELECT2 = "SELECT ordcantidad, ordcosto, prodid FROM tbl_ordecompradetalle";
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado ( ordfecha, provid) VALUES ( ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado (ordfecha, provid) VALUES ( ?, ?)";
     private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle (ordcantidad, ordcosto, prodid) VALUES (?, ?, ?)";
 
     private static final String SQL_UPDATE = "UPDATE tbl_ordecompraencabezado SET ordfecha = ?, provid = ? WHERE tbl_ordecompraencabezado.ordid = ?";
