@@ -127,7 +127,7 @@ public class daoOrdenesCompras {
         return rows;
     }
     
-        public int insert3(clsOrdenesCompras producto) {
+        public int insert2(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -161,6 +161,8 @@ public class daoOrdenesCompras {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, producto.getordfecha());
             stmt.setInt(2, producto.getprovid());
+            stmt.setInt(3, producto.getordid());
+
                         
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -185,6 +187,8 @@ public class daoOrdenesCompras {
             stmt.setInt(2, producto.getordcantidad());
             stmt.setInt(3, producto.getordcosto());
             stmt.setInt(4, producto.getprodid());
+            stmt.setInt(5, producto.getordid());
+
                         
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);

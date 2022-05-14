@@ -126,7 +126,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 95, 30));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 80, 30));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +134,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 95, 30));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 95, 30));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +142,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 100, 30));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 70, 30));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("ORDEN DE COMPRA");
@@ -154,12 +154,12 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 95, 30));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 80, 30));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText("Codigo Del Orden de compra");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, -1, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 102, -1));
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, -1, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 102, -1));
 
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtFecha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -171,7 +171,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 95, 30));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 95, 30));
 
         tablaVendedores.setBackground(new java.awt.Color(204, 255, 255));
         tablaVendedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
@@ -206,7 +206,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 100, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 90, 20));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("ID PROVEEDOR");
@@ -234,7 +234,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, 40, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 40, -1));
 
         txtCosto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCosto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -268,7 +268,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         productoAInsertar2.setprodid(Integer.parseInt(txtProducto.getText()));
 
         productoDAO.insert(productoAInsertar);
-        productoDAO.insert3(productoAInsertar2);
+        productoDAO.insert2(productoAInsertar2);
 
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -280,15 +280,22 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        daoProducto productoDAO = new daoProducto();
-        clsProducto productoAActualizar = new clsProducto();
-        productoAActualizar.setProdid(Integer.parseInt(txtbuscado.getText()));
-        productoAActualizar.setProvid(Integer.parseInt(txtFecha.getText()));
-        productoAActualizar.setProdnombre(txtProveedor.getText());
-        productoAActualizar.setProdmarca(txtCantidad.getText());
-        productoAActualizar.setProdprecio(Integer.parseInt(txtProducto.getText()));
-        productoAActualizar.setProdlinea(txtCosto.getText());
+        daoOrdenesCompras productoDAO = new daoOrdenesCompras();
+        clsOrdenesCompras productoAActualizar = new clsOrdenesCompras();
+        daoOrdenesCompras productoDAO2 = new daoOrdenesCompras();
+        clsOrdenesCompras productoAActualizar2 = new clsOrdenesCompras();
+
+        productoAActualizar.setordid(Integer.parseInt(txtbuscado.getText()));
+        productoAActualizar.setordfecha(txtFecha.getText());
+        productoAActualizar.setprovid(Integer.parseInt(txtProveedor.getText()));
+        productoAActualizar2.setordcantidad(Integer.parseInt(txtCantidad.getText()));
+        productoAActualizar2.setprodid(Integer.parseInt(txtProducto.getText()));
+        productoAActualizar2.setordcosto(Integer.parseInt(txtCosto.getText()));
+
         productoDAO.update(productoAActualizar);
+        productoDAO2.update2(productoAActualizar2);
+
+
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
