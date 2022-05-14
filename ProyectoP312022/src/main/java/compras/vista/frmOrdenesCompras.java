@@ -55,15 +55,22 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
     }
 
     public void buscarProducto() {
-        clsProducto productoAConsultar = new clsProducto();
-        daoProducto productoDAO = new daoProducto();
-        productoAConsultar.setProdid(Integer.parseInt(txtbuscado.getText()));
+        clsOrdenesCompras productoAConsultar = new clsOrdenesCompras();
+        daoOrdenesCompras productoDAO = new daoOrdenesCompras();
+        clsOrdenesCompras productoAConsultar2 = new clsOrdenesCompras();
+        daoOrdenesCompras productoDAO2 = new daoOrdenesCompras();
+
+
+        productoAConsultar.setordid(Integer.parseInt(txtbuscado.getText()));
+        productoAConsultar2.setordid(Integer.parseInt(txtbuscado.getText()));
         productoAConsultar = productoDAO.query(productoAConsultar);
-        txtFecha.setText(String.valueOf(productoAConsultar.getProvid()));
-        txtProveedor.setText(productoAConsultar.getProdnombre());
-        txtCantidad.setText(productoAConsultar.getProdmarca());
-        txtProducto.setText(String.valueOf(productoAConsultar.getProdprecio()));
-        txtCosto.setText(productoAConsultar.getProdlinea());
+        productoAConsultar2 = productoDAO2.query2(productoAConsultar2);
+
+        txtFecha.setText(String.valueOf(productoAConsultar.getordfecha()));
+        txtProveedor.setText(String.valueOf(productoAConsultar.getprovid()));
+        txtCantidad.setText(String.valueOf(productoAConsultar2.getordcantidad()));
+        txtProducto.setText(String.valueOf(productoAConsultar2.getordcosto()));
+        txtCosto.setText(String.valueOf(productoAConsultar2.getordcosto()));
         
     }
 
@@ -249,9 +256,9 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        daoProducto productoDAO = new daoProducto();
-        clsProducto productoAEliminar = new clsProducto();
-        productoAEliminar.setProdid(Integer.parseInt(txtbuscado.getText()));
+        daoOrdenesCompras productoDAO = new daoOrdenesCompras();
+        clsOrdenesCompras productoAEliminar = new clsOrdenesCompras();
+        productoAEliminar.setordid(Integer.parseInt(txtbuscado.getText()));
         productoDAO.delete(productoAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
