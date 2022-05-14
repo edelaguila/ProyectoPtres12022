@@ -10,7 +10,9 @@ import seguridad.vista.*;
 import compras.vista.*;
 import compras.modelo.daoProducto;
 import compras.controlador.clsProducto;
+import compras.controlador.clsProveedor;
 import compras.modelo.daoOrdenesCompras;
+import compras.modelo.daoProveedor;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +25,23 @@ import javax.swing.JOptionPane;
  */
 public class frmOrdenesCompras extends javax.swing.JInternalFrame {
 
-  
+      public void llenadoDeCombos() {
+        daoProveedor provDAO = new daoProveedor();
+        List<clsProveedor> proveedor = provDAO.select();
+
+        cbx_Proveedor.addItem("Seleccione Un Codigo");
+        for (int i = 0; i < proveedor.size(); i++) {
+            cbx_Proveedor.addItem(String.valueOf(proveedor.get(i).getprovid()));
+        }
+
+        daoProducto productoDao = new daoProducto();
+        List<clsProducto> producto = productoDao.select();
+        cbx_Producto.addItem("Seleccione Un codigo");
+        for (int i = 0; i < producto.size(); i++) {
+            cbx_Producto.addItem(String.valueOf(producto.get(i).getProdid()));
+
+        }
+    }
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -69,7 +87,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         txtFecha.setText(String.valueOf(productoAConsultar.getordfecha()));
         txtProveedor.setText(String.valueOf(productoAConsultar.getprovid()));
         txtCantidad.setText(String.valueOf(productoAConsultar2.getordcantidad()));
-        txtProducto.setText(String.valueOf(productoAConsultar2.getordcosto()));
+        txtProducto.setText(String.valueOf(productoAConsultar2.getprodid()));
         txtCosto.setText(String.valueOf(productoAConsultar2.getordcosto()));
         
     }
@@ -77,7 +95,8 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
     public frmOrdenesCompras() {
         initComponents();
         llenadoDeTablas();
-       
+        llenadoDeCombos();
+
     }
 
     /**
@@ -102,18 +121,21 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
-        txtProducto = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         label6 = new javax.swing.JLabel();
         label7 = new javax.swing.JLabel();
-        txtProveedor = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         label4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         txtCosto = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
+        cbx_Proveedor = new javax.swing.JComboBox<>();
+        cbx_Producto = new javax.swing.JComboBox<>();
+        txtProveedor = new javax.swing.JLabel();
+        txtProducto = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -133,7 +155,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 80, 30));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 80, 30));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +163,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 95, 30));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 95, 30));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,11 +171,11 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 70, 30));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 70, 30));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("ORDEN DE COMPRA");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(686, 0, -1, -1));
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, -1, -1));
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -161,16 +183,18 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 80, 30));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 80, 30));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText("Codigo Del Orden de compra");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, -1, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 102, -1));
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        txtbuscado.setBackground(new java.awt.Color(204, 255, 255));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 102, -1));
 
         txtFecha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtFecha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 220, 20));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 90, 20));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +202,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 95, 30));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 95, 30));
 
         tablaVendedores.setBackground(new java.awt.Color(204, 255, 255));
         tablaVendedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
@@ -193,15 +217,11 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tablaVendedores);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 20, 612, 440));
-
-        txtProducto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtProducto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 220, 20));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 20, 640, 440));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("ID PRODUCTO");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -217,23 +237,19 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("ID PROVEEDOR");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label7.setText("CANTIDAD");
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
-
-        txtProveedor.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtProveedor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 220, 20));
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
 
         txtCantidad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCantidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 220, 20));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 90, 20));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("FECHA");
-        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         jButton1.setText("?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -241,15 +257,31 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 40, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 40, -1));
 
         txtCosto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCosto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 220, 20));
+        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 90, 20));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("COSTO");
-        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
+
+        getContentPane().add(cbx_Proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 130, -1));
+
+        getContentPane().add(cbx_Producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 130, -1));
+
+        txtProveedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtProveedor.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(txtProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 70, 20));
+
+        txtProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtProducto.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 60, 20));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel1.setText("INGRESO DE DATOS");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -269,10 +301,10 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         clsOrdenesCompras productoAInsertar2 = new clsOrdenesCompras();
 
         productoAInsertar.setordfecha(txtFecha.getText());
-        productoAInsertar.setprovid(Integer.parseInt(txtProveedor.getText()));
+        productoAInsertar.setprovid(Integer.parseInt(String.valueOf(cbx_Proveedor.getSelectedItem())));
         productoAInsertar2.setordcantidad(Integer.parseInt(txtCantidad.getText()));
         productoAInsertar2.setordcosto(Integer.parseInt(txtCosto.getText()));
-        productoAInsertar2.setprodid(Integer.parseInt(txtProducto.getText()));
+        productoAInsertar2.setprodid(Integer.parseInt(String.valueOf(cbx_Producto.getSelectedItem())));
 
         productoDAO.insert(productoAInsertar);
         productoDAO.insert2(productoAInsertar2);
@@ -295,9 +327,9 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         productoAActualizar.setordid(Integer.parseInt(txtbuscado.getText()));
         productoAActualizar2.setordid(Integer.parseInt(txtbuscado.getText()));
         productoAActualizar.setordfecha(txtFecha.getText());
-        productoAActualizar.setprovid(Integer.parseInt(txtProveedor.getText()));
+        productoAActualizar.setprovid(Integer.parseInt(String.valueOf(cbx_Proveedor.getSelectedItem())));
         productoAActualizar2.setordcantidad(Integer.parseInt(txtCantidad.getText()));
-        productoAActualizar2.setprodid(Integer.parseInt(txtProducto.getText()));
+        productoAActualizar2.setprodid(Integer.parseInt(String.valueOf(cbx_Producto.getSelectedItem())));
         productoAActualizar2.setordcosto(Integer.parseInt(txtCosto.getText()));
 
         productoDAO.update(productoAActualizar);
@@ -341,7 +373,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "INGRESE EL CODIGO DEL PRODUCTO QUE DESEA BUSCAR,ELIMINAR O REGISTRAR");
+        JOptionPane.showMessageDialog(rootPane, "INGRESE EL CODIGO DEL ORDEN DE COMPRA QUE DESEA BUSCAR,ELIMINAR O REGISTRAR");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -351,8 +383,11 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cbx_Producto;
+    private javax.swing.JComboBox<String> cbx_Proveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label3;
@@ -368,8 +403,8 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtProducto;
-    private javax.swing.JTextField txtProveedor;
+    private javax.swing.JLabel txtProducto;
+    private javax.swing.JLabel txtProveedor;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }
