@@ -184,10 +184,11 @@ public class daoOrdenesCompras {
             conn = clsConexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE2);
             stmt = conn.prepareStatement(SQL_UPDATE2);
-            stmt.setInt(2, producto.getordcantidad());
-            stmt.setInt(3, producto.getordcosto());
-            stmt.setInt(4, producto.getprodid());
-            stmt.setInt(5, producto.getordid());
+            stmt.setInt(1, producto.getordcantidad());
+            stmt.setInt(2, producto.getordcosto());
+            stmt.setInt(3, producto.getprodid());
+            stmt.setInt(4, producto.getordid());
+
 
                         
             rows = stmt.executeUpdate();

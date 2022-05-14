@@ -134,7 +134,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 95, 30));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 95, 30));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +171,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 95, 30));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 95, 30));
 
         tablaVendedores.setBackground(new java.awt.Color(204, 255, 255));
         tablaVendedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
@@ -286,6 +286,7 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         clsOrdenesCompras productoAActualizar2 = new clsOrdenesCompras();
 
         productoAActualizar.setordid(Integer.parseInt(txtbuscado.getText()));
+        productoAActualizar2.setordid(Integer.parseInt(txtbuscado.getText()));
         productoAActualizar.setordfecha(txtFecha.getText());
         productoAActualizar.setprovid(Integer.parseInt(txtProveedor.getText()));
         productoAActualizar2.setordcantidad(Integer.parseInt(txtCantidad.getText()));

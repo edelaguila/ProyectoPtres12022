@@ -4,7 +4,8 @@ import compras.vista.*;
 import java.util.Date;
 
 public class clsOrdenesCompras {
- private int ordid;   
+ private int ordid; 
+ private int ordcdetalleid;  
  private String ordfecha;
  private int ordcantidad;
  private int ordcosto;
@@ -16,16 +17,16 @@ public class clsOrdenesCompras {
     public clsOrdenesCompras() {
     }
 
-    public clsOrdenesCompras(int ordid, String ordfecha, int ordcantidad, int ordcosto, int provid, int prodid) {
+    public clsOrdenesCompras(int ordid, int ordcdetalleid, String ordfecha, int ordcantidad, int ordcosto, int provid, int prodid) {
         this.ordid = ordid;
+        this.ordcdetalleid = ordcdetalleid;
         this.ordfecha = ordfecha;
         this.ordcantidad = ordcantidad;
         this.ordcosto = ordcosto;
         this.provid = provid;
         this.prodid = prodid;
-
-
     }
+
 
 
 
@@ -77,9 +78,17 @@ public class clsOrdenesCompras {
         this.prodid = prodid;
     }
 
+    public int getOrdcdetalleid() {
+        return ordcdetalleid;
+    }
+
+    public void setOrdcdetalleid(int ordcdetalleid) {
+        this.ordcdetalleid = ordcdetalleid;
+    }
+
     @Override
     public String toString() {
-        return "clsProducto{" + "ordid=" + ordid + ", ordfecha=" + ordfecha + ", provid=" + provid + ", prodid=" + prodid + ", ordcantidad=" + ordcantidad + ", ordcosto=" + ordcosto  + '}';
+        return "clsProducto{" + "ordid=" + ordid + "ordcdetalleid=" + ordcdetalleid + ", ordfecha=" + ordfecha + ", provid=" + provid + ", prodid=" + prodid + ", ordcantidad=" + ordcantidad + ", ordcosto=" + ordcosto  + '}';
     }
     
 
