@@ -19,10 +19,11 @@ import java.util.List;
 public class daoOrdenesCompras {
 
     private static final String SQL_SELECT = "SELECT ordid ,ordfecha, provid FROM tbl_ordecompraencabezado";
-    private static final String SQL_SELECT2 = "SELECT ordcantidad, ordcosto, prodid FROM tbl_ordecompradetalle";
+    private static final String SQL_SELECT2 = "SELECT ordcdetalleid,ordcantidad, ordcosto, prodid FROM tbl_ordecompradetalle";
 
     private static final String SQL_INSERT = "INSERT INTO tbl_ordecompraencabezado (ordfecha, provid) VALUES ( ?, ?)";
-    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle (ordcantidad, ordcosto, prodid) VALUES (?, ?, ?)";
+    private static final String SQL_INSERT2 = "INSERT INTO tbl_ordecompradetalle (ordcantidad, ordcosto, prodid) VALUES ( ?, ?, ?)";
+                                              
 
     private static final String SQL_UPDATE = "UPDATE tbl_ordecompraencabezado SET ordfecha = ?, provid = ? WHERE tbl_ordecompraencabezado.ordid = ?";
     private static final String SQL_UPDATE2 = "UPDATE tbl_ordecompradetalle SET ordcantidad = ?, ordcosto = ?, prodid = ? WHERE tbl_ordecompradetalle.ordcdetalleid  = ?";
@@ -32,6 +33,7 @@ public class daoOrdenesCompras {
 
     private static final String SQL_QUERY = "SELECT ordid ,ordfecha, provid FROM tbl_ordecompraencabezado WHERE tbl_ordecompraencabezado.ordid = ?";
     private static final String SQL_QUERY2 = "SELECT ordcantidad, ordcosto,prodid FROM tbl_ordecompradetalle WHERE tbl_ordecompradetalle.ordcdetalleid = ?";
+
     public List<clsOrdenesCompras> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -125,7 +127,7 @@ public class daoOrdenesCompras {
         return rows;
     }
     
-        public int insert2(clsOrdenesCompras producto) {
+        public int insert3(clsOrdenesCompras producto) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
