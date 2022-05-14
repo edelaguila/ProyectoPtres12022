@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author visitante
  */
-public class frmAsignacion extends javax.swing.JInternalFrame {
+public class frmVisualizacion extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
         daoEmpleados empleadoDAO = new daoEmpleados();
@@ -148,7 +148,7 @@ efecto.addItem("Muchos");
     }
 
     
-    public frmAsignacion() {
+    public frmVisualizacion() {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
