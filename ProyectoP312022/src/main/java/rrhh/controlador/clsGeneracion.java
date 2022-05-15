@@ -94,7 +94,7 @@ public class clsGeneracion {
 
     @Override
     public String toString() {
-        return "tbl_generacion{" + "geid=" + geid +"geinicial="+ geinicial+", gefinal="+gefinal+", genombre=" + genombre + ", geconcepto=" + geconcepto + ", gevalor ="+ gevalor +'}';
+        return "tbl_generacion{" + "geid=" + geid +"geinicial="+ geinicial+", gefinal="+gefinal+", genombre=" + genombre + ", geconcepto=" + geconcepto + ", gevalor ="+ gevalor +"}";
     }
     
      }
