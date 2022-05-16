@@ -87,6 +87,23 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
     
     }   
     
+     public void autoEliminado(){
+    
+    int contador=1;
+     daoGeneracion autollenadoDAO = new daoGeneracion();
+     clsGeneracion autollenadoAEliminar = new clsGeneracion();;
+        
+    while(contador <= 200){
+    
+      autollenadoAEliminar.setgeid(contador);
+      autollenadoDAO.delete(autollenadoAEliminar);
+      llenadoDeTablas();
+      contador++;
+   
+    }
+    
+    }   
+    
     public frmVisualizacion() {
         initComponents();
         llenadoDeTablas();
@@ -115,6 +132,8 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         label9 = new javax.swing.JLabel();
         Ffinal = new javax.swing.JTextField();
         label6 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -129,13 +148,13 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGenerar.setText("Generar");
+        btnGenerar.setText("Generar registros");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 95, -1));
+        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 120, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
@@ -163,8 +182,8 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 570, 303));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("----------Generacion de nominas-----------");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        label5.setText("----------Visualizacion-----------");
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
         getContentPane().add(Finicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 220, 30));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -175,6 +194,18 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Fecha inicial");
         getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("----------Generacion de nominas-----------");
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        btnEliminar.setText("Eliminar registros");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,9 +219,16 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
       
     }//GEN-LAST:event_btnGenerarActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        autoEliminado();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Ffinal;
     private javax.swing.JTextField Finicial;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGenerar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox jCheckBox1;
@@ -198,6 +236,7 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
     private javax.swing.JLabel label9;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
