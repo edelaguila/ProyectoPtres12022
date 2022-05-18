@@ -150,6 +150,7 @@ empleadoss.addItem("seleccione:");
     }
 
     public void autollenadoEmpleados(){
+        
      int c = 0;
      String consultar="",vacio="";
     String agregados;
