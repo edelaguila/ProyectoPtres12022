@@ -150,10 +150,11 @@ empleadoss.addItem("seleccione:");
     }
 
     public void autollenadoEmpleados(){
+        
      int c = 0;
      String consultar="",vacio="";
     String agregados;
-     int contador=1;
+     int contador=1, contador2=1;
     consultar = JOptionPane.showInputDialog("registro" + "Numero de empleados" + c+".");
     int a = Integer.parseInt(consultar);
      clsEmpleados empleadoAConsultar = new clsEmpleados();
@@ -169,19 +170,13 @@ empleadoss.addItem("seleccione:");
     
     empleadoAConsultar.setempid(contador);
     empleadoAConsultar = empleadoDAO.query(empleadoAConsultar); 
-    busquedaAConsultar.setaid(contador);
-    busquedaAConsultar = busquedaDAO.query(busquedaAConsultar);
-    busquedaAConsultar.getanombre();
+   
      
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
     
-     if(empleadoAConsultar.getempnombre().equals(busquedaAConsultar.getanombre())){
      
-     
-     
-     }else{
          
      agregados =  String.valueOf(pila);
      
@@ -191,10 +186,7 @@ empleadoss.addItem("seleccione:");
   
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
-     
-     }         
-    
-      
+
       contador++;
    
     }
