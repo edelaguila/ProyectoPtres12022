@@ -22,7 +22,7 @@ public class daoGeneracion {
     private static final String SQL_INSERT = "INSERT INTO tbl_generacion(geinicial, gefinal, genombre, geconcepto, gevalor) VALUES(?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE tbl_generacion SET geinicial =?,gefinal =?, genombre=?, geconcepto=?, gevalor=? WHERE geid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_generacion WHERE geid=?";
-    private static final String SQL_QUERY = "SELECT geid, genombre, geconcepto, gevalor FROM tbl_generacion WHERE geid=?";
+    private static final String SQL_QUERY = "SELECT geid,geinicial,gefinal, genombre, geconcepto, gevalor FROM tbl_generacion WHERE geid=?";
   
 
     public List<clsGeneracion> select() {
