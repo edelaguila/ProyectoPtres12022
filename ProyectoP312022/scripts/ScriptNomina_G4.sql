@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS tbl_generacion (
 	geid INT NOT NULL AUTO_INCREMENT,
 	geinicial DATE,
 	gefinal DATE,
-	geombre VARCHAR(45) NOT NULL,
+	genombre VARCHAR(45) NOT NULL,
         geconcepto VARCHAR(50) NOT NULL,
 	gevalor VARCHAR(45) NOT NULL,
 	PRIMARY KEY (geid))

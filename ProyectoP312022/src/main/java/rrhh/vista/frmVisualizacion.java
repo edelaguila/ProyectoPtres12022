@@ -5,13 +5,11 @@
  */
 package rrhh.vista;
 
-import rrhh.modelo.daoEmpleados;
-import rrhh.controlador.clsEmpleados;
-import rrhh.modelo.daoConcepto;
-import rrhh.controlador.clsConcepto;
-
 import rrhh.modelo.daoAsignacion;
 import rrhh.controlador.clsAsignacion;
+
+import rrhh.modelo.daoGeneracion;
+import rrhh.controlador.clsGeneracion;
 
 import java.util.List;
 
@@ -27,136 +25,89 @@ import javax.swing.JOptionPane;
  */
 public class frmVisualizacion extends javax.swing.JInternalFrame {
 
-    public void llenadoDeCombos() {
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        List<clsEmpleados> empleados = empleadoDAO.select();
-        cbox_empleados.addItem("Seleccione una opción");
-        for (int i = 0; i < empleados.size(); i++) {
-            cbox_empleados.addItem(empleados.get(i).getempnombre());
-        }
-    }
+    
     
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("id");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Concepto");
-        modelo.addColumn("Total");
+        modelo.addColumn("fecha inicial");
+        modelo.addColumn("fecha final");
+        modelo.addColumn("nombre");
+        modelo.addColumn("concepto");
+        modelo.addColumn("valor");
      
-        daoAsignacion asignaDAO = new daoAsignacion();
-        List<clsAsignacion> asignas = asignaDAO.select();
-        tablaasignacion.setModel(modelo);
-        String[] dato = new String[5];
-        for (int i = 0; i < asignas.size(); i++) {
-            dato[0] = Integer.toString(asignas.get(i).getaid());
-            dato[1] = asignas.get(i).getanombre();
-            dato[2] = asignas.get(i).getaconcepto();
-            dato[3] = asignas.get(i).getavalor();
+        daoGeneracion generaDAO = new daoGeneracion();
+        List<clsGeneracion> envia = generaDAO.select();
+        tablanomina.setModel(modelo);
+        String[] dato = new String[8];
+        for (int i = 0; i < envia.size(); i++) {
+            dato[0] = Integer.toString(envia.get(i).getgeid());
+            dato[1] = envia.get(i).getgeinicial();
+            dato[2] = envia.get(i).getgefinal();
+            dato[3] = envia.get(i).getgenombre();
+            dato[4] = envia.get(i).getgeconcepto();
+            dato[5] = envia.get(i).getgevalor();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
 
-    public void agrega(Stack pila){
-    
-     agregados.setText(String.valueOf(pila));
    
-       
+    public void autollenado(){
+    
+    int contador=1;
+    consultar = JOptionPane.showInputDialog("Generacion de nominas" + "Numero de empleados" + c+".");
+    int a = Integer.parseInt(consultar);
+     clsAsignacion asignacionAConsultar = new clsAsignacion();
+        daoAsignacion asignacionDAO = new daoAsignacion();
+        
+     daoGeneracion nominaDAO = new daoGeneracion();
+        clsGeneracion nominaAInsertar = new clsGeneracion();   
+        
+    while(contador <= a){
+    
+    asignacionAConsultar.setaid(contador);
+    asignacionAConsultar = asignacionDAO.query(asignacionAConsultar); 
+     
+     asignacionAConsultar.getanombre();
+     asignacionAConsultar.getaconcepto();
+     asignacionAConsultar.getavalor();
+    
+     nominaAInsertar.setgeinicial(Finicial.getText());
+     nominaAInsertar.setgefinal(Ffinal.getText());
+     nominaAInsertar.setgenombre(asignacionAConsultar.getanombre());
+     nominaAInsertar.setgeconcepto(asignacionAConsultar.getaconcepto());
+     nominaAInsertar.setgevalor(asignacionAConsultar.getavalor());  
+     nominaDAO.insert(nominaAInsertar);
+      llenadoDeTablas();
+      
+      contador++;
+   
     }
- 
-
-    public void buscarconcepto() {
-        clsConcepto conceptoAConsultar = new clsConcepto();
-        daoConcepto conceptoDAO = new daoConcepto();
-        
-        conceptoAConsultar.setconcepid(Integer.parseInt(txtbuscado.getText()));
-        conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
-        concepto.setText(conceptoAConsultar.getconcepnombre());     
-        valor.setText(conceptoAConsultar.getconcepvalor());
-        efecto.setSelectedItem(conceptoAConsultar.getconcepefecto());
-       
-        }
-        
-    public void buscarsalario() {
-        clsEmpleados empleadoAConsultar2 = new clsEmpleados();
-        daoEmpleados empleadoDAO = new daoEmpleados();
-        
-        empleadoAConsultar2.setempnombre(cbox_empleados.getSelectedItem().toString());
-        empleadoAConsultar2 = empleadoDAO.query2(empleadoAConsultar2);
     
-        salario.setText(empleadoAConsultar2.getempsueldo());     
-           
-        }
+    }   
     
-    public void sumayresta(){
-efecto.addItem("");
-efecto.addItem("+");
-efecto.addItem("-");
-}
-
-   public void tipo(){
-efecto.addItem("Seleccione");
-efecto.addItem("Algunos");
-efecto.addItem("Muchos");
-}    
-   
-
+     public void autoEliminado(){
     
-    public void procedimientosAdd(){
-   String igss = "igss";
-   String isr= "isr" ;
-   String conceptos = concepto.getText();
-   Double numero1= Double.parseDouble(salario.getText());
-   Double numero2= Double.parseDouble(valor.getText()); 
-   String operacion = efecto.getSelectedItem().toString();
-   int calculos = efecto.getSelectedIndex();
+    int contador=1;
+     daoGeneracion autollenadoDAO = new daoGeneracion();
+     clsGeneracion autollenadoAEliminar = new clsGeneracion();;
+        
+    while(contador <= 200){
+    
+      autollenadoAEliminar.setgeid(contador);
+      autollenadoDAO.delete(autollenadoAEliminar);
+      llenadoDeTablas();
+      contador++;
    
-   if(calculos == 1){
-   
-   if (conceptos.equals(igss)){
-   double porcentaje = (numero2 * numero1)/100;
-   salario.setText(String.valueOf(numero1 + porcentaje));
-   
-   }
-   else if (isr.equals(conceptos)){
-   double porcentaje = (numero2 * numero1)/100;
-   salario.setText(String.valueOf(numero1 + porcentaje));
-   
-   }else{
-  salario.setText(String.valueOf(numero1 + numero2));
-   }
-  
-   }
-   
-   
-   if(calculos == 2){
-   
-     if (conceptos.equals(igss)){
-   double porcentaje = (numero2 * numero1) / 100;
-   salario.setText(String.valueOf(numero1 - porcentaje));
-   
-   }
-     else if (isr.equals(conceptos)){
-   double porcentaje = (numero2 * numero1) / 100;
-   salario.setText(String.valueOf(numero1 - porcentaje));
-   
-   }else{
-  salario.setText(String.valueOf(numero1 - numero2));
-   }
-
-   }
     }
-
+    
+    }   
     
     public frmVisualizacion() {
         initComponents();
         llenadoDeTablas();
-        llenadoDeCombos();
-        sumayresta();
-        tipo();
-        
-        
-   
+ 
     }
 
     /**
@@ -172,34 +123,17 @@ efecto.addItem("Muchos");
         lbusu = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        btnEliminar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
-        Buscar = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
-        txtbuscado = new javax.swing.JTextField();
-        concepto = new javax.swing.JTextField();
-        btnLimpiar = new javax.swing.JButton();
-        lb = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaasignacion = new javax.swing.JTable();
-        label4 = new javax.swing.JLabel();
-        cbox_empleados = new javax.swing.JComboBox<>();
-        label2 = new javax.swing.JLabel();
+        tablanomina = new javax.swing.JTable();
         label5 = new javax.swing.JLabel();
-        valor = new javax.swing.JTextField();
-        lb1 = new javax.swing.JLabel();
-        label6 = new javax.swing.JLabel();
-        lb3 = new javax.swing.JLabel();
-        label7 = new javax.swing.JLabel();
-        agregar = new javax.swing.JButton();
-        agregados = new javax.swing.JTextField();
-        label8 = new javax.swing.JLabel();
-        reiniciar = new javax.swing.JButton();
+        Finicial = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
-        salario = new javax.swing.JTextField();
-        BUSCARSALARIO = new javax.swing.JButton();
-        efecto = new javax.swing.JComboBox<>();
-        label10 = new javax.swing.JLabel();
+        Ffinal = new javax.swing.JTextField();
+        label6 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -210,295 +144,102 @@ efecto.addItem("Muchos");
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Asignaciones");
+        setTitle("Generar");
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setText("Generar registros");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 95, -1));
-
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 95, -1));
-
-        Buscar.setText("Buscar");
-        Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 70, 30));
+        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 120, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 490, 20, 10));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 120, 30));
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 20, 20));
 
-        concepto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        concepto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        concepto.setOpaque(false);
-        getContentPane().add(concepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, 100, 30));
-
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 95, -1));
-
-        lb.setForeground(new java.awt.Color(204, 204, 204));
-        lb.setText(".");
-        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 13, -1));
-
-        tablaasignacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaasignacion.setModel(new javax.swing.table.DefaultTableModel(
+        tablanomina.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablanomina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "id", "Nombre", "Concepto", "Total"
+                "id", "fecha inicial", "fecha final", "nombre", "conceptos", "valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true
+                false, false, true, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tablaasignacion);
+        jScrollPane2.setViewportView(tablanomina);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 350, 303));
-
-        label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label4.setText("Nombre");
-        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
-
-        cbox_empleados.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cbox_empleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_empleadosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cbox_empleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, -1));
-
-        label2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label2.setText("Conceptos Asignados");
-        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, 20));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 570, 303));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Conceptos agregados");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
-
-        valor.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        valor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        valor.setOpaque(false);
-        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 100, 30));
-
-        lb1.setForeground(new java.awt.Color(204, 204, 204));
-        lb1.setText(".");
-        getContentPane().add(lb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 50, 13, -1));
-
-        label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("Valor");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, -1, -1));
-
-        lb3.setForeground(new java.awt.Color(204, 204, 204));
-        lb3.setText(".");
-        getContentPane().add(lb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 13, -1));
-
-        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label7.setText("Efecto");
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, -1, -1));
-
-        agregar.setText("agregar");
-        agregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 95, -1));
-        getContentPane().add(agregados, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 220, 30));
-
-        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label8.setText("Empleado");
-        getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
-
-        reiniciar.setText("reset");
-        reiniciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reiniciarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 95, -1));
+        label5.setText("----------Visualizacion-----------");
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
+        getContentPane().add(Finicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 220, 30));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label9.setText("Salario final");
-        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 70, 20));
-        getContentPane().add(salario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 220, 30));
+        label9.setText("Fecha final");
+        getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 70, 20));
+        getContentPane().add(Ffinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 220, 30));
 
-        BUSCARSALARIO.setText("Buscar");
-        BUSCARSALARIO.addActionListener(new java.awt.event.ActionListener() {
+        label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label6.setText("Fecha inicial");
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("----------Generacion de nominas-----------");
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        btnEliminar.setText("Eliminar registros");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BUSCARSALARIOActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(BUSCARSALARIO, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 70, -1));
-
-        efecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        efecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                efectoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 100, 20));
-
-        label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label10.setText("Buscar Concepto");
-        getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ int c = 0;
+ String consultar="";
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        // TODO add your handling code here:
+     
+        autollenado();
+        
+      
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        int c = 0;
-        String consultar="";
-        consultar = JOptionPane.showInputDialog("Eliminar Asignacion" + " Ingresar numero de ID que aparece en la tabla derecha." + c+".");
         
-        
-        
-        daoAsignacion asignaDAO = new daoAsignacion();
-        clsAsignacion asignaAEliminar = new clsAsignacion();;
-        asignaAEliminar.setaid(Integer.parseInt(consultar));
-        asignaDAO.delete(asignaAEliminar);
-        llenadoDeTablas();
+        autoEliminado();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        daoAsignacion perfilusuarioDAO = new daoAsignacion();
-        clsAsignacion perfilusuarioAInsertar = new clsAsignacion();
-        perfilusuarioAInsertar.setanombre(cbox_empleados.getSelectedItem().toString());
-        perfilusuarioAInsertar.setaconcepto(String.valueOf(pila));
-        perfilusuarioAInsertar.setavalor(salario.getText());
-        // aqui falta el valor
-        perfilusuarioDAO.insert(perfilusuarioAInsertar);
-        llenadoDeTablas();
-        
-        
-    }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        // TODO add your handling code here:
-        buscarconcepto();
- 
-    }//GEN-LAST:event_BuscarActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        
-        concepto.setText("");
-        salario.setText("");
-        valor.setText("");
-        efecto.setSelectedIndex(0);
-        txtbuscado.setText("");
-        agregados.setText("");
-        btnRegistrar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void cbox_empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_empleadosActionPerformed
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbox_empleadosActionPerformed
-Stack<String> pila = new Stack<String>();
-
-int nagregados = 1; int n;
-    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
-       
-        String nameconcepto; 
-        nameconcepto = concepto.getText(); 
-        pila.push(nameconcepto); 
-        agrega(pila); 
-        
-      
-        
-        procedimientosAdd();
-        
-        
-        n = nagregados++;
-      
-    }//GEN-LAST:event_agregarActionPerformed
-
-    private void reiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarActionPerformed
-        // TODO add your handling code here:
-        int contador = 1;
-        
-        while(contador <= n){
-        if(!pila.empty()){ 
-                pila.pop(); 
-                agrega(pila); 
-        }
-        contador++;
-        }
-        salario.setText("");
-    }//GEN-LAST:event_reiniciarActionPerformed
-
-    private void efectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efectoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_efectoActionPerformed
-
-    private void BUSCARSALARIOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUSCARSALARIOActionPerformed
-        // TODO add your handling code here:
-        buscarsalario();
-    }//GEN-LAST:event_BUSCARSALARIOActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BUSCARSALARIO;
-    private javax.swing.JButton Buscar;
-    private javax.swing.JTextField agregados;
-    private javax.swing.JButton agregar;
+    private javax.swing.JTextField Ffinal;
+    private javax.swing.JTextField Finicial;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnGenerar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbox_empleados;
-    private javax.swing.JTextField concepto;
-    private javax.swing.JComboBox<String> efecto;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel label10;
-    private javax.swing.JLabel label2;
     private javax.swing.JLabel label3;
-    private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
-    private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
-    private javax.swing.JLabel lb;
-    private javax.swing.JLabel lb1;
     private javax.swing.JLabel lb2;
-    private javax.swing.JLabel lb3;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JButton reiniciar;
-    private javax.swing.JTextField salario;
-    private javax.swing.JTable tablaasignacion;
-    private javax.swing.JTextField txtbuscado;
-    private javax.swing.JTextField valor;
+    private javax.swing.JTable tablanomina;
     // End of variables declaration//GEN-END:variables
 }
