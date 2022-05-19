@@ -173,9 +173,7 @@ empleadoss.addItem("seleccione:");
     
     empleadoAConsultar.setempid(contador);
     empleadoAConsultar = empleadoDAO.query(empleadoAConsultar); 
-    busquedaAConsultar.setaid(contador);
-    busquedaAConsultar = busquedaDAO.query(busquedaAConsultar);
-    busquedaAConsultar.getanombre();
+ 
      
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
@@ -185,11 +183,7 @@ empleadoss.addItem("seleccione:");
      igss= nuevo-nuevo*0.0483;
      isr= nuevo-nuevo*0.05;
      ambs= nuevo-(nuevo*0.05)-(nuevo*0.0483);
-     if(empleadoAConsultar.getempnombre().equals(busquedaAConsultar.getanombre())){
-        
-     
-     }else{
-    
+       
      agregados =  String.valueOf(pila);
      String igss2 = "[igss]";
      String isr2 = "[isr]" ;
@@ -213,7 +207,7 @@ empleadoss.addItem("seleccione:");
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
      
-     }         
+              
     
       
       contador++;
