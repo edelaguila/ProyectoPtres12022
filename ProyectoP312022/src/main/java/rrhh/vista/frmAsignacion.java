@@ -151,10 +151,11 @@ empleadoss.addItem("seleccione:");
     }
 
     public void autollenadoEmpleados(){
+        
      int c = 0;
      String consultar="",vacio="";
     String agregados;
-     int contador=1;
+     int contador=1, contador2=1;
     consultar = JOptionPane.showInputDialog("registro" + "Numero de empleados" + c+".");
     int a = Integer.parseInt(consultar);
      clsEmpleados empleadoAConsultar = new clsEmpleados();
@@ -174,20 +175,23 @@ empleadoss.addItem("seleccione:");
     
     empleadoAConsultar.setempid(contador);
     empleadoAConsultar = empleadoDAO.query(empleadoAConsultar); 
- 
+
      
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
+
      nuevo=Integer.valueOf(empleadoAConsultar.getempsueldo());
      
      igss= nuevo-nuevo*0.0483;
      isr= nuevo-nuevo*0.05;
      ambs= nuevo-(nuevo*0.05)-(nuevo*0.0483);
+
       Double numero2= Double.parseDouble(valor.getText()); 
      String operacion = efecto.getSelectedItem().toString();       
   int calculos = efecto.getSelectedIndex(); 
   sumayresta();
+
      agregados =  String.valueOf(pila);
      String igss2 = "[igss]";
      String isr2 = "[isr]" ;
@@ -222,10 +226,7 @@ empleadoss.addItem("seleccione:");
            }
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
-     
-              
-    
-      
+
       contador++;
    
     }
