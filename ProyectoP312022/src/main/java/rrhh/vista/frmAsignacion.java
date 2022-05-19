@@ -59,7 +59,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
 
     public void agrega(Stack pila){
     
-     agregados.setText(String.valueOf(pila));
+     agregadoss.setText(String.valueOf(pila));
    
        
     }
@@ -108,6 +108,7 @@ empleadoss.addItem("seleccione:");
    String igss = "igss";
    String isr= "isr" ;
    String conceptos = concepto.getText();
+
    Double numero1= Double.parseDouble(salario.getText());
    Double numero2= Double.parseDouble(valor.getText()); 
    String operacion = efecto.getSelectedItem().toString();
@@ -165,25 +166,51 @@ empleadoss.addItem("seleccione:");
      
      daoAsignacion datosDAO = new daoAsignacion();
      clsAsignacion datosAInsertar = new clsAsignacion(); 
-        
+        int nuevo=0;
+        double isr;
+        double igss;
+        double ambs;
     while(contador <= a){
     
     empleadoAConsultar.setempid(contador);
     empleadoAConsultar = empleadoDAO.query(empleadoAConsultar); 
-   
+
      
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
+
+     nuevo=Integer.valueOf(empleadoAConsultar.getempsueldo());
+     
+     igss= nuevo-nuevo*0.0483;
+     isr= nuevo-nuevo*0.05;
+     ambs= nuevo-(nuevo*0.05)-(nuevo*0.0483);
+       
+
     
      
          
+
      agregados =  String.valueOf(pila);
-     
+     String igss2 = "[igss]";
+     String isr2 = "[isr]" ;
+     String ambosi = "[isr, igss]";
+     String amboss = "[igss, isr]";
+     String conceptos = agregadoss.getText();
      datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
      datosAInsertar.setaconcepto(agregados);
-     datosAInsertar.setavalor(empleadoAConsultar.getempsueldo());
-  
+     if (conceptos.equals(igss2)){
+     datosAInsertar.setavalor(String.valueOf(igss));
+     }
+     else if (conceptos.equals(isr2)){
+     datosAInsertar.setavalor(String.valueOf(isr));
+     }
+      else if (conceptos.equals(ambosi)){
+     datosAInsertar.setavalor(String.valueOf(ambs));
+     }
+      else if (conceptos.equals(amboss)){
+     datosAInsertar.setavalor(String.valueOf(ambs));
+     }
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
 
@@ -242,7 +269,7 @@ empleadoss.addItem("seleccione:");
         lb3 = new javax.swing.JLabel();
         label7 = new javax.swing.JLabel();
         agregar = new javax.swing.JButton();
-        agregados = new javax.swing.JTextField();
+        agregadoss = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
         reiniciar = new javax.swing.JButton();
         label9 = new javax.swing.JLabel();
@@ -299,6 +326,11 @@ empleadoss.addItem("seleccione:");
         concepto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         concepto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         concepto.setOpaque(false);
+        concepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conceptoActionPerformed(evt);
+            }
+        });
         getContentPane().add(concepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 100, 30));
 
         btnLimpiar.setText("Limpiar");
@@ -382,7 +414,7 @@ empleadoss.addItem("seleccione:");
             }
         });
         getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 95, -1));
-        getContentPane().add(agregados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
+        getContentPane().add(agregadoss, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Tipo de asignacion");
@@ -415,7 +447,7 @@ empleadoss.addItem("seleccione:");
                 efectoActionPerformed(evt);
             }
         });
-        getContentPane().add(efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 100, 20));
+        getContentPane().add(efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 100, 20));
 
         label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label10.setText("Buscar Concepto");
@@ -502,7 +534,7 @@ empleadoss.addItem("seleccione:");
         tiposAsignacion.setSelectedIndex(0);
         empleadoss.setSelectedIndex(0);
         txtbuscado.setText("");
-        agregados.setText("");
+        agregadoss.setText("");
         btnRegistrar.setEnabled(true);
         btnEliminar.setEnabled(true);
 
@@ -589,10 +621,14 @@ int nagregados = 1; int n;
         
     }//GEN-LAST:event_tipos_asignacionActionPerformed
 
+    private void conceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conceptoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_conceptoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
-    private javax.swing.JTextField agregados;
+    private javax.swing.JTextField agregadoss;
     private javax.swing.JButton agregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
