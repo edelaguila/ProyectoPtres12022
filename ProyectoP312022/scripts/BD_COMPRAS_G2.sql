@@ -1,6 +1,6 @@
-CREATE SCHEMA IF NOT EXISTS `bdprueba78` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `1245` DEFAULT CHARACTER SET utf8 ;
 
-USE `bdprueba78` ;
+USE `1245` ;
 
 CREATE TABLE IF NOT EXISTS tbl_proveedor(
     provid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -10,6 +10,9 @@ CREATE TABLE IF NOT EXISTS tbl_proveedor(
     provtelefono VARCHAR(10) NOT NULL,
     provdireccion VARCHAR(16) NOT NULL   
     )ENGINE = InnoDB CHARACTER SET = latin1;
+    
+CREATE SCHEMA IF NOT EXISTS `datos` DEFAULT CHARACTER SET utf8 ;
+
     
 CREATE TABLE IF NOT EXISTS tbl_producto(
     prodid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -24,37 +27,34 @@ CREATE TABLE IF NOT EXISTS tbl_producto(
 	)ENGINE = INNODB CHARACTER SET = latin1;
       
    CREATE TABLE IF NOT EXISTS tbl_ordecompraencabezado(
-       ordid INT NOT NULL AUTO_INCREMENT,
-       ordfecha DATE NOT NULL,
+       ordid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+       ordfecha VARCHAR(15) NOT NULL,
        provid INT NOT NULL,
        
-       PRIMARY KEY(ordid),
+ 
        FOREIGN KEY (provid) REFERENCES tbl_producto(provid)
        
     )ENGINE = InnoDB CHARACTER SET = latin1;
     
     
     CREATE TABLE IF NOT EXISTS tbl_ordecompradetalle(
-    ordid INT NOT NULL,
-    prodid INT NOT NULL,
+    ordcdetalleid INT(11) AUTO_INCREMENT PRIMARY KEY ,
     ordcantidad INT (11) NOT NULL,    
     ordcosto INT(11) NOT NULL,
-    PRIMARY KEY(prodid,ordcantidad,ordcosto),
-    FOREIGN KEY (ordid) REFERENCES tbl_ordecompraencabezado(ordid),     
+    prodid INT NOT NULL,
+     
+      
     FOREIGN KEY (prodid) REFERENCES tbl_producto(prodid)   
     )ENGINE = InnoDB CHARACTER SET = latin1;
     
     
     
   CREATE TABLE IF NOT EXISTS tbl_compraencabezado(
-         comid INT NOT NULL AUTO_INCREMENT,
+         comid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
          provid INT NOT NULL,
          comserie INT(11) NOT NULL,
-         comfechaemi DATE NOT NULL,
-         comfechavenci DATE NOT NULL,      
          ordid INT NOT NULL,
       
-      PRIMARY KEY(comid,comserie,provid),
       FOREIGN KEY (provid) REFERENCES tbl_ordecompraencabezado(provid),
       FOREIGN KEY (ordid) REFERENCES tbl_ordecompraencabezado(ordid)
   )ENGINE = InnoDB CHARACTER SET = latin1; 
@@ -63,35 +63,31 @@ CREATE TABLE IF NOT EXISTS tbl_producto(
   
   
   
-    CREATE TABLE IF NOT EXISTS tbl_compradetalle(
-         comid INT NOT NULL,
-         comserie INT NOT NULL,
+      CREATE TABLE IF NOT EXISTS tbl_compradetalle(
+         comdetid INt(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
          prodid INT NOT NULL,
          ordcantidad INT NOT NULL,
          ordcosto INT NOT NULL,
-         bodid INT NOT NULL,
-         FOREIGN KEY (comid,comserie) REFERENCES tbl_compraencabezado(comid,comserie),
-       FOREIGN KEY (prodid,ordcantidad,ordcosto) REFERENCES tbl_ordecompradetalle(prodid,ordcantidad,ordcosto)
-         
-         
-        
-         
+         comfechaemi DATE NOT NULL,
+         comfechavenci DATE NOT NULL,  
+       
+       FOREIGN KEY (prodid) REFERENCES tbl_ordecompradetalle(prodid)     
   )ENGINE = InnoDB CHARACTER SET = latin1;
  
-      CREATE TABLE IF NOT EXISTS  tbl_concepto(
- 	conid INT NOT NULL AUTO_INCREMENT,
+    CREATE TABLE IF NOT EXISTS  tbl_concepto(
+ 	conid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     connombre VARCHAR(16) NOT NULL,
     conefecto VARCHAR(1) NOT NULL,
-    conestatus VARCHAR(1) NOT NULL,
-   PRIMARY KEY (conid)
+    conestatus BOOLEAN NOT NULL
+    
         
 	)ENGINE = INNODB CHARACTER SET = latin1;
     
  CREATE TABLE IF NOT EXISTS tbl_cuentasporpagar(
-     
+     cuentapagarid INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
      conid INT NOT NULL,
      cuentadoc INT(11) NOT NULL,
-     cuentaslado INT(11) NOT NULL,
+     cuentasaldo INT(11) NOT NULL,
      cuentavalor INT(11) NOT NULL,
      cuentareferencia INT (11) NOT NULL,
      comid INT NOT NULL,
