@@ -150,10 +150,11 @@ empleadoss.addItem("seleccione:");
     }
 
     public void autollenadoEmpleados(){
+        
      int c = 0;
      String consultar="",vacio="";
     String agregados;
-     int contador=1;
+     int contador=1, contador2=1;
     consultar = JOptionPane.showInputDialog("registro" + "Numero de empleados" + c+".");
     int a = Integer.parseInt(consultar);
      clsEmpleados empleadoAConsultar = new clsEmpleados();
@@ -169,19 +170,13 @@ empleadoss.addItem("seleccione:");
     
     empleadoAConsultar.setempid(contador);
     empleadoAConsultar = empleadoDAO.query(empleadoAConsultar); 
-    busquedaAConsultar.setaid(contador);
-    busquedaAConsultar = busquedaDAO.query(busquedaAConsultar);
-    busquedaAConsultar.getanombre();
+   
      
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
     
-     if(empleadoAConsultar.getempnombre().equals(busquedaAConsultar.getanombre())){
      
-     
-     
-     }else{
          
      agregados =  String.valueOf(pila);
      
@@ -191,10 +186,7 @@ empleadoss.addItem("seleccione:");
   
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
-     
-     }         
-    
-      
+
       contador++;
    
     }
@@ -259,7 +251,7 @@ empleadoss.addItem("seleccione:");
         efecto = new javax.swing.JComboBox<>();
         label10 = new javax.swing.JLabel();
         tiposAsignacion = new javax.swing.JComboBox<>();
-        elige = new javax.swing.JButton();
+        tipos_asignacion = new javax.swing.JButton();
         label11 = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -437,13 +429,13 @@ empleadoss.addItem("seleccione:");
         });
         getContentPane().add(tiposAsignacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 120, -1));
 
-        elige.setText("Eligir");
-        elige.addActionListener(new java.awt.event.ActionListener() {
+        tipos_asignacion.setText("Eligir");
+        tipos_asignacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eligeActionPerformed(evt);
+                tipos_asignacionActionPerformed(evt);
             }
         });
-        getContentPane().add(elige, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 70, -1));
+        getContentPane().add(tipos_asignacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 70, -1));
 
         label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label11.setText("Empleado");
@@ -575,7 +567,7 @@ int nagregados = 1; int n;
         // TODO add your handling code here:
     }//GEN-LAST:event_tiposAsignacionActionPerformed
 
-    private void eligeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eligeActionPerformed
+    private void tipos_asignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipos_asignacionActionPerformed
         // TODO add your handling code here:
          String algun ="algunos/excepcion", much="muchos";
         
@@ -595,7 +587,7 @@ int nagregados = 1; int n;
          
          }
         
-    }//GEN-LAST:event_eligeActionPerformed
+    }//GEN-LAST:event_tipos_asignacionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -609,7 +601,6 @@ int nagregados = 1; int n;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField concepto;
     private javax.swing.JComboBox<String> efecto;
-    private javax.swing.JButton elige;
     private javax.swing.JComboBox<String> empleadoss;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -632,6 +623,7 @@ int nagregados = 1; int n;
     private javax.swing.JTextField salario;
     private javax.swing.JTable tablaasignacion;
     private javax.swing.JComboBox<String> tiposAsignacion;
+    private javax.swing.JButton tipos_asignacion;
     private javax.swing.JTextField txtbuscado;
     private javax.swing.JTextField valor;
     // End of variables declaration//GEN-END:variables
