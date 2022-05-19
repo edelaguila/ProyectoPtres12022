@@ -107,6 +107,11 @@ public class mdiComprasG2 extends javax.swing.JFrame {
         jM_MantenimientopApps.setText("Procesos");
 
         jMenuItem4.setText("Ordenes de compras");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jM_MantenimientopApps.add(jMenuItem4);
 
         jMenuItem7.setText("Compras");
@@ -165,6 +170,15 @@ public class mdiComprasG2 extends javax.swing.JFrame {
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        frmOrdenesCompras ventana2 = new frmOrdenesCompras();
+        jDesktopPane1.add(ventana2);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana2.getSize();
+        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
