@@ -182,4 +182,12 @@ public class daoProducto {
         //return personas;  // Si se utiliza un ArrayList
         return producto;
     }
+
+    public void insert2(clsProducto productoAInsertar2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void update2(clsProducto productoAActualizar2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
