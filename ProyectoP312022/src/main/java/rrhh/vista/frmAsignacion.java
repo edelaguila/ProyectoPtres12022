@@ -169,6 +169,7 @@ empleadoss.addItem("seleccione:");
         double isr;
         double igss;
         double ambs;
+        double opera;
     while(contador <= a){
     
     empleadoAConsultar.setempid(contador);
@@ -183,7 +184,10 @@ empleadoss.addItem("seleccione:");
      igss= nuevo-nuevo*0.0483;
      isr= nuevo-nuevo*0.05;
      ambs= nuevo-(nuevo*0.05)-(nuevo*0.0483);
-       
+      Double numero2= Double.parseDouble(valor.getText()); 
+     String operacion = efecto.getSelectedItem().toString();       
+  int calculos = efecto.getSelectedIndex(); 
+  sumayresta();
      agregados =  String.valueOf(pila);
      String igss2 = "[igss]";
      String isr2 = "[isr]" ;
@@ -204,6 +208,18 @@ empleadoss.addItem("seleccione:");
       else if (conceptos.equals(amboss)){
      datosAInsertar.setavalor(String.valueOf(ambs));
      }
+     else
+           
+          
+        
+           if(calculos == 1){
+                opera=nuevo + numero2;
+                datosAInsertar.setavalor(String.valueOf(opera));
+           }
+           else if(calculos == 2){
+               opera = nuevo - numero2;
+               datosAInsertar.setavalor(String.valueOf(opera));
+           }
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
      
