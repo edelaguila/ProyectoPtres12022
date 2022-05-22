@@ -100,9 +100,7 @@ tiposAsignacion.addItem("algunos/excepcion");
 tiposAsignacion.addItem("muchos");
 }    
    
- public void empleado(){
-empleadoss.addItem("seleccione:");
-}    
+
     
     public void procedimientosAdd(){
    String igss = "igss";
@@ -231,7 +229,7 @@ empleadoss.addItem("seleccione:");
         llenadoDeCombos();
         sumayresta();
         tipo();
-        empleado();
+
         
    
     }
