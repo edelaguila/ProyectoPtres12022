@@ -1,5 +1,5 @@
 package compras.controlador;
-
+//revert
 public class clsProveedor {
     private int provid;
     private String provnombre;

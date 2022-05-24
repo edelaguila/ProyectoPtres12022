@@ -107,12 +107,27 @@ public class mdiComprasG2 extends javax.swing.JFrame {
         jM_MantenimientopApps.setText("Procesos");
 
         jMenuItem4.setText("Ordenes de compras");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jM_MantenimientopApps.add(jMenuItem4);
 
         jMenuItem7.setText("Compras");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jM_MantenimientopApps.add(jMenuItem7);
 
         jMenuItem8.setText("Cuentas por pagar");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jM_MantenimientopApps.add(jMenuItem8);
 
         jMenuBar1.add(jM_MantenimientopApps);
@@ -165,6 +180,33 @@ public class mdiComprasG2 extends javax.swing.JFrame {
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        frmOrdenesCompras ventana2 = new frmOrdenesCompras();
+        jDesktopPane1.add(ventana2);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana2.getSize();
+        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        frmProcesoCompras ventana2 = new frmProcesoCompras();
+        jDesktopPane1.add(ventana2);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana2.getSize();
+        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        frmProcesoCuentasPorPagar ventana2 = new frmProcesoCuentasPorPagar();
+        jDesktopPane1.add(ventana2);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana2.getSize();
+        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
