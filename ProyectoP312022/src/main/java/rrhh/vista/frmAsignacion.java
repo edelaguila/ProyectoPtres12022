@@ -303,7 +303,6 @@ tiposAsignacion.addItem("muchos");
         tipos_asignacion = new javax.swing.JButton();
         label11 = new javax.swing.JLabel();
         VV = new javax.swing.JTextField();
-        txtbusca = new javax.swing.JTextField();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -499,7 +498,6 @@ tiposAsignacion.addItem("muchos");
 
         VV.setEnabled(false);
         getContentPane().add(VV, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 90, 30));
-        getContentPane().add(txtbusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 120, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -669,14 +667,14 @@ double vigss=0,visr=0;
              label11.setVisible(false);
              label9.setVisible(false);
              salario.setVisible(false);
-             txtbusca.setVisible(false);
+           
         }else{
          buscarSalario.setVisible(true);
              empleadoss.setVisible(true);
              label11.setVisible(true);
              label9.setVisible(true);
              salario.setVisible(true);
-             txtbusca.setVisible(false);
+           
          
          }
         
@@ -722,7 +720,6 @@ double vigss=0,visr=0;
     private javax.swing.JTable tablaasignacion;
     private javax.swing.JComboBox<String> tiposAsignacion;
     private javax.swing.JButton tipos_asignacion;
-    private javax.swing.JTextField txtbusca;
     private javax.swing.JTextField txtbuscado;
     private javax.swing.JTextField valor;
     // End of variables declaration//GEN-END:variables
