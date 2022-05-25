@@ -76,8 +76,15 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         efecto.setSelectedItem(conceptoAConsultar.getconcepefecto());
        
         }
-        
+   
+    
+    
     public void buscarsalario() {
+        
+        conceptosAgregados.setText(""); 
+        salario.setText(""); 
+        
+        
         clsEmpleados empleadoAConsultar2 = new clsEmpleados();
         daoEmpleados empleadoDAO = new daoEmpleados();
         
@@ -85,7 +92,9 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         empleadoAConsultar2 = empleadoDAO.query2(empleadoAConsultar2);
     
         salario.setText(empleadoAConsultar2.getempsueldo());     
-           
+        
+        
+         
         }
 
     
@@ -165,8 +174,6 @@ tiposAsignacion.addItem("muchos");
    }
   
    }
-    
-    
     
 
     public void autollenadoEmpleados(){
@@ -641,6 +648,7 @@ double vigss=0,visr=0;
 
     private void buscarSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarSalarioActionPerformed
         // TODO add your handling code here:
+
         buscarsalario();
     }//GEN-LAST:event_buscarSalarioActionPerformed
 

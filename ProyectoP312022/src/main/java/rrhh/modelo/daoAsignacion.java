@@ -19,9 +19,9 @@ public class daoAsignacion {
     
     private static final String SQL_SELECT = "SELECT aid, anombre, aconcepto, avalor  FROM tbl_asignacion";
     private static final String SQL_INSERT = "INSERT INTO tbl_asignacion(anombre, aconcepto, avalor) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_asignacion SET anombre=?, aconcepto=?, avalor=? WHERE aid = ?";
+    private static final String SQL_UPDATE = "UPDATE tbl_asignacion SET anombre=?, aconcepto=?, avalor=? WHERE  aid =?";
     private static final String SQL_DELETE = "DELETE FROM tbl_asignacion WHERE aid=?";
-    private static final String SQL_QUERY = "SELECT aid, anombre, aconcepto, avalor FROM tbl_asignacion WHERE aid=?";
+    private static final String SQL_QUERY = "SELECT aid, anombre, aconcepto, avalor FROM tbl_asignacion WHERE anombre=?";
   
 
     public List<clsAsignacion> select() {
@@ -148,7 +148,7 @@ public class daoAsignacion {
             conn = clsConexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, asigna.getaid());
+            stmt.setString(1, asigna.getanombre());
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("aid");
