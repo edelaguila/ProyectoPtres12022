@@ -538,7 +538,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(tipos_asignacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 70, -1));
 
         label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label11.setText("Empleado");
+        label11.setText("Empleado disponible");
         getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         VV.setEnabled(false);
