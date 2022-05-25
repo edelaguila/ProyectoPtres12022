@@ -59,7 +59,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
 
     public void agrega(Stack pila){
     
-     agregadoss.setText(String.valueOf(pila));
+     conceptosAgregados.setText(String.valueOf(pila));
    
        
     }
@@ -100,9 +100,7 @@ tiposAsignacion.addItem("algunos/excepcion");
 tiposAsignacion.addItem("muchos");
 }    
    
- public void empleado(){
-empleadoss.addItem("seleccione:");
-}    
+
     
     public void procedimientosAdd(){
    String igss = "igss";
@@ -149,8 +147,34 @@ empleadoss.addItem("seleccione:");
 
    }
     }
+    
+ public void proceso(){
+   Double numero1= Double.parseDouble(VV.getText());
+   Double numero2= Double.parseDouble(valor.getText());    
+  int calculos = efecto.getSelectedIndex();
+   
+ if(calculos == 1){
+   
+  VV.setText(String.valueOf(numero1 + numero2));
+   }
+ if(calculos == 2){
+   
+ 
+  VV.setText(String.valueOf(numero1 - numero2));
+  
+   }
+  
+   }
+    
+    
+    
 
     public void autollenadoEmpleados(){
+      
+      
+
+     int calculos = efecto.getSelectedIndex();
+        
         
      int c = 0;
      String consultar="",vacio="";
@@ -166,11 +190,13 @@ empleadoss.addItem("seleccione:");
      
      daoAsignacion datosDAO = new daoAsignacion();
      clsAsignacion datosAInsertar = new clsAsignacion(); 
+
         int nuevo=0;
         double isr;
         double igss;
         double ambs;
         double opera;
+
     while(contador <= a){
     
     empleadoAConsultar.setempid(contador);
@@ -180,6 +206,21 @@ empleadoss.addItem("seleccione:");
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
+
+
+   String conceptos = conceptosAgregados.getText();
+
+    Double numero1= Double.parseDouble(empleadoAConsultar.getempsueldo());
+    Double numero2= Double.parseDouble(VV.getText());
+    double porcentajeIgss = (vigss * numero1)/100;  
+    double porcentajeIsr = (visr * numero1)/100; 
+    
+ if(calculos == 1){
+         
+     datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
+     datosAInsertar.setaconcepto(conceptos);
+     datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
+    
 
      nuevo=Integer.valueOf(empleadoAConsultar.getempsueldo());
      
@@ -224,9 +265,22 @@ empleadoss.addItem("seleccione:");
                opera = nuevo - numero2;
                datosAInsertar.setavalor(String.valueOf(opera));
            }
+
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
 
+   }
+ if(calculos == 2){
+   
+     datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
+     datosAInsertar.setaconcepto(conceptos);
+     datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
+    
+     datosDAO.insert(datosAInsertar);
+      llenadoDeTablas();
+     
+ 
+   }
       contador++;
    
     }
@@ -244,8 +298,8 @@ empleadoss.addItem("seleccione:");
         llenadoDeCombos();
         sumayresta();
         tipo();
-        empleado();
-        
+
+        VV.setText("0");
    
     }
 
@@ -282,17 +336,18 @@ empleadoss.addItem("seleccione:");
         lb3 = new javax.swing.JLabel();
         label7 = new javax.swing.JLabel();
         agregar = new javax.swing.JButton();
-        agregadoss = new javax.swing.JTextField();
+        conceptosAgregados = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
         reiniciar = new javax.swing.JButton();
-        label9 = new javax.swing.JLabel();
         salario = new javax.swing.JTextField();
+        label9 = new javax.swing.JLabel();
         buscarSalario = new javax.swing.JButton();
         efecto = new javax.swing.JComboBox<>();
         label10 = new javax.swing.JLabel();
         tiposAsignacion = new javax.swing.JComboBox<>();
         tipos_asignacion = new javax.swing.JButton();
         label11 = new javax.swing.JLabel();
+        VV = new javax.swing.JTextField();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -427,7 +482,7 @@ empleadoss.addItem("seleccione:");
             }
         });
         getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 95, -1));
-        getContentPane().add(agregadoss, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
+        getContentPane().add(conceptosAgregados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Tipo de asignacion");
@@ -440,11 +495,11 @@ empleadoss.addItem("seleccione:");
             }
         });
         getContentPane().add(reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, 95, -1));
+        getContentPane().add(salario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 220, 30));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label9.setText("Salario final");
         getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 70, 20));
-        getContentPane().add(salario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 220, 30));
 
         buscarSalario.setText("Buscar");
         buscarSalario.addActionListener(new java.awt.event.ActionListener() {
@@ -485,6 +540,9 @@ empleadoss.addItem("seleccione:");
         label11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label11.setText("Empleado");
         getContentPane().add(label11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        VV.setEnabled(false);
+        getContentPane().add(VV, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 90, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -547,7 +605,7 @@ empleadoss.addItem("seleccione:");
         tiposAsignacion.setSelectedIndex(0);
         empleadoss.setSelectedIndex(0);
         txtbuscado.setText("");
-        agregadoss.setText("");
+        conceptosAgregados.setText("");
         btnRegistrar.setEnabled(true);
         btnEliminar.setEnabled(true);
 
@@ -561,15 +619,39 @@ empleadoss.addItem("seleccione:");
 Stack<String> pila = new Stack<String>();
 
 int nagregados = 1; int n;
+double vigss=0,visr=0;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
        String algun ="algunos/excepcion", much="muchos";
+         String igss ="igss",isr ="isr";
         if(tiposAsignacion.getSelectedItem().toString().equals(much)){
-         String nameconcepto; 
+        
+        if (igss.equals(concepto.getText())){
+        
+        vigss = Double.parseDouble(valor.getText());
+            
+        
+        }else if (isr.equals(concepto.getText())){
+        
+        visr = Double.parseDouble(valor.getText());
+            
+        
+        }else{
+        
+     
+        proceso();    
+        }
+            
+            
+            
+            
+            
+        String nameconcepto; 
         nameconcepto = concepto.getText(); 
         pila.push(nameconcepto); 
         agrega(pila); 
         n = nagregados++;
+        
         }else{
         String nameconcepto; 
         nameconcepto = concepto.getText(); 
@@ -587,6 +669,12 @@ int nagregados = 1; int n;
 
     private void reiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarActionPerformed
         // TODO add your handling code here:
+        vigss = 0;
+        visr = 0;
+        VV.setText("0");
+        conceptosAgregados.setText("");
+        
+        
         int contador = 1;
         
         while(contador <= n){
@@ -641,7 +729,7 @@ int nagregados = 1; int n;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
-    private javax.swing.JTextField agregadoss;
+    private javax.swing.JTextField VV;
     private javax.swing.JButton agregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
@@ -649,6 +737,7 @@ int nagregados = 1; int n;
     private javax.swing.JButton buscarSalario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField concepto;
+    private javax.swing.JTextField conceptosAgregados;
     private javax.swing.JComboBox<String> efecto;
     private javax.swing.JComboBox<String> empleadoss;
     private javax.swing.JCheckBox jCheckBox1;
