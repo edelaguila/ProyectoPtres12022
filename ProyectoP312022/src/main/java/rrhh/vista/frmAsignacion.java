@@ -190,7 +190,13 @@ tiposAsignacion.addItem("muchos");
      
      daoAsignacion datosDAO = new daoAsignacion();
      clsAsignacion datosAInsertar = new clsAsignacion(); 
-       
+
+        int nuevo=0;
+        double isr;
+        double igss;
+        double ambs;
+        double opera;
+
     while(contador <= a){
     
     empleadoAConsultar.setempid(contador);
@@ -200,6 +206,7 @@ tiposAsignacion.addItem("muchos");
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
+
 
    String conceptos = conceptosAgregados.getText();
 
@@ -214,6 +221,51 @@ tiposAsignacion.addItem("muchos");
      datosAInsertar.setaconcepto(conceptos);
      datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
     
+
+     nuevo=Integer.valueOf(empleadoAConsultar.getempsueldo());
+     
+     igss= nuevo-nuevo*0.0483;
+     isr= nuevo-nuevo*0.05;
+     ambs= nuevo-(nuevo*0.05)-(nuevo*0.0483);
+
+      Double numero2= Double.parseDouble(valor.getText()); 
+     String operacion = efecto.getSelectedItem().toString();       
+  int calculos = efecto.getSelectedIndex(); 
+  sumayresta();
+
+     agregados =  String.valueOf(pila);
+     String igss2 = "[igss]";
+     String isr2 = "[isr]" ;
+     String ambosi = "[isr, igss]";
+     String amboss = "[igss, isr]";
+     String conceptos = agregadoss.getText();
+     datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
+     datosAInsertar.setaconcepto(agregados);
+     if (conceptos.equals(igss2)){
+     datosAInsertar.setavalor(String.valueOf(igss));
+     }
+     else if (conceptos.equals(isr2)){
+     datosAInsertar.setavalor(String.valueOf(isr));
+     }
+      else if (conceptos.equals(ambosi)){
+     datosAInsertar.setavalor(String.valueOf(ambs));
+     }
+      else if (conceptos.equals(amboss)){
+     datosAInsertar.setavalor(String.valueOf(ambs));
+     }
+     else
+           
+          
+        
+           if(calculos == 1){
+                opera=nuevo + numero2;
+                datosAInsertar.setavalor(String.valueOf(opera));
+           }
+           else if(calculos == 2){
+               opera = nuevo - numero2;
+               datosAInsertar.setavalor(String.valueOf(opera));
+           }
+
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
 
