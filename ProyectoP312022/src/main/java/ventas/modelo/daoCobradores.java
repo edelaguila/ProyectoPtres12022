@@ -20,11 +20,11 @@ import seguridad.modelo.clsConexion;
  */
 public class daoCobradores {
 
-    private static final String SQL_SELECT = "SELECT Id_cobrador, Nombre, Direccion, Telefono, Correo, Estado, Tipo FROM tbl_cobradores";
-    private static final String SQL_INSERT = "INSERT INTO tbl_cobradores(Nombre, Direccion, Telefono, Correo, Estado, Tipo) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_cobradores SET Nombre=?, Direccion=?, Telefono=?, Correo=?, Estado=?, AND Tipo=? WHERE Id_cobrador = ?";
+    private static final String SQL_SELECT = "SELECT Id_cobrador, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_cliente FROM tbl_cobradores";
+    private static final String SQL_INSERT = "INSERT INTO tbl_cobradores(Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_cliente) VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_cobradores SET Nombre=?, Direccion=?, Telefono=?, Correo=?, Estado=?, Tipo=? AND Id_cliente=? WHERE Id_cobrador = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_cobradores WHERE Id_cobrador=?";
-    private static final String SQL_QUERY = "SELECT Id_cobrador, Nombre, Direccion, Telefono, Correo, Estado, Tipo FROM tbl_cobradores WHERE Id_cobrador = ?";
+    private static final String SQL_QUERY = "SELECT Id_cobrador, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_cliente FROM tbl_cobradores WHERE Id_cobrador = ?";
 
 
     public List<clsCobradores> select() {
@@ -46,6 +46,7 @@ public class daoCobradores {
                 String sCorreo = rs.getString("Correo");
                 String sEstado = rs.getString("Estado");
                 String sTipo = rs.getString("Tipo");
+                int iId_cliente = rs.getInt("Id_cliente");
 
                 cobrador = new clsCobradores();
                 cobrador.fSetid_Cobradores(iId_cobrador);
@@ -55,6 +56,7 @@ public class daoCobradores {
                 cobrador.fSetcorreo_Cobradores(sCorreo);
                 cobrador.fSetestado_Cobradores(sEstado);
                 cobrador.fSettipo_Cobradores(sTipo);
+                cobrador.fSetId_Cliente(iId_cliente);
                 
                 cobradores.add(cobrador);
             }
@@ -83,6 +85,7 @@ public class daoCobradores {
             stmt.setString(4, cobrador.fGetcorreo_Cobradores());
             stmt.setString(5, cobrador.fGetestado_Cobradores());
             stmt.setString(6, cobrador.fGettipo_Cobradores());
+            stmt.setInt(7, cobrador.fGetId_Cliente());
 
 
             System.out.println("ejecutando query:" + SQL_INSERT);
@@ -113,6 +116,7 @@ public class daoCobradores {
             stmt.setString(4, cobrador.fGetcorreo_Cobradores());
             stmt.setString(5, cobrador.fGetestado_Cobradores());
             stmt.setString(6, cobrador.fGettipo_Cobradores());
+            stmt.setInt(7, cobrador.fGetId_Cliente());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -171,6 +175,7 @@ public class daoCobradores {
                 String sCorreo = rs.getString("Correo");
                 String sEstado = rs.getString("Estado");
                 String sTipo = rs.getString("Tipo");
+               int iId_cliente = rs.getInt("Id_cliente");
                 
                 cobrador = new clsCobradores();
                 cobrador.fSetid_Cobradores(iId_cobrador);
@@ -180,6 +185,7 @@ public class daoCobradores {
                 cobrador.fSetcorreo_Cobradores(sCorreo);
                 cobrador.fSetestado_Cobradores(sEstado);
                 cobrador.fSettipo_Cobradores(sTipo);
+                cobrador.fSetId_Cliente(iId_cliente);
                 
                 //cobradores.add(cobrador); // Si se utiliza un ArrayList
             }

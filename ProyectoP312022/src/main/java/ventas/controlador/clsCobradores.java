@@ -20,7 +20,7 @@ public class clsCobradores {
     String sCorreo;
     String sEstado;
     String sTipo;
-
+    int iId_cliente;
     public clsCobradores() {
     }
 
@@ -28,7 +28,7 @@ public class clsCobradores {
     this.iId_cobrador = iId_cobrador;
     }
 
-     public clsCobradores(String sNombre, String sDireccion, String sCorreo, String sEstado, String sTipo, int iId_cobrador,  int iTelefono) {
+     public clsCobradores(String sNombre, String sDireccion, String sCorreo, String sEstado, String sTipo, int iId_cobrador,  int iTelefono, int iId_cliente) {
         this.iId_cobrador = iId_cobrador;
         this.iTelefono = iTelefono;
         this.sNombre = sNombre;
@@ -36,6 +36,7 @@ public class clsCobradores {
         this.sCorreo = sCorreo;
         this.sEstado = sEstado;
         this.sTipo = sTipo;
+        this.iId_cliente = iId_cliente;
     }
 
 
@@ -98,13 +99,22 @@ public int fGettelefono_Cobradores() {
         this.sTipo = sTipo;
     }
 
+
+    public int fGetId_Cliente() {
+        return iId_cliente;
+    }
+
+    public void fSetId_Cliente(int iId_cliente) {
+        this.iId_cliente = iId_cliente;
+    }
+
  
 
 
 
     @Override
     public String toString() {
-         return "tbl_cobradores{" + "Id_cobrador =" + iId_cobrador + ", Nombre=" + sNombre + ", Direccion=" + sDireccion + ", Telefono=" + iTelefono +", Correo=" + sCorreo +", Estado=" + sEstado +", Tipo=" + sTipo + '}';
+         return "tbl_cobradores{" + "Id_cobrador =" + iId_cobrador + ", Nombre=" + sNombre + ", Direccion=" + sDireccion + ", Telefono=" + iTelefono +", Correo=" + sCorreo +", Estado=" + sEstado +", Tipo=" + sTipo +", Id_cliente=" + iId_cliente + '}';
     }
     
 }

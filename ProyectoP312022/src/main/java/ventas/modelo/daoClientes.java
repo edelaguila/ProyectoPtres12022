@@ -20,11 +20,11 @@ import seguridad.modelo.clsConexion;
  */
 public class daoClientes {
 
-    private static final String SQL_SELECT = "SELECT Id_cliente, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_vendedor, Id_cobrador, Id_documento, Orden FROM tbl_clientes";
-    private static final String SQL_INSERT = "INSERT INTO tbl_clientes(Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_vendedor, Id_cobrador, Id_documento, Orden) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_clientes SET Nombre=?, Direccion=?, Telefono=?, Correo=?, Estado=?, Tipo=? Id_vendedor=? Id_cobrador=? Id_documento=? AND Orden=? WHERE Id_cliente = ?";
+    private static final String SQL_SELECT = "SELECT Id_cliente, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_vendedor, Id_cobrador, Id_documento, Orden, Credito FROM tbl_clientes";
+    private static final String SQL_INSERT = "INSERT INTO tbl_clientes(Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_vendedor, Id_cobrador, Id_documento, Orden, Credito) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_clientes SET Nombre=?, Direccion=?, Telefono=?, Correo=?, Estado=?, Tipo=? Id_vendedor=? Id_cobrador=? Id_documento=?, Orden=? AND Credito=? WHERE Id_cliente = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_clientes WHERE Id_cliente=?";
-    private static final String SQL_QUERY = "SELECT Id_cliente, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_vendedor, Id_cobrador, Id_documento, Orden FROM tbl_clientes WHERE Id_cliente = ?";
+    private static final String SQL_QUERY = "SELECT Id_cliente, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Id_vendedor, Id_cobrador, Id_documento, Orden, Credito FROM tbl_clientes WHERE Id_cliente = ?";
 
 
     public List<clsClientes> select() {
@@ -50,6 +50,7 @@ public class daoClientes {
                 String sEstado = rs.getString("Estado");
                 String sTipo = rs.getString("Tipo");
                 String sOrden = rs.getString("Orden");
+                double dCredito = rs.getDouble("Credito");
 
                 cliente = new clsClientes();
                 cliente.fSetid_Clientes(iId_cliente);
@@ -63,6 +64,7 @@ public class daoClientes {
                 cliente.fSetestado_Clientes(sEstado);
                 cliente.fSettipo_Clientes(sTipo);
                 cliente.fSetorden_Clientes(sOrden);
+                cliente.fSetcredito_Clientes(dCredito);
                 
                 clientes.add(cliente);
             }
@@ -95,6 +97,7 @@ public class daoClientes {
             stmt.setInt(8, cliente.fGetid_Cobrador());
             stmt.setInt(9, cliente.fGetid_Documento());
             stmt.setString(10, cliente.fGetorden_Clientes());
+            stmt.setDouble(11, cliente.fGetcredito_Clientes());
             
 
 
@@ -130,6 +133,7 @@ public class daoClientes {
             stmt.setInt(8, cliente.fGetid_Cobrador());
             stmt.setInt(9, cliente.fGetid_Documento());
             stmt.setString(10, cliente.fGetorden_Clientes());
+            stmt.setDouble(11, cliente.fGetcredito_Clientes());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -192,6 +196,7 @@ public class daoClientes {
                 String sEstado = rs.getString("Estado");
                 String sTipo = rs.getString("Tipo");
                 String sOrden = rs.getString("Orden");
+                double dCredito = rs.getDouble("Credito");
                 
                 cliente = new clsClientes();
                 cliente.fSetid_Clientes(iId_cliente);
@@ -205,6 +210,7 @@ public class daoClientes {
                 cliente.fSetestado_Clientes(sEstado);
                 cliente.fSettipo_Clientes(sTipo);
                 cliente.fSetorden_Clientes(sOrden);
+                cliente.fSetcredito_Clientes(dCredito);
                 
                 //vendedores.add(vendedor); // Si se utiliza un ArrayList
             }
@@ -219,6 +225,29 @@ public class daoClientes {
 
         //return vendedores;  // Si se utiliza un ArrayList
         return cliente;
+    }
+
+
+public void update_total_credit(int id_client, double nuevo, double existente) {
+        double suma=nuevo+existente;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("ejecutando query: " +  "UPDATE tbl_clientes SET Credito=? WHERE Id_cliente  = ?");
+            stmt = conn.prepareStatement("UPDATE tbl_clientes SET Credito='"+suma+"' WHERE Id_cliente = '"+id_client+"'");
+            rows = stmt.executeUpdate();
+            System.out.println("Registros actualizado:" + rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
     }
    
 }
