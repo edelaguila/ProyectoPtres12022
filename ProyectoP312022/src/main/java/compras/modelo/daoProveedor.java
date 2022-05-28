@@ -38,7 +38,7 @@ public class daoProveedor {
                 int provid = rs.getInt("provid");
                 String provnombre = rs.getString("provnombre");
                 int provsaldo = rs.getInt("provsaldo");
-                String provestado = rs.getString("provestado");
+                Boolean provestado = rs.getBoolean("provestado");
                 int provtelefono = rs.getInt("provtelefono");
                 String provdireccion = rs.getString("provdireccion");
 
@@ -74,7 +74,7 @@ public class daoProveedor {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, proveedor.getprovnombre());
             stmt.setInt(2, proveedor.getprovsaldo());
-            stmt.setString(3, proveedor.getprovestado());
+            stmt.setBoolean(3, proveedor.getprovestado());
             stmt.setInt(4, proveedor.getprovtelefono());
             stmt.setString(5, proveedor.getprovtdireccion());
 
@@ -101,7 +101,7 @@ public class daoProveedor {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, proveedor.getprovnombre());
             stmt.setInt(2, proveedor.getprovsaldo());
-            stmt.setString(3, proveedor.getprovestado());
+            stmt.setBoolean(3, proveedor.getprovestado());
             stmt.setInt(4, proveedor.getprovtelefono());
             stmt.setString(5, proveedor.getprovtdireccion());
             stmt.setInt(6, proveedor.getprovid());
@@ -157,7 +157,7 @@ public class daoProveedor {
                 int provid = rs.getInt("provid");
                 String provnombre = rs.getString("provnombre");
                 int provsaldo = rs.getInt("provsaldo");
-                String provestado = rs.getString("provestado");
+                Boolean provestado = rs.getBoolean("provestado");
                 int provtelefono = rs.getInt("provtelefono");
                 String provdireccion = rs.getString("provdireccion");
 
