@@ -24,6 +24,7 @@ public class clsClientes {
     String sEstado;
     String sTipo;
     String sOrden;
+    double dCredito;
 
     public clsClientes() {
     }
@@ -32,7 +33,7 @@ public class clsClientes {
     this.iId_cliente = iId_cliente;
     }
 
-     public clsClientes(String sNombre, String sDireccion, String sCorreo, String sEstado, String sTipo, String sOrden, int iId_cliente,  int iTelefono, int iId_vendedor, int iId_cobrador,int iId_documento ) {
+     public clsClientes(String sNombre, String sDireccion, String sCorreo, String sEstado, String sTipo, String sOrden, int iId_cliente,  int iTelefono, int iId_vendedor, int iId_cobrador,int iId_documento, double dCredito ) {
         this.iId_cliente = iId_cliente;
         this.iTelefono = iTelefono;
         this.iId_vendedor = iId_vendedor;
@@ -44,6 +45,7 @@ public class clsClientes {
         this.sEstado = sEstado;
         this.sTipo = sTipo;
         this.sTipo = sOrden;
+        this.dCredito = dCredito;
         
     }
 
@@ -144,9 +146,18 @@ public int fGettelefono_Clientes() {
     }
 
 
+ public double fGetcredito_Clientes() {
+        return dCredito;
+    }
+
+    public void fSetcredito_Clientes(double dCredito) {
+        this.dCredito = dCredito;
+    }
+
+
     @Override
     public String toString() {
-         return "tbl_clientes{" + "Id_cliente =" + iId_cliente + ", Nombre=" + sNombre + ", Direccion=" + sDireccion + ", Telefono=" + iTelefono +", Correo=" + sCorreo +", Estado=" + sEstado +", Tipo=" + sTipo +", Id_vendedor=" + iId_vendedor +", Id_cobrador=" + iId_cobrador +", Id_documento=" + iId_documento+", Orden=" + sOrden +'}';
+         return "tbl_clientes{" + "Id_cliente =" + iId_cliente + ", Nombre=" + sNombre + ", Direccion=" + sDireccion + ", Telefono=" + iTelefono +", Correo=" + sCorreo +", Estado=" + sEstado +", Tipo=" + sTipo +", Id_vendedor=" + iId_vendedor +", Id_cobrador=" + iId_cobrador +", Id_documento=" + iId_documento+", Orden=" + sOrden +", Credito=" + dCredito +'}';
     }
     
 }
