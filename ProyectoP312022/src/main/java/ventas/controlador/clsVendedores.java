@@ -20,6 +20,7 @@ public class clsVendedores {
     String sCorreo;
     String sEstado;
     String sTipo;
+    int iVentas;
 
     public clsVendedores() {
     }
@@ -28,7 +29,7 @@ public class clsVendedores {
     this.iId_vendedor = iId_vendedor;
     }
 
-     public clsVendedores(String sNombre, String sDireccion, String sCorreo, String sEstado, String sTipo, int iId_vendedor,  int iTelefono) {
+     public clsVendedores(String sNombre, String sDireccion, String sCorreo, String sEstado, String sTipo, int iId_vendedor,  int iTelefono, int iVentas) {
         this.iId_vendedor = iId_vendedor;
         this.iTelefono = iTelefono;
         this.sNombre = sNombre;
@@ -36,6 +37,7 @@ public class clsVendedores {
         this.sCorreo = sCorreo;
         this.sEstado = sEstado;
         this.sTipo = sTipo;
+        this.iVentas = iVentas;
     }
 
 
@@ -98,13 +100,22 @@ public int fGettelefono_Vendedores() {
         this.sTipo = sTipo;
     }
 
+
+   public int fGetventas_Vendedores() {
+        return iVentas;
+    }
+
+    public void fSetventas_Vendedores(int iVentas) {
+        this.iVentas = iVentas;
+    }
+
  
 
 
 
     @Override
     public String toString() {
-         return "tbl_vendedores{" + "Id_vendedor =" + iId_vendedor + ", Nombre=" + sNombre + ", Direccion=" + sDireccion + ", Telefono=" + iTelefono +", Correo=" + sCorreo +", Estado=" + sEstado +", Tipo=" + sTipo + '}';
+         return "tbl_vendedores{" + "Id_vendedor =" + iId_vendedor + ", Nombre=" + sNombre + ", Direccion=" + sDireccion + ", Telefono=" + iTelefono +", Correo=" + sCorreo +", Estado=" + sEstado +", Tipo=" + sTipo + ", Ventas=" + iVentas +'}';
     }
     
 }
