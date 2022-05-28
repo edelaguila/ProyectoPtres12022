@@ -124,7 +124,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +132,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 259, 95, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +140,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 70, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("PROVEEDORES");
@@ -152,7 +152,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 95, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText("Saldo Proveedor");
@@ -169,8 +169,10 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 95, -1));
 
+        tablaVendedores.setBackground(new java.awt.Color(204, 255, 255));
+        tablaVendedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,17 +202,18 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         lb.setText(".");
         getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 20, 13, -1));
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 90, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 60, 30));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Telefono Proveedor");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -222,7 +225,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label7.setText("Direccion Proveedor");
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 130, -1));
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 130, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Nombre Proveedor");
@@ -252,7 +255,11 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
 
         cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
         getContentPane().add(cbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, -1));
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 80, 20));
+
+        txtEstado.setBackground(new java.awt.Color(51, 51, 255));
+        txtEstado.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        txtEstado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 90, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
