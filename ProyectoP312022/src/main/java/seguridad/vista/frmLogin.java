@@ -5,8 +5,6 @@
  */
 package seguridad.vista;
 
-
-
 import compras.vista.mdiComprasG2;
 import seguridad.controlador.clsUsuario;
 import java.awt.HeadlessException;
@@ -14,15 +12,17 @@ import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import prototipos.vista.mdiPrototipo;
+import seguridad.controlador.clsBitacora;
 import seguridad.controlador.clsUsuarioConectado;
 import seguridad.modelo.daoUsuario;
-
 
 /**
  *
  * @author visitante
  */
 public class frmLogin extends javax.swing.JFrame {
+
+    
 
     /**
      * Creates new form Login
@@ -149,6 +149,8 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
 
+        clsBitacora bitacora = new clsBitacora();
+
         if (txtUsuario.getText().trim().isEmpty() || txtContraseña.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -161,12 +163,13 @@ public class frmLogin extends javax.swing.JFrame {
 
                 if (txtContraseña.getText().equals(usuarioAConsultar.getUsucontrasena()) && txtUsuario.getText().equals(usuarioAConsultar.getUsunombre())) {
                     JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
-                    
+
                     //mdiGeneral menuGeneral = new mdiGeneral();
                     //menuGeneral.setVisible(true);
                     //this.dispose();
-                    clsUsuarioConectado usuarioRegistrado = new clsUsuarioConectado();                                   usuarioRegistrado.setUsunombre(txtUsuario.getText().trim());
-                    
+                    clsUsuarioConectado usuarioRegistrado = new clsUsuarioConectado();
+                    usuarioRegistrado.setUsunombre(txtUsuario.getText().trim());
+
                     //---Agregado para considerar todos los módulos
                     String areaSeleccionada;
                     areaSeleccionada = cbxAreas.getSelectedItem().toString();
@@ -174,9 +177,11 @@ public class frmLogin extends javax.swing.JFrame {
                     switch (areaSeleccionada) {
 
                         case "Area Seguridad":
+                             
                         try {
                             mdiGeneral menuSeguridad = new mdiGeneral();
                             menuSeguridad.setVisible(true);
+                           
                             this.dispose();
                         } catch (Exception e) {
                             System.out.println(e);
@@ -186,19 +191,24 @@ public class frmLogin extends javax.swing.JFrame {
                         try {
                             mdiPrototipo menuPrototipo = new mdiPrototipo();
                             menuPrototipo.setVisible(true);
+                           
                             this.dispose();
                         } catch (Exception e) {
                             System.out.println(e);
                         }
                         break;
-                            case "Area Compras":
+                        case "Area Compras":       
                         try {
+
+                            
+
                             mdiComprasG2 menuCompras = new mdiComprasG2();
                             menuCompras.setVisible(true);
+                           
                             this.dispose();
                         } catch (Exception e) {
                             System.out.println(e);
-                        }                    
+                        }
                         default:
                             break;
                     }
@@ -215,7 +225,10 @@ public class frmLogin extends javax.swing.JFrame {
                 txtUsuario.setText("");
             }
         }
-
+        
+     
+          
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
