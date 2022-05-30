@@ -76,8 +76,15 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         efecto.setSelectedItem(conceptoAConsultar.getconcepefecto());
        
         }
-        
+   
+    
+    
     public void buscarsalario() {
+        
+        conceptosAgregados.setText(""); 
+        salario.setText(""); 
+        
+        
         clsEmpleados empleadoAConsultar2 = new clsEmpleados();
         daoEmpleados empleadoDAO = new daoEmpleados();
         
@@ -85,7 +92,9 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         empleadoAConsultar2 = empleadoDAO.query2(empleadoAConsultar2);
     
         salario.setText(empleadoAConsultar2.getempsueldo());     
-           
+        
+        
+         
         }
 
     
@@ -166,8 +175,6 @@ tiposAsignacion.addItem("muchos");
   
    }
     
-    
-    
 
     public void autollenadoEmpleados(){
       
@@ -190,13 +197,7 @@ tiposAsignacion.addItem("muchos");
      
      daoAsignacion datosDAO = new daoAsignacion();
      clsAsignacion datosAInsertar = new clsAsignacion(); 
-
-        int nuevo=0;
-        double isr;
-        double igss;
-        double ambs;
-        double opera;
-
+       
     while(contador <= a){
     
     empleadoAConsultar.setempid(contador);
@@ -206,7 +207,6 @@ tiposAsignacion.addItem("muchos");
      empleadoAConsultar.getempnombre();
      empleadoAConsultar.getempsueldo();
      empleadoAConsultar.getempdias();
-
 
    String conceptos = conceptosAgregados.getText();
 
@@ -221,51 +221,6 @@ tiposAsignacion.addItem("muchos");
      datosAInsertar.setaconcepto(conceptos);
      datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
     
-
-     nuevo=Integer.valueOf(empleadoAConsultar.getempsueldo());
-     
-     igss= nuevo-nuevo*0.0483;
-     isr= nuevo-nuevo*0.05;
-     ambs= nuevo-(nuevo*0.05)-(nuevo*0.0483);
-
-      Double numero2= Double.parseDouble(valor.getText()); 
-     String operacion = efecto.getSelectedItem().toString();       
-  int calculos = efecto.getSelectedIndex(); 
-  sumayresta();
-
-     agregados =  String.valueOf(pila);
-     String igss2 = "[igss]";
-     String isr2 = "[isr]" ;
-     String ambosi = "[isr, igss]";
-     String amboss = "[igss, isr]";
-     String conceptos = agregadoss.getText();
-     datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
-     datosAInsertar.setaconcepto(agregados);
-     if (conceptos.equals(igss2)){
-     datosAInsertar.setavalor(String.valueOf(igss));
-     }
-     else if (conceptos.equals(isr2)){
-     datosAInsertar.setavalor(String.valueOf(isr));
-     }
-      else if (conceptos.equals(ambosi)){
-     datosAInsertar.setavalor(String.valueOf(ambs));
-     }
-      else if (conceptos.equals(amboss)){
-     datosAInsertar.setavalor(String.valueOf(ambs));
-     }
-     else
-           
-          
-        
-           if(calculos == 1){
-                opera=nuevo + numero2;
-                datosAInsertar.setavalor(String.valueOf(opera));
-           }
-           else if(calculos == 2){
-               opera = nuevo - numero2;
-               datosAInsertar.setavalor(String.valueOf(opera));
-           }
-
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
 
@@ -389,7 +344,7 @@ tiposAsignacion.addItem("muchos");
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 550, 20, 10));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 120, 30));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 120, 30));
 
         concepto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         concepto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -693,6 +648,7 @@ double vigss=0,visr=0;
 
     private void buscarSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarSalarioActionPerformed
         // TODO add your handling code here:
+
         buscarsalario();
     }//GEN-LAST:event_buscarSalarioActionPerformed
 
@@ -711,12 +667,14 @@ double vigss=0,visr=0;
              label11.setVisible(false);
              label9.setVisible(false);
              salario.setVisible(false);
+           
         }else{
          buscarSalario.setVisible(true);
              empleadoss.setVisible(true);
              label11.setVisible(true);
              label9.setVisible(true);
              salario.setVisible(true);
+           
          
          }
         
