@@ -108,7 +108,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         empleadoAConsultar2 = empleadoDAO.query2(empleadoAConsultar2);
     
         salario.setText(empleadoAConsultar2.getempsueldo());     
-        
+        salario1.setText(empleadoAConsultar2.getempsueldo());     
         
          
         }
@@ -133,22 +133,22 @@ tiposAsignacion.addItem("muchos");
    String conceptos = Cbx_buscado.getSelectedItem().toString();
 
    Double numero1= Double.parseDouble(salario.getText());
+   Double numeroCP= Double.parseDouble(salario1.getText());
    Double numero2= Double.parseDouble(valor.getText()); 
-   String operacion = efecto.getSelectedItem().toString();
    int calculos = efecto.getSelectedIndex();
    
    if(calculos == 1){
    
    if (conceptos.equals(igss)){
-   double porcentaje = (numero2 * numero1)/100;
-    porcentajeIgssA = (numero2 * numero1)/100;
+   double porcentaje = (numero2 * numeroCP)/100;
+    porcentajeIgssA = (numero2 * numeroCP)/100;
    salario.setText(String.valueOf(numero1 + porcentaje));
    
    
    }
    else if (isr.equals(conceptos)){
-   double porcentaje = (numero2 * numero1)/100;
-   porcentajeIsrA = (numero2 * numero1)/100;
+   double porcentaje = (numero2 * numeroCP)/100;
+   porcentajeIsrA = (numero2 * numeroCP)/100;
    salario.setText(String.valueOf(numero1 + porcentaje));
    
    }else{
@@ -161,14 +161,14 @@ tiposAsignacion.addItem("muchos");
    if(calculos == 2){
    
      if (conceptos.equals(igss)){
-   double porcentaje = (numero2 * numero1) / 100;
-   porcentajeIgssA = (numero2 * numero1)/100;
+   double porcentaje = (numero2 * numeroCP) / 100;
+   porcentajeIgssA = (numero2 * numeroCP)/100;
    salario.setText(String.valueOf(numero1 - porcentaje));
    
    }
      else if (isr.equals(conceptos)){
-   double porcentaje = (numero2 * numero1) / 100;
-   porcentajeIsrA = (numero2 * numero1)/100;
+   double porcentaje = (numero2 * numeroCP) / 100;
+   porcentajeIsrA = (numero2 * numeroCP)/100;
    salario.setText(String.valueOf(numero1 - porcentaje));
    
    }else{
@@ -284,7 +284,7 @@ tiposAsignacion.addItem("muchos");
         llenadoDeconceptoID();
         sumayresta();
         tipo();
-
+        tablaasignacion.setVisible(false);
         VV.setText("0");
    
     }
@@ -333,6 +333,9 @@ tiposAsignacion.addItem("muchos");
         VV = new javax.swing.JTextField();
         Cbx_buscado = new javax.swing.JComboBox<>();
         VConceptos = new javax.swing.JTextField();
+        btnver = new javax.swing.JButton();
+        salario1 = new javax.swing.JTextField();
+        btnocultar = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -353,7 +356,7 @@ tiposAsignacion.addItem("muchos");
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -381,7 +384,7 @@ tiposAsignacion.addItem("muchos");
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 95, -1));
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -418,7 +421,7 @@ tiposAsignacion.addItem("muchos");
 
         label2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label2.setText("Conceptos Asignados");
-        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, -1, 20));
+        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 200, -1, 20));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Conceptos agregados");
@@ -521,7 +524,28 @@ tiposAsignacion.addItem("muchos");
             }
         });
         getContentPane().add(Cbx_buscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 120, -1));
+
+        VConceptos.setEnabled(false);
         getContentPane().add(VConceptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
+
+        btnver.setText("ver tabla");
+        btnver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnver, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 95, -1));
+
+        salario1.setEnabled(false);
+        getContentPane().add(salario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 20, 10));
+
+        btnocultar.setText("ocultar");
+        btnocultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnocultarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 95, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -790,6 +814,20 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
         // TODO add your handling code here:
     }//GEN-LAST:event_Cbx_buscadoActionPerformed
 
+    private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
+        // TODO add your handling code here:
+         tablaasignacion.setVisible(true);
+         tablaasignacion.getTableHeader().setVisible(true);
+    }//GEN-LAST:event_btnverActionPerformed
+
+    private void btnocultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnocultarActionPerformed
+        // TODO add your handling code here:
+        tablaasignacion.setVisible(false);
+        tablaasignacion.getTableHeader().setVisible(false);
+        tablaasignacion.setShowHorizontalLines(false);
+        tablaasignacion.setShowVerticalLines(false);
+    }//GEN-LAST:event_btnocultarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
@@ -800,6 +838,8 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnocultar;
+    private javax.swing.JButton btnver;
     private javax.swing.JButton buscarSalario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField conceptosAgregados;
@@ -823,6 +863,7 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
     private javax.swing.JLabel lbusu;
     private javax.swing.JButton reiniciar;
     private javax.swing.JTextField salario;
+    private javax.swing.JTextField salario1;
     private javax.swing.JTable tablaasignacion;
     private javax.swing.JComboBox<String> tiposAsignacion;
     private javax.swing.JButton tipos_asignacion;
