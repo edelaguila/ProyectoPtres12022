@@ -36,6 +36,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         }
     }
     
+   
     public void llenadoDeconceptoID() {
         daoConcepto conceptoDAO = new daoConcepto();
         List<clsConcepto> IdConcepto = conceptoDAO.select();
@@ -50,30 +51,37 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         modelo.addColumn("id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Concepto");
+        modelo.addColumn("Igss");
+        modelo.addColumn("Isr");
+        modelo.addColumn("Otros");
         modelo.addColumn("Total");
-     
         daoAsignacion asignaDAO = new daoAsignacion();
         List<clsAsignacion> asignas = asignaDAO.select();
         tablaasignacion.setModel(modelo);
-        String[] dato = new String[5];
+        String[] dato = new String[8];
         for (int i = 0; i < asignas.size(); i++) {
             dato[0] = Integer.toString(asignas.get(i).getaid());
             dato[1] = asignas.get(i).getanombre();
             dato[2] = asignas.get(i).getaconcepto();
-            dato[3] = asignas.get(i).getavalor();
+            dato[3] = asignas.get(i).getavigss();
+            dato[4] = asignas.get(i).getavisr();
+            dato[5] = asignas.get(i).getavotros();
+            dato[6] = asignas.get(i).getavalor();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
 
+  
+
     public void agrega(Stack pila){
-    
-     conceptosAgregados.setText(String.valueOf(pila));
-   
-       
+    conceptosAgregados.setText(String.valueOf(pila));
+    }
+    public void agregaValores(Stack pilaValores){
+    VConceptos.setText(String.valueOf(pilaValores));
     }
  
-
+    
     public void buscarconcepto() {
         clsConcepto conceptoAConsultar = new clsConcepto();
         daoConcepto conceptoDAO = new daoConcepto();
@@ -133,11 +141,14 @@ tiposAsignacion.addItem("muchos");
    
    if (conceptos.equals(igss)){
    double porcentaje = (numero2 * numero1)/100;
+    porcentajeIgssA = (numero2 * numero1)/100;
    salario.setText(String.valueOf(numero1 + porcentaje));
+   
    
    }
    else if (isr.equals(conceptos)){
    double porcentaje = (numero2 * numero1)/100;
+   porcentajeIsrA = (numero2 * numero1)/100;
    salario.setText(String.valueOf(numero1 + porcentaje));
    
    }else{
@@ -151,11 +162,13 @@ tiposAsignacion.addItem("muchos");
    
      if (conceptos.equals(igss)){
    double porcentaje = (numero2 * numero1) / 100;
+   porcentajeIgssA = (numero2 * numero1)/100;
    salario.setText(String.valueOf(numero1 - porcentaje));
    
    }
      else if (isr.equals(conceptos)){
    double porcentaje = (numero2 * numero1) / 100;
+   porcentajeIsrA = (numero2 * numero1)/100;
    salario.setText(String.valueOf(numero1 - porcentaje));
    
    }else{
@@ -218,10 +231,13 @@ tiposAsignacion.addItem("muchos");
 
    String conceptos = conceptosAgregados.getText();
 
+
     Double numero1= Double.parseDouble(empleadoAConsultar.getempsueldo());
     Double numero2= Double.parseDouble(VV.getText());
     double porcentajeIgss = (vigss * numero1)/100;  
     double porcentajeIsr = (visr * numero1)/100; 
+    
+    
     
  if(calculos == 1){
          
@@ -237,6 +253,9 @@ tiposAsignacion.addItem("muchos");
    
      datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
      datosAInsertar.setaconcepto(conceptos);
+     datosAInsertar.setavigss("1");
+     datosAInsertar.setavisr("1");
+     datosAInsertar.setavotros(conceptos);
      datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
     
      datosDAO.insert(datosAInsertar);
@@ -295,9 +314,9 @@ tiposAsignacion.addItem("muchos");
         lb1 = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
         lb3 = new javax.swing.JLabel();
+        conceptosAgregados = new javax.swing.JTextField();
         label7 = new javax.swing.JLabel();
         agregar = new javax.swing.JButton();
-        conceptosAgregados = new javax.swing.JTextField();
         label8 = new javax.swing.JLabel();
         reiniciar = new javax.swing.JButton();
         salario = new javax.swing.JTextField();
@@ -310,6 +329,7 @@ tiposAsignacion.addItem("muchos");
         label11 = new javax.swing.JLabel();
         VV = new javax.swing.JTextField();
         Cbx_buscado = new javax.swing.JComboBox<>();
+        VConceptos = new javax.swing.JTextField();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -370,11 +390,11 @@ tiposAsignacion.addItem("muchos");
 
             },
             new String [] {
-                "id", "Nombre", "Concepto", "Total"
+                "id", "Nombre", "Concepto", "Igss", "Isr", "Otros", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -383,7 +403,7 @@ tiposAsignacion.addItem("muchos");
         });
         jScrollPane2.setViewportView(tablaasignacion);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 350, 303));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 780, 303));
 
         empleadoss.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         empleadoss.addActionListener(new java.awt.event.ActionListener() {
@@ -417,6 +437,7 @@ tiposAsignacion.addItem("muchos");
         lb3.setForeground(new java.awt.Color(204, 204, 204));
         lb3.setText(".");
         getContentPane().add(lb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 13, -1));
+        getContentPane().add(conceptosAgregados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label7.setText("Efecto");
@@ -429,7 +450,6 @@ tiposAsignacion.addItem("muchos");
             }
         });
         getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 95, -1));
-        getContentPane().add(conceptosAgregados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Tipo de asignacion");
@@ -498,6 +518,7 @@ tiposAsignacion.addItem("muchos");
             }
         });
         getContentPane().add(Cbx_buscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 120, -1));
+        getContentPane().add(VConceptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -523,6 +544,8 @@ tiposAsignacion.addItem("muchos");
        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+   
+    
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
        String algun ="algunos/excepcion", much="muchos";
        
@@ -537,6 +560,9 @@ tiposAsignacion.addItem("muchos");
         clsAsignacion perfilusuarioAInsertar = new clsAsignacion();
         perfilusuarioAInsertar.setanombre(empleadoss.getSelectedItem().toString());
         perfilusuarioAInsertar.setaconcepto(String.valueOf(pila));
+        perfilusuarioAInsertar.setavigss(String.valueOf(porcentajeIgssA));
+        perfilusuarioAInsertar.setavisr(String.valueOf(porcentajeIsrA));
+        perfilusuarioAInsertar.setavotros(String.valueOf(pilaValores));
         perfilusuarioAInsertar.setavalor(salario.getText());
         // aqui falta el valor
         perfilusuarioDAO.insert(perfilusuarioAInsertar);
@@ -572,13 +598,16 @@ tiposAsignacion.addItem("muchos");
         // TODO add your handling code here:
     }//GEN-LAST:event_empleadossActionPerformed
 Stack<String> pila = new Stack<String>();
+Stack<String> pilaValores = new Stack<String>();
 
 int nagregados = 1; int n;
 double vigss=0,visr=0;
+double porcentajeIgssA =0 , porcentajeIsrA = 0;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
        String algun ="algunos/excepcion", much="muchos";
          String igss ="igss",isr ="isr";
+         String separador=": ";
         if(tiposAsignacion.getSelectedItem().toString().equals(much)){
         
         if (igss.equals(Cbx_buscado.getSelectedItem().toString())){
@@ -596,29 +625,57 @@ double vigss=0,visr=0;
      
         proceso();    
         }
-            
-            
-            
-            
-            
+ 
         String nameconcepto; 
         nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
         pila.push(nameconcepto); 
         agrega(pila); 
+
         n = nagregados++;
         
         }else{
+            
+        if (igss.equals(Cbx_buscado.getSelectedItem().toString())){
+        
         String nameconcepto; 
         nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
         pila.push(nameconcepto); 
         agrega(pila); 
-        
-      
-        
+            
         procedimientosAdd();
         
         
         n = nagregados++;
+        
+        }else{
+        
+        String nameValores; 
+        nameValores = Cbx_buscado.getSelectedItem().toString()+separador+valor.getText(); 
+        pilaValores.push(nameValores); 
+        agregaValores(pilaValores); 
+        
+        
+        String nameconcepto; 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
+        pila.push(nameconcepto); 
+        agrega(pila); 
+        
+        
+         procedimientosAdd();
+        
+        
+        n = nagregados++;
+        
+        }    
+            
+            
+            
+     
+        
+        
+         
+        
+       
         }
     }//GEN-LAST:event_agregarActionPerformed
 
@@ -626,6 +683,8 @@ double vigss=0,visr=0;
         // TODO add your handling code here:
         vigss = 0;
         visr = 0;
+        porcentajeIgssA = 0;
+        porcentajeIsrA = 0;
         VV.setText("0");
         conceptosAgregados.setText("");
         
@@ -637,6 +696,11 @@ double vigss=0,visr=0;
                 pila.pop(); 
                 agrega(pila); 
         }
+         if(!pilaValores.empty()){ 
+                pilaValores.pop(); 
+                agregaValores(pilaValores); 
+        }
+   
         contador++;
         }
         salario.setText("");
@@ -688,6 +752,7 @@ double vigss=0,visr=0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
     private javax.swing.JComboBox<String> Cbx_buscado;
+    private javax.swing.JTextField VConceptos;
     private javax.swing.JTextField VV;
     private javax.swing.JButton agregar;
     private javax.swing.JButton btnEliminar;
