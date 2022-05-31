@@ -37,7 +37,7 @@ public class daoConcepto {
             while (rs.next()) {
                 int conid = rs.getInt("conid");
                 String connombre = rs.getString("connombre");
-                String conefecto = rs.getString("conefecto");
+                boolean conefecto = rs.getBoolean("conefecto");
                 boolean conestatus = rs.getBoolean("conestatus");
 
                 concepto = new clsConcepto();
@@ -69,7 +69,7 @@ public class daoConcepto {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, concepto.getConid());
             stmt.setString(2, concepto.getConnombre());
-            stmt.setString(3, concepto.getConefecto());
+            stmt.setBoolean(3, concepto.getConefecto());
             stmt.setBoolean(4, concepto.getConestatus());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
@@ -96,7 +96,7 @@ public class daoConcepto {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setInt(4, concepto.getConid());
             stmt.setString(1, concepto.getConnombre());
-            stmt.setString(2, concepto.getConefecto());
+            stmt.setBoolean(2, concepto.getConefecto());
             stmt.setBoolean(3, concepto.getConestatus());
 
             rows = stmt.executeUpdate();
@@ -148,7 +148,7 @@ public class daoConcepto {
             while (rs.next()) {
                 int conid = rs.getInt("conid");
                 String connombre = rs.getString("connombre");
-                String conefecto = rs.getString("conefecto");
+                boolean conefecto = rs.getBoolean("conefecto");
                 boolean conestatus = rs.getBoolean("conestatus");
 
                 concepto = new clsConcepto();

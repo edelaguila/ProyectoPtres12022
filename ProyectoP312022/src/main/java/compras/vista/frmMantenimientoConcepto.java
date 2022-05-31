@@ -13,14 +13,13 @@ import compras.controlador.clsConcepto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author visitante
  */
 public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
-
-  
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -35,7 +34,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         for (int i = 0; i < concepto.size(); i++) {
             dato[0] = Integer.toString(concepto.get(i).getConid());
             dato[1] = concepto.get(i).getConnombre();
-            dato[2] = concepto.get(i).getConefecto();
+            dato[2] = concepto.get(i).getConefecto().toString();
             dato[3] = concepto.get(i).getConestatus().toString();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
@@ -48,15 +47,15 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         conceptoAConsultar.setConid(Integer.parseInt(txtbuscado.getText()));
         conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
         txtConNombre.setText(conceptoAConsultar.getConnombre());
-        txtConEfecto.setText(conceptoAConsultar.getConefecto());
-        ComboEstado.setSelectedItem(conceptoAConsultar.getConestatus());
-        
+        ComboEfecto.setSelectedItem(conceptoAConsultar.getConefecto());
+        ComboEfecto.setSelectedItem(conceptoAConsultar.getConestatus());
+
     }
 
     public frmMantenimientoConcepto() {
         initComponents();
         llenadoDeTablas();
-       
+
     }
 
     /**
@@ -86,7 +85,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label6 = new javax.swing.JLabel();
         label7 = new javax.swing.JLabel();
         txtConNombre = new javax.swing.JTextField();
-        txtConEfecto = new javax.swing.JTextField();
+        ComboEfecto = new javax.swing.JComboBox<>();
         ComboEstado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -198,11 +197,20 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtConNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         getContentPane().add(txtConNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 220, -1));
 
-        txtConEfecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtConEfecto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        getContentPane().add(txtConEfecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 220, -1));
+        ComboEfecto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positivo", "Negativo" }));
+        ComboEfecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboEfectoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ComboEfecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
 
         ComboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        ComboEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboEstadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(ComboEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
         pack();
@@ -210,18 +218,25 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea proceder?", "Va a borrar una tabla...",
+				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(resp==0){
         daoConcepto conceptoDAO = new daoConcepto();
         clsConcepto conceptoAEliminar = new clsConcepto();
         conceptoAEliminar.setConid(Integer.parseInt(txtbuscado.getText()));
         conceptoDAO.delete(conceptoAEliminar);
         llenadoDeTablas();
+        } else{
+            //0=si 1=no 2=cancelar
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         daoConcepto conceptoDAO = new daoConcepto();
         clsConcepto conceptoAInsertar = new clsConcepto();
         conceptoAInsertar.setConnombre(txtConNombre.getText());
-        conceptoAInsertar.setConefecto(txtConEfecto.getText());
+        conceptoAInsertar.setConefecto(poner());
+        
         if (ComboEstado.getSelectedItem().equals("Activo")) {
             conceptoAInsertar.setConestatus(true);
         } else {
@@ -230,6 +245,16 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         conceptoDAO.insert(conceptoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
+     public boolean poner(){
+         boolean a=false;
+         
+         if (ComboEfecto.getSelectedItem().equals("Positivo")) {
+            a=true;
+         }   
+        return a;
+         
+     }
+     
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
@@ -238,11 +263,18 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea proceder?", "Va a borrar una tabla...",
+				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        if(resp==0){
         daoConcepto conceptoDAO = new daoConcepto();
         clsConcepto conceptoAActualizar = new clsConcepto();
         conceptoAActualizar.setConid(Integer.parseInt(txtbuscado.getText()));
         conceptoAActualizar.setConnombre(txtConNombre.getText());
-        conceptoAActualizar.setConefecto(txtConEfecto.getText());
+        conceptoAActualizar.setConefecto(buscar());
+        System.out.println(buscar());
+        
+        
+        
         if (ComboEstado.getSelectedItem().equals("Activo")) {
             conceptoAActualizar.setConestatus(true);
         } else {
@@ -250,14 +282,26 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         }
         conceptoDAO.update(conceptoAActualizar);
         llenadoDeTablas();
+        } else {
+            //0=si 1=no 2=cancelar
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
-
+     public boolean buscar(){
+         boolean a=false;
+         
+         if (ComboEfecto.getSelectedItem().equals("Positivo")) {
+            a=true;
+     
+         }
+         
+         return a;
+         
+     }
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       
-        ComboEstado.setSelectedItem("");
+
+        ComboEfecto.setSelectedItem("");
         txtbuscado.setText("");
         txtConNombre.setText("");
-        txtConEfecto.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -282,8 +326,17 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void ComboEfectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEfectoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboEfectoActionPerformed
+
+    private void ComboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboEstadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboEfecto;
     private javax.swing.JComboBox<String> ComboEstado;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
@@ -301,7 +354,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaVendedores;
-    private javax.swing.JTextField txtConEfecto;
     private javax.swing.JTextField txtConNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables

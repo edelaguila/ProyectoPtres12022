@@ -4,13 +4,13 @@ import compras.vista.*;
 public class clsConcepto {
  private int conid;   
  private String connombre;
- private String conefecto;
+ private Boolean conefecto;
 private Boolean conestatus;
 
     public clsConcepto() {
     }
 
-    public clsConcepto(int conid, String connombre, String conefecto, Boolean conestatus) {
+    public clsConcepto(int conid, String connombre, Boolean conefecto, Boolean conestatus) {
         this.conid = conid;
         this.connombre = connombre;
         this.conefecto = conefecto;
@@ -33,11 +33,11 @@ private Boolean conestatus;
         this.connombre = connombre;
     }
 
-    public String getConefecto() {
+    public Boolean getConefecto() {
         return conefecto;
     }
 
-    public void setConefecto(String conefecto) {
+    public void setConefecto(Boolean conefecto) {
         this.conefecto = conefecto;
     }
 
@@ -53,4 +53,6 @@ private Boolean conestatus;
     public String toString() {
         return "clsConcepto{" + "conid=" + conid + ", connombre=" + connombre + ", conefecto=" + conefecto + ", conestatus=" + conestatus + '}';
     }
+
+
 }
