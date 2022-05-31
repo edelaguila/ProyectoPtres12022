@@ -5,8 +5,20 @@
  */
 package compras.vista;
 
+import compras.controlador.clsCompras;
+import compras.modelo.daoCompras;
 import seguridad.vista.*;
 import java.awt.Dimension;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import seguridad.controlador.clsBitacora;
+import seguridad.controlador.clsUsuario;
+import seguridad.modelo.daoBitacora;
 
 /**
  *
@@ -105,6 +117,11 @@ public class mdiComprasG2 extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jM_MantenimientopApps.setText("Procesos");
+        jM_MantenimientopApps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jM_MantenimientopAppsActionPerformed(evt);
+            }
+        });
 
         jMenuItem4.setText("Ordenes de compras");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -191,14 +208,57 @@ public class mdiComprasG2 extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-        frmProcesoCompras ventana2 = new frmProcesoCompras();
-        jDesktopPane1.add(ventana2);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana2.getSize();
-        ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            daoBitacora bitacoraDAO = new daoBitacora();
+            clsBitacora bitacora = new clsBitacora();
+            
+            LocalDate todaysDate = LocalDate.now();
+            
+            String a = System.getProperty("user.name");
+            String area ="Area Compras";
+            String accion = "Realizacion De compra";
+            int usuario = 1;
+            System.out.println(obtenerIP());
+            
+            bitacora.fSetfecha_Bitacora(String.valueOf(todaysDate));
+            bitacora.fSetarea_Bitacora(area);
+            bitacora.fSetaccion_Bitacora(accion);
+            bitacora.fSetId_Usuario(usuario);
+            bitacora.fSetip_Bitacora(obtenerIP());
+            bitacora.fSetnombrepc_Bitacora(a);
+            bitacoraDAO.insert(bitacora);
+            
+      
+            
+            
+            
+            
+            
+         
+            
+            
+            
+            
+            frmProcesoCompras ventana2 = new frmProcesoCompras();
+            jDesktopPane1.add(ventana2);
+            Dimension desktopSize = jDesktopPane1.getSize();
+            Dimension FrameSize = ventana2.getSize();
+            ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(mdiComprasG2.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+     String obtenerIP() throws UnknownHostException {
+        InetAddress ip = InetAddress.getLocalHost();
+        return ip.getHostAddress();
+    }
+    
+    
+    
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
         frmProcesoCuentasPorPagar ventana2 = new frmProcesoCuentasPorPagar();
@@ -207,6 +267,11 @@ public class mdiComprasG2 extends javax.swing.JFrame {
         Dimension FrameSize = ventana2.getSize();
         ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jM_MantenimientopAppsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jM_MantenimientopAppsActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jM_MantenimientopAppsActionPerformed
 
     /**
      * @param args the command line arguments
