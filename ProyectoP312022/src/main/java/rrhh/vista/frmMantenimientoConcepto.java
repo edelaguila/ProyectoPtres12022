@@ -123,8 +123,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label13 = new javax.swing.JLabel();
         cbox_efecto = new javax.swing.JComboBox<>();
         label14 = new javax.swing.JLabel();
-
-
         cbox_estado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -266,14 +264,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label14.setText("Estado");
         getContentPane().add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-
-        cbox_estado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cbox_estado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbox_estadoActionPerformed(evt);
-            }
-        };
-
         getContentPane().add(cbox_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, -1));
 
         pack();
@@ -359,10 +349,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
          
     }//GEN-LAST:event_cbox_efectoActionPerformed
-
-    private void cbox_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_estadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbox_estadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
