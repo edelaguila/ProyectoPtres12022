@@ -4,7 +4,7 @@ public class clsProveedor {
     private int provid;
     private String provnombre;
     private int provsaldo;
-    private String provestado;
+    private Boolean provestado;
     private int provtelefono;
     private String provdireccion;
 
@@ -15,12 +15,12 @@ public class clsProveedor {
         this.provid = provid;
     }
     
-    public clsProveedor(String provnombre, String provestado) {
+    public clsProveedor(String provnombre, Boolean provestado) {
         this.provnombre = provnombre;
         this.provestado = provestado;
     }
     
-    public clsProveedor(int provid, String provnombre, String provestado) {
+    public clsProveedor(int provid, String provnombre, Boolean provestado) {
         this.provid = provid;
         this.provnombre = provnombre;
         this.provestado = provestado;
@@ -43,11 +43,11 @@ public class clsProveedor {
         this.provnombre = provnombre;
     }
 
-    public String getprovestado() {
+    public Boolean getprovestado() {
         return provestado;
     }
 
-    public void setprovestado(String provestado) {
+    public void setprovestado(Boolean provestado) {
         this.provestado = provestado;
     }
     
