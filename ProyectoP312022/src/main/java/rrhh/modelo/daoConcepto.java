@@ -21,6 +21,7 @@ public class daoConcepto {
     private static final String SQL_UPDATE = "UPDATE tbl_concepto SET concepnombre=?, concepefecto=?, concepestado=?, concepvalor=? WHERE concepid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_concepto WHERE concepid=?";
     private static final String SQL_QUERY = "SELECT concepid, concepnombre, concepefecto, concepestado,concepvalor FROM tbl_concepto WHERE concepid=?";
+    private static final String SQL_QUERY2 = "SELECT concepid, concepnombre, concepefecto, concepestado,concepvalor FROM tbl_concepto WHERE concepnombre=?";
   
 
     public List<clsConcepto> select() {
@@ -179,4 +180,46 @@ public class daoConcepto {
         //return personas;  // Si se utiliza un ArrayList
         return concepto;
     }
+    
+    public clsConcepto query2(clsConcepto concepto) 
+    {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("Ejecutando query:" + SQL_QUERY2);
+            stmt = conn.prepareStatement(SQL_QUERY2);
+            stmt.setString(1, concepto.getconcepnombre());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("concepid");
+                String nombre = rs.getString("concepnombre");
+                String efecto = rs.getString("concepefecto");
+                String estado = rs.getString("concepestado");
+                String valor = rs.getString("concepvalor");
+               
+                
+
+                concepto = new clsConcepto();
+                concepto.setconcepid(id);
+                concepto.setconcepnombre(nombre);
+                concepto.setconcepefecto(efecto);
+                concepto.setconcepestado(estado);
+                concepto.setconcepvalor(valor);
+                 
+            }
+            //System.out.println("Registros buscado:" + persona);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(rs);
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
+        //return personas;  // Si se utiliza un ArrayList
+        return concepto;
+    }
+    
 }
