@@ -284,7 +284,7 @@ tiposAsignacion.addItem("muchos");
         llenadoDeconceptoID();
         sumayresta();
         tipo();
-        tablaasignacion.setVisible(false);
+
         VV.setText("0");
    
     }
@@ -333,9 +333,7 @@ tiposAsignacion.addItem("muchos");
         VV = new javax.swing.JTextField();
         Cbx_buscado = new javax.swing.JComboBox<>();
         VConceptos = new javax.swing.JTextField();
-        btnver = new javax.swing.JButton();
         salario1 = new javax.swing.JTextField();
-        btnocultar = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -528,24 +526,8 @@ tiposAsignacion.addItem("muchos");
         VConceptos.setEnabled(false);
         getContentPane().add(VConceptos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, 30));
 
-        btnver.setText("ver tabla");
-        btnver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnverActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnver, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 95, -1));
-
         salario1.setEnabled(false);
         getContentPane().add(salario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 20, 10));
-
-        btnocultar.setText("ocultar");
-        btnocultar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnocultarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnocultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 200, 95, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -814,20 +796,6 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
         // TODO add your handling code here:
     }//GEN-LAST:event_Cbx_buscadoActionPerformed
 
-    private void btnverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverActionPerformed
-        // TODO add your handling code here:
-         tablaasignacion.setVisible(true);
-         tablaasignacion.getTableHeader().setVisible(true);
-    }//GEN-LAST:event_btnverActionPerformed
-
-    private void btnocultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnocultarActionPerformed
-        // TODO add your handling code here:
-        tablaasignacion.setVisible(false);
-        tablaasignacion.getTableHeader().setVisible(false);
-        tablaasignacion.setShowHorizontalLines(false);
-        tablaasignacion.setShowVerticalLines(false);
-    }//GEN-LAST:event_btnocultarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
@@ -838,8 +806,6 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JButton btnocultar;
-    private javax.swing.JButton btnver;
     private javax.swing.JButton buscarSalario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField conceptosAgregados;

@@ -16,6 +16,9 @@ public class clsGeneracion {
     private String gefinal;
     private String genombre;
     private String geconcepto; 
+    private String geigss;
+    private String geisr;
+    private String geotros; 
     private String gevalor; 
     
 
@@ -26,20 +29,26 @@ public class clsGeneracion {
         this.geid= id;
     }
 
-    public clsGeneracion(String geinicial,String gefinal, String nombre,String concepto, String valor) {
+    public clsGeneracion(String geinicial,String gefinal, String nombre,String concepto, String igss, String isr, String otros, String valor) {
         this.geinicial = geinicial;
         this.gefinal = gefinal;
         this.genombre = nombre;
         this.geconcepto = concepto;
+        this.geigss = igss;
+        this.geisr = isr;
+        this.geotros = otros;
         this.gevalor = valor;
         
     }
-     public clsGeneracion(int id,String geinicial,String gefinal, String nombre,String concepto, String valor) {
+     public clsGeneracion(int id,String geinicial,String gefinal, String nombre,String concepto,  String igss, String isr, String otros, String valor) {
         this.geid= id;
         this.geinicial = geinicial;
         this.gefinal = gefinal;
         this.genombre = nombre;
         this.geconcepto = concepto;
+        this.geigss = igss;
+        this.geisr = isr;
+        this.geotros = otros;
         this.gevalor = valor;
     }
 
@@ -83,6 +92,25 @@ public class clsGeneracion {
     public void setgeconcepto(String concepto) {
         this.geconcepto = concepto;
     }
+    public String getgeigss() {
+        return geigss;
+    }
+    public void setgeigss(String igss) {
+        this.geigss = igss;
+     }
+    public String getgeisr() {
+        return geisr;
+    }
+    public void setgeisr(String isr) {
+        this.geisr = isr;
+     }
+    public String getgeotros() {
+        return geotros;
+    }
+     public void setgeotros(String otros) {
+        this.geotros = otros;
+     }
+     
     public String getgevalor() {
         return gevalor;
     }
@@ -94,7 +122,7 @@ public class clsGeneracion {
 
     @Override
     public String toString() {
-        return "tbl_generacion{" + "geid=" + geid +"geinicial="+ geinicial+", gefinal="+gefinal+", genombre=" + genombre + ", geconcepto=" + geconcepto + ", gevalor ="+ gevalor +"}";
+        return "tbl_generacion{" + "geid=" + geid +"geinicial="+ geinicial+", gefinal="+gefinal+", genombre=" + genombre + ", geconcepto=" + geconcepto + ", geigss="+ geigss +", geisr="+ geisr + ", geotros=" + geotros +", gevalor ="+ gevalor +"}";
     }
     
      }

@@ -54,6 +54,9 @@ CREATE TABLE IF NOT EXISTS tbl_generacion (
 	gefinal DATE,
 	genombre VARCHAR(45) NOT NULL,
         geconcepto VARCHAR(50) NOT NULL,
+	geigss VARCHAR(50) NOT NULL,
+	geisr VARCHAR(50) NOT NULL,
+	geotros VARCHAR(50) NOT NULL,
 	gevalor VARCHAR(45) NOT NULL,
 	PRIMARY KEY (geid))
 ENGINE = InnoDB CHARACTER SET = latin1;

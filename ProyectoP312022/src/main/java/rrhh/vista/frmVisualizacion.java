@@ -34,19 +34,25 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         modelo.addColumn("fecha final");
         modelo.addColumn("nombre");
         modelo.addColumn("concepto");
+        modelo.addColumn("igss");
+        modelo.addColumn("isr");
+        modelo.addColumn("otros");
         modelo.addColumn("valor");
      
         daoGeneracion generaDAO = new daoGeneracion();
         List<clsGeneracion> envia = generaDAO.select();
         tablanomina.setModel(modelo);
-        String[] dato = new String[8];
+        String[] dato = new String[10];
         for (int i = 0; i < envia.size(); i++) {
             dato[0] = Integer.toString(envia.get(i).getgeid());
             dato[1] = envia.get(i).getgeinicial();
             dato[2] = envia.get(i).getgefinal();
             dato[3] = envia.get(i).getgenombre();
             dato[4] = envia.get(i).getgeconcepto();
-            dato[5] = envia.get(i).getgevalor();
+            dato[5] = envia.get(i).getgeigss();
+            dato[6] = envia.get(i).getgeisr();
+            dato[7] = envia.get(i).getgeotros();
+            dato[8] = envia.get(i).getgevalor();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
@@ -71,12 +77,18 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
      
      asignacionAConsultar.getanombre();
      asignacionAConsultar.getaconcepto();
+     asignacionAConsultar.getavigss();
+     asignacionAConsultar.getavisr();
+     asignacionAConsultar.getavotros();
      asignacionAConsultar.getavalor();
     
      nominaAInsertar.setgeinicial(Finicial.getText());
      nominaAInsertar.setgefinal(Ffinal.getText());
      nominaAInsertar.setgenombre(asignacionAConsultar.getanombre());
      nominaAInsertar.setgeconcepto(asignacionAConsultar.getaconcepto());
+     nominaAInsertar.setgeigss(asignacionAConsultar.getavigss());
+     nominaAInsertar.setgeisr(asignacionAConsultar.getavisr());
+     nominaAInsertar.setgeotros(asignacionAConsultar.getavotros()); 
      nominaAInsertar.setgevalor(asignacionAConsultar.getavalor());  
      nominaDAO.insert(nominaAInsertar);
       llenadoDeTablas();
@@ -158,7 +170,7 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
-        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 20, 20));
+        getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 420, 20, 20));
 
         tablanomina.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablanomina.setModel(new javax.swing.table.DefaultTableModel(
@@ -166,11 +178,11 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "id", "fecha inicial", "fecha final", "nombre", "conceptos", "valor"
+                "id", "fecha inicial", "fecha final", "nombre", "conceptos", "igss", "isr", "otros", "valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, false, true
+                false, false, true, true, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -179,7 +191,7 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tablanomina);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 570, 303));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 800, 303));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("----------Visualizacion-----------");

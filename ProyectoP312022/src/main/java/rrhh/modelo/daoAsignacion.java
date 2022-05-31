@@ -178,9 +178,9 @@ public class daoAsignacion {
                 asigna.setaid(id);
                 asigna.setanombre(nombre);
                 asigna.setaconcepto(concepto);
-                asigna.setavalor(vigss);
-                asigna.setavalor(visr);
-                asigna.setavalor(votros);
+                asigna.setavigss(vigss);
+                asigna.setavisr(visr);
+                asigna.setavotros(votros);
                 asigna.setavalor(valor);
               
                  
