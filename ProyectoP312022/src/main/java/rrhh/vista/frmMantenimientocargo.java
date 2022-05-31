@@ -21,6 +21,11 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
     public void llenadoDeCombos() {
 
     }
+    public void estado() {    
+        cbox_estado.addItem("Seleccione una opción");
+        cbox_estado.addItem("activo");
+        cbox_estado.addItem("inactivo");
+    }
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -49,6 +54,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         cargoAConsultar = cargoDAO.query(cargoAConsultar);
         txtNombre.setText(cargoAConsultar.getcarnombre());   
         txtEstado.setText(cargoAConsultar.getcarestatus());
+        cbox_estado.setSelectedItem(cargoAConsultar.getcarestatus());
         
     }
 
@@ -56,6 +62,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
+        estado();
     }
 
     /**
@@ -80,10 +87,10 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCargos = new javax.swing.JTable();
-        txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        cbox_estado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -159,17 +166,14 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaCargos);
 
-        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado.setOpaque(false);
-
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Estado cargo");
+        label5.setToolTipText("Aqui se ingresa si el cargo esta activo o inactivo");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
 
-        jButton2.setText("btnAyuda");
+        jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -206,18 +210,18 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
                             .addComponent(label5))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtNombre))
+                            .addComponent(cbox_estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
                         .addComponent(label1)
                         .addGap(294, 294, 294))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
                         .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
@@ -233,9 +237,9 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
                             .addComponent(label3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label5))
-                        .addGap(142, 142, 142)
+                            .addComponent(label5)
+                            .addComponent(cbox_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(139, 139, 139)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar)
                             .addComponent(btnEliminar)
@@ -246,7 +250,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
                             .addComponent(btnBuscar)
                             .addComponent(btnLimpiar)
                             .addComponent(jButton2))
-                        .addContainerGap(83, Short.MAX_VALUE))
+                        .addContainerGap(87, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lb)
                         .addGap(10, 10, 10)
@@ -271,7 +275,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
          daocargo cargoDAO = new daocargo();        
          clscargo cargoAInsertar = new clscargo();
         cargoAInsertar.setcarnombre(txtNombre.getText());
-         cargoAInsertar.setcarestatus(txtEstado.getText());
+         cargoAInsertar.setcarestatus(cbox_estado.getSelectedItem().toString());       
         cargoDAO.insert(cargoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -287,13 +291,14 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         clscargo cargoAActualizar = new clscargo();
         cargoAActualizar.setcarid(Integer.parseInt(txtbuscado.getText()));
         cargoAActualizar.setcarnombre(txtNombre.getText());
-         cargoAActualizar.setcarestatus(txtEstado.getText());
+         cargoAActualizar.setcarestatus(cbox_estado.getSelectedItem().toString());
        cargoDAO.update(cargoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       
+        
+        cbox_estado.setSelectedIndex(0);
         txtNombre.setText("");
         txtEstado.setText("");
         txtbuscado.setText("");
@@ -328,6 +333,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cbox_estado;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
@@ -337,7 +343,6 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaCargos;
-    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables

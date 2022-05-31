@@ -33,7 +33,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto.addItem("+");
         cbox_efecto.addItem("-");
     }
-
+   
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -78,9 +78,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         llenadoDeCombos();
         efecto();
+     
     
-  
-     }
+       }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,6 +115,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto = new javax.swing.JComboBox<>();
         label14 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
+        cbox_estado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -258,7 +259,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         txtEstado.setOpaque(false);
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, -1));
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 200, -1));
+
+        getContentPane().add(cbox_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,6 +354,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbox_efecto;
+    private javax.swing.JComboBox<String> cbox_estado;
     private javax.swing.JComboBox<String> cbox_trabajadores;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
