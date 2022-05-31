@@ -304,8 +304,13 @@ public class frmOrdenesCompras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         daoOrdenesCompras productoDAO = new daoOrdenesCompras();
         clsOrdenesCompras productoAEliminar = new clsOrdenesCompras();
+        daoOrdenesCompras productoDAO2 = new daoOrdenesCompras();
+        clsOrdenesCompras productoAEliminar2 = new clsOrdenesCompras();
+
         productoAEliminar.setordid(Integer.parseInt(txtbuscado.getText()));
         productoDAO.delete(productoAEliminar);
+        productoAEliminar2.setordid(Integer.parseInt(txtbuscado.getText()));
+        productoDAO2.delete2(productoAEliminar2);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
