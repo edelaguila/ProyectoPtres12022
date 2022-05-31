@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class daoAsignacion {
     
-    private static final String SQL_SELECT = "SELECT aid, anombre, aconcepto, avalor  FROM tbl_asignacion";
-    private static final String SQL_INSERT = "INSERT INTO tbl_asignacion(anombre, aconcepto, avalor) VALUES(?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_asignacion SET anombre=?, aconcepto=?, avalor=? WHERE  aid =?";
+    private static final String SQL_SELECT = "SELECT aid, anombre, aconcepto, avigss, avisr, avotros, avalor  FROM tbl_asignacion";
+    private static final String SQL_INSERT = "INSERT INTO tbl_asignacion(anombre, aconcepto, avigss, avisr, avotros, avalor) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_asignacion SET anombre=?, aconcepto=?, avigss=?, avisr=?, avotros=?, avalor=? WHERE  aid =?";
     private static final String SQL_DELETE = "DELETE FROM tbl_asignacion WHERE aid=?";
-    private static final String SQL_QUERY = "SELECT aid, anombre, aconcepto, avalor FROM tbl_asignacion WHERE aid =?";
+    private static final String SQL_QUERY = "SELECT aid, anombre, aconcepto, avigss, avisr, avotros, avalor FROM tbl_asignacion WHERE aid =?";
   
 
     public List<clsAsignacion> select() {
@@ -38,6 +38,9 @@ public class daoAsignacion {
                 int id = rs.getInt("aid");
                 String nombre = rs.getString("anombre");
                 String concepto = rs.getString("aconcepto");
+                String vigss = rs.getString("avigss");
+                String visr = rs.getString("avisr");
+                String votros = rs.getString("avotros");
                 String valor = rs.getString("avalor");
                
          
@@ -47,6 +50,9 @@ public class daoAsignacion {
                 asigna.setaid(id);
                 asigna.setanombre(nombre);
                 asigna.setaconcepto(concepto);
+                asigna.setavigss(vigss);
+                asigna.setavisr(visr);
+                asigna.setavotros(votros);
                 asigna.setavalor(valor);
            
                 
@@ -74,7 +80,10 @@ public class daoAsignacion {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, asignas.getanombre());
             stmt.setString(2, asignas.getaconcepto());
-            stmt.setString(3, asignas.getavalor());
+            stmt.setString(3, asignas.getavigss());
+            stmt.setString(4, asignas.getavisr());
+            stmt.setString(5, asignas.getavotros());
+            stmt.setString(6, asignas.getavalor());
            
            
                   
@@ -101,8 +110,11 @@ public class daoAsignacion {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, asigna.getanombre());
             stmt.setString(2, asigna.getaconcepto());
-            stmt.setString(3, asigna.getavalor());
-            stmt.setInt(4, asigna.getaid());
+            stmt.setString(3, asigna.getavigss());
+            stmt.setString(4, asigna.getavisr());
+            stmt.setString(5, asigna.getavotros());
+            stmt.setString(6, asigna.getavalor());
+            stmt.setInt(7, asigna.getaid());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -154,6 +166,9 @@ public class daoAsignacion {
                 int id = rs.getInt("aid");
                 String nombre = rs.getString("anombre");
                 String concepto = rs.getString("aconcepto");
+                String vigss = rs.getString("avigss");
+                String visr = rs.getString("avisr");
+                String votros = rs.getString("avotros");
                 String valor = rs.getString("avalor");
                
                
@@ -163,6 +178,9 @@ public class daoAsignacion {
                 asigna.setaid(id);
                 asigna.setanombre(nombre);
                 asigna.setaconcepto(concepto);
+                asigna.setavigss(vigss);
+                asigna.setavisr(visr);
+                asigna.setavotros(votros);
                 asigna.setavalor(valor);
               
                  
