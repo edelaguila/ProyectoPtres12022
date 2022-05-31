@@ -230,7 +230,7 @@ tiposAsignacion.addItem("muchos");
      empleadoAConsultar.getempdias();
 
    String conceptos = conceptosAgregados.getText();
-
+   String valorConcepto = VConceptos.getText();
 
     Double numero1= Double.parseDouble(empleadoAConsultar.getempsueldo());
     Double numero2= Double.parseDouble(VV.getText());
@@ -243,6 +243,9 @@ tiposAsignacion.addItem("muchos");
          
      datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
      datosAInsertar.setaconcepto(conceptos);
+     datosAInsertar.setavigss(String.valueOf(porcentajeIgss));
+     datosAInsertar.setavisr(String.valueOf(porcentajeIsr));
+     datosAInsertar.setavotros(String.valueOf(pilaValores));
      datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
     
      datosDAO.insert(datosAInsertar);
@@ -253,9 +256,9 @@ tiposAsignacion.addItem("muchos");
    
      datosAInsertar.setanombre(empleadoAConsultar.getempnombre());
      datosAInsertar.setaconcepto(conceptos);
-     datosAInsertar.setavigss("1");
-     datosAInsertar.setavisr("1");
-     datosAInsertar.setavotros(conceptos);
+     datosAInsertar.setavigss(String.valueOf(porcentajeIgss));
+     datosAInsertar.setavisr(String.valueOf(porcentajeIsr));
+     datosAInsertar.setavotros(String.valueOf(pilaValores));
      datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
     
      datosDAO.insert(datosAInsertar);
@@ -579,7 +582,7 @@ tiposAsignacion.addItem("muchos");
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         
-       
+       VConceptos.setText("");
         salario.setText("");
         valor.setText("");
         efecto.setSelectedIndex(0);
@@ -614,18 +617,43 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
         
         vigss = Double.parseDouble(valor.getText());
             
+         
+        String nameconcepto; 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
+        pila.push(nameconcepto); 
+        agrega(pila); 
+            
+   
+        
+        
+        n = nagregados++;
+        
         
         }else if (isr.equals(Cbx_buscado.getSelectedItem().toString())){
         
         visr = Double.parseDouble(valor.getText());
+        
+         
+        String nameconcepto; 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
+        pila.push(nameconcepto); 
+        agrega(pila); 
             
         
+        
+        n = nagregados++;
+   
         }else{
         
      
         proceso();    
-        }
- 
+        
+         String nameValores; 
+        nameValores = Cbx_buscado.getSelectedItem().toString()+separador+valor.getText(); 
+        pilaValores.push(nameValores); 
+        agregaValores(pilaValores); 
+        
+        
         String nameconcepto; 
         nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
         pila.push(nameconcepto); 
@@ -633,9 +661,23 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
 
         n = nagregados++;
         
+        }
+        
         }else{
             
         if (igss.equals(Cbx_buscado.getSelectedItem().toString())){
+        
+        String nameconcepto; 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
+        pila.push(nameconcepto); 
+        agrega(pila); 
+            
+        procedimientosAdd();
+        
+        
+        n = nagregados++;
+        
+        }else if (isr.equals(Cbx_buscado.getSelectedItem().toString())){
         
         String nameconcepto; 
         nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
