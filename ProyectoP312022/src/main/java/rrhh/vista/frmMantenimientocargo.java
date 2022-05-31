@@ -53,7 +53,6 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         cargoAConsultar.setcarid(Integer.parseInt(txtbuscado.getText()));
         cargoAConsultar = cargoDAO.query(cargoAConsultar);
         txtNombre.setText(cargoAConsultar.getcarnombre());   
-        txtEstado.setText(cargoAConsultar.getcarestatus());
         cbox_estado.setSelectedItem(cargoAConsultar.getcarestatus());
         
     }
@@ -300,7 +299,6 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         
         cbox_estado.setSelectedIndex(0);
         txtNombre.setText("");
-        txtEstado.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
