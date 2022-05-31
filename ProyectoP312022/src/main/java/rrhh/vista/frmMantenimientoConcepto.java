@@ -33,6 +33,14 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto.addItem("+");
         cbox_efecto.addItem("-");
     }
+ 
+       
+    public void estado() {    
+        cbox_estado.addItem("Seleccione una opción");
+        cbox_estado.addItem("activo");
+        cbox_estado.addItem("inactivo");
+    }
+
    
 
     public void llenadoDeTablas() {
@@ -68,7 +76,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         empleadoAConsultar = empleadoDAO.query(empleadoAConsultar);
         txtNombre.setText(empleadoAConsultar.getconcepnombre());
         cbox_efecto.setSelectedItem(empleadoAConsultar.getconcepefecto());
-        txtEstado.setText(empleadoAConsultar.getconcepestado());
+        cbox_estado.setSelectedItem(empleadoAConsultar.getconcepestado());
         txtValor.setText(empleadoAConsultar.getconcepvalor());
       
     }
@@ -78,9 +86,10 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         llenadoDeCombos();
         efecto();
-     
-    
+        estado();
+
        }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,7 +123,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label13 = new javax.swing.JLabel();
         cbox_efecto = new javax.swing.JComboBox<>();
         label14 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
+
+
         cbox_estado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -256,10 +266,13 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label14.setText("Estado");
         getContentPane().add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado.setOpaque(false);
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 200, -1));
+
+        cbox_estado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cbox_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbox_estadoActionPerformed(evt);
+            }
+        };
 
         getContentPane().add(cbox_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, -1));
 
@@ -280,17 +293,17 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         clsConcepto empleadoAInsertar = new clsConcepto();
         empleadoAInsertar.setconcepnombre(txtNombre.getText());
         empleadoAInsertar.setconcepefecto(cbox_efecto.getSelectedItem().toString());
-        empleadoAInsertar.setconcepestado(txtEstado.getText());
+        empleadoAInsertar.setconcepestado(cbox_estado.getSelectedItem().toString());
         empleadoAInsertar.setconcepvalor(txtValor.getText());
         //empleadoAInsertar.setempdias(txtDias.getText());
         empleadoDAO.insert(empleadoAInsertar);
         llenadoDeTablas();
-
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscarconceptos();
+        buscarconceptos(); 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -300,7 +313,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         empleadoAActualizar.setconcepid(Integer.parseInt(txtbuscado.getText()));
         empleadoAActualizar.setconcepnombre(txtNombre.getText());
         empleadoAActualizar.setconcepefecto(cbox_efecto.getSelectedItem().toString());
-        empleadoAActualizar.setconcepestado(txtEstado.getText());
+        empleadoAActualizar.setconcepestado(cbox_estado.getSelectedItem().toString());
          empleadoAActualizar.setconcepvalor(txtValor.getText());
         //empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
@@ -344,7 +357,12 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void cbox_efectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_efectoActionPerformed
         // TODO add your handling code here:
+         
     }//GEN-LAST:event_cbox_efectoActionPerformed
+
+    private void cbox_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbox_estadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -369,7 +387,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaEmpleados;
-    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtValor;
     private javax.swing.JTextField txtbuscado;
