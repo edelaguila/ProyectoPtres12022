@@ -36,6 +36,15 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         }
     }
     
+    public void llenadoDeconceptoID() {
+        daoConcepto conceptoDAO = new daoConcepto();
+        List<clsConcepto> IdConcepto = conceptoDAO.select();
+        Cbx_buscado.addItem("Seleccione una opción");
+        for (int i = 0; i < IdConcepto.size(); i++) {
+            Cbx_buscado.addItem(IdConcepto.get(i).getconcepnombre());
+        }
+    }
+    
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("id");
@@ -69,9 +78,8 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         clsConcepto conceptoAConsultar = new clsConcepto();
         daoConcepto conceptoDAO = new daoConcepto();
         
-        conceptoAConsultar.setconcepid(Integer.parseInt(txtbuscado.getText()));
-        conceptoAConsultar = conceptoDAO.query(conceptoAConsultar);
-        concepto.setText(conceptoAConsultar.getconcepnombre());     
+        conceptoAConsultar.setconcepnombre(Cbx_buscado.getSelectedItem().toString());
+        conceptoAConsultar = conceptoDAO.query2(conceptoAConsultar);     
         valor.setText(conceptoAConsultar.getconcepvalor());
         efecto.setSelectedItem(conceptoAConsultar.getconcepefecto());
        
@@ -114,7 +122,7 @@ tiposAsignacion.addItem("muchos");
     public void procedimientosAdd(){
    String igss = "igss";
    String isr= "isr" ;
-   String conceptos = concepto.getText();
+   String conceptos = Cbx_buscado.getSelectedItem().toString();
 
    Double numero1= Double.parseDouble(salario.getText());
    Double numero2= Double.parseDouble(valor.getText()); 
@@ -251,6 +259,7 @@ tiposAsignacion.addItem("muchos");
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
+        llenadoDeconceptoID();
         sumayresta();
         tipo();
 
@@ -275,13 +284,10 @@ tiposAsignacion.addItem("muchos");
         btnRegistrar = new javax.swing.JButton();
         Buscar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
-        txtbuscado = new javax.swing.JTextField();
-        concepto = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         lb = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaasignacion = new javax.swing.JTable();
-        label4 = new javax.swing.JLabel();
         empleadoss = new javax.swing.JComboBox<>();
         label2 = new javax.swing.JLabel();
         label5 = new javax.swing.JLabel();
@@ -303,6 +309,7 @@ tiposAsignacion.addItem("muchos");
         tipos_asignacion = new javax.swing.JButton();
         label11 = new javax.swing.JLabel();
         VV = new javax.swing.JTextField();
+        Cbx_buscado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -339,22 +346,11 @@ tiposAsignacion.addItem("muchos");
                 BuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 70, 30));
+        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 70, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 550, 20, 10));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 120, 30));
-
-        concepto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        concepto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        concepto.setOpaque(false);
-        concepto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                conceptoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(concepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 100, 30));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -389,10 +385,6 @@ tiposAsignacion.addItem("muchos");
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 350, 303));
 
-        label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label4.setText("Nombre");
-        getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, -1));
-
         empleadoss.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         empleadoss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -412,23 +404,23 @@ tiposAsignacion.addItem("muchos");
         valor.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         valor.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         valor.setOpaque(false);
-        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 100, 30));
+        getContentPane().add(valor, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 90, 100, 30));
 
         lb1.setForeground(new java.awt.Color(204, 204, 204));
         lb1.setText(".");
-        getContentPane().add(lb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 13, -1));
+        getContentPane().add(lb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 90, 13, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Valor");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, -1, -1));
 
         lb3.setForeground(new java.awt.Color(204, 204, 204));
         lb3.setText(".");
-        getContentPane().add(lb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, 13, -1));
+        getContentPane().add(lb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 13, -1));
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label7.setText("Efecto");
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -470,10 +462,10 @@ tiposAsignacion.addItem("muchos");
                 efectoActionPerformed(evt);
             }
         });
-        getContentPane().add(efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 100, 20));
+        getContentPane().add(efecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 100, 20));
 
         label10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label10.setText("Buscar Concepto");
+        label10.setText("Buscar conceptos");
         getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
 
         tiposAsignacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -498,6 +490,14 @@ tiposAsignacion.addItem("muchos");
 
         VV.setEnabled(false);
         getContentPane().add(VV, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 90, 30));
+
+        Cbx_buscado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Cbx_buscado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cbx_buscadoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Cbx_buscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 120, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -553,13 +553,13 @@ tiposAsignacion.addItem("muchos");
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         
-        concepto.setText("");
+       
         salario.setText("");
         valor.setText("");
         efecto.setSelectedIndex(0);
         tiposAsignacion.setSelectedIndex(0);
+        Cbx_buscado.setSelectedIndex(0);
         empleadoss.setSelectedIndex(0);
-        txtbuscado.setText("");
         conceptosAgregados.setText("");
         btnRegistrar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -581,12 +581,12 @@ double vigss=0,visr=0;
          String igss ="igss",isr ="isr";
         if(tiposAsignacion.getSelectedItem().toString().equals(much)){
         
-        if (igss.equals(concepto.getText())){
+        if (igss.equals(Cbx_buscado.getSelectedItem().toString())){
         
         vigss = Double.parseDouble(valor.getText());
             
         
-        }else if (isr.equals(concepto.getText())){
+        }else if (isr.equals(Cbx_buscado.getSelectedItem().toString())){
         
         visr = Double.parseDouble(valor.getText());
             
@@ -602,14 +602,14 @@ double vigss=0,visr=0;
             
             
         String nameconcepto; 
-        nameconcepto = concepto.getText(); 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
         pila.push(nameconcepto); 
         agrega(pila); 
         n = nagregados++;
         
         }else{
         String nameconcepto; 
-        nameconcepto = concepto.getText(); 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
         pila.push(nameconcepto); 
         agrega(pila); 
         
@@ -680,13 +680,14 @@ double vigss=0,visr=0;
         
     }//GEN-LAST:event_tipos_asignacionActionPerformed
 
-    private void conceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conceptoActionPerformed
+    private void Cbx_buscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbx_buscadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_conceptoActionPerformed
+    }//GEN-LAST:event_Cbx_buscadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
+    private javax.swing.JComboBox<String> Cbx_buscado;
     private javax.swing.JTextField VV;
     private javax.swing.JButton agregar;
     private javax.swing.JButton btnEliminar;
@@ -694,7 +695,6 @@ double vigss=0,visr=0;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton buscarSalario;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField concepto;
     private javax.swing.JTextField conceptosAgregados;
     private javax.swing.JComboBox<String> efecto;
     private javax.swing.JComboBox<String> empleadoss;
@@ -704,7 +704,6 @@ double vigss=0,visr=0;
     private javax.swing.JLabel label11;
     private javax.swing.JLabel label2;
     private javax.swing.JLabel label3;
-    private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
     private javax.swing.JLabel label7;
@@ -720,7 +719,6 @@ double vigss=0,visr=0;
     private javax.swing.JTable tablaasignacion;
     private javax.swing.JComboBox<String> tiposAsignacion;
     private javax.swing.JButton tipos_asignacion;
-    private javax.swing.JTextField txtbuscado;
     private javax.swing.JTextField valor;
     // End of variables declaration//GEN-END:variables
 }

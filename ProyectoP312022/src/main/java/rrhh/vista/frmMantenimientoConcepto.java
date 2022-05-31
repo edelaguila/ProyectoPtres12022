@@ -33,6 +33,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_efecto.addItem("+");
         cbox_efecto.addItem("-");
     }
+ 
        
     public void estado() {    
         cbox_estado.addItem("Seleccione una opción");
@@ -40,6 +41,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         cbox_estado.addItem("inactivo");
     }
 
+   
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -85,8 +87,9 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         llenadoDeCombos();
         efecto();
         estado();
-  
-     }
+
+       }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,6 +123,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label13 = new javax.swing.JLabel();
         cbox_efecto = new javax.swing.JComboBox<>();
         label14 = new javax.swing.JLabel();
+
+
         cbox_estado = new javax.swing.JComboBox<>();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -261,12 +266,14 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label14.setText("Estado");
         getContentPane().add(label14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
+
         cbox_estado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbox_estadoActionPerformed(evt);
             }
-        });
+        };
+
         getContentPane().add(cbox_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, -1));
 
         pack();
