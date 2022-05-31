@@ -45,7 +45,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
             dato[0] = Integer.toString(vendedores.get(i).getprovid());
             dato[1] = vendedores.get(i).getprovnombre();
             dato[2] = String.valueOf(vendedores.get(i).getprovsaldo());
-            dato[3] = vendedores.get(i).getprovestado();
+            dato[3] = vendedores.get(i).getprovestado().toString();
             dato[4] = String.valueOf(vendedores.get(i).getprovtelefono());
             dato[5] = vendedores.get(i).getprovtdireccion();
             
@@ -61,7 +61,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         vendedorAConsultar = vendedorDAO.query(vendedorAConsultar);
         txtNombre.setText(vendedorAConsultar.getprovnombre());
         txtSaldo.setText(String.valueOf(vendedorAConsultar.getprovsaldo()));  
-        txtEstado.setText(vendedorAConsultar.getprovestado());  
+        txtEstado.setText(vendedorAConsultar.getprovestado().toString());  
         txtTelefono.setText(String.valueOf(vendedorAConsultar.getprovtelefono())); 
         txtDireccion.setText(vendedorAConsultar.getprovtdireccion());      
     }
@@ -94,7 +94,6 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
-        txtEstado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -106,6 +105,8 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        cbEstado = new javax.swing.JComboBox<>();
+        txtEstado = new javax.swing.JLabel();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -113,8 +114,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setResizable(true);
-        setTitle("Mantenimiento Perfiles");
+        setTitle("Mantenimiento Proveedores");
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,7 +124,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +132,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 259, 95, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +140,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 70, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("PROVEEDORES");
@@ -152,7 +152,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 95, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText("Saldo Proveedor");
@@ -161,7 +161,6 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
 
         txtSaldo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtSaldo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtSaldo.setOpaque(false);
         getContentPane().add(txtSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 110, 230, -1));
 
         btnLimpiar.setText("Limpiar");
@@ -170,8 +169,10 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 95, -1));
 
+        tablaVendedores.setBackground(new java.awt.Color(204, 255, 255));
+        tablaVendedores.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,11 +194,6 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 20, 612, 303));
 
-        txtEstado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtEstado.setOpaque(false);
-        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 140, 230, 20));
-
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("Estado Proveedor");
         getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
@@ -206,31 +202,30 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         lb.setText(".");
         getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 20, 13, -1));
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jButton2.setText("Ayuda");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 90, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 60, 30));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Telefono Proveedor");
-        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        getContentPane().add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtTelefono.setOpaque(false);
-        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 240, -1));
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 240, -1));
 
         txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtDireccion.setOpaque(false);
         getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 240, -1));
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label7.setText("Direccion Proveedor");
-        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 130, -1));
+        getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 130, -1));
 
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Nombre Proveedor");
@@ -238,7 +233,6 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
 
         txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtNombre.setOpaque(false);
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -259,6 +253,14 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 40, 20));
 
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        getContentPane().add(cbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, -1));
+
+        txtEstado.setBackground(new java.awt.Color(51, 51, 255));
+        txtEstado.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        txtEstado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 90, 20));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -276,7 +278,12 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         clsProveedor vendedorAInsertar = new clsProveedor();
         vendedorAInsertar.setprovnombre(txtNombre.getText());
         vendedorAInsertar.setprovsaldo(Integer.parseInt(txtSaldo.getText()));
-         vendedorAInsertar.setprovestado(txtEstado.getText());
+        if (cbEstado.getSelectedItem().equals("Activo")) {
+            vendedorAInsertar.setprovestado(true);
+        } else {
+            vendedorAInsertar.setprovestado(false);
+        }
+        vendedorDAO.insert(vendedorAInsertar);
         vendedorAInsertar.setprovtelefono(Integer.parseInt(txtTelefono.getText()));
         vendedorAInsertar.setprovtdireccion(txtDireccion.getText());
         vendedorDAO.insert(vendedorAInsertar);
@@ -295,7 +302,11 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
         vendedorAActualizar.setprovid(Integer.parseInt(txtbuscado.getText()));
         vendedorAActualizar.setprovnombre(txtNombre.getText());
         vendedorAActualizar.setprovsaldo(Integer.parseInt(txtSaldo.getText()));
-        vendedorAActualizar.setprovestado(txtEstado.getText());
+        if (cbEstado.getSelectedItem().equals("Activo")) {
+            vendedorAActualizar.setprovestado(true);
+        } else {
+            vendedorAActualizar.setprovestado(false);
+        }
         vendedorAActualizar.setprovtelefono(Integer.parseInt(txtTelefono.getText()));
         vendedorAActualizar.setprovtdireccion(txtDireccion.getText());
         vendedorDAO.update(vendedorAActualizar);
@@ -350,6 +361,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -365,7 +377,7 @@ public class frmMantenimientoProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaVendedores;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEstado;
+    private javax.swing.JLabel txtEstado;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSaldo;
     private javax.swing.JTextField txtTelefono;
