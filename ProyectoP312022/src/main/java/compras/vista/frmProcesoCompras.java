@@ -172,7 +172,6 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
         label14 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtComid = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -454,14 +453,6 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 500, 40));
 
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 600, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -685,15 +676,6 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbx_OrdenActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-     
-        
-        
-       
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -706,7 +688,6 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbx_Proveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
