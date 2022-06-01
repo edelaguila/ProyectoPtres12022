@@ -17,6 +17,7 @@ import java.util.List;
  * @author visitante
  */
 public class daoCompras {
+    //programado por josue moran 
 
     private static final String SQL_SELECT = "SELECT comid ,provid, comserie, ordid , comfechaemi, comfechavenci FROM tbl_compraencabezado";
     private static final String SQL_SELECT2 = "SELECT prodid, ordcantidad, ordcosto FROM tbl_compradetalle";
@@ -25,6 +26,7 @@ public class daoCompras {
     private static final String SQL_UPDATE = "UPDATE tbl_compraencabezado SET provid = ?, comserie = ?, ordid = ?, comfechaemi = ?, comfechavenci = ? WHERE tbl_compraencabezado.comid = ?";
     private static final String SQL_UPDATE2 = "UPDATE tbl_compradetalle SET prodid = ?, ordcantidad = ?, ordcosto = ? WHERE tbl_compradetalle.comid = ?";
     private static final String SQL_UPDATE3 = "UPDATE tbl_producto SET prodexistencia = ? WHERE tbl_producto.prodid = ?";
+    private static final String SQL_UPDATE4 = "UPDATE tbl_proveedor SET provsaldo = ? WHERE tbl_proveedor.provid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_compraencabezado WHERE tbl_compraencabezado.comid = ?";
     private static final String SQL_DELETE2 = "DELETE FROM tbl_compradetalle WHERE tbl_compradetalle.comid = ?";
     private static final String SQL_QUERY = "SELECT comid ,provid, comserie, ordid , comfechaemi, comfechavenci FROM tbl_compraencabezado WHERE tbl_compraencabezado.comid = ?";
@@ -32,6 +34,9 @@ public class daoCompras {
     private static final String SQL_QUERY3 = "SELECT prodexistencia FROM tbl_producto WHERE prodid = ?";
     private static final String SQL_QUERY4 = "SELECT ordcantidad FROM tbl_compradetalle WHERE comid = ?";
     private static final String SQL_QUERY5 = "SELECT prodid FROM tbl_compradetalle WHERE tbl_compradetalle.comid=?";
+    private static final String SQL_QUERY6 = "SELECT provsaldo FROM tbl_proveedor WHERE tbl_proveedor.provid=?";
+    private static final String SQL_QUERY7 = "SELECT ordcosto FROM tbl_compradetalle WHERE tbl_compradetalle.comid = ?";
+
     public List<clsCompras> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -225,6 +230,30 @@ public class daoCompras {
             System.out.println(producto.getProdexistenciaA());
             stmt.setInt(1,producto.getProdexistenciaA());
             stmt.setInt(2, producto.getComid2()); 
+
+            rows = stmt.executeUpdate();
+            System.out.println("Registros actualizado:" + rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
+        return rows;
+    }
+    public int update4(clsCompras producto) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("ejecutando query3: " + SQL_UPDATE4);
+            stmt = conn.prepareStatement(SQL_UPDATE4);
+
+            stmt.setInt(1,producto.getProvsadoO());
+            stmt.setInt(2, producto.getProvid()); 
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -439,6 +468,68 @@ public class daoCompras {
 
                 compras = new clsCompras();
                 compras.setProdexistencia(ordcantidad);
+
+            }
+            //System.out.println("Registros buscado:" + persona);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(rs);
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
+        //return personas;  // Si se utiliza un ArrayList
+        return compras;
+    }
+         public clsCompras query6(clsCompras compras) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("Ejecutando query6:" + SQL_QUERY6);
+            stmt = conn.prepareStatement(SQL_QUERY6);
+            stmt.setInt(1, compras.getProvid());
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int provsaldo= rs.getInt("provsaldo");
+                
+
+                compras = new clsCompras();
+                compras.setProvsaldo(provsaldo);
+
+            }
+            //System.out.println("Registros buscado:" + persona);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(rs);
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
+        //return personas;  // Si se utiliza un ArrayList
+        return compras;
+    }
+                  public clsCompras query7(clsCompras compras) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("Ejecutando query6:" + SQL_QUERY7);
+            stmt = conn.prepareStatement(SQL_QUERY7);
+            stmt.setInt(1, compras.getComid());
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int ordcosto= rs.getInt("ordcosto");
+                
+
+                compras = new clsCompras();
+                compras.setProvsaldo(ordcosto);
 
             }
             //System.out.println("Registros buscado:" + persona);
