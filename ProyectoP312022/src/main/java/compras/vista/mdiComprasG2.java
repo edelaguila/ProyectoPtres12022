@@ -172,39 +172,139 @@ public class mdiComprasG2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+try {
+            // TODO add your handling code here:
+            
+            daoBitacora bitacoraDAO = new daoBitacora();
+            clsBitacora bitacora = new clsBitacora();
+            
+            LocalDate todaysDate = LocalDate.now();
+            
+            String a = System.getProperty("user.name");
+            String area ="Area Compras";
+            String accion = "Realizacion De proveedores";
+            int usuario = 1;
+            System.out.println(obtenerIP());
+            
+            bitacora.fSetfecha_Bitacora(String.valueOf(todaysDate));
+            bitacora.fSetarea_Bitacora(area);
+            bitacora.fSetaccion_Bitacora(accion);
+            bitacora.fSetId_Usuario(usuario);
+            bitacora.fSetip_Bitacora(obtenerIP());
+            bitacora.fSetnombrepc_Bitacora(a);
+            bitacoraDAO.insert(bitacora);
+
         frmMantenimientoProveedor ventana = new frmMantenimientoProveedor();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);        // TODO add your handling code here:
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(mdiComprasG2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+try {
+            // TODO add your handling code here:
+            
+            daoBitacora bitacoraDAO = new daoBitacora();
+            clsBitacora bitacora = new clsBitacora();
+            
+            LocalDate todaysDate = LocalDate.now();
+            
+            String a = System.getProperty("user.name");
+            String area ="Area Compras";
+            String accion = "Realizacion De producto";
+            int usuario = 1;
+            System.out.println(obtenerIP());
+            
+            bitacora.fSetfecha_Bitacora(String.valueOf(todaysDate));
+            bitacora.fSetarea_Bitacora(area);
+            bitacora.fSetaccion_Bitacora(accion);
+            bitacora.fSetId_Usuario(usuario);
+            bitacora.fSetip_Bitacora(obtenerIP());
+            bitacora.fSetnombrepc_Bitacora(a);
+            bitacoraDAO.insert(bitacora);
+
         frmMantenimientoProducto ventana = new frmMantenimientoProducto();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
 
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(mdiComprasG2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+try {
+            // TODO add your handling code here:
+            
+            daoBitacora bitacoraDAO = new daoBitacora();
+            clsBitacora bitacora = new clsBitacora();
+            
+            LocalDate todaysDate = LocalDate.now();
+            
+            String a = System.getProperty("user.name");
+            String area ="Area Compras";
+            String accion = "Realizacion De concepto";
+            int usuario = 1;
+            System.out.println(obtenerIP());
+            
+            bitacora.fSetfecha_Bitacora(String.valueOf(todaysDate));
+            bitacora.fSetarea_Bitacora(area);
+            bitacora.fSetaccion_Bitacora(accion);
+            bitacora.fSetId_Usuario(usuario);
+            bitacora.fSetip_Bitacora(obtenerIP());
+            bitacora.fSetnombrepc_Bitacora(a);
+            bitacoraDAO.insert(bitacora);
+
         frmMantenimientoConcepto ventana = new frmMantenimientoConcepto();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(mdiComprasG2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+try {
+            // TODO add your handling code here:
+            
+            daoBitacora bitacoraDAO = new daoBitacora();
+            clsBitacora bitacora = new clsBitacora();
+            
+            LocalDate todaysDate = LocalDate.now();
+            
+            String a = System.getProperty("user.name");
+            String area ="Area Compras";
+            String accion = "Realizacion De orden de compra";
+            int usuario = 1;
+            System.out.println(obtenerIP());
+            
+            bitacora.fSetfecha_Bitacora(String.valueOf(todaysDate));
+            bitacora.fSetarea_Bitacora(area);
+            bitacora.fSetaccion_Bitacora(accion);
+            bitacora.fSetId_Usuario(usuario);
+            bitacora.fSetip_Bitacora(obtenerIP());
+            bitacora.fSetnombrepc_Bitacora(a);
+            bitacoraDAO.insert(bitacora);
+
         frmOrdenesCompras ventana2 = new frmOrdenesCompras();
         jDesktopPane1.add(ventana2);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana2.getSize();
         ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(mdiComprasG2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -260,12 +360,37 @@ public class mdiComprasG2 extends javax.swing.JFrame {
     
     
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            daoBitacora bitacoraDAO = new daoBitacora();
+            clsBitacora bitacora = new clsBitacora();
+            
+            LocalDate todaysDate = LocalDate.now();
+            
+            String a = System.getProperty("user.name");
+            String area ="Area Compras";
+            String accion = "Realizacion De cuentas por pagar";
+            int usuario = 1;
+            System.out.println(obtenerIP());
+            
+            bitacora.fSetfecha_Bitacora(String.valueOf(todaysDate));
+            bitacora.fSetarea_Bitacora(area);
+            bitacora.fSetaccion_Bitacora(accion);
+            bitacora.fSetId_Usuario(usuario);
+            bitacora.fSetip_Bitacora(obtenerIP());
+            bitacora.fSetnombrepc_Bitacora(a);
+            bitacoraDAO.insert(bitacora);
+
         frmProcesoCuentasPorPagar ventana2 = new frmProcesoCuentasPorPagar();
         jDesktopPane1.add(ventana2);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana2.getSize();
         ventana2.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(mdiComprasG2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jM_MantenimientopAppsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jM_MantenimientopAppsActionPerformed
