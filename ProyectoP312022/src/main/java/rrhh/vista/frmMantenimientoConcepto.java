@@ -6,12 +6,18 @@
 package rrhh.vista;
 
 
+
+import java.awt.Desktop;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import rrhh.modelo.daoConcepto;
 import rrhh.controlador.clsConcepto;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
-
+import java.io.IOException;
+import java.net.URI;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -113,7 +119,7 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         tablaEmpleados = new javax.swing.JTable();
         cbox_trabajadores = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        ayuda = new javax.swing.JButton();
         label8 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
@@ -214,13 +220,13 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         label4.setText("-----------------Ingreso de datos del empleado-----------------");
         getContentPane().add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 360, -1));
 
-        jButton2.setText("Ayuda");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ayuda.setText("Ayuda");
+        ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ayudaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 100, -1));
+        getContentPane().add(ayuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 100, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Nombre");
@@ -271,10 +277,16 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        int i =JOptionPane.showConfirmDialog(this, "seguro que quieres borrar este dato ");
+        if ( i == 0){
         daoConcepto empleadoDAO = new daoConcepto();
         clsConcepto empleadoAEliminar = new clsConcepto();
         empleadoAEliminar.setconcepid(Integer.parseInt(txtbuscado.getText()));
         empleadoDAO.delete(empleadoAEliminar);
+
+        } else if(1==1){
+         JOptionPane.showMessageDialog(this, "no se a borrado los datos ");
+        }
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -298,6 +310,8 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
+int i =JOptionPane.showConfirmDialog(this, "seguro que quieres modificar este dato ");
+        if ( i == 0){
         daoConcepto empleadoDAO = new daoConcepto();
         clsConcepto empleadoAActualizar = new clsConcepto();
         empleadoAActualizar.setconcepid(Integer.parseInt(txtbuscado.getText()));
@@ -307,7 +321,11 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
          empleadoAActualizar.setconcepvalor(txtValor.getText());
         //empleadoAActualizar.setempdias(txtDias.getText());  
         empleadoDAO.update(empleadoAActualizar);
-        llenadoDeTablas();
+        
+        }   else if(1==1){
+         JOptionPane.showMessageDialog(this, "no se a modificado los datos ");
+        }
+         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -328,30 +346,41 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbox_trabajadoresActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ayudaActionPerformed
         // TODO add your handling code here:
-        try {
-            if ((new File("src\\main\\java\\ayudas\\ProcesoMayor.chm")).exists()) {
-                Process p = Runtime
-                        .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\ProcesoMayor.chm");
-                p.waitFor();
-            } else {
-                System.out.println("La ayuda no Fue encontrada");
-            }
-            System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+  
+ 
+//EVENTO DEL BOTON
+ayuda.addActionListener(new ActionListener()
+{
+public void actionPerformed(ActionEvent evento)
+{
+ 
+try{
+            
+            Desktop.getDesktop().browse(new URI("https://docs.oracle.com/netbeans/nb81/netbeans/NBDAG.pdf"));
+        } catch (Exception e){
+JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
+ 
+
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+ 
+
+}
+
+});
+       
+    }//GEN-LAST:event_ayudaActionPerformed
 
     private void cbox_efectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbox_efectoActionPerformed
         // TODO add your handling code here:
-         
+        
     }//GEN-LAST:event_cbox_efectoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ayuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
@@ -360,7 +389,6 @@ public class frmMantenimientoConcepto extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbox_efecto;
     private javax.swing.JComboBox<String> cbox_estado;
     private javax.swing.JComboBox<String> cbox_trabajadores;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label1;
     private javax.swing.JLabel label12;
