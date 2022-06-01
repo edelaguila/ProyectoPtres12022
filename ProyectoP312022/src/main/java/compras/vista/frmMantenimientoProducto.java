@@ -67,6 +67,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         initComponents();
         llenadoDeTablas();
        
+       
     }
 
     /**
@@ -252,6 +253,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
 
         txtExistencia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtExistencia.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtExistencia.setEnabled(false);
         getContentPane().add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 220, 20));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -278,7 +280,7 @@ public class frmMantenimientoProducto extends javax.swing.JInternalFrame {
         productoAInsertar.setProdmarca(txtMarca.getText());
         productoAInsertar.setProdprecio(Integer.parseInt(txtPrecio.getText()));
         productoAInsertar.setProdlinea(txtlinea.getText());
-        productoAInsertar.setProdexistencia(txtExistencia.getText());
+        productoAInsertar.setProdexistencia(String.valueOf(0));
         productoDAO.insert(productoAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed

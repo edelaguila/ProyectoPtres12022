@@ -27,7 +27,7 @@ import seguridad.vista.frmLogin;
  * @author visitante
  */
 public class frmProcesoCompras extends javax.swing.JInternalFrame {
-
+//programado por josue moran 
     public void llenadoDeCombos() {
         daoProveedor provDAO = new daoProveedor();
         List<clsProveedor> proveedor = provDAO.select();
@@ -57,6 +57,7 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         //instancia del objeta tabla
+        //programado por josue moran 
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Compra");
         modelo.addColumn("ID Proveedor");
@@ -90,6 +91,7 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
     }
 
     public void buscarProducto() {
+        //programado por josue moran 
         clsCompras productoAConsultar = new clsCompras();
         daoCompras productoDAO = new daoCompras();
         clsCompras productoAConsultar2 = new clsCompras();
@@ -458,6 +460,7 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        //programado por josue moran 
         daoCompras productoDAO = new daoCompras();
         clsCompras productoAEliminar = new clsCompras();
         clsCompras productoAEliminar2 = new clsCompras();
@@ -466,14 +469,16 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
 
         String resp = JOptionPane.showInputDialog("Esta seguro de Eliminar esta Compra S/N");
         if (resp.equals("S") || resp.equals("s")) {
-            
+            System.out.println(busarSaldo());
+            System.out.println(busarSaldo2());
         int actualizarCompra = buscarid() - buscarcomid();
-        
-        System.out.println(actualizarCompra);
-            System.out.println(buscarprodid());
+        int actualizarSaldo = busarSaldo()-busarSaldo2();
+            System.out.println(actualizarSaldo);
         productoAEliminar.setProdexistenciaA(actualizarCompra);
+        productoAEliminar.setProvsadoO(actualizarSaldo);
         productoAEliminar.setComid2(buscarprodid());
-        
+        productoAEliminar.setProvid(Integer.parseInt(String.valueOf(cbx_Proveedor.getSelectedItem())));
+            productoDAO.update4(productoAEliminar);
             productoDAO.update3(productoAEliminar);
             productoDAO.delete2(productoAEliminar2);
             productoDAO.delete(productoAEliminar);
@@ -486,7 +491,7 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
+//programado por josue moran 
         daoCompras productoDAO = new daoCompras();
         clsCompras productoAInsertar = new clsCompras();
         clsCompras productoAInsertar2 = new clsCompras();
@@ -514,11 +519,14 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
         productoAInsertar.setComfechavenci(fecha2);
 
         int actualizarCompra = buscarid() + (Integer.parseInt(txtCantidad.getText()));
-        System.out.println(buscarid());
-        System.out.println(actualizarCompra);
+        int actualizarSaldo = busarSaldo()+(Integer.parseInt(txtCosto.getText()));
+        System.out.println(busarSaldo());
+        System.out.println(actualizarSaldo);
 
         productoAInsertar.setProdexistenciaA(actualizarCompra);
+        productoAInsertar.setProvsadoO(actualizarSaldo);
         productoAInsertar.setComid2(Integer.parseInt(String.valueOf(cbx_Producto.getSelectedItem())));
+        productoDAO.update4(productoAInsertar);
         productoDAO.update3(productoAInsertar);
         productoDAO.insert(productoAInsertar);
         productoDAO2.insert2(productoAInsertar2);
@@ -535,6 +543,7 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
     private int buscarid() {
+        //programado por josue moran 
         clsCompras productoAConsultar = new clsCompras();
         daoCompras productoDAO = new daoCompras();
         productoAConsultar.setProdid(Integer.parseInt(String.valueOf(cbx_Producto.getSelectedItem())));
@@ -545,7 +554,34 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
         return existencia;
 
     }
+     private int busarSaldo(){
+         //programado por josue moran 
+        clsCompras productoAConsultar = new clsCompras();
+        daoCompras productoDAO = new daoCompras();
+        productoAConsultar.setProvid(Integer.parseInt(String.valueOf(cbx_Proveedor.getSelectedItem())));
+        productoAConsultar = productoDAO.query6(productoAConsultar);
+
+        int saldo = productoAConsultar.getProvsaldo();
+        System.out.println(saldo);
+        return saldo;
+         
+     }
+          private int busarSaldo2(){
+              //programado por josue moran 
+        clsCompras productoAConsultar = new clsCompras();
+        daoCompras productoDAO = new daoCompras();
+        productoAConsultar.setComid(Integer.parseInt(txtbuscado.getText()));
+        productoAConsultar = productoDAO.query7(productoAConsultar);
+
+        int saldo = productoAConsultar.getProvsaldo();
+        System.out.println(saldo);
+        return saldo;
+         
+     }
+    
+    
         private int buscarcomid() {
+            //programado por josue moran 
         clsCompras productoAConsultar = new clsCompras();
         daoCompras productoDAO = new daoCompras();
         productoAConsultar.setComid(Integer.parseInt(txtbuscado.getText()));
@@ -557,6 +593,7 @@ public class frmProcesoCompras extends javax.swing.JInternalFrame {
 
     }
               private int buscarprodid() {
+                  //programado por josue moran 
         clsCompras productoAConsultar = new clsCompras();
         daoCompras productoDAO = new daoCompras();
         productoAConsultar.setComid(Integer.parseInt(txtbuscado.getText()));

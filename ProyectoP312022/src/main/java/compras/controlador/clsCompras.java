@@ -15,11 +15,13 @@ public class clsCompras {
  private int prodexistencia;
  private int prodexistenciaA;
  private int comid2;
+ private int provsaldo;
+ private int provsadoO;
 
     public clsCompras() {
     }
 
-    public clsCompras(int comid2 ,int prodexistenciaA ,int prodexistencia,int comid, int provid, int comserie, int ordid, int prodid, int ordcantidad, int ordcosto, String comfechaemi, String comfechavenci) {
+    public clsCompras(int provsadoO,int provsaldo,int comid2 ,int prodexistenciaA ,int prodexistencia,int comid, int provid, int comserie, int ordid, int prodid, int ordcantidad, int ordcosto, String comfechaemi, String comfechavenci) {
         this.comid = comid;
         this.provid = provid;
         this.comserie = comserie;
@@ -32,6 +34,8 @@ public class clsCompras {
         this.prodexistencia = prodexistencia;
         this.prodexistenciaA = prodexistenciaA;
         this.comid2 = comid2;
+        this.provsaldo = provsaldo;
+        this.provsadoO = provsadoO;
     }
 
     public int getComid() {
@@ -130,10 +134,33 @@ public class clsCompras {
         this.comid2 = comid2;
     }
 
+    public int getProvsaldo() {
+        return provsaldo;
+    }
+
+    public void setProvsaldo(int provsaldo) {
+        this.provsaldo = provsaldo;
+    }
+
+    public int getProvsadoO() {
+        return provsadoO;
+    }
+
+    public void setProvsadoO(int provsadoO) {
+        this.provsadoO = provsadoO;
+    }
+
     @Override
     public String toString() {
-        return "clsCompras{" + "comid=" + comid + ", provid=" + provid + ", comserie=" + comserie + ", ordid=" + ordid + ", prodid=" + prodid + ", ordcantidad=" + ordcantidad + ", ordcosto=" + ordcosto + ", comfechaemi=" + comfechaemi + ", comfechavenci=" + comfechavenci + ", prodexistencia=" + prodexistencia + ", prodexistenciaA=" + prodexistenciaA + ", comid2=" + comid2 + '}';
+        return "clsCompras{" + "comid=" + comid + ", provid=" + provid + ", comserie=" + comserie + ", ordid=" + ordid + ", prodid=" + prodid + ", ordcantidad=" + ordcantidad + ", ordcosto=" + ordcosto + ", comfechaemi=" + comfechaemi + ", comfechavenci=" + comfechavenci + ", prodexistencia=" + prodexistencia + ", prodexistenciaA=" + prodexistenciaA + ", comid2=" + comid2 + ", provsaldo=" + provsaldo + ", provsadoO=" + provsadoO + '}';
     }
+    
+    
+
+    
+   
+
+   
     
 
   
