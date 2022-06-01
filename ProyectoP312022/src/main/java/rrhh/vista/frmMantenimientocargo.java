@@ -11,6 +11,7 @@ import rrhh.controlador.clscargo;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -262,10 +263,15 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+         int i =JOptionPane.showConfirmDialog(this, "seguro que quieres borrar este dato ");
+        if ( i == 0){
         daocargo cargoDAO = new daocargo();
         clscargo cargoAEliminar = new clscargo();
         cargoAEliminar.setcarid(Integer.parseInt(txtbuscado.getText()));
         cargoDAO.delete(cargoAEliminar);
+        } else if(1==1){
+         JOptionPane.showMessageDialog(this, "no se a borrado los datos ");
+        }
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -286,12 +292,17 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
+       int i =JOptionPane.showConfirmDialog(this, "seguro que quieres modificar este dato ");
+        if ( i == 0){
         daocargo cargoDAO = new daocargo();
         clscargo cargoAActualizar = new clscargo();
         cargoAActualizar.setcarid(Integer.parseInt(txtbuscado.getText()));
         cargoAActualizar.setcarnombre(txtNombre.getText());
          cargoAActualizar.setcarestatus(cbox_estado.getSelectedItem().toString());
        cargoDAO.update(cargoAActualizar);
+       }   else if(1==1){
+         JOptionPane.showMessageDialog(this, "no se a modificado los datos ");
+        }
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
