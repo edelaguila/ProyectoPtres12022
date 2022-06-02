@@ -100,6 +100,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
 
+        setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -114,7 +115,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 95, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 95, -1));
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +123,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 95, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 95, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +131,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 95, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 95, -1));
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label1.setText("Departamentos");
@@ -142,13 +143,13 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 95, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 95, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText("Nombre departamento");
         label3.setToolTipText("En este apartado se agrega el nombre de los departamentos que tiene la empresa");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
-        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 102, -1));
+        getContentPane().add(txtbuscado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 250, 30));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +157,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 95, -1));
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 95, -1));
 
         tablaVendedores.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaVendedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -177,7 +178,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaVendedores);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 20, 556, 303));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 556, 303));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText(".");
@@ -187,13 +188,13 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         lb.setText(".");
         getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 20, 13, -1));
 
-        jButton2.setText("Ayuda");
+        jButton2.setText("?");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 100, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 90, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Estado");
@@ -281,7 +282,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try{
             
-            Desktop.getDesktop().browse(new URI("https://docs.oracle.com/netbeans/nb81/netbeans/NBDAG.pdf"));
+            Desktop.getDesktop().browse(new URI("https://drive.google.com/file/d/16u3Iz38pFTR4hnO8JYcy_20Z1Mx9oDUJ/view?usp=sharing"));
         } catch (Exception e){
 JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
  
