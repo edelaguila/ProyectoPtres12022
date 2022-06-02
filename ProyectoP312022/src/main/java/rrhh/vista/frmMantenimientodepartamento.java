@@ -194,7 +194,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 90, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 90, -1));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Estado");
