@@ -20,11 +20,11 @@ import seguridad.modelo.clsConexion;
  */
 public class daoVendedores {
 
-    private static final String SQL_SELECT = "SELECT Id_vendedor, Nombre, Direccion, Telefono, Correo, Estado, Tipo FROM tbl_vendedores";
-    private static final String SQL_INSERT = "INSERT INTO tbl_vendedores(Nombre, Direccion, Telefono, Correo, Estado, Tipo) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_vendedores SET Nombre=?, Direccion=?, Telefono=?, Correo=?, Estado=?, AND Tipo=? WHERE Id_vendedor = ?";
+    private static final String SQL_SELECT = "SELECT Id_vendedor, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Ventas FROM tbl_vendedores";
+    private static final String SQL_INSERT = "INSERT INTO tbl_vendedores(Nombre, Direccion, Telefono, Correo, Estado, Tipo, Ventas) VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_vendedores SET Nombre=?, Direccion=?, Telefono=?, Correo=?, Estado=?, Tipo=? AND Ventas=? WHERE Id_vendedor = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_vendedores WHERE Id_vendedor=?";
-    private static final String SQL_QUERY = "SELECT Id_vendedor, Nombre, Direccion, Telefono, Correo, Estado, Tipo FROM tbl_vendedores WHERE Id_vendedor = ?";
+    private static final String SQL_QUERY = "SELECT Id_vendedor, Nombre, Direccion, Telefono, Correo, Estado, Tipo, Ventas FROM tbl_vendedores WHERE Id_vendedor = ?";
 
 
     public List<clsVendedores> select() {
@@ -46,6 +46,7 @@ public class daoVendedores {
                 String sCorreo = rs.getString("Correo");
                 String sEstado = rs.getString("Estado");
                 String sTipo = rs.getString("Tipo");
+                int iVentas = rs.getInt("Ventas");
 
                 vendedor = new clsVendedores();
                 vendedor.fSetid_Vendedores(iId_vendedor);
@@ -55,6 +56,7 @@ public class daoVendedores {
                 vendedor.fSetcorreo_Vendedores(sCorreo);
                 vendedor.fSetestado_Vendedores(sEstado);
                 vendedor.fSettipo_Vendedores(sTipo);
+                vendedor.fSetventas_Vendedores(iVentas);
                 
                 vendedores.add(vendedor);
             }
@@ -83,6 +85,7 @@ public class daoVendedores {
             stmt.setString(4, vendedor.fGetcorreo_Vendedores());
             stmt.setString(5, vendedor.fGetestado_Vendedores());
             stmt.setString(6, vendedor.fGettipo_Vendedores());
+            stmt.setInt(7, vendedor.fGetventas_Vendedores());
 
 
             System.out.println("ejecutando query:" + SQL_INSERT);
@@ -113,6 +116,7 @@ public class daoVendedores {
             stmt.setString(4, vendedor.fGetcorreo_Vendedores());
             stmt.setString(5, vendedor.fGetestado_Vendedores());
             stmt.setString(6, vendedor.fGettipo_Vendedores());
+            stmt.setInt(7, vendedor.fGetventas_Vendedores());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -171,6 +175,7 @@ public class daoVendedores {
                 String sCorreo = rs.getString("Correo");
                 String sEstado = rs.getString("Estado");
                 String sTipo = rs.getString("Tipo");
+                int iVentas = rs.getInt("Ventas");
                 
                 vendedor = new clsVendedores();
                 vendedor.fSetid_Vendedores(iId_vendedor);
@@ -180,6 +185,7 @@ public class daoVendedores {
                 vendedor.fSetcorreo_Vendedores(sCorreo);
                 vendedor.fSetestado_Vendedores(sEstado);
                 vendedor.fSettipo_Vendedores(sTipo);
+                vendedor.fSetventas_Vendedores(iVentas);
                 
                 //vendedores.add(vendedor); // Si se utiliza un ArrayList
             }
@@ -194,6 +200,29 @@ public class daoVendedores {
 
         //return vendedores;  // Si se utiliza un ArrayList
         return vendedor;
+    }
+
+
+
+public void update_total_sells(int id_cliente, int nueva_venta) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = clsConexion.getConnection();
+            System.out.println("ejecutando query: " +  "UPDATE tbl_vendedores SET Ventas=? WHERE Id_vendedor = ?");
+            stmt = conn.prepareStatement("UPDATE tbl_vendedores SET Ventas="+nueva_venta+" WHERE Id_vendedor = '"+id_cliente+"'");
+            rows = stmt.executeUpdate();
+            System.out.println("Registros actualizado:" + rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            clsConexion.close(stmt);
+            clsConexion.close(conn);
+        }
+
     }
    
 }
