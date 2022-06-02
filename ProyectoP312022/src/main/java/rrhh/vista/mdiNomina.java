@@ -8,6 +8,13 @@ package rrhh.vista;
 
 import java.awt.Dimension;
 import java.io.IOException;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import rrhh.modelo.clsConexion;
 
 /**
  *
@@ -52,6 +59,8 @@ public class mdiNomina extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -154,6 +163,18 @@ public class mdiNomina extends javax.swing.JFrame {
         jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu5.setText("Reportes");
+
+        jMenuItem11.setText("Reporte nominas");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem11);
+
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -268,6 +289,29 @@ public class mdiNomina extends javax.swing.JFrame {
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
              
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+ private Connection connectio = null;
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+                JasperReport report = null;
+        JasperPrint print;
+       
+        String path = "src/main/java/rrhh/reportes/reporte_nomina.jasper";
+         
+        try {
+            
+            connectio = clsConexion.getConnection();
+            report = (JasperReport) JRLoader.loadObjectFromFile(path);
+                       print = JasperFillManager.fillReport(report, null,connectio);
+                        JasperViewer view = new JasperViewer(print);
+            view.setVisible(true);
+         
+            view.setTitle("Prueba reporte");
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+       
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,10 +417,12 @@ public class mdiNomina extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
