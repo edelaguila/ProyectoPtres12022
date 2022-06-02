@@ -94,7 +94,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         }
    
     
-    
+    int nhoras=0;
     public void buscarsalario() {
         
         conceptosAgregados.setText(""); 
@@ -109,7 +109,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
     
         salario.setText(empleadoAConsultar2.getempsueldo());     
         salario1.setText(empleadoAConsultar2.getempsueldo());     
-        
+        nhoras=Integer.parseInt(empleadoAConsultar2.getempdias());
          
         }
 
@@ -120,7 +120,7 @@ efecto.addItem("+");
 efecto.addItem("-");
 }
 
-   public void tipo(){
+ public void tipo(){
 tiposAsignacion.addItem("algunos/excepcion");
 tiposAsignacion.addItem("muchos");
 }    
@@ -349,6 +349,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -357,6 +358,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 95, -1));
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
@@ -365,18 +367,20 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 95, -1));
 
         Buscar.setText("Buscar");
+        Buscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 70, -1));
+        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 70, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
         getContentPane().add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 550, 20, 10));
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -410,6 +414,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 780, 303));
 
         empleadoss.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        empleadoss.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         empleadoss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 empleadossActionPerformed(evt);
@@ -448,18 +453,20 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
 
         agregar.setText("agregar");
+        agregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 95, -1));
+        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 95, -1));
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label8.setText("Tipo de asignacion");
         getContentPane().add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         reiniciar.setText("reset");
+        reiniciar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         reiniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reiniciarActionPerformed(evt);
@@ -473,6 +480,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 70, 20));
 
         buscarSalario.setText("Buscar");
+        buscarSalario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         buscarSalario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarSalarioActionPerformed(evt);
@@ -760,8 +768,9 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
 
     private void buscarSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarSalarioActionPerformed
         // TODO add your handling code here:
-
+     
         buscarsalario();
+        conceptosAgregados.setText(String.valueOf(nhoras));
     }//GEN-LAST:event_buscarSalarioActionPerformed
 
     private void tiposAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiposAsignacionActionPerformed
