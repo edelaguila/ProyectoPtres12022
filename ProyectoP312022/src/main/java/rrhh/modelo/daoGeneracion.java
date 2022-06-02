@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class daoGeneracion {
     
-    private static final String SQL_SELECT = "SELECT geid, geinicial, gefinal, genombre, geconcepto, gevalor  FROM tbl_generacion";
-    private static final String SQL_INSERT = "INSERT INTO tbl_generacion(geinicial, gefinal, genombre, geconcepto, gevalor) VALUES(?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_generacion SET geinicial =?,gefinal =?, genombre=?, geconcepto=?, gevalor=? WHERE geid = ?";
+    private static final String SQL_SELECT = "SELECT geid, geinicial, gefinal, genombre, geconcepto, geigss, geisr, geotros, gevalor  FROM tbl_generacion";
+    private static final String SQL_INSERT = "INSERT INTO tbl_generacion(geinicial, gefinal, genombre, geconcepto, geigss, geisr, geotros, gevalor) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_generacion SET geinicial =?,gefinal =?, genombre =?, geconcepto =?, geigss =?, geisr =?, geotros=?, gevalor=? WHERE geid = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_generacion WHERE geid=?";
-    private static final String SQL_QUERY = "SELECT geid,geinicial,gefinal, genombre, geconcepto, gevalor FROM tbl_generacion WHERE geid=?";
+    private static final String SQL_QUERY = "SELECT geid,geinicial,gefinal, genombre, geconcepto, geigss, geisr, geotros, gevalor FROM tbl_generacion WHERE geid=?";
   
 
     public List<clsGeneracion> select() {
@@ -41,6 +41,9 @@ public class daoGeneracion {
                 String gefinal = rs.getString("gefinal");
                 String genombre = rs.getString("genombre");
                 String geconcepto = rs.getString("geconcepto");
+                String geigss = rs.getString("geigss");
+                String geisr = rs.getString("geisr");
+                String geotros = rs.getString("geotros");
                 String gevalor = rs.getString("gevalor");
                
          
@@ -52,6 +55,9 @@ public class daoGeneracion {
                 genera.setgefinal(gefinal);
                 genera.setgenombre(genombre);
                 genera.setgeconcepto(geconcepto);
+                genera.setgeigss(geigss);
+                genera.setgeisr(geisr);
+                genera.setgeotros(geotros);
                 genera.setgevalor(gevalor);
            
                 
@@ -79,12 +85,13 @@ public class daoGeneracion {
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, generas.getgeinicial());
             stmt.setString(2, generas.getgefinal());
-             stmt.setString(3, generas.getgenombre());  
-              stmt.setString(4, generas.getgeconcepto());
-            stmt.setString(5, generas.getgevalor());
-            
-           
-           
+            stmt.setString(3, generas.getgenombre());  
+            stmt.setString(4, generas.getgeconcepto());
+            stmt.setString(5, generas.getgeigss());
+            stmt.setString(6, generas.getgeisr());
+            stmt.setString(7, generas.getgeotros());
+            stmt.setString(8, generas.getgevalor());
+
                   
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -111,8 +118,11 @@ public class daoGeneracion {
             stmt.setString(2, genera.getgefinal());            
             stmt.setString(3, genera.getgenombre());
             stmt.setString(4, genera.getgeconcepto());
-            stmt.setString(5, genera.getgevalor());
-            stmt.setInt(6, genera.getgeid());
+            stmt.setString(5, genera.getgeigss());
+            stmt.setString(6, genera.getgeisr());
+            stmt.setString(7, genera.getgeotros());
+            stmt.setString(8, genera.getgevalor());
+            stmt.setInt(9, genera.getgeid());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -166,7 +176,11 @@ public class daoGeneracion {
                 String gefinal = rs.getString("gefinal");
                 String genombre = rs.getString("genombre");
                 String geconcepto = rs.getString("geconcepto");
+                String geigss = rs.getString("geigss");
+                String geisr = rs.getString("geisr");
+                String geotros = rs.getString("geotros");
                 String gevalor = rs.getString("gevalor");
+                
                               
                
                 
@@ -177,6 +191,9 @@ public class daoGeneracion {
                 genera.setgefinal(gefinal);
                 genera.setgenombre(genombre);
                 genera.setgeconcepto(geconcepto);
+                genera.setgeigss(geigss);
+                genera.setgeisr(geisr);
+                genera.setgeotros(geotros);
                 genera.setgevalor(gevalor);
               
                  

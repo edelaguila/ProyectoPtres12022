@@ -15,6 +15,7 @@ import rrhh.controlador.clsdepartamento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -344,10 +345,16 @@ cbox_estado.addItem("inactivo");
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        int i =JOptionPane.showConfirmDialog(this, "seguro que quieres borrar este dato ");
+        if ( i == 0){
         daoEmpleados empleadoDAO = new daoEmpleados();
         clsEmpleados empleadoAEliminar = new clsEmpleados();
         empleadoAEliminar.setempid(Integer.parseInt(txtbuscado.getText()));
         empleadoDAO.delete(empleadoAEliminar);
+        
+         } else if(1==1){
+         JOptionPane.showMessageDialog(this, "no se a borrado los datos ");
+        }
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -376,6 +383,8 @@ cbox_estado.addItem("inactivo");
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
+int i =JOptionPane.showConfirmDialog(this, "seguro que quieres modificar este dato ");
+        if ( i == 0){
         daoEmpleados empleadoDAO = new daoEmpleados();
         clsEmpleados empleadoAActualizar = new clsEmpleados();
         empleadoAActualizar.setempid(Integer.parseInt(txtbuscado.getText()));
@@ -386,6 +395,9 @@ cbox_estado.addItem("inactivo");
         empleadoAActualizar.setempcargo(cbox_cargos.getSelectedItem().toString());
         empleadoAActualizar.setempdepart(cbox_departamentos.getSelectedItem().toString());
         empleadoDAO.update(empleadoAActualizar);
+        }   else if(1==1){
+         JOptionPane.showMessageDialog(this, "no se a modificado los datos ");
+        }
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
