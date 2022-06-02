@@ -6,9 +6,12 @@
 package rrhh.vista;
 
 
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.net.URI;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -61,6 +64,8 @@ public class mdiNomina extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -175,6 +180,18 @@ public class mdiNomina extends javax.swing.JFrame {
         jMenu5.add(jMenuItem11);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Ayuda");
+
+        jMenuItem12.setText("ayuda del funcionamiento nominas");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -313,6 +330,19 @@ public class mdiNomina extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            
+            Desktop.getDesktop().browse(new URI("https://drive.google.com/file/d/1IV5Ao_OMMv_5PZnz5NiIPPnvViImgP5P/view?usp=sharing"));
+        } catch (Exception e){
+JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
+ 
+
+        }
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,11 +448,13 @@ public class mdiNomina extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
