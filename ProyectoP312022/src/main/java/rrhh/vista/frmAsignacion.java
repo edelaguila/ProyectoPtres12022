@@ -94,7 +94,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
         }
    
     
-    int nhoras=0;
+    double nhoras=0;
     public void buscarsalario() {
         
         conceptosAgregados.setText(""); 
@@ -109,7 +109,7 @@ public class frmAsignacion extends javax.swing.JInternalFrame {
     
         salario.setText(empleadoAConsultar2.getempsueldo());     
         salario1.setText(empleadoAConsultar2.getempsueldo());     
-        nhoras=Integer.parseInt(empleadoAConsultar2.getempdias());
+        nhoras=Double.parseDouble(empleadoAConsultar2.getempdias());
          
         }
 
@@ -130,6 +130,7 @@ tiposAsignacion.addItem("muchos");
     public void procedimientosAdd(){
    String igss = "igss";
    String isr= "isr" ;
+   String horas= "horas_extras" ;
    String conceptos = Cbx_buscado.getSelectedItem().toString();
 
    Double numero1= Double.parseDouble(salario.getText());
@@ -151,7 +152,13 @@ tiposAsignacion.addItem("muchos");
    porcentajeIsrA = (numero2 * numeroCP)/100;
    salario.setText(String.valueOf(numero1 + porcentaje));
    
-   }else{
+   }else if (horas.equals(conceptos)){
+   double horasX = nhoras * numero2;
+   
+   salario.setText(String.valueOf(numero1 + horasX));
+   
+   }
+   else{
   salario.setText(String.valueOf(numero1 + numero2));
    }
   
@@ -170,6 +177,11 @@ tiposAsignacion.addItem("muchos");
    double porcentaje = (numero2 * numeroCP) / 100;
    porcentajeIsrA = (numero2 * numeroCP)/100;
    salario.setText(String.valueOf(numero1 - porcentaje));
+   
+   }else if (horas.equals(conceptos)){
+   double horasX = nhoras * numero2;
+   
+   salario.setText(String.valueOf(numero1 - horasX));
    
    }else{
   salario.setText(String.valueOf(numero1 - numero2));
@@ -486,7 +498,7 @@ tiposAsignacion.addItem("muchos");
                 buscarSalarioActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, -1));
+        getContentPane().add(buscarSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 70, -1));
 
         efecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         efecto.addActionListener(new java.awt.event.ActionListener() {
@@ -770,7 +782,7 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
         // TODO add your handling code here:
      
         buscarsalario();
-        conceptosAgregados.setText(String.valueOf(nhoras));
+        
     }//GEN-LAST:event_buscarSalarioActionPerformed
 
     private void tiposAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiposAsignacionActionPerformed
