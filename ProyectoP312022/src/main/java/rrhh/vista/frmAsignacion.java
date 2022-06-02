@@ -245,10 +245,11 @@ tiposAsignacion.addItem("muchos");
    String valorConcepto = VConceptos.getText();
 
     Double numero1= Double.parseDouble(empleadoAConsultar.getempsueldo());
+    Double numeroH= Double.parseDouble(empleadoAConsultar.getempdias());
     Double numero2= Double.parseDouble(VV.getText());
     double porcentajeIgss = (vigss * numero1)/100;  
     double porcentajeIsr = (visr * numero1)/100; 
-    
+    double calculoshoras= vhoras * numeroH;
     
     
  if(calculos == 1){
@@ -258,7 +259,7 @@ tiposAsignacion.addItem("muchos");
      datosAInsertar.setavigss(String.valueOf(porcentajeIgss));
      datosAInsertar.setavisr(String.valueOf(porcentajeIsr));
      datosAInsertar.setavotros(String.valueOf(pilaValores));
-     datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
+     datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr +calculoshoras + numero2));
     
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
@@ -271,7 +272,7 @@ tiposAsignacion.addItem("muchos");
      datosAInsertar.setavigss(String.valueOf(porcentajeIgss));
      datosAInsertar.setavisr(String.valueOf(porcentajeIsr));
      datosAInsertar.setavotros(String.valueOf(pilaValores));
-     datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr + numero2));
+     datosAInsertar.setavalor(String.valueOf(numero1 - porcentajeIgss - porcentajeIsr +calculoshoras + numero2));
     
      datosDAO.insert(datosAInsertar);
       llenadoDeTablas();
@@ -513,6 +514,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
 
         tiposAsignacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tiposAsignacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         tiposAsignacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tiposAsignacionActionPerformed(evt);
@@ -536,6 +538,7 @@ tiposAsignacion.addItem("muchos");
         getContentPane().add(VV, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 90, 30));
 
         Cbx_buscado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Cbx_buscado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         Cbx_buscado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Cbx_buscadoActionPerformed(evt);
@@ -630,12 +633,12 @@ Stack<String> pila = new Stack<String>();
 Stack<String> pilaValores = new Stack<String>();
 
 int nagregados = 1; int n;
-double vigss=0,visr=0;
+double vigss=0,visr=0,vhoras=0;
 double porcentajeIgssA =0 , porcentajeIsrA = 0;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
        String algun ="algunos/excepcion", much="muchos";
-         String igss ="igss",isr ="isr";
+         String igss ="igss",isr ="isr",horas="horas extras";
          String separador=": ";
         if(tiposAsignacion.getSelectedItem().toString().equals(much)){
         
@@ -669,8 +672,30 @@ double porcentajeIgssA =0 , porcentajeIsrA = 0;
         
         n = nagregados++;
    
-        }else{
+        }
+        else if (horas.equals(Cbx_buscado.getSelectedItem().toString())){
         
+         vhoras = Double.parseDouble(valor.getText());
+        
+         
+         
+        String nameValores; 
+        nameValores = Cbx_buscado.getSelectedItem().toString()+separador+valor.getText(); 
+        pilaValores.push(nameValores); 
+        agregaValores(pilaValores);  
+        String nameconcepto; 
+        nameconcepto = Cbx_buscado.getSelectedItem().toString(); 
+        pila.push(nameconcepto); 
+        agrega(pila); 
+            
+        
+        
+        n = nagregados++;
+   
+        }
+        else{
+        
+            
      
         proceso();    
         
