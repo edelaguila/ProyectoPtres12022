@@ -325,7 +325,7 @@ public class frmMantenimientocargo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        try{
             
-            Desktop.getDesktop().browse(new URI("https://docs.oracle.com/netbeans/nb81/netbeans/NBDAG.pdf"));
+            Desktop.getDesktop().browse(new URI("https://drive.google.com/file/d/1ccJrzIDJDDotu0NzWNAkbh9RWQCBiDq7/view?usp=sharing"));
         } catch (Exception e){
 JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
  

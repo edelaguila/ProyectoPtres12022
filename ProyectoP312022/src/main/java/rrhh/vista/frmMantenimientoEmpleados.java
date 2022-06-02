@@ -426,7 +426,7 @@ int i =JOptionPane.showConfirmDialog(this, "seguro que quieres modificar este da
         // TODO add your handling code here:
        try{
             
-            Desktop.getDesktop().browse(new URI("https://docs.oracle.com/netbeans/nb81/netbeans/NBDAG.pdf"));
+            Desktop.getDesktop().browse(new URI("https://drive.google.com/file/d/1B1vJyre5vz7w_Wo9AK7Sa3UPGxhEm33y/view?usp=sharing"));
         } catch (Exception e){
 JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
  
