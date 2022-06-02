@@ -7,7 +7,7 @@ package rrhh.vista;
 
 import rrhh.modelo.daoAsignacion;
 import rrhh.controlador.clsAsignacion;
-
+import java.util.Calendar;
 import rrhh.modelo.daoGeneracion;
 import rrhh.controlador.clsGeneracion;
 
@@ -60,7 +60,16 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
 
    
     public void autollenado(){
-    
+String dia = Integer.toString(finicial.getCalendar().get(Calendar.DAY_OF_MONTH));
+String mes = Integer.toString(finicial.getCalendar().get(Calendar.MONTH) + 1);
+String year = Integer.toString(finicial.getCalendar().get(Calendar.YEAR));
+String fecha_inicial = (year + "-" + mes+ "-" + dia);
+
+String dia1 = Integer.toString(ffinal.getCalendar().get(Calendar.DAY_OF_MONTH));
+String mes2 = Integer.toString(ffinal.getCalendar().get(Calendar.MONTH) + 1);
+String year3 = Integer.toString(ffinal.getCalendar().get(Calendar.YEAR));
+String fecha_final = (year3 + "-" + mes2+ "-" + dia1);
+        
     int contador=1;
     consultar = JOptionPane.showInputDialog("Generacion de nominas" + "Numero de empleados" + c+".");
     int a = Integer.parseInt(consultar);
@@ -82,8 +91,8 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
      asignacionAConsultar.getavotros();
      asignacionAConsultar.getavalor();
     
-     nominaAInsertar.setgeinicial(Finicial.getText());
-     nominaAInsertar.setgefinal(Ffinal.getText());
+     nominaAInsertar.setgeinicial(fecha_inicial);
+     nominaAInsertar.setgefinal(fecha_final);
      nominaAInsertar.setgenombre(asignacionAConsultar.getanombre());
      nominaAInsertar.setgeconcepto(asignacionAConsultar.getaconcepto());
      nominaAInsertar.setgeigss(asignacionAConsultar.getavigss());
@@ -140,12 +149,12 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablanomina = new javax.swing.JTable();
         label5 = new javax.swing.JLabel();
-        Finicial = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
-        Ffinal = new javax.swing.JTextField();
         label6 = new javax.swing.JLabel();
         label7 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
+        finicial = new com.toedter.calendar.JDateChooser();
+        ffinal = new com.toedter.calendar.JDateChooser();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -161,12 +170,13 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnGenerar.setText("Generar registros");
+        btnGenerar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 120, -1));
+        getContentPane().add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 140, -1));
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label3.setText(".");
@@ -191,17 +201,15 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tablanomina);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 800, 303));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 800, 303));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label5.setText("----------Visualizacion-----------");
-        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
-        getContentPane().add(Finicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 220, 30));
+        getContentPane().add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, -1, -1));
 
         label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label9.setText("Fecha final");
         getContentPane().add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 70, 20));
-        getContentPane().add(Ffinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 220, 30));
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label6.setText("Fecha inicial");
@@ -212,12 +220,19 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
         getContentPane().add(label7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         btnEliminar.setText("Eliminar registros");
+        btnEliminar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 120, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 140, -1));
+
+        finicial.setDateFormatString("d-MM-y");
+        getContentPane().add(finicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 170, 30));
+
+        ffinal.setDateFormatString("d-MM-y");
+        getContentPane().add(ffinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 170, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,11 +253,11 @@ public class frmVisualizacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Ffinal;
-    private javax.swing.JTextField Finicial;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGenerar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser ffinal;
+    private com.toedter.calendar.JDateChooser finicial;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label3;
