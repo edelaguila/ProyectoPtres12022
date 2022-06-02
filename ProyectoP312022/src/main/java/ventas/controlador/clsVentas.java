@@ -17,8 +17,12 @@ public class clsVentas {
     String sTipo;
     int iCantidad;
     String sProducto;
+    double fPrecio;
+    double fTotal;
     String sFecha;
     int iId_cliente;
+    int iId_vendedor;
+    String Stipo_de_pago;
 
     public clsVentas() {
     }
@@ -27,13 +31,17 @@ public class clsVentas {
     this.iId_venta = iId_venta;
     }
 
-     public clsVentas(int iId_venta, String sTipo, int iCantidad, String sProducto, String sFecha, int iId_cliente) {
+     public clsVentas(int iId_venta, String sTipo, int iCantidad, String sProducto, String sFecha, int iId_cliente, int iId_vendedor, double fPrecio, double fTotal, String Stipo_de_pago) {
         this.iId_venta = iId_venta;
         this.sTipo = sTipo;
         this.iCantidad = iCantidad;
         this.sProducto = sProducto;
+        this.fPrecio = fPrecio;
+        this.fTotal = fTotal;
         this.sFecha = sFecha;
         this.iId_cliente = iId_cliente;
+        this.iId_vendedor = iId_vendedor;
+        this.Stipo_de_pago = Stipo_de_pago;
     }
 
 
@@ -77,6 +85,29 @@ public int fGetcantidad_Venta () {
 
 
 
+    public double fGetprecio_Venta() {
+        return fPrecio;
+    }
+
+    public void fSetprecio_Venta(double fPrecio) {
+        this.fPrecio = fPrecio;
+    }
+
+
+
+    public double fGettotal_Venta() {
+        return fTotal;
+    }
+
+    public void fSettotal_Venta(double fTotal) {
+        this.fTotal = fTotal;
+    }
+
+
+
+
+
+
     public String fGetfecha_Venta() {
         return sFecha;
     }
@@ -97,10 +128,28 @@ public int fGetcantidad_Venta () {
 
 
 
+ public int fGetid_Vendedor () {
+        return iId_vendedor;
+    }
+
+    public void fSetid_Vendedor(int iId_vendedor) {
+        this.iId_vendedor = iId_vendedor;
+    }
+
+
+ public String fGetpago_Vendedor () {
+        return Stipo_de_pago;
+    }
+
+    public void fSetpago_Cliente(String Stipo_de_pago) {
+        this.Stipo_de_pago = Stipo_de_pago;
+    }
+
+
 
     @Override
     public String toString() {
-         return "tbl_ventas{" + "id_venta =" + iId_venta + ", tipo=" + sTipo + ", cantidad=" + iCantidad + ", producto=" + sProducto +", fecha=" + sFecha +", id_cliente=" + iId_cliente + '}';
+         return "tbl_ventas{" + "id_venta =" + iId_venta + ", tipo=" + sTipo + ", cantidad=" + iCantidad + ", producto=" + sProducto +", precio=" + fPrecio +", total=" + fTotal +", fecha=" + sFecha +", id_cliente=" + iId_cliente +", id_vendedor=" + iId_vendedor +", tipo_de_pago=" + Stipo_de_pago + '}';
     }
     
 }

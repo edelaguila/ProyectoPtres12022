@@ -5,8 +5,30 @@
  */
 package ventas.vista;
 
+import static com.itextpdf.kernel.pdf.PdfName.App;
 import seguridad.vista.frmMantenimientoBitacora;
 import java.awt.Dimension;
+import java.awt.Frame;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.modelo.clsConexion;
 
 /**
  *
@@ -48,6 +70,7 @@ public class mdiVentas extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -127,6 +150,15 @@ public class mdiVentas extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Reportes");
+
+        jMenuItem9.setText("Reporte Clientes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem9);
+
         jMenuBar1.add(jMenu6);
 
         jMenu1.setText("Ayuda");
@@ -183,12 +215,51 @@ public class mdiVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-
+         frmVentas ventana = new frmVentas();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+       frmMantenimientoVentas ventana = new frmMantenimientoVentas();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+Connection con;
+PreparedStatement pst;
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+        con=clsConexion.getConnection();
+        JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\Pablo\\Desktop\\omar\\ProyectoP312022\\ProyectoP312022\\src\\main\\java\\ventas\\reportes\\Reporte_Clientes.jrxml");
+        String query="select * from tbl_clientes";        
+        
+       JRDesignQuery updateQuery = new JRDesignQuery();
+       updateQuery.setText(query);
+       jdesign.setQuery(updateQuery);
+       JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+       JasperPrint jprint = JasperFillManager.fillReport(jreport, null, con);
+       JasperViewer.viewReport(jprint);
+        }catch(ClassNotFoundException ex){
+         Logger.getLogger(mdiVentas.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(mdiVentas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(mdiVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+     
+
+
+
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,5 +313,6 @@ public class mdiVentas extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
