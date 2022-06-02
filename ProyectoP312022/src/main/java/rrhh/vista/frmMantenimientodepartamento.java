@@ -259,7 +259,7 @@ public class frmMantenimientodepartamento extends javax.swing.JInternalFrame {
         vendedorDAO.update(vendedorAActualizar);
         
         } else if(1==1){
-         JOptionPane.showMessageDialog(this, "no se a borrado los datos ");
+         JOptionPane.showMessageDialog(this, "no se a modificado los datos ");
         }
          llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
