@@ -6,6 +6,7 @@
 package rrhh.vista;
 
 
+import java.awt.Desktop;
 import rrhh.modelo.daoEmpleados;
 import rrhh.controlador.clsEmpleados;
 import rrhh.modelo.daocargo;
@@ -15,6 +16,7 @@ import rrhh.controlador.clsdepartamento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import java.net.URI;
 import javax.swing.JOptionPane;
 
 /**
@@ -422,18 +424,13 @@ int i =JOptionPane.showConfirmDialog(this, "seguro que quieres modificar este da
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try {
-            if ((new File("src\\main\\java\\ayudas\\ProcesoMayor.chm")).exists()) {
-                Process p = Runtime
-                        .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\ProcesoMayor.chm");
-                p.waitFor();
-            } else {
-                System.out.println("La ayuda no Fue encontrada");
-            }
-            System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
+       try{
+            
+            Desktop.getDesktop().browse(new URI("https://docs.oracle.com/netbeans/nb81/netbeans/NBDAG.pdf"));
+        } catch (Exception e){
+JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);
+ 
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
